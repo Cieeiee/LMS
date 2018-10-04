@@ -1,0 +1,36 @@
+.admin-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.admin-login-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    z-index: -1;
+}
+.admin-login-slogan {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 48px;
+    margin-right: 100px;
+}
+.admin-login-paper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin-login-input {
+    width: 200px;
+    margin-left: 100px;
+}
+.admin-login-button {
+    width: 200px;
+    margin: 50px;
+}
