@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css'
 import AdminLogin from './pages/login/index'
 import NotFound from './pages/notFound/index'
+import Admin from './pages/admin'
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path='/' exact component={AdminLogin} />
+          <Route path='/admin' component={Admin} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

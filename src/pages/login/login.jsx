@@ -35,7 +35,8 @@ export default class AdminLogin extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.handleOpen();
+        window.location.href = '/admin'
+        // this.handleOpen();
         // fetch('/api/login')
         //  .then(response => response.json())
         //  .then(result => {
