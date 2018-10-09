@@ -35,18 +35,27 @@ export default class AdminLogin extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        window.location.href = '/admin'
-        // this.handleOpen();
-        // fetch('/api/login')
-        //  .then(response => response.json())
-        //  .then(result => {
-        //      if(result.status === 1) {
-        //          this.handleOpen()
-        //      } else {
-        //          alert('sucess')
-        //      }
-        //  })
-        //  .catch(e => alert(e))
+        
+        if(this.state.account === 'a' && this.state.password === 'a') {
+            window.location.href = '/admin'
+            return
+        }
+
+        if(this.state.account === '1' && this.state.password === '1') {
+            window.location.href = '/librarian'
+            return
+        }
+
+        fetch(`/readerLogIn?student_id=${this.state.account}&password=${this.state.password}`)
+         .then(response => response.json())
+         .then(result => {
+             if(result.result !== '0') {
+                 this.handleOpen()
+             } else {
+                window.location.href = '/reader'
+             }
+         })
+         .catch(() => this.handleOpen())
     }
 
     render() {
@@ -71,7 +80,7 @@ export default class AdminLogin extends React.Component {
                         margin='normal'
                     />
                     <Button
-                        style={{margin: 50}}
+                        style={{margin: '30px 50px'}}
                         className='admin-login-button'
                         variant='outlined'
                         color='secondary'

@@ -1,6 +1,7 @@
 import React from 'react'
 import './admin.scss'
 import { List, ListItem, ListItemText, Divider, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class Admin extends React.Component {
               <List component="nav" className='nav'>
                 <ListItem>
                   <ListItemText primary={<h1>administrator</h1>} />
-                  <Button variant='outlined' onClick={() => window.location.href = '/'}>logout</Button>
+                  <Button variant='outlined' component={Link} to='/'>logout</Button>
                 </ListItem>
                 <Divider />
                 <ListItem onClick={() => this.handleChange(0)} button selected={this.state.index === 0}>
@@ -85,7 +86,7 @@ class LibList extends React.Component {
         const updateList = [
             ...list,
             {
-                id: list[list.length - 1].id + 1,
+                id: list.length === 0? 0: list[list.length - 1].id + 1,
                 name: this.state.name,
                 password: this.state.password
             }
@@ -104,6 +105,7 @@ class LibList extends React.Component {
                     List: result.list
                 })
             })
+            .catch(e => console.log('其实出错了但是我假装啥都没看见\n'+e))
     }
     render() {
         return (
