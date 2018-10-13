@@ -23,3 +23,19 @@
 .grow {
     flex-grow: 1;
 }
+.table-title {
+  //text-align: center;
+  padding-bottom: 20px;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.mid-div {
+  width: 60%;
+  margin: 20px auto 20px auto;
+}
