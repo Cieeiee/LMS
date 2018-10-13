@@ -23,7 +23,8 @@ const styles = theme => ({
     },
     menuButton: {
         marginLeft: -12,
-        marginRight: 20,
+        marginRight: 15,
+        // fontSize: 20
     },
     title: {
         display: 'none',

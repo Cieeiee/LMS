@@ -10,6 +10,8 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import { AccountBoxOutlined, EmailOutlined, PhoneOutlined, DateRangeOutlined } from '@material-ui/icons'
 import './reader.scss'
+import Tabs from "@material-ui/core/Tabs/Tabs";
+import Tab from "@material-ui/core/Tab/Tab";
 const ToLive = require('./components/alive.jpeg');
 const BarCode = require('./components/barcode.jpg');
 
@@ -18,6 +20,7 @@ export default class ReaderHistory extends React.Component {
         super(props);
 
         this.state = {
+            value: 0,
             info: {
                 name: 'asd123',
                 email: '529012380@qq.com',
@@ -191,6 +194,10 @@ export default class ReaderHistory extends React.Component {
             .catch(e => alert(e));
     };
 
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
+
     componentDidMount() {
         // this.getHistory();
         this.classifyRecord();
@@ -203,10 +210,25 @@ export default class ReaderHistory extends React.Component {
                 <TopBar />
                 <div className={"flex-col" + " " + "mid-div"}>
                     <Grid container spacing={24}>
-                        <ReaderInfo info={this.state.info}/>
-                        <BorrowingTable records={this.state.classified.borrowing}/>
-                        <ReservingTable records={this.state.classified.reserving}/>
-                        <BorrowedTable records={this.state.classified.borrowed}/>
+                        <Grid item xs={12} className="flex-row">
+                            <ReaderInfo info={this.state.info}/>
+                            <div style={{marginTop: 'auto', }} className="grow">
+                                <Tabs
+                                    value={this.state.value}
+                                    indicatorColor="primary"
+                                    textColor="primary"
+                                    onChange={this.handleChange}
+                                    fullWidth
+                                >
+                                    <Tab label="Borrowing" />
+                                    <Tab label="Reserving"/>
+                                    <Tab label="Borrowed" />
+                                </Tabs>
+                            </div>
+                        </Grid>
+                        {this.state.value === 0 && <BorrowingTable records={this.state.classified.borrowing}/>}
+                        {this.state.value === 1 && <ReservingTable records={this.state.classified.reserving}/>}
+                        {this.state.value === 2 && <BorrowedTable records={this.state.classified.borrowed}/>}
                     </Grid>
                 </div>
             </React.Fragment>
@@ -217,86 +239,72 @@ export default class ReaderHistory extends React.Component {
 class ReaderInfo extends React.Component {
     render() {
         return (
-            <Grid item xs={12}>
-                <Grid container justify="center"
-                      style={{
-                          marginTop: 20
-                      }}
-                >
-                    <Grid item xs>
-                        <Paper style={{padding: 20}}>
-                            <div className="flex-row">
-                                <AccountBoxOutlined
-                                    fontSize="large"
-                                    style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
-                                />
-                                <Typography
-                                    variant="title"
-                                    style={{marginTop: 'auto', marginBottom: 'auto'}}
-                                    color="textSecondary"
-                                >
-                                    name:
-                                </Typography>
-                                <div className="grow"/>
-                                <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                    {this.props.info.name}
-                                </Typography>
-                            </div>
-                            <div className="flex-row">
-                                <EmailOutlined
-                                    fontSize="large"
-                                    style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
-                                />
-                                <Typography
-                                    variant="title"
-                                    style={{marginTop: 'auto', marginBottom: 'auto'}}
-                                    color="textSecondary"
-                                >
-                                    email:
-                                </Typography>
-                                <div className="grow"/>
-                                <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                    {this.props.info.email}
-                                </Typography>
-                            </div>
-                            <div className="flex-row">
-                                <DateRangeOutlined
-                                    fontSize="large"
-                                    style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
-                                />
-                                <Typography
-                                    variant="title"
-                                    style={{marginTop: 'auto', marginBottom: 'auto'}}
-                                    color="textSecondary"
-                                >
-                                    birth:
-                                </Typography>
-                                <div className="grow"/>
-                                <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                    {this.props.info.birth}
-                                </Typography>
-                            </div>
-                            <div className="flex-row">
-                                <PhoneOutlined
-                                    fontSize="large"
-                                    style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
-                                />
-                                <Typography
-                                    variant="title"
-                                    style={{marginTop: 'auto', marginBottom: 'auto'}}
-                                    color="textSecondary"
-                                >
-                                    phone:
-                                </Typography>
-                                <div className="grow"/>
-                                <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                                    {this.props.info.tel}
-                                </Typography>
-                            </div>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <Paper style={{width: 400, padding: 20}}>
+                <div className="flex-row" style={{margin: 2}}>
+                    <AccountBoxOutlined
+                        fontSize="large"
+                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                    />
+                    <Typography
+                        variant="title"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                    >
+                        name:
+                    </Typography>
+                    <div className="grow"/>
+                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                        {this.props.info.name}
+                        </Typography>
+                </div>
+                <div className="flex-row" style={{margin: 2}}>
+                    <EmailOutlined
+                        fontSize="large"
+                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                    />
+                    <Typography
+                        variant="title"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                    >
+                        email:
+                    </Typography>
+                    <div className="grow"/>
+                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                        {this.props.info.email}
+                        </Typography>
+                </div>
+                <div className="flex-row" style={{margin: 2}}>
+                    <DateRangeOutlined
+                        fontSize="large"
+                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                    />
+                    <Typography
+                        variant="title"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                    >
+                        birth:
+                    </Typography>
+                    <div className="grow"/>
+                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                        {this.props.info.birth}
+                        </Typography>
+                </div>
+                <div className="flex-row" style={{margin: 2}}>
+                    <PhoneOutlined
+                        fontSize="large"
+                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                    />
+                    <Typography
+                        variant="title"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                    >
+                        phone:
+                    </Typography>
+                    <div className="grow"/>
+                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                        {this.props.info.tel}
+                        </Typography>
+                </div>
+            </Paper>
         );
     }
 }
@@ -315,7 +323,6 @@ class BorrowingTable extends React.Component {
                     className="table-title"
                     variant="h4"
                     component="h1"
-                    color="textSecondary"
                 >
                     Borrowing books
                 </Typography>
@@ -366,7 +373,6 @@ class ReservingTable extends React.Component {
                     className="table-title"
                     variant="h4"
                     component="h1"
-                    color="textSecondary"
                 >
                     Reserving books
                 </Typography>
@@ -415,7 +421,6 @@ class BorrowedTable extends React.Component {
                     className="table-title"
                     variant="h4"
                     component="h1"
-                    color="textSecondary"
                 >
                     Borrowed books
                 </Typography>
