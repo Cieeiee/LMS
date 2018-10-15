@@ -8,12 +8,20 @@ import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
-import { AccountBoxOutlined, EmailOutlined, PhoneOutlined, DateRangeOutlined } from '@material-ui/icons'
+import { AccountBoxOutlined, EmailOutlined, PhoneOutlined, DateRangeOutlined, MoveToInboxOutlined, AssignmentOutlined, HistoryOutlined } from '@material-ui/icons'
 import './reader.scss'
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
+import Divider from "@material-ui/core/Divider/Divider";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import {pink, teal} from "@material-ui/core/colors";
+import blue from "@material-ui/core/es/colors/blue";
+
 const ToLive = require('./components/alive.jpeg');
 const BarCode = require('./components/barcode.jpg');
+const Logo = require('./components/logo.jpg');
 
 export default class ReaderHistory extends React.Component {
     constructor(props) {
@@ -111,66 +119,64 @@ export default class ReaderHistory extends React.Component {
                 borrowing: [],
                 reserving: [],
                 borrowed: [],
+            },
+            total: {
+                borrowing: undefined,
+                borrowed: undefined
             }
         }
     }
 
     classifyRecord = () => {
         const borrowing = [];
+        let borrowing_id = 0;
         const reserving = [];
+        let reserving_id = 0;
         const borrowed = [];
+        let borrowed_id = 0;
         for (let i in this.state.record) {
             const record = this.state.record[i];
             if (record.reserveTime !== null && record.borrowTime !== null) {
+                record.id = reserving_id;
+                reserving_id += 1;
                 reserving.push(record);
             }
             else if (record.borrowTime !== null && record.returnTime !== null) {
+                record.id = borrowed_id;
+                borrowed_id += 1;
                 borrowed.push(record);
             }
             else if (record.borrowTime !== null && record.returnTime === null) {
+                record.id = borrowing_id;
+                borrowing_id += 1;
                 borrowing.push(record);
             }
         };
-
-        let total0 = {
-            title: 'Total fine ($)',
-            author: null,
-            picture: null,
-            barcode: null,
-            barcode_img: null,
-            borrowTime: null,
-            returnTime: null,
-            reserveTime: null,
-            fine: 0,
-        };
-        for (let i in borrowing) {
-            total0.fine += borrowing[i].fine;
-        };
-        borrowing.push(total0);
-
-        let total1 = {
-            title: 'Total fine ($)',
-            author: null,
-            picture: null,
-            barcode: null,
-            barcode_img: null,
-            borrowTime: null,
-            returnTime: null,
-            reserveTime: null,
-            fine: 0,
-        };
-        for (let i in borrowed) {
-            total1.fine += borrowed[i].fine;
-        };
-        borrowed.push(total1);
 
         const classified = {
             borrowing: borrowing,
             reserving: reserving,
             borrowed: borrowed,
         };
-
         this.setState({classified: classified});
+
+        let total_borrowing = 0;
+        for (let i in borrowing) {
+            total_borrowing += borrowing[i].fine;
+        };
+
+        let total_borrowed = 0;
+        for (let i in borrowed) {
+            total_borrowed += borrowed[i].fine;
+        };
+        this.setState({
+            total: {
+                borrowing: total_borrowing,
+                borrowed: total_borrowed
+            }
+        });
+
+
     };
 
     getHistory = () => {
@@ -212,23 +218,31 @@ export default class ReaderHistory extends React.Component {
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="flex-row">
                             <ReaderInfo info={this.state.info}/>
-                            <div style={{marginTop: 'auto', }} className="grow">
-                                <Tabs
-                                    value={this.state.value}
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    onChange={this.handleChange}
-                                    fullWidth
-                                >
-                                    <Tab label="Borrowing" />
-                                    <Tab label="Reserving"/>
-                                    <Tab label="Borrowed" />
-                                </Tabs>
+                        </Grid>
+                        <Grid item xs={12} className="flex-row">
+                            {/*<ReaderInfo info={this.state.info}/>*/}
+                            <div className={`grow flex-col`}>
+                                <div style={{marginTop: 'auto', }}>
+                                    <Tabs
+                                        value={this.state.value}
+                                        indicatorColor="primary"
+                                        textColor="primary"
+                                        onChange={this.handleChange}
+                                        fullWidth
+                                    >
+                                        <Tab label="Borrowing" icon={<MoveToInboxOutlined />}/>
+                                        <Tab label="Reserving" icon={<AssignmentOutlined />}/>
+                                        <Tab label="Borrowed" icon={<HistoryOutlined />}/>
+                                    </Tabs>
+                                </div>
                             </div>
                         </Grid>
-                        {this.state.value === 0 && <BorrowingTable records={this.state.classified.borrowing}/>}
-                        {this.state.value === 1 && <ReservingTable records={this.state.classified.reserving}/>}
-                        {this.state.value === 2 && <BorrowedTable records={this.state.classified.borrowed}/>}
+                        {this.state.value === 0 &&
+                        <BorrowingTableWrapped records={this.state.classified.borrowing} total={this.state.total.borrowing}/>}
+                        {this.state.value === 1 &&
+                        <ReservingTableWrapped records={this.state.classified.reserving}/>}
+                        {this.state.value === 2 &&
+                        <BorrowedTableWrapped records={this.state.classified.borrowed} total={this.state.total.borrowed}/>}
                     </Grid>
                 </div>
             </React.Fragment>
@@ -239,75 +253,110 @@ export default class ReaderHistory extends React.Component {
 class ReaderInfo extends React.Component {
     render() {
         return (
-            <Paper style={{width: 400, padding: 20}}>
-                <div className="flex-row" style={{margin: 2}}>
+            <Paper style={{padding: 20}} className="grow">
+                <Divider />
+                <div className="flex-row" style={{margin: 5}}>
                     <AccountBoxOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
                     />
                     <Typography
                         variant="title"
                         style={{marginTop: 'auto', marginBottom: 'auto'}}
                     >
-                        name:
+                        name
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.name}
                         </Typography>
                 </div>
-                <div className="flex-row" style={{margin: 2}}>
+                <Divider />
+                <div className="flex-row" style={{margin: 5}}>
                     <EmailOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
                     />
                     <Typography
                         variant="title"
                         style={{marginTop: 'auto', marginBottom: 'auto'}}
                     >
-                        email:
+                        email
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.email}
                         </Typography>
                 </div>
-                <div className="flex-row" style={{margin: 2}}>
+                <Divider />
+                <div className="flex-row" style={{margin: 5}}>
                     <DateRangeOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
                     />
                     <Typography
                         variant="title"
                         style={{marginTop: 'auto', marginBottom: 'auto'}}
                     >
-                        birth:
+                        birth
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.birth}
                         </Typography>
                 </div>
-                <div className="flex-row" style={{margin: 2}}>
+                <Divider />
+                <div className="flex-row" style={{margin: 5}}>
                     <PhoneOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', marginRight: 2}}
+                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
                     />
                     <Typography
                         variant="title"
                         style={{marginTop: 'auto', marginBottom: 'auto'}}
                     >
-                        phone:
+                        phone
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.tel}
                         </Typography>
                 </div>
+                <Divider />
             </Paper>
         );
     }
 }
+
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: blue[300],
+        color: theme.palette.common.white,
+        fontSize: 16,
+    },
+    body: {
+        fontSize: 14,
+    },
+    footer: {
+        backgroundColor: blue[200],
+        color: theme.palette.common.black,
+        fontSize: 16,
+    }
+}))(TableCell);
+
+const styles = theme => ({
+    head: {
+
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: blue[100],
+        },
+        '&:nth-of-type(even)': {
+            backgroundColor: blue[50],
+        },
+    },
+});
 
 class BorrowingTable extends React.Component {
     constructor(props) {
@@ -316,42 +365,45 @@ class BorrowingTable extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
 
         return (
             <Grid item xs={12}>
-                <Typography
-                    className="table-title"
-                    variant="h4"
-                    component="h1"
-                >
-                    Borrowing books
-                </Typography>
                 <Paper>
                     <Table>
-                        <TableHead>
+                        <TableHead className={classes.head}>
                             <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell numeric>Author</TableCell>
-                                <TableCell numeric>Barcode</TableCell>
-                                <TableCell numeric>Borrow Time</TableCell>
-                                <TableCell numeric>Fine ($)</TableCell>
+                                <CustomTableCell>Title</CustomTableCell>
+                                <CustomTableCell numeric>Author</CustomTableCell>
+                                <CustomTableCell numeric>Barcode</CustomTableCell>
+                                <CustomTableCell numeric>Borrow Time</CustomTableCell>
+                                <CustomTableCell numeric>Fine ($)</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.props.records.map(book => {
                                 return (
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
+                                    <TableRow className={classes.row} key={book.id}>
+                                        <CustomTableCell component="th" scope="row">
                                             {book.title}
-                                        </TableCell>
-                                        <TableCell numeric>{book.author}</TableCell>
-                                        <TableCell numeric>{book.barcode}</TableCell>
-                                        <TableCell numeric>{book.borrowTime}</TableCell>
-                                        <TableCell numeric>{book.fine}</TableCell>
+                                        </CustomTableCell>
+                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
                                     </TableRow>
                                 );
                             })}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <CustomTableCell>Total fine ($)</CustomTableCell>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric>{this.props.total}</CustomTableCell>
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </Paper>
             </Grid>
@@ -366,36 +418,30 @@ class ReservingTable extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
 
         return (
             <Grid item xs={12}>
-                <Typography
-                    className="table-title"
-                    variant="h4"
-                    component="h1"
-                >
-                    Reserving books
-                </Typography>
                 <Paper>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell numeric>Author</TableCell>
-                                <TableCell numeric>Barcode</TableCell>
-                                <TableCell numeric>Reserve Time</TableCell>
+                                <CustomTableCell>Title</CustomTableCell>
+                                <CustomTableCell numeric>Author</CustomTableCell>
+                                <CustomTableCell numeric>Barcode</CustomTableCell>
+                                <CustomTableCell numeric>Reserve Time</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.props.records.map(book => {
                                 return (
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
+                                    <TableRow className={classes.row} key={book.id}>
+                                        <CustomTableCell component="th" scope="row">
                                             {book.title}
-                                        </TableCell>
-                                        <TableCell numeric>{book.author}</TableCell>
-                                        <TableCell numeric>{book.barcode}</TableCell>
-                                        <TableCell numeric>{book.reserveTime}</TableCell>
+                                        </CustomTableCell>
+                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.reserveTime}</CustomTableCell>
                                     </TableRow>
                                 );
                             })}
@@ -414,47 +460,55 @@ class BorrowedTable extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
 
         return (
             <Grid item xs={12}>
-                <Typography
-                    className="table-title"
-                    variant="h4"
-                    component="h1"
-                >
-                    Borrowed books
-                </Typography>
                 <Paper>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell numeric>Author</TableCell>
-                                <TableCell numeric>Barcode</TableCell>
-                                <TableCell numeric>Borrow Time</TableCell>
-                                <TableCell numeric>Return Time</TableCell>
-                                <TableCell numeric>Fine ($)</TableCell>
+                                <CustomTableCell>Title</CustomTableCell>
+                                <CustomTableCell numeric>Author</CustomTableCell>
+                                <CustomTableCell numeric>Barcode</CustomTableCell>
+                                <CustomTableCell numeric>Borrow Time</CustomTableCell>
+                                <CustomTableCell numeric>Return Time</CustomTableCell>
+                                <CustomTableCell numeric>Fine ($)</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.props.records.map(book => {
                                 return (
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
+                                    <TableRow className={classes.row} key={book.id}>
+                                        <CustomTableCell component="th" scope="row">
                                             {book.title}
-                                        </TableCell>
-                                        <TableCell numeric>{book.author}</TableCell>
-                                        <TableCell numeric>{book.barcode}</TableCell>
-                                        <TableCell numeric>{book.borrowTime}</TableCell>
-                                        <TableCell numeric>{book.returnTime}</TableCell>
-                                        <TableCell numeric>{book.fine}</TableCell>
+                                        </CustomTableCell>
+                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
                                     </TableRow>
                                 );
                             })}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <CustomTableCell>Total fine ($)</CustomTableCell>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric/>
+                                <CustomTableCell numeric>{this.props.total}</CustomTableCell>
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </Paper>
             </Grid>
         );
     }
 };
+
+const BorrowingTableWrapped = withStyles(styles)(BorrowingTable);
+const BorrowedTableWrapped = withStyles(styles)(BorrowedTable);
+const ReservingTableWrapped = withStyles(styles)(ReservingTable);

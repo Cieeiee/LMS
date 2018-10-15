@@ -23,7 +23,7 @@ const styles = theme => ({
     },
     menuButton: {
         marginLeft: -12,
-        marginRight: 15,
+        marginRight: 12,
         // fontSize: 20
     },
     title: {
@@ -48,7 +48,7 @@ const styles = theme => ({
         },
     },
     searchIcon: {
-        width: theme.spacing.unit * 9,
+        width: theme.spacing.unit * 7,
         height: '100%',
         position: 'absolute',
         pointerEvents: 'none',
@@ -64,13 +64,13 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit,
         paddingRight: theme.spacing.unit,
         paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
+        paddingLeft: theme.spacing.unit * 7,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             width: 100,
             '&:focus': {
-                width: 450,
+                width: 300,
             },
         },
     },
@@ -167,6 +167,9 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" component={Link} to='/reader/notification'>
                                 <Notifications />
                             </IconButton>
+                            {/*<IconButton color="inherit">*/}
+                                {/*<Notifications />*/}
+                            {/*</IconButton>*/}
                             <IconButton
                                 color="inherit"
                                 onClick={this.handleLogout}
@@ -176,7 +179,6 @@ class PrimarySearchAppBar extends React.Component {
                         </div>
                     </Toolbar>
                 </AppBar>
-                {/*<div className={classes.toolbar}/>*/}
             </div>
         );
     }

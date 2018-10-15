@@ -37,7 +37,7 @@ export default class ReaderNotification extends React.Component {
     }
 
     getNotification = () => {
-        fetch('/reader/showAnnotation', {
+        fetch('/showAnnotation', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

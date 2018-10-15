@@ -114,7 +114,7 @@ class BookClass extends React.Component {
                             <Typography component="p" color="textSecondary">
                                 ISBN:
                             </Typography>
-                            <Typography>
+                            <Typography style={{marginLeft: 10}}>
                                 {this.props.book.isbn}
                             </Typography>
                         </div>
@@ -122,15 +122,15 @@ class BookClass extends React.Component {
                             <Typography component="p" color="textSecondary">
                                 price:
                             </Typography>
-                            <Typography>
+                            <Typography style={{marginLeft: 10}}>
                                 ${this.props.book.price}
                             </Typography>
                         </div>
                         <Typography component="p" color="textSecondary">
                             introduction:
                         </Typography>
-                        <Typography component="p">
-                            {".." + this.props.book.introduction}
+                        <Typography component="p" style={{textIndent: '2em'}}>
+                            {this.props.book.introduction}
                             </Typography>
                     </CardContent>
 
