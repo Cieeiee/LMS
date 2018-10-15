@@ -3,7 +3,7 @@ import {Grid} from "@material-ui/core";
 import {OneBook} from "./components/OneBook";
 import {TopBar} from "./components/TopBar";
 
-const Alive = require('../../components/alive.jpeg');
+const Alive = require('./components/alive.jpeg');
 
 export default class SearchedPage extends React.Component {
     constructor(props) {
@@ -49,7 +49,9 @@ export default class SearchedPage extends React.Component {
     };
 
     componentDidMount() {
-        this.state.keywords = this.props.match.params.keywords;
+        this.setState({
+            keywords: this.props.match.params.keywords
+        })
         // this.handleSearch();
     }
 

@@ -214,7 +214,7 @@ export default class ReaderHistory extends React.Component {
         return (
             <React.Fragment>
                 <TopBar />
-                <div className={"flex-col" + " " + "mid-div"}>
+                <div className="flex-col mid-div">
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="flex-row">
                             <ReaderInfo info={this.state.info}/>
@@ -358,58 +358,46 @@ const styles = theme => ({
     },
 });
 
-class BorrowingTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Grid item xs={12}>
-                <Paper>
-                    <Table>
-                        <TableHead className={classes.head}>
-                            <TableRow>
-                                <CustomTableCell>Title</CustomTableCell>
-                                <CustomTableCell numeric>Author</CustomTableCell>
-                                <CustomTableCell numeric>Barcode</CustomTableCell>
-                                <CustomTableCell numeric>Borrow Time</CustomTableCell>
-                                <CustomTableCell numeric>Fine ($)</CustomTableCell>
+const BorrowingTable = props => 
+    <Grid item xs={12}>
+        <Paper>
+            <Table>
+                <TableHead className={props.classes.head}>
+                    <TableRow>
+                        <CustomTableCell>Title</CustomTableCell>
+                        <CustomTableCell numeric>Author</CustomTableCell>
+                        <CustomTableCell numeric>Barcode</CustomTableCell>
+                        <CustomTableCell numeric>Borrow Time</CustomTableCell>
+                        <CustomTableCell numeric>Fine ($)</CustomTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {props.records.map(book => {
+                        return (
+                            <TableRow className={props.classes.row} key={book.id}>
+                                <CustomTableCell component="th" scope="row">
+                                    {book.title}
+                                </CustomTableCell>
+                                <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                <CustomTableCell numeric>{book.fine}</CustomTableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.props.records.map(book => {
-                                return (
-                                    <TableRow className={classes.row} key={book.id}>
-                                        <CustomTableCell component="th" scope="row">
-                                            {book.title}
-                                        </CustomTableCell>
-                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <CustomTableCell>Total fine ($)</CustomTableCell>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric>{this.props.total}</CustomTableCell>
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </Paper>
-            </Grid>
-        );
-    }
-};
+                        );
+                    })}
+                </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <CustomTableCell>Total fine ($)</CustomTableCell>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric>{props.total}</CustomTableCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
+        </Paper>
+    </Grid>
 
 class ReservingTable extends React.Component {
     constructor(props) {

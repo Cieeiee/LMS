@@ -29,6 +29,7 @@ export default class Librarian extends React.Component {
                 list: result.name
             })
         })
+        .catch(e => console.log('我知道报错了但是我不说\n' + e))
     }
     render() {
         return (

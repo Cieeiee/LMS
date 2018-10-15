@@ -70,12 +70,8 @@ export default class ReaderNotification extends React.Component {
         return (
             <React.Fragment>
                 <TopBar/>
-                <div
-                    className={"flex-col" + " " + "mid-div"}
-                >
-                    <List>
-                        {MessageLists}
-                    </List>
+                <div className="flex-col mid-div">
+                    <List>{MessageLists}</List>
                 </div>
             </React.Fragment>
         );
@@ -83,12 +79,6 @@ export default class ReaderNotification extends React.Component {
 }
 
 class OneNotification extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-
     render() {
         return (
             <ListItem>

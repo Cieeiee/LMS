@@ -95,9 +95,11 @@ class LoginClass extends React.Component {
         }
 
         // clear
-        this.state.status = undefined;
-        this.state.account = undefined;
-        this.state.password = undefined;
+        this.setState({
+            status: undefined,
+            account: undefined,
+            password: undefined
+        })
     };
 
     render() {
