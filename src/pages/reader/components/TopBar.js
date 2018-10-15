@@ -167,9 +167,6 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" component={Link} to='/reader/notification'>
                                 <Notifications />
                             </IconButton>
-                            {/*<IconButton color="inherit">*/}
-                                {/*<Notifications />*/}
-                            {/*</IconButton>*/}
                             <IconButton
                                 color="inherit"
                                 onClick={this.handleLogout}

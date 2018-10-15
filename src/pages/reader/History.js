@@ -180,16 +180,7 @@ export default class ReaderHistory extends React.Component {
     };
 
     getHistory = () => {
-        fetch('/reader/showHistory', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                reader_id: this.props.readerID,
-            })
-        })
+        fetch(`/reader/showHistory/?reader_id=${this.props.readerID}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -214,7 +205,7 @@ export default class ReaderHistory extends React.Component {
         return (
             <React.Fragment>
                 <TopBar />
-                <div className={"flex-col" + " " + "mid-div"}>
+                <div className="flex-col mid-div">
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="flex-row">
                             <ReaderInfo info={this.state.info}/>

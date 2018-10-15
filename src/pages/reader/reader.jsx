@@ -48,8 +48,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div style={{height: '100%'}}>
-                <div style={{height: '100%'}}>
+                <div className="flex-col" style={{height: '100%'}}>
                     <TopButton />
                     <div className='reader-page'>
                         <div className='bg' style={{backgroundImage: `url(${Logo})`}} />
@@ -69,7 +68,6 @@ class Home extends React.Component {
                         </Button>
                     </div>
                 </div>
-            </div>
         );
     }
 

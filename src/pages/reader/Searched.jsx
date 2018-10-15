@@ -49,22 +49,13 @@ export default class SearchedPage extends React.Component {
     };
 
     componentDidMount() {
-        this.state.keywords = this.props.match.params.keywords;
+        this.setState({keywords: this.props.match.params.keywords});
         // this.handleSearch();
     }
 
 
     handleSearch = () => {
-        fetch('/searchBooks', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                keywords: this.state.keywords,
-            })
-        })
+        fetch(`/searchBooks?keywords=${this.state.keywords}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
