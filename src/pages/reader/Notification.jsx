@@ -4,9 +4,10 @@ import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import { Assignment } from '@material-ui/icons'
+import {Assignment, DescriptionOutlined} from '@material-ui/icons'
 import {TopBar} from "./components/TopBar";
 import {green} from "@material-ui/core/colors";
+import Typography from "@material-ui/core/Typography/Typography";
 
 export default class ReaderNotification extends React.Component {
     constructor(props) {
@@ -62,6 +63,13 @@ export default class ReaderNotification extends React.Component {
             <React.Fragment>
                 <TopBar/>
                 <div className="flex-col mid-div">
+                    <div className="flex-row"
+                         style={{marginBottom: 10}}
+                    >
+                        <Typography style={{fontSize: 50, marginLeft: 5}} className="col-mid">
+                            Notifications
+                        </Typography>
+                    </div>
                     <List>
                         {MessageLists}
                     </List>

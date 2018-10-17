@@ -7,12 +7,18 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { Notifications, History, ExitToApp, Home } from '@material-ui/icons'
+import { Notifications, History, ExitToApp, Home, DescriptionOutlined } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button/Button";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import {TextField} from "@material-ui/core";
+import LibraryRules from "../libraryRules";
 
 const styles = theme => ({
     root: {
@@ -88,9 +94,30 @@ class PrimarySearchAppBar extends React.Component {
         super(props);
         this.state = {
             keywords: undefined,
-            bookList: [],
+
+            openRules: false,
+            deposit: 300,
+            fine: 0.01,
+            maxReturnTime: 90,
+            maxReserveTime: 2,
+            maxBorrowNum: 5,
         }
     }
+
+    getAllRules = () => {
+        fetch('/showRules')
+            .then(Response => Response.json())
+            .then(result => {
+                this.setState({
+                    deposit: result.deposit,
+                    fine: result.fine,
+                    maxReturnTime: result.maxReturnTime,
+                    maxReserveTime: result.maxReserveTime,
+                    maxBorrowNum: result.maxBorrowNum,
+                });
+            })
+            .catch(e => alert(e));
+    };
 
     handleLogout = () => {
         fetch('/logout').catch(e => alert(e));
@@ -105,25 +132,19 @@ class PrimarySearchAppBar extends React.Component {
         if (e.keyCode !== 13)
             return;
 
-        fetch('/searchBooks', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                keywords: this.state.keywords,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    bookList: result.books,
-                });
-            })
-            .catch(e => alert(e));
-
         window.location.href = '/reader/search/' + this.state.keywords;
+    };
+
+    handleClick = () => {
+        this.setState({openRules: true});
+    };
+
+    handleClose = () => {
+        this.setState({openRules: false});
+    };
+
+    componentDidMount() {
+        // this.getAllRules();
     };
 
     render() {
@@ -161,6 +182,9 @@ class PrimarySearchAppBar extends React.Component {
                                 />
                             </div>}
                         <div className={classes.sectionDesktop}>
+                            <IconButton color="inherit" onClick={this.handleClick}>
+                                <DescriptionOutlined />
+                            </IconButton>
                             <IconButton color="inherit" component={Link} to='/reader/history'>
                                 <History />
                             </IconButton>
@@ -176,6 +200,17 @@ class PrimarySearchAppBar extends React.Component {
                         </div>
                     </Toolbar>
                 </AppBar>
+                <LibraryRules
+                    open={this.state.openRules}
+                    handleClose={this.handleClose}
+                    rules={{
+                        deposit: this.state.deposit,
+                        fine: this.state.fine,
+                        maxReturnTime: this.state.maxReturnTime,
+                        maxReserveTime: this.state.maxReserveTime,
+                        maxBorrowNum: this.state.maxBorrowNum,
+                    }}
+                />
             </div>
         );
     }

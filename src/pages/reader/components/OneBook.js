@@ -135,7 +135,7 @@ class BookClass extends React.Component {
                         </Typography>
                         <Typography component="p" style={{textIndent: '2em'}}>
                             {this.props.book.introduction}
-                            </Typography>
+                        </Typography>
                     </CardContent>
 
                     <div className={classes.grow}/>

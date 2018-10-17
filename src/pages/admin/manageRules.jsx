@@ -159,7 +159,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    $
+                                                    $/day
                                                 </InputAdornment>
                                             ),
                                         }}
