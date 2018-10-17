@@ -537,6 +537,7 @@ function MessageDialog(props) {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
+            autoHideDuration={1500}
             message={
                 <span id="message-id">
                     {props.message}

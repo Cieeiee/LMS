@@ -22,18 +22,18 @@ export default class ManageRules extends React.Component {
             maxReturnTime: 90,
             maxReserveTime: 2,
             maxBorrowNum: 5,
-            status: 0,
+            status: -1,
 
             returnMessage: undefined,
-        }
+        };
 
-        this.encode = {
-            "deposit": 0,
-            "fine": 1,
-            "maxReturnTime": 2,
-            "maxReserveTime": 3,
-            "maxBorrowNum": 4,
-        }
+        this.encode = [
+            "Deposit",
+            "Fine",
+            "Time to return book",
+            "Valid time for reserving",
+            "Maximum books to borrow",
+        ];
     };
 
     getAllRules = () => {
@@ -66,22 +66,23 @@ export default class ManageRules extends React.Component {
     };
 
     handleClick = (id, value) => () => {
-        fetch(`/admin/changeRules?rule=${id}&value=${value}`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({status: result.state})
-            })
-            .catch(e => alert(e));
+        // fetch(`/admin/changeRules?rule=${id}&value=${value}`)
+        //     .then(Response => Response.json())
+        //     .then(result => {
+        //         this.setState({status: result.state})
+        //     })
+        //     .catch(e => alert(e));
+
         this.setState({status: 1});
 
         if (this.state.status === 0) {
             this.setState({
-                returnMessage: "Change failed."
+                returnMessage: `${this.encode[id]} change failed.`
             });
         }
-        else {
+        else if (this.state.status === 1){
             this.setState({
-                returnMessage: "Change success."
+                returnMessage: `${this.encode[id]} change success.`
             });
         }
     };
@@ -106,7 +107,7 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title">Deposit</Typography>
+                                        <Typography variant="title" gutterBottom>Deposit</Typography>
                                         <Typography variant="body1" color="textSecondary">
                                             Paid by the reader to become the member of the Bibliosoft.
                                         </Typography>
@@ -130,7 +131,9 @@ export default class ManageRules extends React.Component {
                                         value={this.state.deposit}
                                         onChange={this.handleChange("deposit")}
                                     />
-                                    <Button onClick={this.handleClick(0, this.state.deposit)}>
+                                    <Button
+                                        onClick={this.handleClick(0, this.state.deposit)}
+                                    >
                                         <CreateOutlined/>
                                     </Button>
                                 </div>
@@ -141,7 +144,7 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title">Fine</Typography>
+                                        <Typography variant="title" gutterBottom>Fine</Typography>
                                         <Typography variant="body1" color="textSecondary">
                                             Paid for the book which doesn't return in time.
                                         </Typography>
@@ -176,7 +179,7 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title">Time to return book</Typography>
+                                        <Typography variant="title" gutterBottom>Time to return book</Typography>
                                         <Typography variant="body1" color="textSecondary">
                                             Time limit for returning the book after borrowing.
                                         </Typography>
@@ -211,7 +214,7 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title">Valid Time for reserving</Typography>
+                                        <Typography variant="title" gutterBottom>Valid Time for reserving</Typography>
                                         <Typography variant="body1" color="textSecondary">
                                             The valid time that a reader can borrow the book reserved after reserving.
                                         </Typography>
@@ -246,7 +249,7 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title">Maximum books to borrow</Typography>
+                                        <Typography variant="title" gutterBottom>Maximum books to borrow</Typography>
                                         <Typography variant="body1" color="textSecondary">
                                             The maximum number of books that a reader can borrow meanwhile.
                                         </Typography>
@@ -297,6 +300,7 @@ function MessageDialog(props) {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
+            autoHideDuration={1500}
             message={
                 <span id="message-id">
                     {props.message}
