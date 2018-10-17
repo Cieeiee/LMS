@@ -15,8 +15,11 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import Badge from "@material-ui/core/Badge/Badge";
+import Avatar from "@material-ui/core/Avatar/Avatar";
+import {deepOrange} from "@material-ui/core/colors";
 
-const Alive = require('./alive.jpeg');
+const Alive = require('./images/alive.jpeg');
 
 const styles = theme => ({
     card: {
@@ -46,13 +49,10 @@ const styles = theme => ({
     grow: {
         flexGrow: 1,
     },
-    row: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    col: {
-        display: 'flex',
-        flexDirection: 'column',
+    avatar: {
+        padding: 10,
+        color: '#fff',
+        backgroundColor: deepOrange[500],
     }
 });
 
@@ -93,24 +93,28 @@ class BookClass extends React.Component {
                     title={this.props.book.title}
                 />
                 <div className={classes.info}>
-                    <CardContent>
-                        <div className={classes.row}>
+                    <div className="flex-row">
+                        <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.book.title}
                             </Typography>
-                            <div className="grow"/>
-                            <Typography variant="subtitle" style={{margin: 'auto'}}>
-                                {this.props.book.location}
+                            <Typography component="p" color="textSecondary">
+                                {this.props.book.author}
+                            </Typography>
+                        </CardContent>
+                        <div className="grow"/>
+                        <CardContent>
+                            <div className="flex-row" style={{marginBottom: 10}}>
+                                <Typography variant="subtitle" style={{margin: 'auto'}}>
+                                    {this.props.book.location}
                                 </Typography>
-                            <LocationOnOutlined style={{margin: 'auto'}}/>
-                        </div>
-                        <Typography component="p" color="textSecondary">
-                            {this.props.book.author}
-                        </Typography>
-                    </CardContent>
+                                <LocationOnOutlined style={{margin: 'auto'}}/>
+                            </div>
+                        </CardContent>
+                    </div>
 
                     <CardContent>
-                        <div className={classes.row}>
+                        <div className="flex-row">
                             <Typography component="p" color="textSecondary">
                                 ISBN:
                             </Typography>
@@ -118,7 +122,7 @@ class BookClass extends React.Component {
                                 {this.props.book.isbn}
                             </Typography>
                         </div>
-                        <div className={classes.row}>
+                        <div className="flex-row">
                             <Typography component="p" color="textSecondary">
                                 price:
                             </Typography>
@@ -136,12 +140,17 @@ class BookClass extends React.Component {
 
                     <div className={classes.grow}/>
 
-                    <div className={classes.row}>
-                        <CardContent>
-                            {this.props.book.remain}/{this.props.book.total}
-                            </CardContent>
+                    <div className="flex-row">
+                        <CardContent className="flex-row">
+                            <Button color="primary">
+                                REMAIN: {this.props.book.remain}
+                            </Button>
+                            <Button color="primary">
+                                TOTAL: {this.props.book.total}
+                            </Button>
+                        </CardContent>
                         <div className={classes.grow}/>
-                        <CardActions className={classes.row}>
+                        <CardActions className="flex-row">
                             <Button color="primary" onClick={this.handleClick}>
                                 reserve
                             </Button>

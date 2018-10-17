@@ -3,27 +3,63 @@ import {TopBar} from "./components/TopBar";
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
-import Table from "@material-ui/core/Table/Table";
-import TableHead from "@material-ui/core/TableHead/TableHead";
-import TableRow from "@material-ui/core/TableRow/TableRow";
-import TableCell from "@material-ui/core/TableCell/TableCell";
-import TableBody from "@material-ui/core/TableBody/TableBody";
 import { AccountBoxOutlined, EmailOutlined, PhoneOutlined, DateRangeOutlined, MoveToInboxOutlined, AssignmentOutlined, HistoryOutlined } from '@material-ui/icons'
 import './reader.scss'
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
 import Divider from "@material-ui/core/Divider/Divider";
-import TableFooter from "@material-ui/core/TableFooter/TableFooter";
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import {pink, teal} from "@material-ui/core/colors";
-import blue from "@material-ui/core/es/colors/blue";
+import BorrowingTableWrapped from './components/BorrowingTable'
+import ReservingTableWrapped from './components/ReservingTable'
+import BorrowedTableWrapped from './components/BorrowedTable'
+import {withStyles} from "@material-ui/core";
+import {blue} from "@material-ui/core/colors";
 
-const ToLive = require('./components/alive.jpeg');
-const BarCode = require('./components/barcode.jpg');
-const Logo = require('./components/logo.jpg');
+const ToLive = require('./components/images/alive.jpeg');
+const BarCode = require('./components/images/barcode.jpg');
+const Logo = require('./components/images/logo.jpg');
 
-export default class ReaderHistory extends React.Component {
+const styles = theme => ({
+    tabsRoot: {
+        borderBottom: '2px solid #e8e8e8',
+    },
+    tabsIndicator: {
+        backgroundColor: blue[500],
+    },
+    tabRoot: {
+        // textTransform: 'initial',
+        fontWeight: theme.typography.fontWeightRegular,
+        // marginRight: theme.spacing.unit * 4,
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+        ].join(','),
+        '&:hover': {
+            color: blue[300],
+            opacity: 1,
+        },
+        '&$tabSelected': {
+            color: blue[500],
+            fontWeight: theme.typography.fontWeightMedium,
+        },
+        '&:focus': {
+            color: blue[500],
+        },
+    },
+    tabSelected: {},
+    typography: {
+        padding: theme.spacing.unit * 3,
+    },
+});
+
+class ReaderHistoryClass extends React.Component {
     constructor(props) {
         super(props);
 
@@ -201,6 +237,7 @@ export default class ReaderHistory extends React.Component {
     }
 
     render() {
+        const {classes} = this.props;
 
         return (
             <React.Fragment>
@@ -210,30 +247,47 @@ export default class ReaderHistory extends React.Component {
                         <Grid item xs={12} className="flex-row">
                             <ReaderInfo info={this.state.info}/>
                         </Grid>
-                        <Grid item xs={12} className="flex-row">
-                            {/*<ReaderInfo info={this.state.info}/>*/}
-                            <div className="grow flex-col">
-                                <div style={{marginTop: 'auto'}}>
-                                    <Tabs
-                                        value={this.state.value}
-                                        indicatorColor="primary"
-                                        textColor="primary"
-                                        onChange={this.handleChange}
-                                        fullWidth
-                                    >
-                                        <Tab label="Borrowing" icon={<MoveToInboxOutlined />}/>
-                                        <Tab label="Reserving" icon={<AssignmentOutlined />}/>
-                                        <Tab label="Borrowed" icon={<HistoryOutlined />}/>
-                                    </Tabs>
-                                </div>
-                            </div>
+                        <Grid item xs={12}>
+                            <Paper>
+                                <Grid item xs={12} className="flex-row">
+                                    {/*<ReaderInfo info={this.state.info}/>*/}
+                                    <div className="grow flex-col">
+                                        <div style={{marginTop: 'auto'}}>
+                                            <Tabs
+                                                value={this.state.value}
+                                                textColor="primary"
+                                                indicatorColor="primary"
+                                                onChange={this.handleChange}
+                                                fullWidth
+                                                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                                            >
+                                                <Tab
+                                                    label="Borrowing"
+                                                    icon={<MoveToInboxOutlined />}
+                                                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                                                />
+                                                <Tab
+                                                    label="Reserving"
+                                                    icon={<AssignmentOutlined />}
+                                                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                                                />
+                                                <Tab
+                                                    label="Borrowed"
+                                                    icon={<HistoryOutlined />}
+                                                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                                                />
+                                            </Tabs>
+                                        </div>
+                                    </div>
+                                </Grid>
+                                {this.state.value === 0 &&
+                                <BorrowingTableWrapped records={this.state.classified.borrowing} total={this.state.total.borrowing}/>}
+                                {this.state.value === 1 &&
+                                <ReservingTableWrapped records={this.state.classified.reserving}/>}
+                                {this.state.value === 2 &&
+                                <BorrowedTableWrapped records={this.state.classified.borrowed} total={this.state.total.borrowed}/>}
+                            </Paper>
                         </Grid>
-                        {this.state.value === 0 &&
-                        <BorrowingTableWrapped records={this.state.classified.borrowing} total={this.state.total.borrowing}/>}
-                        {this.state.value === 1 &&
-                        <ReservingTableWrapped records={this.state.classified.reserving}/>}
-                        {this.state.value === 2 &&
-                        <BorrowedTableWrapped records={this.state.classified.borrowed} total={this.state.total.borrowed}/>}
                     </Grid>
                 </div>
             </React.Fragment>
@@ -244,12 +298,13 @@ export default class ReaderHistory extends React.Component {
 class ReaderInfo extends React.Component {
     render() {
         return (
-            <Paper style={{padding: 20}} className="grow">
+            <div className="grow">
+            {/*<Paper style={{padding: 20}} className="grow">*/}
                 <Divider />
                 <div className="flex-row" style={{margin: 5}}>
                     <AccountBoxOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
+                        style={{margin: 5}}
                     />
                     <Typography
                         variant="title"
@@ -258,15 +313,17 @@ class ReaderInfo extends React.Component {
                         name
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography
+                        variant="title" color="textSecondary"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.name}
-                        </Typography>
+                    </Typography>
                 </div>
                 <Divider />
                 <div className="flex-row" style={{margin: 5}}>
                     <EmailOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
+                        style={{margin: 5}}
                     />
                     <Typography
                         variant="title"
@@ -283,7 +340,7 @@ class ReaderInfo extends React.Component {
                 <div className="flex-row" style={{margin: 5}}>
                     <DateRangeOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
+                        style={{margin: 5}}
                     />
                     <Typography
                         variant="title"
@@ -300,7 +357,7 @@ class ReaderInfo extends React.Component {
                 <div className="flex-row" style={{margin: 5}}>
                     <PhoneOutlined
                         fontSize="large"
-                        style={{marginTop: 'auto', marginBottom: 'auto', margin: 5}}
+                        style={{margin: 5}}
                     />
                     <Typography
                         variant="title"
@@ -309,197 +366,18 @@ class ReaderInfo extends React.Component {
                         phone
                     </Typography>
                     <div className="grow"/>
-                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography
+                        variant="title" color="textSecondary"
+                        style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.tel}
-                        </Typography>
+                    </Typography>
                 </div>
                 <Divider />
-            </Paper>
+            {/* </Paper>*/}
+            </div>
         );
     }
 }
 
-const CustomTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: blue[300],
-        color: theme.palette.common.white,
-        fontSize: 16,
-    },
-    body: {
-        fontSize: 14,
-    },
-    footer: {
-        backgroundColor: blue[200],
-        color: theme.palette.common.black,
-        fontSize: 16,
-    }
-}))(TableCell);
-
-const styles = theme => ({
-    head: {
-
-    },
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: blue[100],
-        },
-        '&:nth-of-type(even)': {
-            backgroundColor: blue[50],
-        },
-    },
-});
-
-class BorrowingTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Grid item xs={12}>
-                <Paper>
-                    <Table>
-                        <TableHead className={classes.head}>
-                            <TableRow>
-                                <CustomTableCell>Title</CustomTableCell>
-                                <CustomTableCell numeric>Author</CustomTableCell>
-                                <CustomTableCell numeric>Barcode</CustomTableCell>
-                                <CustomTableCell numeric>Borrow Time</CustomTableCell>
-                                <CustomTableCell numeric>Fine ($)</CustomTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.props.records.map(book => {
-                                return (
-                                    <TableRow className={classes.row} key={book.id}>
-                                        <CustomTableCell component="th" scope="row">
-                                            {book.title}
-                                        </CustomTableCell>
-                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <CustomTableCell>Total fine ($)</CustomTableCell>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric>{this.props.total}</CustomTableCell>
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </Paper>
-            </Grid>
-        );
-    }
-};
-
-class ReservingTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Grid item xs={12}>
-                <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <CustomTableCell>Title</CustomTableCell>
-                                <CustomTableCell numeric>Author</CustomTableCell>
-                                <CustomTableCell numeric>Barcode</CustomTableCell>
-                                <CustomTableCell numeric>Reserve Time</CustomTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.props.records.map(book => {
-                                return (
-                                    <TableRow className={classes.row} key={book.id}>
-                                        <CustomTableCell component="th" scope="row">
-                                            {book.title}
-                                        </CustomTableCell>
-                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.reserveTime}</CustomTableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </Paper>
-            </Grid>
-        );
-    }
-};
-
-class BorrowedTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Grid item xs={12}>
-                <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <CustomTableCell>Title</CustomTableCell>
-                                <CustomTableCell numeric>Author</CustomTableCell>
-                                <CustomTableCell numeric>Barcode</CustomTableCell>
-                                <CustomTableCell numeric>Borrow Time</CustomTableCell>
-                                <CustomTableCell numeric>Return Time</CustomTableCell>
-                                <CustomTableCell numeric>Fine ($)</CustomTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.props.records.map(book => {
-                                return (
-                                    <TableRow className={classes.row} key={book.id}>
-                                        <CustomTableCell component="th" scope="row">
-                                            {book.title}
-                                        </CustomTableCell>
-                                        <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
-                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <CustomTableCell>Total fine ($)</CustomTableCell>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric/>
-                                <CustomTableCell numeric>{this.props.total}</CustomTableCell>
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </Paper>
-            </Grid>
-        );
-    }
-};
-
-const BorrowingTableWrapped = withStyles(styles)(BorrowingTable);
-const BorrowedTableWrapped = withStyles(styles)(BorrowedTable);
-const ReservingTableWrapped = withStyles(styles)(ReservingTable);
+const ReaderHistory = withStyles(styles)(ReaderHistoryClass);
+export default ReaderHistory

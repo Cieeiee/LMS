@@ -10,7 +10,7 @@ import ReaderHistory from "./History";
 import SearchedPage from "./Searched";
 import ReaderNotification from "./Notification"
 
-const Logo = require('./components/logo.jpg');
+const Logo = require('./components/images/logo.jpg');
 
 export default class Reader extends React.Component {
     constructor(props) {
