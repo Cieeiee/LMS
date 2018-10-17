@@ -21,7 +21,7 @@ export default class Reader extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path='/reader' component={Home}/>
+                    <Route path='/reader' exact component={Home}/>
                     <Route path='/reader/history' component={ReaderHistory}/>
                     <Route path='/reader/search/:keywords' component={SearchedPage}/>
                     <Route path='/reader/notification' component={ReaderNotification}/>

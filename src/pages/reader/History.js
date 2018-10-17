@@ -212,8 +212,8 @@ export default class ReaderHistory extends React.Component {
                         </Grid>
                         <Grid item xs={12} className="flex-row">
                             {/*<ReaderInfo info={this.state.info}/>*/}
-                            <div className={`grow flex-col`}>
-                                <div style={{marginTop: 'auto', }}>
+                            <div className="grow flex-col">
+                                <div style={{marginTop: 'auto'}}>
                                     <Tabs
                                         value={this.state.value}
                                         indicatorColor="primary"

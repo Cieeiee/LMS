@@ -37,11 +37,11 @@ export default class ReaderNotification extends React.Component {
     }
 
     getNotification = () => {
-        fetch('/showAnnotation')
+        fetch('/showAnnouncement')
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
-                    notifications: result.annotations
+                    notifications: result.announcements
                 });
             })
             .catch(e => alert(e));
