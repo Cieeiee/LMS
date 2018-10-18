@@ -70,9 +70,7 @@ class AdminLoginClass extends React.Component {
         }
 
         // clear
-        this.state.status = undefined;
-        this.state.account = undefined;
-        this.state.password = undefined;
+        
     };
 
     render() {

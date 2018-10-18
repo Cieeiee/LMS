@@ -77,15 +77,15 @@ class LoginClass extends React.Component {
         else if (this.state.status === -1) {
             this.handleIncorrectOpen();
         }
-        else if (this.state.status === 0) {
+        else if (this.state.status === 1) {
             const path = {
                 pathname: '/librarian',
                 account: this.state.account
             };
             this.props.history.push(path);
-            window.location.href = '/librarian';
+            window.location.href = `/librarian/${this.state.account}`;
         }
-        else if (this.state.status === 1) {
+        else if (this.state.status === 0) {
             const path = {
                 pathname: '/reader',
                 account: this.state.account
@@ -95,9 +95,11 @@ class LoginClass extends React.Component {
         }
 
         // clear
-        this.state.status = undefined;
-        this.state.account = undefined;
-        this.state.password = undefined;
+        this.setState({
+            status: undefined,
+            account: undefined,
+            password: undefined
+        })
     };
 
     render() {
