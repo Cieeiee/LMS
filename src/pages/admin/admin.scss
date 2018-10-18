@@ -12,3 +12,23 @@
     width: 100%;
     height: 100%;
 }
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.mid-div {
+    width: 60%;
+    margin: 30px auto 20px auto;
+}
+.col-mid {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.row-mid {
+    margin-left: auto;
+    margin-right: auto;
+}
