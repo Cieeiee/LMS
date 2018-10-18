@@ -10,14 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Notifications, History, ExitToApp, Home, DescriptionOutlined } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button/Button";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
-import {TextField} from "@material-ui/core";
 import LibraryRules from "../libraryRules";
 
 const styles = theme => ({

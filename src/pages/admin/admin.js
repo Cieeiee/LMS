@@ -1,6 +1,5 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {TopBar} from "./components/TopBar";
 import ManageLibrarians from "./manageLibrarians";
 import ManageRules from "./manageRules";
 

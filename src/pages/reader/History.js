@@ -7,7 +7,7 @@ import { AccountBoxOutlined, EmailOutlined, PhoneOutlined, DateRangeOutlined, Mo
 import './reader.scss'
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
-import Divider from "@material-ui/core/Divider/Divider";
+
 import BorrowingTableWrapped from './components/BorrowingTable'
 import ReservingTableWrapped from './components/ReservingTable'
 import BorrowedTableWrapped from './components/BorrowedTable'

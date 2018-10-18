@@ -9,7 +9,6 @@ import Grid from "@material-ui/core/Grid/Grid";
 import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 
 export default class ManageRules extends React.Component {

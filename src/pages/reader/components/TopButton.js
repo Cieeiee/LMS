@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
 import {Notifications, History, ExitToApp, DescriptionOutlined} from '@material-ui/icons'
-import NotFound from "../../notFound/notFound";
 import LibraryRules from "../libraryRules";
 
 const styles = theme => ({
