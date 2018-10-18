@@ -3,7 +3,7 @@ import {Grid} from "@material-ui/core";
 import {OneBook} from "./components/OneBook";
 import {TopBar} from "./components/TopBar";
 
-const Alive = require('../../components/alive.jpeg');
+const Alive = require('./components/images/alive.jpeg');
 
 export default class SearchedPage extends React.Component {
     constructor(props) {
