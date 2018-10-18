@@ -1,3 +1,4 @@
-import AdminLogin from './login'
+import Login from './login'
+import AdminLogin from './adminLogin'
 
-export default AdminLogin
+export {Login, AdminLogin}

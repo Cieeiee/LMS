@@ -1,11 +1,10 @@
-import React from 'react'
-import './login.scss'
-import { TextField, Button, Paper, Dialog, DialogTitle } from '@material-ui/core'
-import { withRouter } from 'react-router-dom'
+import React from "react";
+import {Button, Dialog, DialogTitle, Paper, TextField} from "@material-ui/core";
+import {withRouter} from "react-router-dom";
 
 const backgroundImage = require('./library.jpg');
 
-class LoginClass extends React.Component {
+class AdminLoginClass extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,23 +35,10 @@ class LoginClass extends React.Component {
         setTimeout(this.handleIncorrectClose, 1500)
     };
 
-    handleNotExistsClose = () => {
-        this.setState({
-            notExists: false
-        })
-    };
-
-    handleNotExistsOpen = () => {
-        this.setState({
-            notExists: true
-        });
-        setTimeout(this.handleNotExistsClose, 1500)
-    };
-
     handleSubmit = event => {
         event.preventDefault();
 
-        fetch('/login', {
+        fetch('/admin/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -71,27 +57,16 @@ class LoginClass extends React.Component {
             })
             .catch(e => alert(e));
 
-        if (this.state.status === -2) {
-            this.handleNotExistsOpen();
-        }
-        else if (this.state.status === -1) {
+        if (this.state.status === 0) {
             this.handleIncorrectOpen();
         }
-        else if (this.state.status === 0) {
+        else if (this.state.status === 1) {
             const path = {
                 pathname: '/librarian',
                 account: this.state.account
             };
             this.props.history.push(path);
-            window.location.href = '/librarian';
-        }
-        else if (this.state.status === 1) {
-            const path = {
-                pathname: '/reader',
-                account: this.state.account
-            };
-            this.props.history.push(path);
-            window.location.href = '/reader';
+            window.location.href = '/admin';
         }
 
         // clear
@@ -101,6 +76,7 @@ class LoginClass extends React.Component {
     };
 
     render() {
+
         return (
             <div className='admin-login'>
                 <div className='admin-login-bg' style={{backgroundImage: `url(${backgroundImage})`}} />
@@ -139,18 +115,10 @@ class LoginClass extends React.Component {
                         Incorrect account or password!
                     </DialogTitle>
                 </Dialog>
-                <Dialog
-                    onClose={this.handleNotExistsClose}
-                    open={this.state.notExists}
-                >
-                    <DialogTitle>
-                        Account not exists!
-                    </DialogTitle>
-                </Dialog>
             </div>
         )
     }
 }
 
-const Login = withRouter(LoginClass);
-export default Login;
+const AdminLogin = withRouter(AdminLoginClass);
+export default AdminLogin;

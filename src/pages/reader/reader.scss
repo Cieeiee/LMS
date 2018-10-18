@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    margin: 14%;
 }
 .bg {
     width: 300px;
@@ -19,4 +19,38 @@
     display: flex;
     height: 64px;
     align-items: center;
+}
+.grow {
+    flex-grow: 1;
+}
+.table-title {
+  //text-align: center;
+  padding-bottom: 20px;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.mid-div {
+  width: 60%;
+  margin: 30px auto 20px auto;
+}
+.col-mid {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.row-mid {
+  margin-left: auto;
+  margin-right: auto;
+}
+.top-img {
+  width: 300px;
+  height: 80px;
+  background-repeat: no-repeat;
+  margin-top: auto;
+  margin-bottom: auto;
 }
