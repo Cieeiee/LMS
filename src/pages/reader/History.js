@@ -245,6 +245,8 @@ class ReaderHistoryClass extends React.Component {
                 <div className="flex-col mid-div">
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="flex-row">
+                            <div className='top-img' style={{backgroundImage: `url(${Logo})`}} />
+                            <div className="grow"/>
                             <ReaderInfo info={this.state.info}/>
                         </Grid>
                         <Grid item xs={12}>
@@ -298,82 +300,54 @@ class ReaderHistoryClass extends React.Component {
 class ReaderInfo extends React.Component {
     render() {
         return (
-            <div className="grow">
-            {/*<Paper style={{padding: 20}} className="grow">*/}
-                <Divider />
-                <div className="flex-row" style={{margin: 5}}>
-                    <AccountBoxOutlined
-                        fontSize="large"
-                        style={{margin: 5}}
-                    />
+            <div>
+                <div className="flex-row">
                     <Typography
-                        variant="title"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                        variant="h5" color="textPrimary"
+                        style={{margin: 'auto 0 auto auto'}}
                     >
-                        name
-                    </Typography>
-                    <div className="grow"/>
-                    <Typography
-                        variant="title" color="textSecondary"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.name}
                     </Typography>
-                </div>
-                <Divider />
-                <div className="flex-row" style={{margin: 5}}>
-                    <EmailOutlined
-                        fontSize="large"
+                    <AccountBoxOutlined
                         style={{margin: 5}}
                     />
+                </div>
+
+                <div className="flex-row">
                     <Typography
-                        variant="title"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                        variant="h5" color="textPrimary"
+                        style={{margin: 'auto 0 auto auto'}}
                     >
-                        email
-                    </Typography>
-                    <div className="grow"/>
-                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.email}
-                        </Typography>
-                </div>
-                <Divider />
-                <div className="flex-row" style={{margin: 5}}>
-                    <DateRangeOutlined
-                        fontSize="large"
+                    </Typography>
+                    <EmailOutlined
                         style={{margin: 5}}
                     />
+                </div>
+
+                <div className="flex-row">
                     <Typography
-                        variant="title"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                        variant="h5" color="textPrimary"
+                        style={{margin: 'auto 0 auto auto'}}
                     >
-                        birth
-                    </Typography>
-                    <div className="grow"/>
-                    <Typography variant="title" color="textSecondary" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.birth}
-                        </Typography>
-                </div>
-                <Divider />
-                <div className="flex-row" style={{margin: 5}}>
-                    <PhoneOutlined
-                        fontSize="large"
+                    </Typography>
+                    <DateRangeOutlined
                         style={{margin: 5}}
                     />
+                </div>
+
+                <div className="flex-row">
                     <Typography
-                        variant="title"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}
+                        variant="h5" color="textPrimary"
+                        style={{margin: 'auto 0 auto auto'}}
                     >
-                        phone
-                    </Typography>
-                    <div className="grow"/>
-                    <Typography
-                        variant="title" color="textSecondary"
-                        style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         {this.props.info.tel}
                     </Typography>
+                    <PhoneOutlined
+                        style={{margin: 5}}
+                    />
                 </div>
-                <Divider />
-            {/* </Paper>*/}
             </div>
         );
     }

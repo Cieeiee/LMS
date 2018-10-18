@@ -69,7 +69,7 @@ export default class SearchedPage extends React.Component {
         // !!!
         // {/*<Grid item xs={6}><OneBook book={book} readerID={this.props.location.account}/></Grid>*/}
         const BookList = this.state.bookList.map(book =>
-            <Grid item xs={6}><OneBook book={book} readerID={"abc"}/></Grid>
+            <Grid item xs={6}><OneBook key={book.isbn} book={book} readerID={"abc"}/></Grid>
         );
 
         return (
