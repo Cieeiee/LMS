@@ -1,11 +1,10 @@
 import React from 'react'
-import {TextField, Button, Grid, withStyles} from '@material-ui/core'
-import { AppBar } from '@material-ui/core'
+import {TextField, Button} from '@material-ui/core'
 import {Link, Route, BrowserRouter, Switch,} from 'react-router-dom'
 import './reader.scss'
 import { TopButton } from "./components/TopButton";
-import { TopBar } from "./components/TopBar";
-import { OneBook } from "./components/OneBook";
+// import { TopBar } from "./components/TopBar";
+// import { OneBook } from "./components/OneBook";
 import ReaderHistory from "./History";
 import SearchedPage from "./Searched";
 import ReaderNotification from "./Notification"
@@ -13,10 +12,6 @@ import ReaderNotification from "./Notification"
 const Logo = require('./components/logo.jpg');
 
 export default class Reader extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <BrowserRouter>

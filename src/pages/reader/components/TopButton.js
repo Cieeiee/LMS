@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
 import { Notifications, History, ExitToApp } from '@material-ui/icons'
-import NotFound from "../../notFound/notFound";
+// import NotFound from "../../notFound/notFound";
 
 const styles = theme => ({
     button: {
@@ -26,10 +26,7 @@ const styles = theme => ({
 });
 
 class IconLabelButtons extends React.Component {
-    constructor(props) {
-        super(props);
 
-    }
 
     handleLogout = () => {
         fetch('/logout').catch(e => alert(e));

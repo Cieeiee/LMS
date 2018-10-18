@@ -37,16 +37,7 @@ export default class ReaderNotification extends React.Component {
     }
 
     getNotification = () => {
-        fetch('/showAnnotation', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                reader_id: this.props.readerID,
-            })
-        })
+        fetch('/showAnnotation')
             .then(Response => Response.json())
             .then(result => {
                 this.setState({

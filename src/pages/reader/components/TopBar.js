@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { Notifications, History, ExitToApp, Home } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button/Button";
-import {TextField} from "@material-ui/core";
+// import Button from "@material-ui/core/Button/Button";
+// import {TextField} from "@material-ui/core";
 
 const styles = theme => ({
     root: {
@@ -167,9 +167,6 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" component={Link} to='/reader/notification'>
                                 <Notifications />
                             </IconButton>
-                            {/*<IconButton color="inherit">*/}
-                                {/*<Notifications />*/}
-                            {/*</IconButton>*/}
                             <IconButton
                                 color="inherit"
                                 onClick={this.handleLogout}

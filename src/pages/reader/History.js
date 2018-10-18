@@ -15,13 +15,11 @@ import Tab from "@material-ui/core/Tab/Tab";
 import Divider from "@material-ui/core/Divider/Divider";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import {pink, teal} from "@material-ui/core/colors";
 import blue from "@material-ui/core/es/colors/blue";
 
 const ToLive = require('./components/alive.jpeg');
 const BarCode = require('./components/barcode.jpg');
-const Logo = require('./components/logo.jpg');
+// const Logo = require('./components/logo.jpg');
 
 export default class ReaderHistory extends React.Component {
     constructor(props) {
@@ -180,16 +178,7 @@ export default class ReaderHistory extends React.Component {
     };
 
     getHistory = () => {
-        fetch('/reader/showHistory', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                reader_id: this.props.readerID,
-            })
-        })
+        fetch(`/reader/showHistory/?reader_id=${this.props.readerID}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -400,11 +389,6 @@ const BorrowingTable = props =>
     </Grid>
 
 class ReservingTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         const { classes } = this.props;
 
@@ -442,11 +426,6 @@ class ReservingTable extends React.Component {
 };
 
 class BorrowedTable extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         const { classes } = this.props;
 
