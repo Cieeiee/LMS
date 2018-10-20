@@ -9,8 +9,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import Snackbar from "@material-ui/core/Snackbar/Snackbar";
+import MessageDialog from './components/messageDialog'
 
 export default class ManageRules extends React.Component {
     constructor(props) {
@@ -22,7 +21,6 @@ export default class ManageRules extends React.Component {
             maxReturnTime: 90,
             maxReserveTime: 2,
             maxBorrowNum: 5,
-            status: -1,
 
             returnMessage: undefined,
         };
@@ -52,7 +50,7 @@ export default class ManageRules extends React.Component {
     };
 
     componentDidMount() {
-        // this.getAllRules();
+        this.getAllRules();
     };
 
     handleChange = which => event => {
@@ -66,12 +64,13 @@ export default class ManageRules extends React.Component {
     };
 
     handleClick = (id, value) => () => {
-        // fetch(`/admin/changeRules?rule=${id}&value=${value}`)
-        //     .then(Response => Response.json())
-        //     .then(result => {
-        //         this.setState({status: result.state})
-        //     })
-        //     .catch(e => alert(e));
+        let status = -1;
+        fetch(`/admin/changeRules?rule=${id}&value=${value}`)
+            .then(Response => Response.json())
+            .then(result => {
+                status = result.state;
+            })
+            .catch(e => alert(e));
 
         this.setState({status: 1});
 
@@ -289,23 +288,4 @@ export default class ManageRules extends React.Component {
             </React.Fragment>
         );
     }
-}
-
-function MessageDialog(props) {
-    return (
-        <Snackbar
-            anchorOrigin={{vertical: 'bottom', horizontal:'right'}}
-            open={props.open}
-            onClose={props.handleClose}
-            ContentProps={{
-                'aria-describedby': 'message-id',
-            }}
-            autoHideDuration={1500}
-            message={
-                <span id="message-id">
-                    {props.message}
-                </span>
-            }
-        />
-    );
 }

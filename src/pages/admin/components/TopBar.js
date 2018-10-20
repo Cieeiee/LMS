@@ -81,26 +81,20 @@ class PrimarySearchAppBar extends React.Component {
                         </Typography>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
-                            <Button
+                            <IconButton
                                 color="inherit"
                                 component={Link} to='/admin'
                                 style={{textTransform: 'none'}}
                             >
-                                <PeopleOutlined
-                                    style={{marginRight: 5}}
-                                />
-                                Manage Librarians
-                            </Button>
-                            <Button
+                                <PeopleOutlined/>
+                            </IconButton>
+                            <IconButton
                                 color="inherit"
                                 component={Link} to='/admin/manageRules'
                                 style={{textTransform: 'none'}}
                             >
-                                <DescriptionOutlined
-                                    style={{marginRight: 5}}
-                                />
-                                Manage Library Rules
-                            </Button>
+                                <DescriptionOutlined/>
+                            </IconButton>
                             <IconButton
                                 color="inherit"
                                 onClick={this.handleLogout}

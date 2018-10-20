@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
-import {Notifications, History, ExitToApp, DescriptionOutlined} from '@material-ui/icons'
+import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined} from '@material-ui/icons'
 import NotFound from "../../notFound/notFound";
-import LibraryRules from "../libraryRules";
+import LibraryRules from "./libraryRules";
 
 const styles = theme => ({
     button: {
@@ -59,7 +59,7 @@ class IconLabelButtons extends React.Component {
     };
 
     componentDidMount() {
-        // this.getAllRules();
+        this.getAllRules();
     };
 
 
@@ -94,16 +94,16 @@ class IconLabelButtons extends React.Component {
                     variant="outlined"
                     color="secondary"
                     className={classes.button}
-                    component={Link} to='/reader/history'
+                    component={Link} to={`/reader/${this.props.loginUser}/history`}
                 >
-                    History
-                    <History className={classes.iconSmall} />
+                    Profile
+                    <AccountCircleOutlined className={classes.iconSmall} />
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
                     className={classes.button}
-                    component={Link} to='/reader/notification'
+                    component={Link} to={`/reader/${this.props.loginUser}/notification`}
                 >
                     Notification
                     <Notifications className={classes.iconSmall}/>

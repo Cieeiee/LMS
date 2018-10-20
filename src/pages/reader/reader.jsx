@@ -1,14 +1,11 @@
 import React from 'react'
-import {TextField, Button, Grid, withStyles} from '@material-ui/core'
-import { AppBar } from '@material-ui/core'
+import {TextField, Button} from '@material-ui/core'
 import {Link, Route, BrowserRouter, Switch,} from 'react-router-dom'
 import './reader.scss'
 import { TopButton } from "./components/TopButton";
-import { TopBar } from "./components/TopBar";
-import { OneBook } from "./components/OneBook";
-import ReaderHistory from "./History";
-import SearchedPage from "./Searched";
-import ReaderNotification from "./Notification"
+import ReaderHistory from "./history/History";
+import SearchedPage from "./searched/Searched";
+import ReaderNotification from "./notification/Notification"
 
 const Logo = require('./components/images/logo.jpg');
 
@@ -21,10 +18,10 @@ export default class Reader extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path='/reader' exact component={Home}/>
-                    <Route path='/reader/history' component={ReaderHistory}/>
-                    <Route path='/reader/search/:keywords' component={SearchedPage}/>
-                    <Route path='/reader/notification' component={ReaderNotification}/>
+                    <Route path='/reader/:loginUser' exact component={Home}/>
+                    <Route path='/reader/:loginUser/history' component={ReaderHistory}/>
+                    <Route path='/reader/:loginUser/search/:keywords' component={SearchedPage}/>
+                    <Route path='/reader/:loginUser/notification' component={ReaderNotification}/>
                 </Switch>
             </BrowserRouter>
         );
@@ -36,20 +33,25 @@ class Home extends React.Component {
         super(props);
 
         this.state = {
-            keywords: undefined
+            keywords: undefined,
+            loginUser: undefined,
         };
     };
 
     handleChange = e => {
         this.setState({
-            keywords: e.target.value
+            keywords: e.target.value,
         })
     };
+
+    componentDidMount() {
+        this.setState({loginUser: this.props.match.params.loginUser});
+    }
 
     render() {
         return (
                 <div className="flex-col" style={{height: '100%'}}>
-                    <TopButton />
+                    <TopButton loginUser={this.state.loginUser}/>
                     <div className='reader-page'>
                         <div className='bg' style={{backgroundImage: `url(${Logo})`}} />
                         <TextField
@@ -62,7 +64,7 @@ class Home extends React.Component {
                         <Button
                             variant='outlined'
                             color='primary'
-                            component={Link} to={'/reader/search/'+this.state.keywords}
+                            component={Link} to={`/reader/${this.state.loginUser}/search/${this.state.keywords}`}
                         >
                             search
                         </Button>

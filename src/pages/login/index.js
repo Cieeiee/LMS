@@ -1,4 +1,4 @@
-import Login from './login'
-import AdminLogin from './adminLogin'
+import Login from './librarianAndReader/login'
+import AdminLogin from './admin/adminLogin'
 
 export {Login, AdminLogin}

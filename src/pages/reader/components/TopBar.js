@@ -8,17 +8,9 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { Notifications, History, ExitToApp, Home, DescriptionOutlined } from '@material-ui/icons'
+import { Notifications, ExitToApp, Home, DescriptionOutlined, AccountCircleOutlined } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button/Button";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
-import {TextField} from "@material-ui/core";
-import LibraryRules from "../libraryRules";
+import LibraryRules from "./libraryRules";
 
 const styles = theme => ({
     root: {
@@ -132,7 +124,7 @@ class PrimarySearchAppBar extends React.Component {
         if (e.keyCode !== 13)
             return;
 
-        window.location.href = '/reader/search/' + this.state.keywords;
+        window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}`;
     };
 
     handleClick = () => {
@@ -144,7 +136,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     componentDidMount() {
-        // this.getAllRules();
+        this.getAllRules();
     };
 
     render() {
@@ -157,7 +149,7 @@ class PrimarySearchAppBar extends React.Component {
                         <IconButton
                             className={classes.menuButton}
                             color="inherit"
-                            component={Link} to='/reader'
+                            component={Link} to={`/reader/${this.props.loginUser}`}
                         >
                             <Home />
                         </IconButton>
@@ -185,10 +177,14 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" onClick={this.handleClick}>
                                 <DescriptionOutlined />
                             </IconButton>
-                            <IconButton color="inherit" component={Link} to='/reader/history'>
-                                <History />
+                            <IconButton color="inherit" component={Link}
+                                        to={`/reader/${this.props.loginUser}/history`}
+                            >
+                                <AccountCircleOutlined />
                             </IconButton>
-                            <IconButton color="inherit" component={Link} to='/reader/notification'>
+                            <IconButton color="inherit" component={Link}
+                                        to={`/reader/${this.props.loginUser}/notification`}
+                            >
                                 <Notifications />
                             </IconButton>
                             <IconButton
