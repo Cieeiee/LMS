@@ -4,7 +4,7 @@ import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import {Assignment, DescriptionOutlined} from '@material-ui/icons'
+import {Assignment} from '@material-ui/icons'
 import {TopBar} from "../components/TopBar";
 import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -90,7 +90,7 @@ function OneNotification(props) {
                     backgroundColor: green[500],
                 }}
             >
-                <Assignment />
+                <Assignment/>
             </Avatar>
             <ListItemText
                 primary={props.notification.message}

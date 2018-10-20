@@ -7,13 +7,10 @@ import ReaderHistory from "./history/History";
 import SearchedPage from "./searched/Searched";
 import ReaderNotification from "./notification/Notification"
 
+
 const Logo = require('./components/images/logo.jpg');
 
 export default class Reader extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <BrowserRouter>

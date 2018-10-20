@@ -11,6 +11,7 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
 import MessageDialog from './components/messageDialog'
 
+
 export default class ManageRules extends React.Component {
     constructor(props) {
         super(props);

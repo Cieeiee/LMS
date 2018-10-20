@@ -38,7 +38,8 @@ export default class Login extends React.Component {
         if (which === "openFind") {
             this.setState({
                 ID: undefined,
-                email: undefined
+                email: undefined,
+                formError: undefined,
             })
         }
     };
