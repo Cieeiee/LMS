@@ -88,12 +88,21 @@ function BookClass(props) {
                             ${props.book.price}
                         </Typography>
                     </div>
+                    <div className="flex-row">
+                        <Typography component="p" color="textSecondary">
+                            category:
+                        </Typography>
+                        <Typography style={{marginLeft: 10}}>
+                            {props.book.category}
+                        </Typography>
+                    </div>
                     <Typography component="p" color="textSecondary">
                         introduction:
                     </Typography>
                     <Typography component="p" style={{textIndent: '2em'}}>
                         {props.book.introduction}
                     </Typography>
+
                 </CardContent>
 
                 <div className={classes.grow}/>

@@ -7,7 +7,7 @@ import ReserveDialog from "./reserveDialog";
 
 const Alive = require('../components/images/alive.jpeg');
 
-export default class SearchedPage extends React.Component {
+export default class CategoryPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,7 +48,7 @@ export default class SearchedPage extends React.Component {
                 this.alive,
                 this.alive1,
             ],
-            keywords: undefined,
+            category: undefined,
             openReserve: undefined,
             loginUser: undefined,
             returnMessage: undefined,
@@ -57,7 +57,7 @@ export default class SearchedPage extends React.Component {
 
     componentDidMount() {
         this.setState({
-            keywords: this.props.match.params.keywords,
+            category: this.props.match.params.category,
             loginUser: this.props.match.params.loginUser,
         });
         this.handleSearch();
@@ -65,7 +65,7 @@ export default class SearchedPage extends React.Component {
 
 
     handleSearch = () => {
-        fetch(`/searchBooks?keywords=${this.state.keywords}`)
+        fetch(`/searchCategory?category=${this.state.category}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -148,11 +148,11 @@ export default class SearchedPage extends React.Component {
             <React.Fragment>
                 <TopBar searchBar loginUser={this.state.loginUser}/>
                 <div className={"flex-col"}
-                    style={{
-                        marginTop: 30,
-                        marginLeft: 10,
-                        marginRight: 10,
-                    }}
+                     style={{
+                         marginTop: 30,
+                         marginLeft: 10,
+                         marginRight: 10,
+                     }}
                 >
                     <div className="grow">
                         <Grid container spacing={24}>
