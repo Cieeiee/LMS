@@ -76,7 +76,7 @@ function BookClass(props) {
                         <Typography component="p" color="textSecondary">
                             ISBN:
                         </Typography>
-                        <Typography style={{marginLeft: 10}}>
+                        <Typography style={{marginLeft: 60}}>
                             {props.book.isbn}
                         </Typography>
                     </div>
@@ -84,7 +84,7 @@ function BookClass(props) {
                         <Typography component="p" color="textSecondary">
                             price:
                         </Typography>
-                        <Typography style={{marginLeft: 10}}>
+                        <Typography style={{marginLeft: 60}}>
                             ${props.book.price}
                         </Typography>
                     </div>
@@ -92,14 +92,14 @@ function BookClass(props) {
                         <Typography component="p" color="textSecondary">
                             category:
                         </Typography>
-                        <Typography style={{marginLeft: 10}}>
+                        <Typography style={{marginLeft: 35}}>
                             {props.book.category}
                         </Typography>
                     </div>
                     <Typography component="p" color="textSecondary">
                         introduction:
                     </Typography>
-                    <Typography component="p" style={{textIndent: '2em'}}>
+                    <Typography component="p" style={{textIndent: '1em'}}>
                         {props.book.introduction}
                     </Typography>
 

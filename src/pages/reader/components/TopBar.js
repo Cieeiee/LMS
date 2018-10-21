@@ -12,6 +12,7 @@ import { Notifications, ExitToApp, Home, DescriptionOutlined, AccountCircleOutli
 import {Link} from "react-router-dom";
 import LibraryRules from "./libraryRules";
 
+const server = "http://192.168.1.100:8080";
 
 const styles = theme => ({
     root: {
@@ -98,7 +99,7 @@ class PrimarySearchAppBar extends React.Component {
     }
 
     getAllRules = () => {
-        fetch('/showRules')
+        fetch(`${server}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -113,7 +114,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     handleLogout = () => {
-        fetch('/logout').catch(e => alert(e));
+        fetch(`${server}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 
@@ -123,6 +124,9 @@ class PrimarySearchAppBar extends React.Component {
 
     handleSearch = e => {
         if (e.keyCode !== 13)
+            return;
+
+        if (this.state.keywords === undefined || this.state.keywords.length === 0)
             return;
 
         window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}`;

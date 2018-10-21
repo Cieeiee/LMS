@@ -17,7 +17,7 @@ export default function ReserveDialog(props) {
             <DialogTitle id="alert-dialog-title">{"Reserve the book?"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Once you reserve the book, the book will been reserved for you in two hours.
+                    Once you reserve the book, the book will been reserved for you.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

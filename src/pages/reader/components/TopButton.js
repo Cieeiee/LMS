@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined} from '@material-ui/icons'
 import LibraryRules from "./libraryRules";
 
+const server = "http://192.168.1.100:8080";
+
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
@@ -42,7 +44,7 @@ class IconLabelButtons extends React.Component {
     };
 
     getAllRules = () => {
-        fetch('/showRules')
+        fetch(`${server}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -70,7 +72,7 @@ class IconLabelButtons extends React.Component {
     };
 
     handleLogout = () => {
-        fetch('/logout').catch(e => alert(e));
+        fetch(`${server}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 

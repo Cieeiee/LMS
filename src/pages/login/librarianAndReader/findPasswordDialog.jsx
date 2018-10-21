@@ -28,15 +28,22 @@ export default function FindPasswordDialog(props) {
                     fullWidth
                     value={props.ID}
                     onChange={props.handleChange("ID")}
+                    onFocus={props.handleClearFormError}
                 />
                 <TextField
-                    error={props.formError === "emailEmpty"}
+                    error={props.formError === "emailEmpty" || props.formError === "emailIncorrect"}
                     margin="normal"
                     id="name"
-                    label={props.formError === "emailEmpty" ? "The email can not be empty" : "email"}
+                    label={
+                        props.formError === "emailEmpty" ?
+                            "The email can not be empty" :
+                            props.formError === "emailIncorrect" ?
+                                "Incorrect email format." : "Email"
+                    }
                     fullWidth
                     value={props.email}
                     onChange={props.handleChange("email")}
+                    onFocus={props.handleClearFormError}
                 />
             </DialogContent>
             <DialogActions>

@@ -26,16 +26,23 @@ export default function AddDialog(props) {
                     label={props.formError === "nameEmpty" ? "The ID can not be empty" : "ID"}
                     fullWidth
                     value={props.ID}
+                    onFocus={props.clearFormError}
                     onChange={props.handleChange("ID")}
                 />
                 <TextField
-                    error={props.formError === "emailEmpty"}
+                    error={props.formError === "emailEmpty" || props.formError === "emailIncorrect"}
                     margin="normal"
                     id="name"
-                    label={props.formError === "emailEmpty" ? "The email can not be empty" : "Email"}
+                    label={
+                        props.formError === "emailEmpty" ?
+                            "The email can not be empty" :
+                            props.formError === "emailIncorrect" ?
+                                "Incorrect email format." : "Email"
+                    }
                     type="email"
                     fullWidth
                     value={props.email}
+                    onFocus={props.clearFormError}
                     onChange={props.handleChange("email")}
                 />
                 <TextField
@@ -45,25 +52,26 @@ export default function AddDialog(props) {
                     label={
                         props.formError === "passwordNotSame" ?
                             "The passwords are not same!" : props.formError === "passwordEmpty" ?
-                            "The passwords can not be empty" : "Confirm Password"
+                            "The passwords can not be empty" : "Password"
                     }
                     type="password"
                     fullWidth
                     value={props.password}
+                    onFocus={props.clearFormError}
                     onChange={props.handleChange("password")}
                 />
                 <TextField
-                    error={props.formError === "passwordNotSame" || props.formError === "passwordEmpty"}
+                    error={props.formError === "passwordNotSame"}
                     margin="normal"
                     id="name"
                     label={
                         props.formError === "passwordNotSame" ?
-                            "The passwords are not same!" : props.formError === "passwordEmpty" ?
-                            "The passwords can not be empty" : "Confirm Password"
+                            "The passwords are not same!" : "Confirm Password"
                     }
                     type="password"
                     fullWidth
                     value={props.confirmPassword}
+                    onFocus={props.clearFormError}
                     onChange={props.handleChange("confirmPassword")}
                     // variant="outlined"
                 />

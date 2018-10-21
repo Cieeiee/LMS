@@ -1,71 +1,70 @@
 import React from "react";
 import {Grid} from "@material-ui/core";
-import {OneBook} from "./OneBook";
+import {OneBook} from "./components/OneBook";
 import {TopBar} from "../components/TopBar";
 import MessageDialog from '../components/messageDialog'
-import ReserveDialog from "./reserveDialog";
+import ReserveDialog from "./components/reserveDialog";
+import BookList from "./components/bookList";
 
+const server = "http://192.168.1.100:8080";
 const Alive = require('../components/images/alive.jpeg');
+const alive =  {
+    isbn: "9787506355957",
+    title: "To live",
+    author: "Yu Hua",
+    introduction: "The book 'To Live' narrates the life stories of a country man called Fu Gui. He was born into a very rich family but he loved gambling. Eventually, he lost all his possessions and became poor. His father died after knowing this, while his mother became seriously ill. Fu Gui went to find a doctor but was forced to join the army on the way. Many years later, after many trials and hardships, Fu Gui went back home and found his mother had passed away while his wife had brought up his son and daughter on her own. Unfortunately, misfortune struck this family again. Fu Gui's wife, son, daughter and grandson died one by one. It was only Fu Gui and an old bull who remained alive. Despite all, Fu Gui was still braver, calmer and more alive than ever.",
+    location: "11-111-11",
+    remain: 2,
+    total: 5,
+    price: 12.01,
+    picture: Alive,
+    category: "novel",
+};
+
+const alive1= {
+    isbn: "9787506355957",
+    title: "To live",
+    author: "Yu Hua",
+    introduction: "",
+    location: "11-111-11",
+    remain: 2,
+    total: 5,
+    price: 12.01,
+    picture: Alive,
+    category: "novel",
+};
 
 export default class SearchedPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.alive = {
-            isbn: "9787506355957",
-            title: "To live",
-            author: "Yu Hua",
-            introduction: "The book 'To Live' narrates the life stories of a country man called Fu Gui. He was born into a very rich family but he loved gambling. Eventually, he lost all his possessions and became poor. His father died after knowing this, while his mother became seriously ill. Fu Gui went to find a doctor but was forced to join the army on the way. Many years later, after many trials and hardships, Fu Gui went back home and found his mother had passed away while his wife had brought up his son and daughter on her own. Unfortunately, misfortune struck this family again. Fu Gui's wife, son, daughter and grandson died one by one. It was only Fu Gui and an old bull who remained alive. Despite all, Fu Gui was still braver, calmer and more alive than ever.",
-            location: "11-111-11",
-            remain: 2,
-            total: 5,
-            price: 12.01,
-            picture: Alive,
-            category: "novel",
-        };
-
-        this.alive1 = {
-            isbn: "9787506355957",
-            title: "To live",
-            author: "Yu Hua",
-            introduction: "",
-            location: "11-111-11",
-            remain: 2,
-            total: 5,
-            price: 12.01,
-            picture: Alive,
-            category: "novel",
-        };
-
         this.state = {
-            bookList: [
-                this.alive,
-                this.alive,
-                this.alive1,
-                this.alive,
-                this.alive1,
-                this.alive,
-                this.alive,
-                this.alive1,
-            ],
+            // bookList: [
+            //     alive,
+            //     alive,
+            //     alive1,
+            //     alive,
+            //     alive1,
+            //     alive,
+            //     alive,
+            //     alive1,
+            // ],
+            bookList: [],
             keywords: undefined,
             openReserve: undefined,
             loginUser: undefined,
             returnMessage: undefined,
+            reserveStatus: undefined,
         };
     };
 
     componentDidMount() {
-        this.setState({
-            keywords: this.props.match.params.keywords,
-            loginUser: this.props.match.params.loginUser,
-        });
         this.handleSearch();
     }
 
 
     handleSearch = () => {
-        fetch(`/searchBooks?keywords=${this.state.keywords}`)
+        fetch(`${server}/searchBooks?keywords=${this.props.match.params.keywords}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -75,51 +74,55 @@ export default class SearchedPage extends React.Component {
             .catch(e => alert(e));
     };
 
-    handleReserve = book => () => {
-        this.handleClose("openReserve")();
+    reserveBook = () => {
+        if (this.state.reserveStatus === 1) {
+            let updatedBookList = this.state.bookList;
+            for (let i in updatedBookList) {
+                if (updatedBookList[i].isbn === this.state.openReserve.isbn) {
+                    updatedBookList[i].remain -= 1;
+                    break;
+                }
+            }
+            this.setState({
+                reserveStatus: undefined,
+                openReserve: undefined,
+                bookList: updatedBookList,
+                returnMessage: "Reserve successfully."
+            })
+        }
+        if (this.state.reserveStatus === -1) {
+            this.setState({
+                reserveStatus: undefined,
+                openReserve: undefined,
+                returnMessage: "You can not borrow more books now.",
+            });
+        }
+        if (this.state.reserveStatus === 0) {
+            this.setState({
+                reserveStatus: undefined,
+                openReserve: undefined,
+                returnMessage: "Reserve failed."
+            })
+        }
+    };
 
-        let status = 0;
-        fetch('/reader/reserveBook', {
+    handleReserve = book => () => {
+        fetch(`${server}/reader/reserveBook`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: this.state.loginUser,
+                id: this.props.match.params.loginUser,
                 isbn: book.isbn,
             })
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state
+                this.setState({reserveStatus: result.state});
             })
             .catch(e => alert(e));
-
-
-        if (status === 1) {
-            let updatedBookList = this.state.bookList;
-            for (let i in updatedBookList) {
-                if (updatedBookList[i].isbn === book.isbn) {
-                    updatedBookList[i].remain -= 1;
-                    break;
-                }
-            }
-            this.setState({
-                bookList: updatedBookList,
-                returnMessage: "Reserve successfully."
-            })
-        }
-        else if (status === -1) {
-            this.setState({
-                returnMessage: "You can not borrow more books now.",
-            });
-        }
-        else {
-            this.setState({
-                returnMessage: "Reserve failed."
-            })
-        }
     };
 
     handleOpen = (which, value) => () => {
@@ -134,19 +137,11 @@ export default class SearchedPage extends React.Component {
     };
 
     render() {
-        const BookList = this.state.bookList.map(book =>
-            <Grid item xs={6}>
-                <OneBook
-                    key={book.isbn}
-                    book={book}
-                    handleOpen={this.handleOpen}
-                />
-            </Grid>
-        );
+        this.reserveBook();
 
         return (
             <React.Fragment>
-                <TopBar searchBar loginUser={this.state.loginUser}/>
+                <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
                 <div className={"flex-col"}
                     style={{
                         marginTop: 30,
@@ -155,9 +150,10 @@ export default class SearchedPage extends React.Component {
                     }}
                 >
                     <div className="grow">
-                        <Grid container spacing={24}>
-                            {BookList}
-                        </Grid>
+                        <BookList
+                            bookList={this.state.bookList}
+                            handleOpen={this.handleOpen}
+                        />
                     </div>
                     <ReserveDialog
                         handleClose={this.handleClose("openReserve")}

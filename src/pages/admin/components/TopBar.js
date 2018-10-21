@@ -10,6 +10,7 @@ import {Link} from "react-router-dom";
 import { PeopleOutlined, DescriptionOutlined } from "@material-ui/icons"
 import Button from "@material-ui/core/Button/Button";
 
+const server = "http://192.168.1.103:7911";
 
 const styles = theme => ({
     root: {
@@ -79,14 +80,14 @@ class PrimarySearchAppBar extends React.Component {
                         <div className={classes.sectionDesktop}>
                             <IconButton
                                 color="inherit"
-                                component={Link} to='/admin'
+                                component={Link} to={`/admin`}
                                 style={{textTransform: 'none'}}
                             >
                                 <PeopleOutlined/>
                             </IconButton>
                             <IconButton
                                 color="inherit"
-                                component={Link} to='/admin/manageRules'
+                                component={Link} to={`/admin/manageRules`}
                                 style={{textTransform: 'none'}}
                             >
                                 <DescriptionOutlined/>

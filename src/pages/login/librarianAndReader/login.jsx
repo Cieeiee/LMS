@@ -1,10 +1,11 @@
 import React from 'react'
 import '../login.scss'
-import { TextField, Button, Paper, Dialog, DialogTitle } from '@material-ui/core'
+import { TextField, Button, Paper} from '@material-ui/core'
 import FindPasswordDialog from "./findPasswordDialog";
-import MessageDialog from "./MessageDialog";
+import MessageDialog from "../components/MessageDialog";
 
 const backgroundImage = require('../components/library.jpg');
+const server = "http://192.168.1.100:8080";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -13,10 +14,8 @@ export default class Login extends React.Component {
             account: undefined,
             password: undefined,
 
-            incorrect: false,
-            notExists: false,
-            findFailed: false,
-            findSuccess: false,
+            loginStatus: undefined,
+            findStatus: undefined,
             openFind: false,
 
             ID: undefined,
@@ -32,9 +31,13 @@ export default class Login extends React.Component {
     };
 
     handleClose = which => () => {
-        this.setState({
-            [which]: false,
-        });
+        if (which === "loginStatus" || which === "findStatus") {
+            this.setState({[which]: undefined});
+        }
+        else {
+            this.setState({[which]: false});
+        }
+
         if (which === "openFind") {
             this.setState({
                 ID: undefined,
@@ -44,20 +47,34 @@ export default class Login extends React.Component {
         }
     };
 
+    handleClearFormError = () => {
+        this.setState({formError: undefined});
+    };
+
     handleOpen = which => () => {
         this.setState({
             [which]: true
         });
-        if (which === "incorrect" || which === "notExists"
-            || which === "findFailed" || which === "findSuccess")
-            setTimeout(this.handleClose, 1500)
     };
 
     handleSubmit = event => {
         event.preventDefault();
 
-        let status = -1;
-        fetch('/login', {
+        if (this.state.account === undefined || this.state.account.length === 0) {
+            this.setState({
+                formError: "accountEmpty",
+            });
+            return;
+        }
+
+        if (this.state.password === undefined || this.state.password.length === 0) {
+            this.setState({
+                formError: "passwordEmpty"
+            });
+            return;
+        }
+
+        fetch(`${server}/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -70,22 +87,16 @@ export default class Login extends React.Component {
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({loginStatus: result.state});
             })
             .catch(e => alert(e));
+    };
 
-        if (status === -2) {
-            this.handleOpen("notExists");
-        }
-        else if (status === 0) {
-            window.location.href = '/reader/' + this.state.id;
-        }
-        else if (status === 1) {
-            window.location.href = '/librarian/' + this.state.id;
-        }
-        else {
-            this.handleOpen("incorrect");
-        }
+    loginUser = () => {
+        if (this.state.loginStatus === 0)
+            window.location.href = '/reader/' + this.state.account;
+        if (this.state.loginStatus === 1)
+            window.location.href = '/librarian/' + this.state.account;
     };
 
     handleFindPassword = event => {
@@ -95,14 +106,19 @@ export default class Login extends React.Component {
             this.setState({formError: "IDEmpty"});
             return;
         }
+        const emailPattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        if (!emailPattern.test(this.state.email)) {
+            this.setState({formError: "emailIncorrect"});
+            return;
+        }
         if (this.state.email === undefined) {
             this.setState({formError: "emailEmpty"});
             return;
         }
 
         this.handleClose("openFind")();
-        let status = -1;
-        fetch('/findPassword', {
+
+        fetch(`${server}/findPassword`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -115,36 +131,35 @@ export default class Login extends React.Component {
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({findStatus: result.state});
             })
             .catch(e => alert(e));
-
-        if (status === 1) {
-            this.handleOpen("findSuccess");
-        }
-        else {
-            this.handleOpen("findFailed");
-        }
-    }
+    };
 
     render() {
+        this.loginUser();
+
         return (
             <div className='admin-login'>
                 <div className='admin-login-bg' style={{backgroundImage: `url(${backgroundImage})`}} />
                 <h2 className='admin-login-slogan'>Welcome to Bibliosoft <br/> Library Management System</h2>
                 <Paper className='admin-login-paper'>
                     <TextField
+                        error={this.state.formError === "accountEmpty"}
                         className='admin-login-input'
-                        label='account'
+                        label={this.state.formError === "accountEmpty" ? "account can not be empty" : 'account'}
                         value={this.state.account}
                         onChange={this.handleChange('account')}
+                        onFocus={this.handleClearFormError}
                         margin='normal'
                     />
                     <TextField
+                        error={this.state.formError === "passwordEmpty"}
                         className='admin-login-input'
-                        label='password'
+                        label={this.state.formError === "passwordEmpty" ? "password can not be empty" : 'password'}
                         value={this.state.password}
                         onChange={this.handleChange('password')}
+                        onFocus={this.handleClearFormError}
                         type='password'
                         margin='normal'
                     />
@@ -168,28 +183,29 @@ export default class Login extends React.Component {
                     handleClose={this.handleClose("openFind")}
                     handleChange={this.handleChange}
                     handleFindPassword={this.handleFindPassword}
+                    handleClearFormError={this.handleClearFormError}
                     formError={this.state.formError}
                     ID={this.state.ID}
                     email={this.state.email}
                 />
                 <MessageDialog
-                    onClose={this.handleClose("incorrect")}
-                    open={this.state.incorrect}
+                    handleClose={this.handleClose("loginStatus")}
+                    open={this.state.loginStatus === -1}
                     message={"Incorrect account or password!"}
                 />
                 <MessageDialog
-                    onClose={this.handleClose("notExists")}
-                    open={this.state.notExists}
+                    handleClose={this.handleClose("loginStatus")}
+                    open={this.state.loginStatus === -2}
                     message={"Account not exists!"}
                 />
                 <MessageDialog
-                    onClose={this.handleClose("findFailed")}
-                    open={this.state.findFailed}
+                    handleClose={this.handleClose("findStatus")}
+                    open={this.state.findStatus === 0}
                     message={"Incorrect email or ID."}
                 />
                 <MessageDialog
-                    onClose={this.handleClose("findSuccess")}
-                    open={this.state.findSuccess}
+                    handleClose={this.handleClose("findStatus")}
+                    open={this.state.findStatus === 1}
                     message={"Success! Check your email for your password."}
                 />
             </div>

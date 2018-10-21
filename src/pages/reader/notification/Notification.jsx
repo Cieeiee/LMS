@@ -9,37 +9,40 @@ import {TopBar} from "../components/TopBar";
 import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
 
+const server = "http://192.168.1.100:8080";
+
+const notifications = [
+    {
+        timestamp: "Jan 9, 2014",
+        message: "The time you have to return the book has been changed to five month"
+    },
+    {
+        timestamp: "Jan 9, 2014",
+        message: "The time you have to return the book has been changed to five month"
+    },
+    {
+        timestamp: "Jan 9, 2014",
+        message: "The time you have to return the book has been changed to five month"
+    },
+    {
+        timestamp: "Jan 9, 2014",
+        message: "The time you have to return the book has been changed to five month, " +
+            "The time you have to return the book has been changed to five month, " +
+            "The time you have to return the book has been changed to five month"
+    }
+];
+
 export default class ReaderNotification extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            notifications: [
-                {
-                    timestamp: "Jan 9, 2014",
-                    message: "The time you have to return the book has been changed to five month"
-                },
-                {
-                    timestamp: "Jan 9, 2014",
-                    message: "The time you have to return the book has been changed to five month"
-                },
-                {
-                    timestamp: "Jan 9, 2014",
-                    message: "The time you have to return the book has been changed to five month"
-                },
-                {
-                    timestamp: "Jan 9, 2014",
-                    message: "The time you have to return the book has been changed to five month, " +
-                        "The time you have to return the book has been changed to five month, " +
-                        "The time you have to return the book has been changed to five month"
-                }
-            ],
-            loginUser: undefined,
+            notifications: []
         };
     }
 
     getNotification = () => {
-        fetch('/showAnnouncement')
+        fetch(`${server}/showAnnouncement`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -51,7 +54,6 @@ export default class ReaderNotification extends React.Component {
 
     componentDidMount() {
         this.getNotification();
-        this.setState({loginUser: this.props.match.params.loginUser});
     }
 
     render() {
@@ -63,7 +65,7 @@ export default class ReaderNotification extends React.Component {
         );
         return (
             <React.Fragment>
-                <TopBar loginUser={this.state.loginUser}/>
+                <TopBar loginUser={this.props.match.params.loginUser}/>
                 <div className="flex-col mid-div">
                     <div className="flex-row"
                          style={{marginBottom: 10}}

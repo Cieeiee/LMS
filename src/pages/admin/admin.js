@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import ManageLibrarians from "./manageLibrarians";
-import ManageRules from "./manageRules";
+import ManageLibrarians from "./manageLibrarians/manageLibrarians";
+import ManageRules from "./manageRules/manageRules";
 
 
 export default function Admin(props) {

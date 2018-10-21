@@ -1,7 +1,9 @@
 import React from "react";
 import {Button, Dialog, DialogTitle, Paper, TextField} from "@material-ui/core";
+import MessageDialog from "../components/MessageDialog";
 
 const backgroundImage = require('../components/library.jpg');
+const server = "http://192.168.1.103:7911";
 
 export default class AdminLogin extends React.Component {
     constructor(props) {
@@ -9,8 +11,8 @@ export default class AdminLogin extends React.Component {
         this.state = {
             account: undefined,
             password: undefined,
-            incorrect: false,
-            notExists: false,
+
+            loginStatus: undefined,
             formError: undefined,
         }
     }
@@ -21,24 +23,32 @@ export default class AdminLogin extends React.Component {
         })
     };
 
-    handleIncorrectClose = () => {
-        this.setState({
-            incorrect: false
-        })
+    handleClose = which => () => {
+        this.setState({[which]: undefined})
     };
 
-    handleIncorrectOpen = () => {
-        this.setState({
-            incorrect: true
-        });
-        setTimeout(this.handleIncorrectClose, 1500)
+    handleClearFormError = () => {
+        this.setState({formError: undefined});
     };
 
     handleSubmit = event => {
         event.preventDefault();
 
-        let status = 0;
-        fetch('/admin/login', {
+        if (this.state.account === undefined || this.state.account.length === 0) {
+            this.setState({
+                formError: "accountEmpty",
+            });
+            return;
+        }
+
+        if (this.state.password === undefined || this.state.password.length === 0) {
+            this.setState({
+                formError: "passwordEmpty"
+            });
+            return;
+        }
+
+        fetch(`${server}/admin/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -51,20 +61,18 @@ export default class AdminLogin extends React.Component {
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({loginStatus: result.state});
             })
             .catch(e => alert(e));
+    };
 
-        if (status === 0) {
-            this.handleIncorrectOpen();
-        }
-        else {
+    loginUser = () => {
+        if (this.state.loginStatus === 1)
             window.location.href = '/admin';
-        }
-
     };
 
     render() {
+        this.loginUser();
 
         return (
             <div className='admin-login'>
@@ -72,17 +80,21 @@ export default class AdminLogin extends React.Component {
                 <h2 className='admin-login-slogan'>Welcome to Bibliosoft <br/> Library Management System</h2>
                 <Paper className='admin-login-paper'>
                     <TextField
+                        error={this.state.formError === "accountEmpty"}
                         className='admin-login-input'
-                        label='account'
+                        label={this.state.formError === "accountEmpty" ? "account can not be empty" : 'account'}
                         value={this.state.account}
                         onChange={this.handleChange('account')}
+                        onFocus={this.handleClearFormError}
                         margin='normal'
                     />
                     <TextField
+                        error={this.state.formError === "passwordEmpty"}
                         className='admin-login-input'
-                        label='password'
+                        label={this.state.formError === "passwordEmpty" ? "password can not be empty" : 'password'}
                         value={this.state.password}
                         onChange={this.handleChange('password')}
+                        onFocus={this.handleClearFormError}
                         type='password'
                         margin='normal'
                     />
@@ -96,14 +108,11 @@ export default class AdminLogin extends React.Component {
                         login
                     </Button>
                 </Paper>
-                <Dialog
-                    onClose={this.handleIncorrectClose}
-                    open={this.state.incorrect}
-                >
-                    <DialogTitle>
-                        Incorrect account or password!
-                    </DialogTitle>
-                </Dialog>
+                <MessageDialog
+                    handleClose={this.handleClose("loginStatus")}
+                    open={this.state.loginStatus === 0}
+                    message={"Incorrect account or password!"}
+                />
             </div>
         )
     }

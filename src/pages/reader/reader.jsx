@@ -1,6 +1,6 @@
 import React from 'react'
 import {TextField, Button} from '@material-ui/core'
-import {Link, Route, BrowserRouter, Switch,} from 'react-router-dom'
+import {Route, BrowserRouter, Switch,} from 'react-router-dom'
 import './reader.scss'
 import { TopButton } from "./components/TopButton";
 import ReaderHistory from "./history/History";
@@ -13,7 +13,6 @@ import MenuList from "@material-ui/core/MenuList/MenuList";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import CategoryPage from "./searched/catagory";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
-
 
 const Logo = require('./components/images/logo.jpg');
 
@@ -39,7 +38,6 @@ class Home extends React.Component {
 
         this.state = {
             keywords: undefined,
-            loginUser: undefined,
 
             openCategory: false,
         };
@@ -63,31 +61,27 @@ class Home extends React.Component {
         if (which === "keyUp" && e.keyCode !== 13) {
             return;
         }
-        if (this.state.keywords === undefined) {
+        if (this.state.keywords === undefined || this.state.keywords.length === 0) {
             return;
         }
 
-        window.location.href = `/reader/${this.state.loginUser}/search/${this.state.keywords}`;
+        window.location.href = `/reader/${this.props.match.params.loginUser}/search/${this.state.keywords}`;
     };
 
     handleCategory = which => () => {
-        window.location.href = `/reader/${this.state.loginUser}/category/${which}`;
-    };
-
-    componentDidMount() {
-        this.setState({loginUser: this.props.match.params.loginUser});
+        window.location.href = `/reader/${this.props.match.params.loginUser}/category/${which}`;
     };
 
     render() {
         return (
                 <div className="flex-col" style={{height: '100%'}}>
-                    <TopButton loginUser={this.state.loginUser}/>
+                    <TopButton loginUser={this.props.match.params.loginUser}/>
                     <div className='reader-page'>
                         <div className='bg' style={{backgroundImage: `url(${Logo})`}} />
                         <TextField
                             label='search'
                             variant='outlined'
-                            style={{width: 600, margin: '40px 0'}}
+                            style={{width: 600, margin: '30px 0 50px 0'}}
                             value={this.state.keywords}
                             onChange={this.handleChange}
                             onKeyUp={this.handleSearch("keyUp")}
@@ -96,7 +90,7 @@ class Home extends React.Component {
                             <Button
                                 variant='outlined'
                                 color='primary'
-                                style={{marginRight: 50, width: 150}}
+                                style={{marginRight: 60, width: 150}}
                                 onClick={this.handleSearch("button")}
                             >
                                 search
@@ -142,7 +136,7 @@ function CategorySelect(props) {
                     <Paper>
                         <ClickAwayListener onClickAway={props.handleClose("openCategory")}>
                             <MenuList>
-                                <MenuItem onClick={props.handleCategory("novel")}>novel</MenuItem>
+                                <MenuItem onClick={props.handleCategory("IT")}>IT</MenuItem>
                                 <MenuItem onClick={props.handleCategory("science")}>science</MenuItem>
                                 <MenuItem onClick={props.handleCategory("art")}>art</MenuItem>
                             </MenuList>

@@ -1,28 +1,31 @@
 import React from "react";
-import {TopBar} from "./components/TopBar";
+import {TopBar} from "../components/TopBar";
 import {DescriptionOutlined} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
-import './admin.scss'
+import '../admin.scss'
 import Paper from "@material-ui/core/Paper/Paper";
 import Grid from "@material-ui/core/Grid/Grid";
 import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
-import MessageDialog from './components/messageDialog'
+import MessageDialog from '../components/messageDialog'
 
+const server = "http://192.168.1.103:7911";
 
 export default class ManageRules extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            deposit: 300,
-            fine: 0.01,
-            maxReturnTime: 90,
-            maxReserveTime: 2,
-            maxBorrowNum: 5,
+            // deposit: 300,
+            // fine: 0.01,
+            // maxReturnTime: 90,
+            // maxReserveTime: 2,
+            // maxBorrowNum: 5,
 
+
+            changingID: undefined,
             returnMessage: undefined,
         };
 
@@ -36,7 +39,7 @@ export default class ManageRules extends React.Component {
     };
 
     getAllRules = () => {
-        fetch('/showRules')
+        fetch(`${server}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -45,6 +48,8 @@ export default class ManageRules extends React.Component {
                     maxReturnTime: result.maxReturnTime,
                     maxReserveTime: result.maxReserveTime,
                     maxBorrowNum: result.maxBorrowNum,
+
+                    formError: undefined,
                 });
             })
             .catch(e => alert(e));
@@ -55,6 +60,18 @@ export default class ManageRules extends React.Component {
     };
 
     handleChange = which => event => {
+        // const val = event.target.value;
+        // const pre = `_${which}`;
+        // if (!isNaN(val)) {
+        //     this.setState({
+        //         [which]: val,
+        //         [pre]: val,
+        //     });
+        //
+        // }
+        // else {
+        //     this.setState({[which]: this.state.})
+        // }
         this.setState({[which]: event.target.value})
     };
 
@@ -64,30 +81,44 @@ export default class ManageRules extends React.Component {
         });
     };
 
+    clearFormError = () => {
+        this.setState({formError: undefined});
+    };
+
     handleClick = (id, value) => () => {
-        let status = -1;
-        fetch(`/admin/changeRules?rule=${id}&value=${value}`)
+        if (value === undefined || value.length === 0) {
+            this.setState({formError: `${id}empty`});
+            return;
+        }
+        fetch(`${server}/admin/changeRules?rule=${id}&value=${value}`)
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({
+                    status: result.state,
+                    changingID: id,
+                });
             })
             .catch(e => alert(e));
+    };
 
-        this.setState({status: 1});
-
-        if (this.state.status === 0) {
+    changeRules = () => {
+        if (this.state.status === 1){
             this.setState({
-                returnMessage: `${this.encode[id]} change failed.`
+                status: undefined,
+                returnMessage: `${this.encode[this.state.changingID]} change success.`
             });
         }
-        else if (this.state.status === 1){
+        if (this.state.status === 0) {
             this.setState({
-                returnMessage: `${this.encode[id]} change success.`
+                status: undefined,
+                returnMessage: `${this.encode[this.state.changingID]} change failed.`
             });
         }
     };
 
     render() {
+        this.changeRules();
+
         return (
             <React.Fragment>
                 <TopBar />
@@ -114,6 +145,8 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
+                                        error={this.state.formError === "0empty"}
+                                        helperText={this.state.formError === "0empty" && "Please input right format!"}
                                         label="Deposit"
                                         type="number"
                                         InputLabelProps={{
@@ -129,6 +162,7 @@ export default class ManageRules extends React.Component {
                                         variant="outlined"
                                         defaultValue={this.state.deposit}
                                         value={this.state.deposit}
+                                        onFocus={this.clearFormError}
                                         onChange={this.handleChange("deposit")}
                                     />
                                     <Button
@@ -151,6 +185,8 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
+                                        error={this.state.formError === "1empty"}
+                                        helperText={this.state.formError === "1empty" && "Please input right format!"}
                                         label="Fine"
                                         type="number"
                                         InputLabelProps={{
@@ -186,6 +222,8 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
+                                        error={this.state.formError === "2empty"}
+                                        helperText={this.state.formError === "2empty" && "Please input right format!"}
                                         label="Time to return book"
                                         type="number"
                                         InputLabelProps={{
@@ -221,6 +259,8 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
+                                        error={this.state.formError === "3empty"}
+                                        helperText={this.state.formError === "3empty" && "Please input right format!"}
                                         label="Valid Time for reserving"
                                         type="number"
                                         InputLabelProps={{
@@ -256,6 +296,8 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
+                                        error={this.state.formError === "4empty"}
+                                        helperText={this.state.formError === "4empty" && "Please input right format!"}
                                         label="Maximum books to borrow"
                                         type="number"
                                         InputLabelProps={{

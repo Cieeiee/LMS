@@ -1,5 +1,5 @@
 import React from "react";
-import {TopBar} from "./components/TopBar";
+import {TopBar} from "../components/TopBar";
 import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableBody from "@material-ui/core/TableBody/TableBody";
@@ -11,11 +11,13 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Button from "@material-ui/core/Button/Button";
 import { CreateOutlined, DeleteOutlined, PeopleOutlined } from "@material-ui/icons"
 import Typography from "@material-ui/core/Typography/Typography";
-import MessageDialog from './components/messageDialog'
+import MessageDialog from '../components/messageDialog'
 import DeleteDialog from './components/deleteDialog'
 import AddDialog from './components/addDialog'
 import EditDialog from './components/editDialog'
-import './admin.scss'
+import '../admin.scss'
+
+const server = "http://192.168.1.103:7911";
 
 const styles = theme => ({
     row: {
@@ -25,29 +27,32 @@ const styles = theme => ({
     },
 });
 
+const librariansExample = [
+    {
+        id: 'xzcq123',
+        email: '5124925467@qq.com'
+    },
+    {
+        id: 'xq',
+        email: '1231847819@qq.com'
+    },
+    {
+        id: 'zsljfd',
+        email: '1509481267@qq.com'
+    },
+    {
+        id: 'xz23',
+        email: '1294535467@qq.com'
+    }
+    ];
+
 class ManageLibrariansClass extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            librarians: [
-                {
-                    name: 'xzcq123',
-                    email: '5124925467@qq.com'
-                },
-                {
-                    name: 'xq',
-                    email: '1231847819@qq.com'
-                },
-                {
-                    name: 'zsljfd',
-                    email: '1509481267@qq.com'
-                },
-                {
-                    name: 'xz23',
-                    email: '1294535467@qq.com'
-                },
-            ],
+            librarians: [],
+            // librarians: librariansExample,
             openDelete: undefined,
             openEdit: undefined,
             openAdd: false,
@@ -60,7 +65,7 @@ class ManageLibrariansClass extends React.Component {
 
             changePassword: false,
             formError: undefined,
-
+            status: undefined,
         }
     }
 
@@ -88,45 +93,6 @@ class ManageLibrariansClass extends React.Component {
         });
     };
 
-
-    handleDelete = (librarian) => () => {
-        this.handleClose();
-
-        let status = 0;
-        fetch('/admin/deleteLibrarian', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: librarian.name,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                status = result.state;
-            })
-            .catch(e => alert(e));
-
-        // this.setState({status: 1});
-
-        if (status === 0) {
-            this.setState({
-                returnMessage: "Delete failed."
-            });
-        }
-        else {
-            const updated_librarians = this.state.librarians.filter(lib =>
-                lib.name !== librarian.name
-            );
-            this.setState({
-                librarians: updated_librarians,
-                returnMessage: "Delete success."
-            });
-        }
-    };
-
     handleChange = which => event => {
         if (which === "changePassword") {
             this.setState({
@@ -140,55 +106,104 @@ class ManageLibrariansClass extends React.Component {
         }
     };
 
-    handleEdit = (librarian) => () => {
-        if (this.state.email === undefined) {
-            this.setState({formError: "emailEmpty"});
-            return;
-        }
-        if (this.state.changePassword && this.state.password === undefined) {
-            this.setState({formError: "passwordEmpty"});
-            return;
-        }
-        if (this.state.changePassword && this.state.password !== this.state.confirmPassword) {
-            this.setState({formError: "passwordNotSame"});
-            return;
-        }
-        this.handleClose();
-
-        let status = 0;
-        fetch('/admin/updateLibrarian', {
+    handleDelete = (librarian) => () => {
+        fetch(`${server}/admin/deleteLibrarian`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                id: librarian.id,
+            })
+        })
+            .then(Response => Response.json())
+            .then(result => {
+                this.setState({deleteStatus: result.state});
+            })
+            .catch(e => alert(e));
+    };
+
+    deleteLibrarian() {
+        if (this.state.deleteStatus === 0) {
+            this.setState({
+                deleteStatus: undefined,
+                openDelete: undefined,
+                returnMessage: "Delete failed."
+            });
+        }
+        if (this.state.deleteStatus === 1) {
+            const updated_librarians = this.state.librarians.filter(lib =>
+                lib.id !== this.state.openDelete.id
+            );
+            this.setState({
+                deleteStatus: undefined,
+                openDelete: undefined,
+                librarians: updated_librarians,
+                returnMessage: "Delete success."
+            });
+        }
+    }
+
+    handleEdit = (librarian) => () => {
+        if (this.state.email === undefined || this.state.email.length === 0) {
+            this.setState({formError: "emailEmpty"});
+            return;
+        }
+        const emailPattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        if (!emailPattern.test(this.state.email)) {
+            this.setState({formError: "emailIncorrect"});
+            return;
+        }
+        if (this.state.changePassword) {
+            if (this.state.password === undefined || this.state.password.length === 0) {
+                this.setState({formError: "passwordEmpty"});
+                return;
+            }
+            if (this.state.password !== this.state.confirmPassword) {
+                this.setState({formError: "passwordNotSame"});
+                return;
+            }
+        }
+
+        fetch(`${server}/admin/updateLibrarian`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: librarian.id,
                 email: this.state.email,
                 password: this.state.password
             })
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({editStatus: result.state});
             })
             .catch(e => alert(e));
+    };
 
-        // this.setState({status: 1});
-
-        if (status === 0) {
+    editLibrarian = () => {
+        if (this.state.editStatus === 0) {
             this.setState({
+                editStatus: undefined,
+                openEdit: undefined,
                 returnMessage: "Update failed."
             });
         }
-        else {
+        if (this.state.editStatus === 1) {
             const updated_librarians = this.state.librarians;
             for (let i in updated_librarians) {
-                if (updated_librarians[i].name === librarian.name) {
+                if (updated_librarians[i].id === this.state.openEdit.id) {
                     updated_librarians[i].email = this.state.email;
                     break;
                 }
             }
             this.setState({
+                editStatus: undefined,
+                openEdit: undefined,
                 librarians: updated_librarians,
                 returnMessage: "Update success."
             });
@@ -196,15 +211,20 @@ class ManageLibrariansClass extends React.Component {
     };
 
     handleAdd = () => {
-        if (this.state.ID === undefined) {
+        if (this.state.ID === undefined || this.state.ID.length === 0) {
             this.setState({formError: "nameEmpty"});
             return;
         }
-        if (this.state.email === undefined) {
+        if (this.state.email === undefined || this.state.email.length === 0) {
             this.setState({formError: "emailEmpty"});
             return;
         }
-        if (this.state.password === undefined) {
+        const emailPattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        if (!emailPattern.test(this.state.email)) {
+            this.setState({formError: "emailIncorrect"});
+            return;
+        }
+        if (this.state.password === undefined || this.state.email.length === 0) {
             this.setState({formError: "passwordEmpty"});
             return;
         }
@@ -213,10 +233,7 @@ class ManageLibrariansClass extends React.Component {
             return;
         }
 
-        this.handleClose();
-
-        let status = 0;
-        fetch('/admin/addLibrarian', {
+        fetch(`${server}/admin/addLibrarian`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -230,38 +247,48 @@ class ManageLibrariansClass extends React.Component {
         })
             .then(Response => Response.json())
             .then(result => {
-                status = result.state;
+                this.setState({addStatus: result.state});
             })
             .catch(e => alert(e));
+    };
 
-        // this.setState({status: 1});
-
-        if (status === -1) {
+    addLibrarian = () => {
+        if (this.state.addStatus === -1) {
             this.setState({
+                addStatus: undefined,
+                openAdd: false,
                 returnMessage: "Add Librarian failed."
             });
         }
-        else if (status === 0) {
+        if (this.state.addStatus === 0) {
             this.setState({
-                returnMessage: "The name of the librarian already exists."
+                addStatus: undefined,
+                openAdd: false,
+                returnMessage: "The ID of the librarian already exists."
             });
         }
-        else {
-            const new_librarian = {
-                name: this.state.ID,
-                email: this.state.email
-            };
-            const updated_librarians = [...this.state.librarians, new_librarian];
-            this.setState({
-                librarians: updated_librarians,
-                returnMessage: "Add Librarian success."
-            });
+        if (this.state.addStatus === 1) {
+            // const new_librarian = {
+            //     name: this.state.ID,
+            //     email: this.state.email
+            // };
+            // const updated_librarians = [...this.state.librarians, new_librarian];
+            // this.setState({
+            //     addStatus: undefined,
+            //     openAdd: false,
+            //     librarians: updated_librarians,
+            //     returnMessage: "Add Librarian success."
+            // });
+            window.location.href = `/admin`
         }
+    };
 
+    clearFormError = () => {
+        this.setState({formError: undefined});
     };
 
     getAllLibrarians = () => {
-        fetch('/admin/showLibrarian')
+        fetch(`${server}/admin/showLibrarian`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -277,6 +304,9 @@ class ManageLibrariansClass extends React.Component {
 
     render() {
         const { classes } = this.props;
+        this.deleteLibrarian();
+        this.editLibrarian();
+        this.addLibrarian();
 
         return (
             <React.Fragment>
@@ -307,6 +337,7 @@ class ManageLibrariansClass extends React.Component {
                         <AddDialog handleClose={this.handleClose}
                                    handleAdd={this.handleAdd}
                                    handleChange={this.handleChange}
+                                   clearFormError={this.clearFormError}
                                    ID={this.state.ID}
                                    email={this.state.email}
                                    password={this.state.password}
@@ -328,9 +359,9 @@ class ManageLibrariansClass extends React.Component {
                             <TableBody>
                                 {this.state.librarians.map(librarian => {
                                     return (
-                                        <TableRow className={classes.row} key={librarian.name}>
+                                        <TableRow className={classes.row} key={librarian.id}>
                                             <CustomTableCell component="th" scope="row">
-                                                {librarian.name}
+                                                {librarian.id}
                                             </CustomTableCell>
                                             <CustomTableCell>{librarian.email}</CustomTableCell>
                                             <CustomTableCell padding="checkbox">
@@ -354,6 +385,7 @@ class ManageLibrariansClass extends React.Component {
                             handleClose={this.handleClose}
                             handleEdit={this.handleEdit(this.state.openEdit)}
                             handleChange={this.handleChange}
+                            clearFormError={this.clearFormError}
                             changePassword={this.state.changePassword}
                             account={this.state.openEdit}
                             email={this.state.email}
