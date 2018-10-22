@@ -10,7 +10,7 @@ export default props =>
       <ListItemText primary='Readers' />
     </ListItem>
     <ListItem button selected={props.type === 2} onClick={() => props.handleClick(2)}>
-      <ListItemText primary='Income' />
+      <ListItemText primary='Delete History' />
     </ListItem>
     <ListItem button selected={props.type === 3} onClick={() => props.handleClick(3)}>
       <ListItemText primary='News' />

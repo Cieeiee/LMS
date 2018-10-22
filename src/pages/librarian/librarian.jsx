@@ -1,232 +1,122 @@
-import { AppBar, Button, Toolbar } from '@material-ui/core';
+import { AppBar, Button, Toolbar, Snackbar } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Nav from './components/nav/nav.jsx'
-import Confirm from './components/confirm/confirm.jsx'
+import { fetchBookList, fetchBorrow, fetchDetails, fetchAddReader, fetchReaderList, fetchDeleteBook, fetchAddBook, fetchBookHistory } from './../../mock/index';
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
+import BookHistory from './components/books/bookHistory.jsx'
+import Confirm from './components/confirm/confirm.jsx';
+import Nav from './components/nav/nav.jsx';
+import Readers from './components/readers/readers.jsx';
 import './librarian.scss';
-
-const booklist = [
-  {
-    isbn: 734578,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734579,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734580,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734581,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734582,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734583,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734584,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734585,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734586,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  },
-  {
-    isbn: 734587,
-    title: 'God of war',
-    author: 'Me',
-    category: 'comedy',
-    price: '$30'
-  }
-]
-const details = {
-  isbn: '1472245547',
-  title: 'American Gods',
-  author: 'Neil Gaiman',
-  category: 'Fantasy',
-  introduction: `If you are to survive, you must believe.
-
-  Shadow Moon has served his time. But hours before his release from prison, his beloved wife is killed in a freak accident. Dazed, he boards a plane home where he meets the enigmatic Mr Wednesday, who professes both to know Shadow and to be king of America.
-  
-  Together they embark on a profoundly strange road trip across the USA, encountering a kaleidoscopic cast of characters along the way. Yet all around them a storm threatens to break.
-  
-  The war has already begun, an epic struggle for the very soul of America, and Shadow is standing squarely in its path.`,
-  location: '1-11-111',
-  total: 6,
-  remain: 2,
-  price: 25,
-  picture: 'https://books.google.nl/books/content?id=I3o7vgAACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70w8bTVK05KCIbrLwDgJksNaIxssduYe7-1laZQgiRlVEh9d-nBE3oWhhk7kUdK2p7GwYkznidAl9a3yBppV4kJ1JCz4pbfEvaT0a4BrrGb2CqYhudlUBXvUolRLDOnEoe3AxZT',
-  state: [
-    {
-      barCode: 123,
-      availability: 1
-    },
-    {
-      barCode: 124,
-      availability: 1
-    },
-    {
-      barCode: 126,
-      availability: 1
-    },
-    {
-      barCode: 127,
-      availability: 1
-    },
-    {
-      barCode: 128,
-      availability: 0
-    },
-    {
-      barCode: 129,
-      availability: 0
-    }
-  ]
-}
+import TopBar from './components/nav/TopBar';
 
 export default class Librarian extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [],
-      type: 0,
-      open: false,
-      book: {},
-      barCode: null,
-      title: ''
+      list: [], // all books
+      readers: [], // all readers
+      bookHistory: [], // ..
+      type: 0, // 条件渲染
+      open: false, // confirm dialog
+      book: {}, // book details
+      barcode: null,
+      title: '', // confirm type
+      snackOpen: false, // snackbar
+      eventState: false, // fetch response
+      searchTerm: ''
     }
   }
-  handleDetail = () => this.setState({book: details, type: 4})
-  handleOpen = (barCode, title) => () => this.setState({open: true, barCode, title})
+  handleOpen = (barcode, title) => () => this.setState({open: true, barcode, title})
   handleClose = () => this.setState({open: false})
+  handleSnackClose = () => this.setState({snackOpen: false})
   handleClick = index => this.setState({type: index})
-  handleBorrow = barCode => () => {
-    let newState = this.state.book.state
-    for(let x of newState) {
-      if(x.barCode === barCode) {
-        x.availability = 0
-      }
-    }
-    let newbook = {...this.state.book, state: newState}
+  handleSearch = e => this.setState({searchTerm: e.target.value})
+  
+  handleDetail = isbn => async () => {
+    const book = await fetchDetails(isbn)
+    this.setState({type: 4, book})
+  }
+  handleAddBook = newBook => async () => {
+    const eventState = await fetchAddBook(newBook)
     this.setState({
-      book: newbook,
-      open: false
+      open: false,
+      type: 0,
+      snackOpen: true,
+      eventState
     })
   }
-  handleDelete = barCode => () => {
-    let newState = this.state.book.state.filter(item => 
-      item.barCode !== barCode
-    )
-    let newbook = {...this.state.book, state: newState}
+  handleBorrow = info => async () => {
+    const eventState = await fetchBorrow(info)
     this.setState({
-      book: newbook,
-      open: false
+      open: false, 
+      type: 0,
+      snackOpen: true,
+      eventState
     })
   }
-  handleReturn = barCode => () => {
-    let newState = this.state.book.state
-    for(let x of newState) {
-      if(x.barCode === barCode) {
-        x.availability = 1
-      }
-    }
-    let newbook = {...this.state.book, state: newState}
+  handleDelete = (id, barcode) => async () => {
+    const eventState =  await fetchDeleteBook(id, barcode)
     this.setState({
-      book: newbook,
-      open: false
+      open: false,
+      type: 0,
+      snackOpen: true,
+      eventState
     })
   }
-  handleLost = barCode => () => {
-    let newState = this.state.book.state.filter(item => 
-      item.barCode !== barCode
-    )
-    let newbook = {...this.state.book, state: newState}
+  handleAddReader = info => async () => {
+    const eventState =  await fetchAddReader(info)
+    const readers = await fetchReaderList()
     this.setState({
-      book: newbook,
-      open: false
+      snackOpen: true,
+      eventState,
+      readers
     })
   }
-  componentDidMount() {
-      // fetch('/booklist')
-      // .then(Response => Response.json())
-      // .then(result => {
-      //     this.setState({
-      //         list: result.name
-      //     })
-      // })
-      // .catch(e => console.log('我知道报错了但是我不说\n' + e))
-      this.setState({
-        list: booklist
-      })
+  async componentDidMount() {
+    const list = await fetchBookList()
+    const readers = await fetchReaderList()
+    const bookHistory = await fetchBookHistory()
+      this.setState({list, readers, bookHistory})
   }
   render() {
     return (
       <div style={{height: '100%'}}>
-        <AppBar position='static' color='primary'>
-          <Toolbar>
-            <h1 style={{flexGrow: 1}}>Bibliosoft</h1>
-            {this.props.match.params.id}
-            <Button variant='contained' component={Link} to='/' style={{marginLeft: 20}}>logout</Button>
-          </Toolbar>
-        </AppBar>
+        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} />
         <div style={{height: '100%', display: 'flex'}}>
           {Nav({ type: this.state.type, handleClick: this.handleClick })}
-          {this.state.type === 0 && Books({ list: this.state.list, handleOpen: this.handleDetail })}
-          {this.state.type === 1 && <p>Book</p>}
-          {this.state.type === 2 && <p>Boo</p>}
+          {this.state.type === 0 && Books({ 
+            list: this.state.list, 
+            searchTerm: this.state.searchTerm, 
+            handleDetail: this.handleDetail, 
+            handleOpen: this.handleOpen 
+          })}
+          {this.state.type === 1 && <Readers list={this.state.readers} handleAddReader={this.handleAddReader}/>}
+          {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
           {this.state.type === 3 && <p>Bo</p>}
-          {this.state.type === 4 && Details({id: this.props.match.params.id, book: this.state.book, handleOpen: this.handleOpen })}
+          {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
         </div>
-        {Confirm({
-          barCode: this.state.barCode,
-          title: this.state.title,
-          open: this.state.open,
-          handleClose: this.handleClose,
-          handleDelete: this.handleDelete,
-          handleBorrow: this.handleBorrow,
-          handleReturn: this.handleReturn,
-          handleLost: this.handleLost
-        })}
+        <Confirm
+          libid={this.props.match.params.id}
+          barcode={this.state.barcode}
+          title={this.state.title}
+          open={this.state.open}
+          handleClose={this.handleClose}
+          handleDelete={this.handleDelete}
+          handleBorrow={this.handleBorrow}
+          handleAddBook={this.handleAddBook}
+        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          open={this.state.snackOpen}
+          autoHideDuration={1500}
+          onClose={this.handleSnackClose}
+          message={this.state.eventState? 'succeed': 'failed'}
+        />
       </div>
     )
   }
