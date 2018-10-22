@@ -30,3 +30,26 @@
     transform: rotate(360deg);
   }
 }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /*background-color: gainsboro;*/
+}

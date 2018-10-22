@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
-import {Notifications, History, ExitToApp, DescriptionOutlined} from '@material-ui/icons'
-import LibraryRules from "../libraryRules";
+import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined} from '@material-ui/icons'
+import LibraryRules from "./libraryRules";
+import {serverReader} from "../../../mock/config";
 
 const styles = theme => ({
     button: {
@@ -33,16 +34,16 @@ class IconLabelButtons extends React.Component {
         this.state = {
             openRules: false,
 
-            deposit: 300,
-            fine: 0.01,
-            maxReturnTime: 90,
-            maxReserveTime: 2,
-            maxBorrowNum: 5,
+            // deposit: 300,
+            // fine: 0.01,
+            // maxReturnTime: 90,
+            // maxReserveTime: 2,
+            // maxBorrowNum: 5,
         }
     };
 
     getAllRules = () => {
-        fetch('/showRules')
+        fetch(`${serverReader}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -57,7 +58,7 @@ class IconLabelButtons extends React.Component {
     };
 
     componentDidMount() {
-        // this.getAllRules();
+        this.getAllRules();
     };
 
 
@@ -70,7 +71,7 @@ class IconLabelButtons extends React.Component {
     };
 
     handleLogout = () => {
-        fetch('/logout').catch(e => alert(e));
+        fetch(`${serverReader}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 
@@ -92,16 +93,16 @@ class IconLabelButtons extends React.Component {
                     variant="outlined"
                     color="secondary"
                     className={classes.button}
-                    component={Link} to='/reader/history'
+                    component={Link} to={`/reader/${this.props.loginUser}/history`}
                 >
-                    History
-                    <History className={classes.iconSmall} />
+                    Profile
+                    <AccountCircleOutlined className={classes.iconSmall} />
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
                     className={classes.button}
-                    component={Link} to='/reader/notification'
+                    component={Link} to={`/reader/${this.props.loginUser}/notification`}
                 >
                     Notification
                     <Notifications className={classes.iconSmall}/>

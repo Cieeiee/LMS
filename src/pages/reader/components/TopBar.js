@@ -8,9 +8,10 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { Notifications, History, ExitToApp, Home, DescriptionOutlined } from '@material-ui/icons'
+import { Notifications, ExitToApp, Home, DescriptionOutlined, AccountCircleOutlined } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import LibraryRules from "../libraryRules";
+import LibraryRules from "./libraryRules";
+import {serverReader} from "../../../mock/config";
 
 const styles = theme => ({
     root: {
@@ -66,9 +67,9 @@ const styles = theme => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: 100,
+            width: 120,
             '&:focus': {
-                width: 300,
+                width: 250,
             },
         },
     },
@@ -88,16 +89,16 @@ class PrimarySearchAppBar extends React.Component {
             keywords: undefined,
 
             openRules: false,
-            deposit: 300,
-            fine: 0.01,
-            maxReturnTime: 90,
-            maxReserveTime: 2,
-            maxBorrowNum: 5,
+            // deposit: 300,
+            // fine: 0.01,
+            // maxReturnTime: 90,
+            // maxReserveTime: 2,
+            // maxBorrowNum: 5,
         }
     }
 
     getAllRules = () => {
-        fetch('/showRules')
+        fetch(`${serverReader}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -112,7 +113,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     handleLogout = () => {
-        fetch('/logout').catch(e => alert(e));
+        fetch(`${serverReader}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 
@@ -124,7 +125,10 @@ class PrimarySearchAppBar extends React.Component {
         if (e.keyCode !== 13)
             return;
 
-        window.location.href = '/reader/search/' + this.state.keywords;
+        if (this.state.keywords === undefined || this.state.keywords.length === 0)
+            return;
+
+        window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}`;
     };
 
     handleClick = () => {
@@ -136,7 +140,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     componentDidMount() {
-        // this.getAllRules();
+        this.getAllRules();
     };
 
     render() {
@@ -149,7 +153,7 @@ class PrimarySearchAppBar extends React.Component {
                         <IconButton
                             className={classes.menuButton}
                             color="inherit"
-                            component={Link} to='/reader'
+                            component={Link} to={`/reader/${this.props.loginUser}`}
                         >
                             <Home />
                         </IconButton>
@@ -177,10 +181,14 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" onClick={this.handleClick}>
                                 <DescriptionOutlined />
                             </IconButton>
-                            <IconButton color="inherit" component={Link} to='/reader/history'>
-                                <History />
+                            <IconButton color="inherit" component={Link}
+                                        to={`/reader/${this.props.loginUser}/history`}
+                            >
+                                <AccountCircleOutlined />
                             </IconButton>
-                            <IconButton color="inherit" component={Link} to='/reader/notification'>
+                            <IconButton color="inherit" component={Link}
+                                        to={`/reader/${this.props.loginUser}/notification`}
+                            >
                                 <Notifications />
                             </IconButton>
                             <IconButton
