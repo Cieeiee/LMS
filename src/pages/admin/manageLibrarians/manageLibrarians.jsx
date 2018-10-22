@@ -16,8 +16,7 @@ import DeleteDialog from './components/deleteDialog'
 import AddDialog from './components/addDialog'
 import EditDialog from './components/editDialog'
 import '../admin.scss'
-
-const server = "http://192.168.1.103:7911";
+import {serverAdmin} from "../../../mock/config";
 
 const styles = theme => ({
     row: {
@@ -107,7 +106,7 @@ class ManageLibrariansClass extends React.Component {
     };
 
     handleDelete = (librarian) => () => {
-        fetch(`${server}/admin/deleteLibrarian`, {
+        fetch(`${serverAdmin}/admin/deleteLibrarian`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -166,7 +165,7 @@ class ManageLibrariansClass extends React.Component {
             }
         }
 
-        fetch(`${server}/admin/updateLibrarian`, {
+        fetch(`${serverAdmin}/admin/updateLibrarian`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -233,7 +232,7 @@ class ManageLibrariansClass extends React.Component {
             return;
         }
 
-        fetch(`${server}/admin/addLibrarian`, {
+        fetch(`${serverAdmin}/admin/addLibrarian`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -268,18 +267,17 @@ class ManageLibrariansClass extends React.Component {
             });
         }
         if (this.state.addStatus === 1) {
-            // const new_librarian = {
-            //     name: this.state.ID,
-            //     email: this.state.email
-            // };
-            // const updated_librarians = [...this.state.librarians, new_librarian];
-            // this.setState({
-            //     addStatus: undefined,
-            //     openAdd: false,
-            //     librarians: updated_librarians,
-            //     returnMessage: "Add Librarian success."
-            // });
-            window.location.href = `/admin`
+            const new_librarian = {
+                id: this.state.ID,
+                email: this.state.email
+            };
+            const updated_librarians = [...this.state.librarians, new_librarian];
+            this.setState({
+                addStatus: undefined,
+                openAdd: false,
+                librarians: updated_librarians,
+                returnMessage: "Add Librarian success."
+            });
         }
     };
 
@@ -288,7 +286,7 @@ class ManageLibrariansClass extends React.Component {
     };
 
     getAllLibrarians = () => {
-        fetch(`${server}/admin/showLibrarian`)
+        fetch(`${serverAdmin}/admin/showLibrarian`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({

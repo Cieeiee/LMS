@@ -1,13 +1,11 @@
 import React from "react";
-import {Grid} from "@material-ui/core";
-import {OneBook} from "./components/OneBook";
 import {TopBar} from "../components/TopBar";
 import MessageDialog from '../components/messageDialog'
 import ReserveDialog from "./components/reserveDialog";
 import BookList from "./components/bookList";
+import {serverReader} from "../../../mock/config";
 
 const Alive = require('../components/images/alive.jpeg');
-const server = "http://192.168.1.100:8080";
 
 export default class CategoryPage extends React.Component {
     constructor(props) {
@@ -29,7 +27,7 @@ export default class CategoryPage extends React.Component {
 
 
     handleSearch = () => {
-        fetch(`${server}/searchCategory?category=${this.props.match.params.category}`)
+        fetch(`${serverReader}/searchCategory?category=${this.props.match.params.category}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -72,7 +70,7 @@ export default class CategoryPage extends React.Component {
     };
 
     handleReserve = book => () => {
-        fetch(`${server}/reader/reserveBook`, {
+        fetch(`${serverReader}/reader/reserveBook`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

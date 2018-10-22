@@ -13,21 +13,26 @@ import MenuList from "@material-ui/core/MenuList/MenuList";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import CategoryPage from "./searched/catagory";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
+import ApplicationFooter from "../../mock/footer";
 
 const Logo = require('./components/images/logo.jpg');
 
 export default class Reader extends React.Component {
     render() {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path='/reader/:loginUser' exact component={Home}/>
-                    <Route path='/reader/:loginUser/history' component={ReaderHistory}/>
-                    <Route path='/reader/:loginUser/search/:keywords' component={SearchedPage}/>
-                    <Route path='/reader/:loginUser/category/:category' component={CategoryPage}/>
-                    <Route path='/reader/:loginUser/notification' component={ReaderNotification}/>
-                </Switch>
-            </BrowserRouter>
+            <div className="flex-col grow">
+                <BrowserRouter>
+                    <Switch>
+                        <Route path='/reader/:loginUser' exact component={Home}/>
+                        <Route path='/reader/:loginUser/history' component={ReaderHistory}/>
+                        <Route path='/reader/:loginUser/search/:keywords' component={SearchedPage}/>
+                        <Route path='/reader/:loginUser/category/:category' component={CategoryPage}/>
+                        <Route path='/reader/:loginUser/notification' component={ReaderNotification}/>
+                    </Switch>
+                </BrowserRouter>
+                <div className="grow"/>
+                <ApplicationFooter/>
+            </div>
         );
     }
 };

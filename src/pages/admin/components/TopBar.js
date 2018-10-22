@@ -8,9 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ExitToApp } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import { PeopleOutlined, DescriptionOutlined } from "@material-ui/icons"
-import Button from "@material-ui/core/Button/Button";
-
-const server = "http://192.168.1.103:7911";
+import {serverAdmin} from "../../../mock/config";
 
 const styles = theme => ({
     root: {
@@ -51,7 +49,7 @@ class PrimarySearchAppBar extends React.Component {
     }
 
     handleLogout = () => {
-        fetch('/admin/logout').catch(e => alert(e));
+        fetch(`${serverAdmin}/admin/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 

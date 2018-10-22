@@ -67,7 +67,7 @@ function BorrowedTable(props) {
                             );
                         })}
                     </TableBody>
-                    { props.records !== [] && <TableFooter>
+                    { props.total !== undefined && <TableFooter>
                         <TableRow>
                             <CustomTableCell>Total fine ($)</CustomTableCell>
                             <CustomTableCell numeric/>

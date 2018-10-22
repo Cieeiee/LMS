@@ -6,22 +6,25 @@ import NotFound from './pages/notFound/index'
 import Admin from './pages/admin/index'
 import Reader from './pages/reader/index'
 import Librarian from './pages/librarian/index'
+import Typography from "@material-ui/core/Typography/Typography";
 
 class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route path='/' exact component={Login} />
-          <Route path='/admin/login' exact component={AdminLogin} />
-          <Route path='/admin' component={Admin} />
-          <Route path='/reader' component={Reader} />
-          <Route path='/librarian/:id' component={Librarian} />
-          <Route component={NotFound}/>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+    render() {
+        return (
+            <div className="flex-col" style={{height: "100%"}}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path='/' exact component={Login} />
+                        <Route path='/admin/login' exact component={AdminLogin} />
+                        <Route path='/admin' component={Admin} />
+                        <Route path='/reader' component={Reader} />
+                        <Route path='/librarian/:id' component={Librarian} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
 
 export default App;

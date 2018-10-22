@@ -14,9 +14,9 @@ import ReservingTableWrapped from './components/ReservingTable'
 import BorrowedTableWrapped from './components/BorrowedTable'
 import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
+import {serverReader} from "../../../mock/config";
 
 const Logo = require('../components/images/logo.jpg');
-const server = "http://192.168.1.100:8080";
 
 const styles = theme => ({
     tabsRoot: {
@@ -26,9 +26,7 @@ const styles = theme => ({
         backgroundColor: blue[500],
     },
     tabRoot: {
-        // textTransform: 'initial',
         fontWeight: theme.typography.fontWeightRegular,
-        // marginRight: theme.spacing.unit * 4,
         fontFamily: [
             '-apple-system',
             'BlinkMacSystemFont',
@@ -141,7 +139,7 @@ class ReaderHistoryClass extends React.Component {
             borrowingRecord: [],
             reservingRecord: [],
             borrowedRecord: [],
-            borrowedTotal: 0,
+            borrowedTotal: undefined,
             tabValue: 0,
             openUpdate: false,
             formError: undefined,
@@ -150,6 +148,7 @@ class ReaderHistoryClass extends React.Component {
             email: undefined,
             password: undefined,
             confirmPassword: undefined,
+
             changePassword: false,
             updateStatus: undefined,
             returnMessage: undefined,
@@ -157,7 +156,7 @@ class ReaderHistoryClass extends React.Component {
     }
 
     getHistory = () => {
-        fetch(`${server}/searchReader?id=${this.props.match.params.loginUser}`)
+        fetch(`${serverReader}/searchReader?id=${this.props.match.params.loginUser}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -252,7 +251,7 @@ class ReaderHistoryClass extends React.Component {
 
         this.handleClose("openUpdate")();
 
-        fetch(`${server}/updateReader`, {
+        fetch(`${serverReader}/updateReader`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

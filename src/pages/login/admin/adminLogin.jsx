@@ -1,9 +1,9 @@
 import React from "react";
-import {Button, Dialog, DialogTitle, Paper, TextField} from "@material-ui/core";
+import {Button, Paper, TextField} from "@material-ui/core";
 import MessageDialog from "../components/MessageDialog";
+import {serverAdmin} from "../../../mock/config";
 
 const backgroundImage = require('../components/library.jpg');
-const server = "http://192.168.1.103:7911";
 
 export default class AdminLogin extends React.Component {
     constructor(props) {
@@ -48,7 +48,7 @@ export default class AdminLogin extends React.Component {
             return;
         }
 
-        fetch(`${server}/admin/login`, {
+        fetch(`${serverAdmin}/admin/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

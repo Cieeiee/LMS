@@ -11,8 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Notifications, ExitToApp, Home, DescriptionOutlined, AccountCircleOutlined } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import LibraryRules from "./libraryRules";
-
-const server = "http://192.168.1.100:8080";
+import {serverReader} from "../../../mock/config";
 
 const styles = theme => ({
     root: {
@@ -90,16 +89,16 @@ class PrimarySearchAppBar extends React.Component {
             keywords: undefined,
 
             openRules: false,
-            deposit: 300,
-            fine: 0.01,
-            maxReturnTime: 90,
-            maxReserveTime: 2,
-            maxBorrowNum: 5,
+            // deposit: 300,
+            // fine: 0.01,
+            // maxReturnTime: 90,
+            // maxReserveTime: 2,
+            // maxBorrowNum: 5,
         }
     }
 
     getAllRules = () => {
-        fetch(`${server}/showRules`)
+        fetch(`${serverReader}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -114,7 +113,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     handleLogout = () => {
-        fetch(`${server}/logout`).catch(e => alert(e));
+        fetch(`${serverReader}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 

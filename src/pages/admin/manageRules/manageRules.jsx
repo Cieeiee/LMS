@@ -10,8 +10,7 @@ import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
 import MessageDialog from '../components/messageDialog'
-
-const server = "http://192.168.1.103:7911";
+import {serverAdmin} from "../../../mock/config";
 
 export default class ManageRules extends React.Component {
     constructor(props) {
@@ -39,7 +38,7 @@ export default class ManageRules extends React.Component {
     };
 
     getAllRules = () => {
-        fetch(`${server}/showRules`)
+        fetch(`${serverAdmin}/showRules`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({
@@ -60,18 +59,6 @@ export default class ManageRules extends React.Component {
     };
 
     handleChange = which => event => {
-        // const val = event.target.value;
-        // const pre = `_${which}`;
-        // if (!isNaN(val)) {
-        //     this.setState({
-        //         [which]: val,
-        //         [pre]: val,
-        //     });
-        //
-        // }
-        // else {
-        //     this.setState({[which]: this.state.})
-        // }
         this.setState({[which]: event.target.value})
     };
 
@@ -90,7 +77,7 @@ export default class ManageRules extends React.Component {
             this.setState({formError: `${id}empty`});
             return;
         }
-        fetch(`${server}/admin/changeRules?rule=${id}&value=${value}`)
+        fetch(`${serverAdmin}/admin/changeRules?rule=${id}&value=${value}`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({

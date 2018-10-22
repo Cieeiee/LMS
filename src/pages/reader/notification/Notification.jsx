@@ -8,8 +8,7 @@ import {Assignment} from '@material-ui/icons'
 import {TopBar} from "../components/TopBar";
 import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
-
-const server = "http://192.168.1.100:8080";
+import {serverReader} from "../../../mock/config";
 
 const notifications = [
     {
@@ -42,7 +41,7 @@ export default class ReaderNotification extends React.Component {
     }
 
     getNotification = () => {
-        fetch(`${server}/showAnnouncement`)
+        fetch(`${serverReader}/showAnnouncement`)
             .then(Response => Response.json())
             .then(result => {
                 this.setState({

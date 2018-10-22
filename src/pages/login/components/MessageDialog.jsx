@@ -1,7 +1,6 @@
 import {Dialog, DialogTitle} from "@material-ui/core";
 import React from "react";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
-import Button from "@material-ui/core/Button/Button";
 
 export default function MessageDialog(props) {
     return (
