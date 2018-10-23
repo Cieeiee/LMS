@@ -1,7 +1,17 @@
 import { AppBar, Button, Toolbar, Snackbar } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { fetchBookList, fetchBorrow, fetchDetails, fetchAddReader, fetchReaderList, fetchDeleteBook, fetchAddBook, fetchBookHistory } from './../../mock/index';
+import {
+    fetchBookList,
+    fetchBorrow,
+    fetchDetails,
+    fetchAddReader,
+    fetchReaderList,
+    fetchDeleteBook,
+    fetchAddBook,
+    fetchBookHistory,
+    fetchNotification
+} from './../../mock/index';
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
 import BookHistory from './components/books/bookHistory.jsx'
@@ -10,6 +20,7 @@ import Nav from './components/nav/nav.jsx';
 import Readers from './components/readers/readers.jsx';
 import './librarian.scss';
 import TopBar from './components/nav/TopBar';
+import LibrarianNotifications from "./components/notifications/notifications";
 
 export default class Librarian extends React.Component {
   constructor(props) {
@@ -18,6 +29,7 @@ export default class Librarian extends React.Component {
       list: [], // all books
       readers: [], // all readers
       bookHistory: [], // ..
+        notifications: [],
       type: 0, // 条件渲染
       open: false, // confirm dialog
       book: {}, // book details
@@ -94,7 +106,7 @@ export default class Librarian extends React.Component {
           })}
           {this.state.type === 1 && <Readers list={this.state.readers} handleAddReader={this.handleAddReader}/>}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
-          {this.state.type === 3 && <p>Bo</p>}
+          {this.state.type === 3 && <LibrarianNotifications/>}
           {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
         </div>
         <Confirm

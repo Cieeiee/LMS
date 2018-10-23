@@ -6,7 +6,6 @@ import NotFound from './pages/notFound/index'
 import Admin from './pages/admin/index'
 import Reader from './pages/reader/index'
 import Librarian from './pages/librarian/index'
-import Typography from "@material-ui/core/Typography/Typography";
 
 class App extends Component {
     render() {

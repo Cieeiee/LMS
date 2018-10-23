@@ -13,6 +13,6 @@ export default props =>
       <ListItemText primary='Delete History' />
     </ListItem>
     <ListItem button selected={props.type === 3} onClick={() => props.handleClick(3)}>
-      <ListItemText primary='News' />
+      <ListItemText primary='Notifications' />
     </ListItem>
   </List>
