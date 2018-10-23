@@ -142,8 +142,8 @@ function CategorySelect(props) {
                         <ClickAwayListener onClickAway={props.handleClose("openCategory")}>
                             <MenuList>
                                 <MenuItem onClick={props.handleCategory("IT")}>IT</MenuItem>
-                                <MenuItem onClick={props.handleCategory("science")}>science</MenuItem>
-                                <MenuItem onClick={props.handleCategory("art")}>art</MenuItem>
+                                <MenuItem onClick={props.handleCategory("literature")}>literature</MenuItem>
+                                <MenuItem onClick={props.handleCategory("CS")}>CS</MenuItem>
                             </MenuList>
                         </ClickAwayListener>
                     </Paper>

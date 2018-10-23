@@ -1,6 +1,6 @@
-import {serverAdmin, serverReader} from "./config";
+// import {serverAdmin, serverReader} from "./config";
 
-const baseUrl = 'http://192.168.1.200:8080'
+const baseUrl = 'http://192.168.1.170:8080'
 //
 export const fetchBookList = async () => {
   try {
@@ -128,7 +128,7 @@ export const fetchAddReader = async info => {
 
 export const fetchNotification = async () => {
   try {
-    const Response = await fetch(`${serverReader}/showAnnouncement`);
+    const Response = await fetch(`${baseUrl}/showAnnouncement`);
     const result = await Response.json();
     return result
   } catch {
@@ -138,13 +138,7 @@ export const fetchNotification = async () => {
 
 export const fetchAddNotification = async (message) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/addAnnouncement`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(message)
-        });
+        const Response = await fetch(`${baseUrl}/librarian/addAnnouncement?message=${message}`);
         const result = await Response.json();
         return result
     } catch {
@@ -154,13 +148,7 @@ export const fetchAddNotification = async (message) => {
 
 export const fetchDeleteNotification = async (timestamp) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/deleteAnnouncement`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(timestamp)
-        });
+        const Response = await fetch(`${baseUrl}/librarian/deleteAnnouncement?timestamp=${timestamp}`);
         const result = await Response.json();
         return result
     } catch {

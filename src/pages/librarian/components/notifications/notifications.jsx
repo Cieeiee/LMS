@@ -56,20 +56,11 @@ export default class LibrarianNotifications extends React.Component {
             return;
         }
 
-        // const result = await fetchAddNotification(this.state.message);
-        // const eventState = result.state;
-        const eventState = 1;
-
-        const date = new Date();
-        const new_notification = {
-            // timestamp: result.timestamp,
-            timestamp: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.0`,
-            message: this.state.message
-        };
-        const updated_notifications = [...this.state.notifications, new_notification];
+        const eventState = await fetchAddNotification(this.state.message);
+        const announcements = await fetchNotification();
 
         this.setState({
-            notifications: updated_notifications,
+            notifications: announcements,
             snackOpen: true,
             openAdd: false,
             message: undefined,
@@ -82,18 +73,10 @@ export default class LibrarianNotifications extends React.Component {
             this.setState({formError: "messageEmpty"});
             return;
         }
-        // const eventState = await fetchUpdateNotification(notifications.timestamp, this.state.message);
-        const eventState = true;
-
-        const updated_notifications = this.state.notifications;
-        for (let i in updated_notifications) {
-            if (updated_notifications[i].timestamp === notifications.timestamp) {
-                updated_notifications[i].message = this.state.message;
-                break;
-            }
-        }
+        const eventState = await fetchUpdateNotification(notifications.timestamp, this.state.message);
+        const announcements = await fetchNotification();
         this.setState({
-            notifications: updated_notifications,
+            notifications: announcements,
             snackOpen: true,
             openEdit: undefined,
             message: undefined,
@@ -102,14 +85,10 @@ export default class LibrarianNotifications extends React.Component {
     };
 
     handleDelete = (notifications) => async () => {
-        // const eventState = await fetchDeleteNotification(notifications.timestamp);
-        const eventState = true;
-
-        const updated_notifications = this.state.notifications.filter(notification =>
-            notification.timestamp !== notifications.timestamp
-        );
+        const eventState = await fetchDeleteNotification(notifications.timestamp);
+        const announcements = await fetchNotification();
         this.setState({
-            notifications: updated_notifications,
+            notifications: announcements,
             snackOpen: true,
             openDelete: undefined,
             message: undefined,
@@ -143,9 +122,9 @@ export default class LibrarianNotifications extends React.Component {
     };
 
     async componentDidMount() {
-        const result = await fetchNotification();
+        const announcements = await fetchNotification();
         this.setState({
-            notifications: result.announcements
+            notifications: announcements
         });
     }
 
