@@ -26,6 +26,7 @@ const styles = theme => ({
         // fontSize: 20
     },
     title: {
+        marginLeft: 10,
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
@@ -152,7 +153,7 @@ class PrimarySearchAppBar extends React.Component {
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
-                            color="inherit"
+                                color="inherit"
                             component={Link} to={`/reader/${this.props.loginUser}`}
                         >
                             <Home />

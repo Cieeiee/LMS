@@ -69,12 +69,14 @@ export default class Librarian extends React.Component {
     })
   }
   handleDelete = (id, barcode) => async () => {
-    const eventState =  await fetchDeleteBook(id, barcode)
+    const eventState =  await fetchDeleteBook(id, barcode);
+    const book = await fetchBookHistory();
     this.setState({
       open: false,
       type: 0,
       snackOpen: true,
-      eventState
+      eventState,
+        book
     })
   }
   handleAddReader = info => async () => {
@@ -95,19 +97,27 @@ export default class Librarian extends React.Component {
   render() {
     return (
       <div style={{height: '100%'}}>
-        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} />
-        <div style={{height: '100%', display: 'flex'}}>
-          {Nav({ type: this.state.type, handleClick: this.handleClick })}
+        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} whichTab={this.state.type}/>
+        <div style={{height: '100%', width: '100%', display: 'flex'}}>
+          <div>
+            {Nav({ type: this.state.type, handleClick: this.handleClick })}
+          </div>
+          <div style={{
+            flexGrow: 1,
+          }}>
           {this.state.type === 0 && Books({ 
             list: this.state.list, 
             searchTerm: this.state.searchTerm, 
             handleDetail: this.handleDetail, 
             handleOpen: this.handleOpen 
           })}
-          {this.state.type === 1 && <Readers list={this.state.readers} handleAddReader={this.handleAddReader}/>}
+          {this.state.type === 1 && <Readers list={this.state.readers}
+                                             handleAddReader={this.handleAddReader}
+                                             searchTerm={this.state.searchTerm}/>}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
           {this.state.type === 3 && <LibrarianNotifications/>}
           {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
+          </div>
         </div>
         <Confirm
           libid={this.props.match.params.id}

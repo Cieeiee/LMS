@@ -3,7 +3,7 @@ import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import {green} from "@material-ui/core/colors";
-import {Assignment} from "@material-ui/icons";
+import {Assignment, NotificationsOutlined} from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import {fetchNotification, fetchAddNotification, fetchUpdateNotification, fetchDeleteNotification} from "../../../../mock";
 import Button from "@material-ui/core/Button/Button";
@@ -57,7 +57,7 @@ export default class LibrarianNotifications extends React.Component {
         }
 
         const eventState = await fetchAddNotification(this.state.message);
-        const announcements = await fetchNotification();
+        const announcements = await this.getNotification();
 
         this.setState({
             notifications: announcements,
@@ -74,7 +74,7 @@ export default class LibrarianNotifications extends React.Component {
             return;
         }
         const eventState = await fetchUpdateNotification(notifications.timestamp, this.state.message);
-        const announcements = await fetchNotification();
+        const announcements = await this.getNotification();
         this.setState({
             notifications: announcements,
             snackOpen: true,
@@ -86,7 +86,7 @@ export default class LibrarianNotifications extends React.Component {
 
     handleDelete = (notifications) => async () => {
         const eventState = await fetchDeleteNotification(notifications.timestamp);
-        const announcements = await fetchNotification();
+        const announcements = await this.getNotification();
         this.setState({
             notifications: announcements,
             snackOpen: true,
@@ -121,10 +121,29 @@ export default class LibrarianNotifications extends React.Component {
         this.setState({formError: undefined});
     };
 
+    changeFormat = (announcements) => {
+        let changedAnnouncements = [];
+        for (let i in announcements) {
+            const date = new Date(announcements[i].timestamp);
+            let _timestamp = {
+                timestamp: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+                message: announcements[i].message,
+            };
+            changedAnnouncements.push(_timestamp);
+        }
+        return changedAnnouncements;
+    };
+
+    getNotification = async () => {
+        let announcements = await fetchNotification();
+        let changed = this.changeFormat(announcements);
+        return changed;
+    };
+
     async componentDidMount() {
-        const announcements = await fetchNotification();
+        const changed = await this.getNotification();
         this.setState({
-            notifications: announcements
+            notifications: changed
         });
     }
 
@@ -141,11 +160,11 @@ export default class LibrarianNotifications extends React.Component {
             <div className="flex-col" style={{width: "100%"}}>
                 <Button
                     color="secondary"
-                    variant="outlined"
                     style={{
                         margin: "20px auto 20px auto"
                     }}
                     onClick={this.handleOpen("openAdd", true)}
+                    fullWidth
                 >
                     Add Notification
                 </Button>

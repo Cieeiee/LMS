@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import {  } from '@material-ui/icons'
+import '../../librarian.scss'
 
 const isSearched = searchTerm => item => 
   item.title.includes(searchTerm)
 
 const Books = props => {
   return(
-    props.list === null? null:
     <Table>
       <TableHead>
         <TableRow>
@@ -16,12 +17,12 @@ const Books = props => {
           <TableCell numeric>author</TableCell>
           <TableCell numeric>category</TableCell>
           <TableCell numeric>price</TableCell>
-          <TableCell numeric><Button variant='contained' color='primary' onClick={props.handleOpen(null, 'ADD BOOK')}>add</Button></TableCell>
+          <TableCell numeric><Button variant='outlined' color='secondary' onClick={props.handleOpen(null, 'ADD BOOK')}>add</Button></TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {props.list !== null && props.list.filter(isSearched(props.searchTerm)).map((item, index) => 
-          <TableRow key={index}>
+        {typeof(props.list.filter) !== "undefined" && props.list.filter(isSearched(props.searchTerm)).map((item, index) =>
+          <TableRow key={index} className="table-row">
             <TableCell>{index}</TableCell>
             <TableCell numeric>{item.isbn}</TableCell>
             <TableCell numeric>{item.title}</TableCell>

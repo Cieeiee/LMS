@@ -35,12 +35,13 @@ export default class Readers extends React.Component {
             <TableCell numeric>books borrowed</TableCell>
             <TableCell numeric>books reserved</TableCell>
             <TableCell numeric>deposit</TableCell>
-            <TableCell numeric><Button variant='contained' color='primary' onClick={this.handleOpen}>add</Button></TableCell>
+            <TableCell numeric><Button variant='outlined' color='secondary' onClick={this.handleOpen}>add</Button></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.list.map((item, index) => 
-            <TableRow key={index}>
+          {typeof(props.list.map) !== "undefined"
+            && props.list.filter(reader => reader.id.includes(props.searchTerm)).map((item, index) =>
+            <TableRow key={index} className="table-row">
               <TableCell>{item.id}</TableCell>
               <TableCell numeric>{item.name}</TableCell>
               <TableCell numeric>{item.booksBorrowed}</TableCell>

@@ -99,7 +99,7 @@ function BookClass(props) {
                     <Typography component="p" color="textSecondary">
                         introduction:
                     </Typography>
-                    <Typography component="p" style={{textIndent: '1em'}}>
+                    <Typography component="p" style={{textIndent: '2em'}}>
                         {props.book.introduction}
                     </Typography>
 

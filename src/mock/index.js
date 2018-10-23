@@ -1,6 +1,6 @@
 // import {serverAdmin, serverReader} from "./config";
 
-const baseUrl = 'http://192.168.1.170:8080'
+const baseUrl = 'http://192.168.1.200:8080';
 //
 export const fetchBookList = async () => {
   try {
@@ -158,16 +158,7 @@ export const fetchDeleteNotification = async (timestamp) => {
 
 export const fetchUpdateNotification = async (timestamp, message) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/updateAnnouncement`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                timestamp: timestamp,
-                message: message
-            })
-        });
+        const Response = await fetch(`${baseUrl}/librarian/updateAnnouncement?timestamp=${timestamp}&message=${message}`);
         const result = await Response.json();
         return result
     } catch {
