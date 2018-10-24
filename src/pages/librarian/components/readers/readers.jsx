@@ -13,7 +13,7 @@ import {
     Snackbar, withStyles, IconButton
 } from '@material-ui/core';
 import React from 'react';
-import {fetchDeleteReader, fetchReaderHistory} from '../../../../mock';
+import {fetchDeleteReader, fetchReaderHistory, fetchReaderList} from '../../../../mock';
 import Typography from "@material-ui/core/Typography/Typography";
 import blue from "@material-ui/core/es/colors/blue";
 import {blueGrey} from "@material-ui/core/colors";
@@ -89,17 +89,8 @@ export default class Readers extends React.Component {
         whoseDetails: id,
     })
   }
-  handleDeleteReader = id => async () => {
-    const eventStatus = await fetchDeleteReader(id);
-    this.setState({
-        open: false,
-        whoseDetails: undefined,
-        snackOpen: true,
-        eventStatus
-    })
-  };
 
-  render() {
+    render() {
     const props = this.props;
 
     return([
@@ -213,7 +204,10 @@ export default class Readers extends React.Component {
           </DialogContent>
             <DialogActions>
                 <Button onClick={this.handleClose}>cancel</Button>
-                <Button onClick={this.handleDeleteReader(this.state.whoseDetails)}>delete the reader</Button>
+                <Button onClick={() => {
+                    props.handleDeleteReader(this.state.whoseDetails)();
+                    this.setState({open: false});
+                }}>delete the reader</Button>
             </DialogActions>
       </Dialog>,
       <Dialog
@@ -245,7 +239,10 @@ export default class Readers extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button color='primary' onClick={this.handleclose1}>cancel</Button>
-          <Button color='primary' onClick={props.handleAddReader(this.state.newReader)}>OK</Button>
+          <Button color='primary' onClick={() => {
+              props.handleAddReader(this.state.newReader)()
+              this.setState({addOpen: false})
+          }}>OK</Button>
         </DialogActions>
       </Dialog>,
         <Dialog
@@ -277,16 +274,6 @@ export default class Readers extends React.Component {
                 }}>OK</Button>
             </DialogActions>
         </Dialog>,
-        <Snackbar
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-            }}
-            open={this.state.snackOpen}
-            autoHideDuration={1500}
-            onClose={this.handleSnackClose}
-            message={this.state.eventState? 'succeed': 'failed'}
-        />
     ])
   }
 }

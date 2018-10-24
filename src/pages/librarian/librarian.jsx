@@ -11,7 +11,7 @@ import {
     fetchAddBook,
     fetchBookHistory,
     fetchUpdateBook,
-    fetchNotification
+    fetchNotification, fetchDeleteReader
 } from './../../mock/index';
 import Footer from '../../mock/footer'
 import Books from './components/books/books.jsx';
@@ -115,6 +115,16 @@ export default class Librarian extends React.Component {
       readers
     })
   }
+    handleDeleteReader = id => async () => {
+        const eventStatus = await fetchDeleteReader(id);
+        const readers = await fetchReaderList()
+        this.setState({
+            snackOpen: true,
+            eventStatus,
+            readers
+        })
+    };
+
   async componentDidMount() {
     const list = await fetchBookList()
     const readers = await fetchReaderList()
@@ -141,6 +151,7 @@ export default class Librarian extends React.Component {
               list={this.state.readers}
               handleAddReader={this.handleAddReader}
               handleUpdateReader={this.handleUpdateReader}
+              handleDeleteReader={this.handleDeleteReader}
               searchTerm={this.state.searchTerm}
             />}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}

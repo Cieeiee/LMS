@@ -123,7 +123,7 @@ export const fetchUpdateReader = async info => {
 //
 export const fetchDeleteReader = async id => {
   try {
-      const Response = await fetch(`${baseUrl}/librarian/deleteReader?id=${id}`)
+      const Response = await fetch(`${baseUrl}/deleteReader?id=${id}`)
       const result = await Response.json()
       return result
   }
