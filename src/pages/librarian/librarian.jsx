@@ -1,8 +1,5 @@
 import { Snackbar } from '@material-ui/core';
 import React from 'react';
-<<<<<<< HEAD
-import { fetchBookList, fetchBorrow, fetchDetails, fetchAddReader, fetchReaderList, fetchDeleteBook, fetchAddBook, fetchBookHistory } from './../../mock/index';
-=======
 import { Link } from 'react-router-dom';
 import {
     fetchBookList,
@@ -15,7 +12,6 @@ import {
     fetchBookHistory,
     fetchNotification
 } from './../../mock/index';
->>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
 import BookHistory from './components/books/bookHistory.jsx'
@@ -81,12 +77,8 @@ export default class Librarian extends React.Component {
     })
   }
   handleDelete = (id, barcode) => async () => {
-<<<<<<< HEAD
-    const eventState = await fetchDeleteBook(id, barcode)
-=======
     const eventState =  await fetchDeleteBook(id, barcode);
     const book = await fetchBookHistory();
->>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
     this.setState({
       open: false,
       type: 0,

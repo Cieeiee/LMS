@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -74,18 +73,10 @@ function SearchAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-<<<<<<< HEAD
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Bibliosoft
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.search}>
-=======
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
                 Bibliosoft
             </Typography>
             { ( props.whichTab === 0 || props.whichTab === 1 ) && <div className={classes.search}>
->>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>

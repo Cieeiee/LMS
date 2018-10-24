@@ -21,13 +21,8 @@ const Books = props => {
         </TableRow>
       </TableHead>
       <TableBody>
-<<<<<<< HEAD
-        {props.list.filter(isSearched(props.searchTerm)).map((item, index) => 
-          <TableRow key={index}>
-=======
         {typeof(props.list.filter) !== "undefined" && props.list.filter(isSearched(props.searchTerm)).map((item, index) =>
           <TableRow key={index} className="table-row">
->>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
             <TableCell>{index}</TableCell>
             <TableCell numeric>{item.isbn}</TableCell>
             <TableCell numeric>{item.title}</TableCell>

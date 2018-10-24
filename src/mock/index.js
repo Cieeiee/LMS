@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 const baseUrl = 'http://120.78.240.24:7922'
-=======
-// import {serverAdmin, serverReader} from "./config";
-
-const baseUrl = 'http://192.168.1.200:8080';
->>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
 //
 export const fetchBookList = async () => {
   try {
