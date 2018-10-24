@@ -60,9 +60,9 @@ const styles = theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: 170,
+      width: 120,
       '&:focus': {
-        width: 250,
+        width: 200,
       },
     },
   },
@@ -83,7 +83,7 @@ function SearchAppBar(props) {
             </div>
             <InputBase
               onChange={handleSearch}
-              placeholder="Search Books…"
+              placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

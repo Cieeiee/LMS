@@ -22,6 +22,13 @@ import './librarian.scss';
 import TopBar from './components/nav/TopBar';
 import LibrarianNotifications from "./components/notifications/notifications";
 
+const reader = {
+  id: 18292027797,
+    name: "hzj",
+    booksBorrowed: 2,
+
+};
+
 export default class Librarian extends React.Component {
   constructor(props) {
     super(props)
