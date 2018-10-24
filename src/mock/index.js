@@ -105,6 +105,22 @@ export const fetchReaderHistory = async id => {
   }
 }
 //
+export const fetchUpdateReader = async info => {
+  try{
+      const Response = await fetch(`${baseUrl}/updateReader`, {
+          method: 'POST',
+          headers: {
+              'Content-type': 'application/json'
+          },
+          body: JSON.stringify(info)
+      })
+      const result = await Response.json()
+      return result
+  } catch {
+    return null
+  }
+}
+//
 export const fetchDeleteReader = async id => {
   try {
       const Response = await fetch(`${baseUrl}/librarian/deleteReader?id=${id}`)

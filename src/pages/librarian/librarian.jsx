@@ -23,6 +23,7 @@ import Readers from './components/readers/readers.jsx';
 import './librarian.scss';
 import TopBar from './components/nav/TopBar';
 import LibrarianNotifications from "./components/notifications/notifications";
+import {fetchUpdateReader} from "../../mock";
 
 export default class Librarian extends React.Component {
   constructor(props) {
@@ -96,6 +97,15 @@ export default class Librarian extends React.Component {
         book
     })
   }
+  handleUpdateReader = info => async () => {
+    const eventState = await fetchUpdateReader(info);
+    const readers = await fetchReaderList();
+    this.setState({
+        snackOpen: true,
+        eventState,
+        readers
+    })
+  };
   handleAddReader = info => async () => {
     const eventState =  await fetchAddReader(info)
     const readers = await fetchReaderList()
@@ -130,6 +140,7 @@ export default class Librarian extends React.Component {
             <Readers 
               list={this.state.readers}
               handleAddReader={this.handleAddReader}
+              handleUpdateReader={this.handleUpdateReader}
               searchTerm={this.state.searchTerm}
             />}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
