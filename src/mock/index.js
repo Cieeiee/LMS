@@ -107,7 +107,7 @@ export const fetchReaderHistory = async id => {
 //
 export const fetchDeleteReader = async id => {
   try {
-      const Response = await fetch(`${baseUrl}/librarian/deleteReader?id=${id}`)
+      const Response = await fetch(`${baseUrl}/deleteReader?id=${id}`)
       const result = await Response.json()
       return result
   }
@@ -171,3 +171,17 @@ export const fetchUpdateNotification = async (timestamp, message) => {
         return null
     }
 };
+
+export const fetchDownload = url => {
+  fetch(url)
+  .then(res => res.blob()
+  .then(blob => {
+    let a = document.createElement('a');
+    let url = window.URL.createObjectURL(blob);
+    let filename = 'barcode.png';
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }))
+}

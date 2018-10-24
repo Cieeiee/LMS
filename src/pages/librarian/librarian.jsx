@@ -43,6 +43,10 @@ export default class Librarian extends React.Component {
       searchTerm: ''
     }
   }
+  handleReloadReader = async () => {
+    const readers = await fetchReaderList()
+    this.setState({readers})
+  }
   handleOpen = (barcode, title) => () => this.setState({open: true, barcode, title})
   handleClose = () => this.setState({open: false})
   handleSnackClose = () => this.setState({snackOpen: false})
@@ -100,6 +104,7 @@ export default class Librarian extends React.Component {
     const eventState =  await fetchAddReader(info)
     const readers = await fetchReaderList()
     this.setState({
+      open: false,
       snackOpen: true,
       eventState,
       readers
@@ -130,6 +135,7 @@ export default class Librarian extends React.Component {
             <Readers 
               list={this.state.readers}
               handleAddReader={this.handleAddReader}
+              handleReloadReader={this.handleReloadReader}
               searchTerm={this.state.searchTerm}
             />}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}

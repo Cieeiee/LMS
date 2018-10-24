@@ -1,4 +1,6 @@
 import React from 'react'
+import { fetchDownload } from '../../../../mock/index'
+
 
 const img0 = require('../../../../barcode/barcode0.png')
 const img1 = require('../../../../barcode/barcode1.png')
@@ -26,19 +28,7 @@ export default class Barcode extends React.Component {
   }
   handleImg = e => this.setState({imgg: e.target.files[0]})
   handleClick = () => {
-    let Data = new FormData()
-    Data.append('file', this.state.imgg)
-    Data.append('json', JSON.stringify({
-      a: 1,
-      b: 2,
-      c: 3
-    }))
-    console.log(Data)
-    fetch('http://192.168.1.122:7911/putPicture', {
-      method: 'POST',
-      body: Data
-    }).then(res => console.log(res))
-    .catch(e => console.log(e))
+    fetchDownload('http://120.78.240.24:8080/book_picture?imgName=%E7%BA%A2%E4%B8%8E%E9%BB%91.jpg')
   }
   render() {
     return(

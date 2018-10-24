@@ -13,7 +13,7 @@ import {
     Snackbar, withStyles
 } from '@material-ui/core';
 import React from 'react';
-import {fetchDeleteReader, fetchReaderHistory} from '../../../../mock';
+import {fetchDeleteReader, fetchReaderHistory, fetchReaderList} from '../../../../mock';
 import Typography from "@material-ui/core/Typography/Typography";
 import blue from "@material-ui/core/es/colors/blue";
 import {blueGrey} from "@material-ui/core/colors";
@@ -86,7 +86,8 @@ export default class Readers extends React.Component {
     })
   }
   handleDeleteReader = id => async () => {
-    const eventStatus = await fetchDeleteReader(id);
+    const eventStatus = await fetchDeleteReader(id)
+    this.props.handleReloadReader()
     this.setState({
         open: false,
         whoseDetails: undefined,
