@@ -11,7 +11,7 @@ import {
     fetchAddBook,
     fetchBookHistory,
     fetchUpdateBook,
-    fetchNotification
+    fetchNotification, fetchDeleteReader
 } from './../../mock/index';
 import Footer from '../../mock/footer'
 import Books from './components/books/books.jsx';
@@ -23,6 +23,7 @@ import Readers from './components/readers/readers.jsx';
 import './librarian.scss';
 import TopBar from './components/nav/TopBar';
 import LibrarianNotifications from "./components/notifications/notifications";
+import {fetchUpdateReader} from "../../mock";
 
 export default class Librarian extends React.Component {
   constructor(props) {
@@ -100,6 +101,15 @@ export default class Librarian extends React.Component {
         book
     })
   }
+  handleUpdateReader = info => async () => {
+    const eventState = await fetchUpdateReader(info);
+    const readers = await fetchReaderList();
+    this.setState({
+        snackOpen: true,
+        eventState,
+        readers
+    })
+  };
   handleAddReader = info => async () => {
     const eventState =  await fetchAddReader(info)
     const readers = await fetchReaderList()
@@ -110,6 +120,16 @@ export default class Librarian extends React.Component {
       readers
     })
   }
+    handleDeleteReader = id => async () => {
+        const eventStatus = await fetchDeleteReader(id);
+        const readers = await fetchReaderList()
+        this.setState({
+            snackOpen: true,
+            eventStatus,
+            readers
+        })
+    };
+
   async componentDidMount() {
     const list = await fetchBookList()
     const readers = await fetchReaderList()
@@ -136,6 +156,8 @@ export default class Librarian extends React.Component {
               list={this.state.readers}
               handleAddReader={this.handleAddReader}
               handleReloadReader={this.handleReloadReader}
+              handleUpdateReader={this.handleUpdateReader}
+              handleDeleteReader={this.handleDeleteReader}
               searchTerm={this.state.searchTerm}
             />}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}

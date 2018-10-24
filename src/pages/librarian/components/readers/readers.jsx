@@ -10,13 +10,14 @@ import {
     TableRow,
     TextField,
     DialogActions,
-    Snackbar, withStyles
+    Snackbar, withStyles, IconButton
 } from '@material-ui/core';
 import React from 'react';
 import {fetchDeleteReader, fetchReaderHistory, fetchReaderList} from '../../../../mock';
 import Typography from "@material-ui/core/Typography/Typography";
 import blue from "@material-ui/core/es/colors/blue";
 import {blueGrey} from "@material-ui/core/colors";
+import {BuildOutlined} from "@material-ui/icons";
 
 export default class Readers extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class Readers extends React.Component {
         whoseDetails: undefined,
         snackOpen: false,
         eventStatus: 0,
+        updateOpen: false,
     }
   }
   handleClose = () => this.setState({
@@ -43,6 +45,8 @@ export default class Readers extends React.Component {
   handleChange = name => e => this.setState({newReader: {...this.state.newReader, [name]: e.target.value}})
     handleSnackClose = () => this.setState({snackOpen: false})
   handleOpen = () => this.setState({addOpen: true})
+    handleOpenUpdate = id => () => this.setState({updateOpen: true, newReader: {...this.state.newReader, id:id}})
+    handleCloseUpdate = () => this.setState({updateOpen: false})
   changeDateFormat = (d) => {
     let date = new Date(d);
     let changed = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -85,18 +89,8 @@ export default class Readers extends React.Component {
         whoseDetails: id,
     })
   }
-  handleDeleteReader = id => async () => {
-    const eventStatus = await fetchDeleteReader(id)
-    this.props.handleReloadReader()
-    this.setState({
-        open: false,
-        whoseDetails: undefined,
-        snackOpen: true,
-        eventStatus
-    })
-  };
 
-  render() {
+    render() {
     const props = this.props;
 
     return([
@@ -121,6 +115,9 @@ export default class Readers extends React.Component {
               <TableCell numeric>{item.booksReserved}</TableCell>
               <TableCell numeric>{item.deposit}</TableCell>
               <TableCell numeric>
+                  <IconButton onClick={this.handleOpenUpdate(item.id)}>
+                      <BuildOutlined/>
+                  </IconButton>
                 <Button variant='outlined' onClick={this.handleDetails(item.id)}>detail</Button>
               </TableCell>
             </TableRow>
@@ -207,7 +204,10 @@ export default class Readers extends React.Component {
           </DialogContent>
             <DialogActions>
                 <Button onClick={this.handleClose}>cancel</Button>
-                <Button onClick={this.handleDeleteReader(this.state.whoseDetails)}>delete the reader</Button>
+                <Button onClick={() => {
+                    props.handleDeleteReader(this.state.whoseDetails)();
+                    this.setState({open: false});
+                }}>delete the reader</Button>
             </DialogActions>
       </Dialog>,
       <Dialog
@@ -239,19 +239,41 @@ export default class Readers extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button color='primary' onClick={this.handleclose1}>cancel</Button>
-          <Button color='primary' onClick={props.handleAddReader(this.state.newReader)}>OK</Button>
+          <Button color='primary' onClick={() => {
+              props.handleAddReader(this.state.newReader)()
+              this.setState({addOpen: false})
+          }}>OK</Button>
         </DialogActions>
       </Dialog>,
-        <Snackbar
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-            }}
-            open={this.state.snackOpen}
-            autoHideDuration={1500}
-            onClose={this.handleSnackClose}
-            message={this.state.eventState? 'succeed': 'failed'}
-        />
+        <Dialog
+            open={this.state.updateOpen}
+            onClose={this.handleCloseUpdate}
+        >
+            <DialogTitle>Update Reader</DialogTitle>
+            <DialogContent>
+                <TextField
+                    margin='dense'
+                    label='email'
+                    type='email'
+                    fullWidth
+                    onChange={this.handleChange('email')}
+                />
+                <TextField
+                    margin='dense'
+                    label='password'
+                    type='password'
+                    fullWidth
+                    onChange={this.handleChange('password')}
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button color='primary' onClick={this.handleCloseUpdate}>cancel</Button>
+                <Button color='primary' onClick={() => {
+                    props.handleUpdateReader(this.state.newReader)()
+                    this.setState({updateOpen: false})
+                }}>OK</Button>
+            </DialogActions>
+        </Dialog>,
     ])
   }
 }
