@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3612d19a-a6ef-481f-9819-dd6bc31f6df8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/reader/history/components/NoContent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/barcode/barcode5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/barcode.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/bookHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/bookHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/details.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/confirm/confirm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/confirm/confirm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/components/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/components/TopBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/History.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/History.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/reader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/reader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/components/bookList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/components/bookList.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +85,7 @@
           <entry key="CSS" value="428" />
           <entry key="HTML" value="11" />
           <entry key="JSON" value="61" />
-          <entry key="JSX Harmony" value="42797" />
+          <entry key="JSX Harmony" value="42801" />
           <entry key="JavaScript" value="25887" />
           <entry key="PLAIN_TEXT" value="41" />
           <entry key="SCSS" value="877" />
@@ -102,7 +97,7 @@
           <entry key="html" value="11" />
           <entry key="js" value="25887" />
           <entry key="json" value="61" />
-          <entry key="jsx" value="42838" />
+          <entry key="jsx" value="42842" />
           <entry key="scss" value="877" />
         </counts>
       </usages-collector>
@@ -115,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/details.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="20" column="74" lean-forward="true" selection-start-line="20" selection-start-column="74" selection-end-line="20" selection-end-column="74" />
+            <state relative-caret-position="458">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -149,7 +144,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="648">
-              <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -161,7 +156,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="568">
-              <caret line="145" column="29" lean-forward="true" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
+              <caret line="145" column="29" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
               <folding>
                 <element signature="e#0#225#0" expanded="true" />
               </folding>
@@ -173,7 +168,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="41" column="53" lean-forward="true" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="53" />
+              <caret line="41" column="53" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="53" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -197,7 +192,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/NoContent.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -209,7 +204,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="112">
-              <caret line="44" column="30" lean-forward="true" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+              <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -646,12 +641,12 @@
       <workItem from="1540275019202" duration="10816000" />
       <workItem from="1540287884656" duration="4020000" />
       <workItem from="1540363543164" duration="1843000" />
-      <workItem from="1540366716456" duration="16038000" />
+      <workItem from="1540366716456" duration="16446000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="348227000" />
+    <option name="totallyTimeSpent" value="348635000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -981,7 +976,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
-          <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
@@ -991,7 +986,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="568">
-          <caret line="145" column="29" lean-forward="true" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
+          <caret line="145" column="29" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
           <folding>
             <element signature="e#0#225#0" expanded="true" />
           </folding>
@@ -1008,7 +1003,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/NoContent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
@@ -1028,7 +1023,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="41" column="53" lean-forward="true" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="53" />
+          <caret line="41" column="53" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="53" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
@@ -1038,14 +1033,14 @@
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
-          <caret line="44" column="30" lean-forward="true" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/details.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="20" column="74" lean-forward="true" selection-start-line="20" selection-start-column="74" selection-end-line="20" selection-end-column="74" />
+        <state relative-caret-position="458">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

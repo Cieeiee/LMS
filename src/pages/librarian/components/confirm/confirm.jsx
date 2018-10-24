@@ -51,6 +51,13 @@ export default class Confirm extends React.Component {
                 margin='dense'
                 label='ISBN'
                 fullWidth
+                type='file'
+                accept="image/*"
+              />
+              <TextField
+                margin='dense'
+                label='ISBN'
+                fullWidth
                 onChange={this.handleChange('isbn')}
               />
               <TextField
@@ -86,12 +93,14 @@ export default class Confirm extends React.Component {
               <TextField
                 margin='dense'
                 label='price'
+                type='number'
                 fullWidth
                 onChange={this.handleChange('price')}
               />
               <TextField
                 margin='dense'
                 label='number'
+                type='number'
                 fullWidth
                 onChange={this.handleChange('number')}
               />

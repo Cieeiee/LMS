@@ -1,4 +1,4 @@
-import { AppBar, Button, Toolbar, Snackbar } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -52,6 +52,7 @@ export default class Librarian extends React.Component {
   }
   handleAddBook = newBook => async () => {
     const eventState = await fetchAddBook(newBook)
+    window.open('/showBarcode')
     this.setState({
       open: false,
       type: 0,
@@ -92,7 +93,7 @@ export default class Librarian extends React.Component {
     const list = await fetchBookList()
     const readers = await fetchReaderList()
     const bookHistory = await fetchBookHistory()
-      this.setState({list, readers, bookHistory})
+    this.setState({list, readers, bookHistory})
   }
   render() {
     return (

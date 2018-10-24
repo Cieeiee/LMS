@@ -1,6 +1,5 @@
-// import {serverAdmin, serverReader} from "./config";
+const baseUrl = 'http://120.78.240.24:7922'
 
-const baseUrl = 'http://120.78.240.24:7922';
 //
 export const fetchBookList = async () => {
   try {
@@ -8,7 +7,7 @@ export const fetchBookList = async () => {
     const result = await Response.json()
     return result
   } catch {
-    return null
+    return []
   }
 }
 //
@@ -18,7 +17,7 @@ export const fetchReaderList = async () => {
     const result = await Response.json()
     return result
   } catch {
-    return null
+    return []
   }
 }
 //
@@ -80,7 +79,7 @@ export const fetchBookHistory = async () => {
     const result = await Response.json()
     return result
   } catch {
-    return null
+    return []
   }
 }
 //
