@@ -1,6 +1,7 @@
+import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { BuildOutlined } from '@material-ui/icons';
 import React from 'react';
-import {Button, Table, TableBody, TableCell, TableHead, TableRow, withStyles} from '@material-ui/core';
-import {  } from '@material-ui/icons'
+import {withStyles} from '@material-ui/core';
 import '../../librarian.scss'
 import blue from "@material-ui/core/es/colors/blue";
 
@@ -30,7 +31,12 @@ const Books = props => {
             <TableCell numeric>{item.author}</TableCell>
             <TableCell numeric>{item.category}</TableCell>
             <TableCell numeric>{item.price}</TableCell>
-            <TableCell numeric><Button variant='outlined' onClick={props.handleDetail(item.isbn)}>detail</Button></TableCell>
+            <TableCell numeric>
+              <IconButton onClick={props.handleOpen(item.isbn, 'UPDATE BOOK')}>
+                <BuildOutlined/>
+              </IconButton>
+              <Button variant='outlined' onClick={props.handleDetail(item.isbn)}>detail</Button>
+            </TableCell>
           </TableRow>
         )}
       </TableBody>

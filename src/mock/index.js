@@ -1,5 +1,4 @@
 const baseUrl = 'http://120.78.240.24:7922'
-
 //
 export const fetchBookList = async () => {
   try {
@@ -33,12 +32,9 @@ export const fetchDetails = async isbn => {
 //
 export const fetchAddBook = async newBook => {
   try {
-    const Response = await fetch(`${baseUrl}/addBook`, {
+    const Response = await fetch(`${baseUrl}/librarian/addBook`, {
       method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(newBook)
+      body: newBook
     })
     const result = await Response.json()
     return result
@@ -46,7 +42,7 @@ export const fetchAddBook = async newBook => {
     return null
   }
 }
-/////////////////////////////////////////////////////////
+//
 export const fetchUpdateBook = async newBook => {
   try {
     const Response = await fetch(`${baseUrl}/updateBook`, {
