@@ -10,8 +10,10 @@ import {
     fetchDeleteBook,
     fetchAddBook,
     fetchBookHistory,
+    fetchUpdateBook,
     fetchNotification
 } from './../../mock/index';
+import Footer from '../../mock/footer'
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
 import BookHistory from './components/books/bookHistory.jsx'
@@ -36,7 +38,8 @@ export default class Librarian extends React.Component {
       list: [], // all books
       readers: [], // all readers
       bookHistory: [], // ..
-        notifications: [],
+      notifications: [],
+      barcodeList: [],
       type: 0, // 条件渲染
       open: false, // confirm dialog
       book: {}, // book details
@@ -53,18 +56,31 @@ export default class Librarian extends React.Component {
   handleClick = index => this.setState({type: index})
   handleSearch = e => this.setState({searchTerm: e.target.value})
   
+  handleUpdateBook = newBook => async () => {
+    const eventState = await fetchUpdateBook(newBook)
+    const book = await fetchBookList()
+    this.setState({
+      book,
+      snackOpen: true,
+      eventState
+    })
+  }
   handleDetail = isbn => async () => {
     const book = await fetchDetails(isbn)
     this.setState({type: 4, book})
   }
-  handleAddBook = newBook => async () => {
-    const eventState = await fetchAddBook(newBook)
+  handleAddBook = (img, newBook) => async () => {
+    let data = new FormData()
+    data.append('file', img)
+    data.append('data', JSON.stringify(newBook))
+    const res = await fetchAddBook(data)
     window.open('/showBarcode')
     this.setState({
       open: false,
       type: 0,
       snackOpen: true,
-      eventState
+      eventState: res.state,
+      barcodeList: res.barcode
     })
   }
   handleBorrow = info => async () => {
@@ -119,14 +135,18 @@ export default class Librarian extends React.Component {
             handleDetail: this.handleDetail, 
             handleOpen: this.handleOpen 
           })}
-          {this.state.type === 1 && <Readers list={this.state.readers}
-                                             handleAddReader={this.handleAddReader}
-                                             searchTerm={this.state.searchTerm}/>}
+          {this.state.type === 1 && 
+            <Readers 
+              list={this.state.readers}
+              handleAddReader={this.handleAddReader}
+              searchTerm={this.state.searchTerm}
+            />}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
           {this.state.type === 3 && <LibrarianNotifications/>}
           {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
           </div>
         </div>
+        <Footer />
         <Confirm
           libid={this.props.match.params.id}
           barcode={this.state.barcode}
@@ -136,6 +156,7 @@ export default class Librarian extends React.Component {
           handleDelete={this.handleDelete}
           handleBorrow={this.handleBorrow}
           handleAddBook={this.handleAddBook}
+          handleUpdate={this.handleUpdateBook}
         />
         <Snackbar
           anchorOrigin={{
