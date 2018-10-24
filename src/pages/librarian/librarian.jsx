@@ -1,6 +1,5 @@
-import { AppBar, Button, Toolbar, Snackbar } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { fetchBookList, fetchBorrow, fetchDetails, fetchAddReader, fetchReaderList, fetchDeleteBook, fetchAddBook, fetchBookHistory } from './../../mock/index';
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
@@ -40,6 +39,7 @@ export default class Librarian extends React.Component {
   }
   handleAddBook = newBook => async () => {
     const eventState = await fetchAddBook(newBook)
+    window.open('/showBarcode')
     this.setState({
       open: false,
       type: 0,
@@ -57,7 +57,7 @@ export default class Librarian extends React.Component {
     })
   }
   handleDelete = (id, barcode) => async () => {
-    const eventState =  await fetchDeleteBook(id, barcode)
+    const eventState = await fetchDeleteBook(id, barcode)
     this.setState({
       open: false,
       type: 0,
@@ -78,7 +78,7 @@ export default class Librarian extends React.Component {
     const list = await fetchBookList()
     const readers = await fetchReaderList()
     const bookHistory = await fetchBookHistory()
-      this.setState({list, readers, bookHistory})
+    this.setState({list, readers, bookHistory})
   }
   render() {
     return (

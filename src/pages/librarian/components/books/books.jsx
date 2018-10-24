@@ -20,7 +20,7 @@ const Books = props => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {props.list !== null && props.list.filter(isSearched(props.searchTerm)).map((item, index) => 
+        {props.list.filter(isSearched(props.searchTerm)).map((item, index) => 
           <TableRow key={index}>
             <TableCell>{index}</TableCell>
             <TableCell numeric>{item.isbn}</TableCell>
