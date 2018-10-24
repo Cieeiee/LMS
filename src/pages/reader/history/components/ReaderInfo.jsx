@@ -1,4 +1,4 @@
-import Card from "@material-ui/core/Card/Card";
+    import Card from "@material-ui/core/Card/Card";
 import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import CardContent from "@material-ui/core/CardContent/CardContent";
@@ -31,7 +31,7 @@ export default function ReaderInfo(props) {
                             variant="h5" color="textPrimary"
                             style={{marginTop: 'auto', marginBottom: 'auto'}}
                         >
-                            {props.info.name}
+                            {props.info !== undefined && props.info.name}
                         </Typography>
                     </div>
 
@@ -41,7 +41,7 @@ export default function ReaderInfo(props) {
                             variant="h5" color="textPrimary"
                             style={{marginTop: 'auto', marginBottom: 'auto'}}
                         >
-                            {props.info.email}
+                            {props.info !== undefined && props.info.email}
                         </Typography>
                     </div>
 
@@ -51,7 +51,7 @@ export default function ReaderInfo(props) {
                             variant="h5" color="textPrimary"
                             style={{marginTop: 'auto', marginBottom: 'auto'}}
                         >
-                            {props.info.id}
+                            {props.info !== undefined && props.info.id}
                         </Typography>
                     </div>
 
@@ -61,7 +61,7 @@ export default function ReaderInfo(props) {
                             variant="h5" color="textPrimary"
                             style={{marginTop: 'auto', marginBottom: 'auto'}}
                         >
-                            {props.info.deposit}
+                            {props.info !== undefined && props.info.deposit}
                         </Typography>
                     </div>
                 </CardContent>

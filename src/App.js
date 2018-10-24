@@ -6,7 +6,10 @@ import NotFound from './pages/notFound/index'
 import Admin from './pages/admin/index'
 import Reader from './pages/reader/index'
 import Librarian from './pages/librarian/index'
+<<<<<<< HEAD
 import Barcode from './pages/librarian/components/books/barcode'
+=======
+>>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
 
 class App extends Component {
     render() {

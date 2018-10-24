@@ -16,7 +16,7 @@ const BookHistory = props => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {props.list.map((item, index) => 
+        {typeof(props.list.map) !== "undefined" && props.list.map((item, index) =>
           <TableRow key={index}>
             <TableCell>{item.num}</TableCell>
             <TableCell numeric>{item.id}</TableCell>

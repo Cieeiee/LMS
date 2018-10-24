@@ -1,6 +1,21 @@
 import { Snackbar } from '@material-ui/core';
 import React from 'react';
+<<<<<<< HEAD
 import { fetchBookList, fetchBorrow, fetchDetails, fetchAddReader, fetchReaderList, fetchDeleteBook, fetchAddBook, fetchBookHistory } from './../../mock/index';
+=======
+import { Link } from 'react-router-dom';
+import {
+    fetchBookList,
+    fetchBorrow,
+    fetchDetails,
+    fetchAddReader,
+    fetchReaderList,
+    fetchDeleteBook,
+    fetchAddBook,
+    fetchBookHistory,
+    fetchNotification
+} from './../../mock/index';
+>>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
 import Books from './components/books/books.jsx';
 import Details from './components/books/details.jsx';
 import BookHistory from './components/books/bookHistory.jsx'
@@ -9,6 +24,14 @@ import Nav from './components/nav/nav.jsx';
 import Readers from './components/readers/readers.jsx';
 import './librarian.scss';
 import TopBar from './components/nav/TopBar';
+import LibrarianNotifications from "./components/notifications/notifications";
+
+const reader = {
+  id: 18292027797,
+    name: "hzj",
+    booksBorrowed: 2,
+
+};
 
 export default class Librarian extends React.Component {
   constructor(props) {
@@ -17,6 +40,7 @@ export default class Librarian extends React.Component {
       list: [], // all books
       readers: [], // all readers
       bookHistory: [], // ..
+        notifications: [],
       type: 0, // 条件渲染
       open: false, // confirm dialog
       book: {}, // book details
@@ -57,12 +81,18 @@ export default class Librarian extends React.Component {
     })
   }
   handleDelete = (id, barcode) => async () => {
+<<<<<<< HEAD
     const eventState = await fetchDeleteBook(id, barcode)
+=======
+    const eventState =  await fetchDeleteBook(id, barcode);
+    const book = await fetchBookHistory();
+>>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
     this.setState({
       open: false,
       type: 0,
       snackOpen: true,
-      eventState
+      eventState,
+        book
     })
   }
   handleAddReader = info => async () => {
@@ -83,19 +113,27 @@ export default class Librarian extends React.Component {
   render() {
     return (
       <div style={{height: '100%'}}>
-        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} />
-        <div style={{height: '100%', display: 'flex'}}>
-          {Nav({ type: this.state.type, handleClick: this.handleClick })}
+        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} whichTab={this.state.type}/>
+        <div style={{height: '100%', width: '100%', display: 'flex'}}>
+          <div>
+            {Nav({ type: this.state.type, handleClick: this.handleClick })}
+          </div>
+          <div style={{
+            flexGrow: 1,
+          }}>
           {this.state.type === 0 && Books({ 
             list: this.state.list, 
             searchTerm: this.state.searchTerm, 
             handleDetail: this.handleDetail, 
             handleOpen: this.handleOpen 
           })}
-          {this.state.type === 1 && <Readers list={this.state.readers} handleAddReader={this.handleAddReader}/>}
+          {this.state.type === 1 && <Readers list={this.state.readers}
+                                             handleAddReader={this.handleAddReader}
+                                             searchTerm={this.state.searchTerm}/>}
           {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
-          {this.state.type === 3 && <p>Bo</p>}
+          {this.state.type === 3 && <LibrarianNotifications/>}
           {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
+          </div>
         </div>
         <Confirm
           libid={this.props.match.params.id}

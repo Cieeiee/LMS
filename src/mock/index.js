@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 const baseUrl = 'http://120.78.240.24:7922'
+=======
+// import {serverAdmin, serverReader} from "./config";
+
+const baseUrl = 'http://192.168.1.200:8080';
+>>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
 //
 export const fetchBookList = async () => {
   try {
@@ -123,3 +129,43 @@ export const fetchAddReader = async info => {
     return null
   }
 }
+
+export const fetchNotification = async () => {
+  try {
+    const Response = await fetch(`${baseUrl}/showAnnouncement`);
+    const result = await Response.json();
+    return result
+  } catch {
+    return []
+  }
+};
+
+export const fetchAddNotification = async (message) => {
+    try {
+        const Response = await fetch(`${baseUrl}/librarian/addAnnouncement?message=${message}`);
+        const result = await Response.json();
+        return result
+    } catch {
+        return null
+    }
+};
+
+export const fetchDeleteNotification = async (timestamp) => {
+    try {
+        const Response = await fetch(`${baseUrl}/librarian/deleteAnnouncement?timestamp=${timestamp}`);
+        const result = await Response.json();
+        return result
+    } catch {
+        return null
+    }
+};
+
+export const fetchUpdateNotification = async (timestamp, message) => {
+    try {
+        const Response = await fetch(`${baseUrl}/librarian/updateAnnouncement?timestamp=${timestamp}&message=${message}`);
+        const result = await Response.json();
+        return result
+    } catch {
+        return null
+    }
+};

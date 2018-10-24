@@ -7,8 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import { ExitToAppOutlined } from '@material-ui/icons'
 import SearchIcon from '@material-ui/icons/Search';
+import Button from "@material-ui/core/Button/Button";
+import {Link} from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -17,12 +19,9 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   title: {
     display: 'none',
+      marginRight: 40,
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -34,7 +33,6 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit,
@@ -58,7 +56,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing.unit * 8,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -76,11 +74,18 @@ function SearchAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+<<<<<<< HEAD
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             Bibliosoft
           </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>
+=======
+            <Typography className={classes.title} variant="title" color="inherit" noWrap>
+                Bibliosoft
+            </Typography>
+            { ( props.whichTab === 0 || props.whichTab === 1 ) && <div className={classes.search}>
+>>>>>>> d9f0eadb5cedf78dfff8d78aed4e3cb351c08dd7
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -92,8 +97,18 @@ function SearchAppBar(props) {
                 input: classes.inputInput,
               }}
             />
+          </div>}
+            <div className={classes.grow} />
+          <div style={{marginRight: 20}}>
+            {id}
           </div>
-          {id}
+            <Button
+                color="inherit" variant="outlined"
+                component={Link} to="/"
+            >
+                logout
+                <ExitToAppOutlined style={{marginLeft: 10}}/>
+            </Button>
         </Toolbar>
       </AppBar>
     </div>

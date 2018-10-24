@@ -20,10 +20,10 @@ export default class Confirm extends React.Component {
         </DialogTitle>
         <DialogContent>
           {props.title === 'DELETE' && 
-            <DialogContentText>确实要删？</DialogContentText>}
+            <DialogContentText>Confirm to delete the book?</DialogContentText>}
           {props.title === 'BORROW' && 
             <div>
-              <DialogContentText>谁借？</DialogContentText>
+              <DialogContentText>Borrowed by who?</DialogContentText>
               <TextField
                 autoFocus
                 margin='dense'
@@ -33,10 +33,10 @@ export default class Confirm extends React.Component {
               />
             </div>}
           {props.title === 'RETURN' &&
-            <DialogContentText>确实要还？</DialogContentText>}
+            <DialogContentText>Confirm to return?</DialogContentText>}
           {props.title === 'LOST' &&
             <div>
-              <DialogContentText>哪位小可爱把书丢了？</DialogContentText>
+              <DialogContentText>Which reader lost the book?</DialogContentText>
               <TextField
                 autoFocus
                 margin='dense'
