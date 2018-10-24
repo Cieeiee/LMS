@@ -159,7 +159,7 @@ export default class LibrarianNotifications extends React.Component {
         return (
             <div className="flex-col" style={{width: "100%"}}>
                 <Button
-                    color="secondary"
+                    color="primary"
                     style={{
                         margin: "20px auto 20px auto"
                     }}

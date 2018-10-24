@@ -22,13 +22,6 @@ import './librarian.scss';
 import TopBar from './components/nav/TopBar';
 import LibrarianNotifications from "./components/notifications/notifications";
 
-const reader = {
-  id: 18292027797,
-    name: "hzj",
-    booksBorrowed: 2,
-
-};
-
 export default class Librarian extends React.Component {
   constructor(props) {
     super(props)
@@ -109,9 +102,7 @@ export default class Librarian extends React.Component {
           <div>
             {Nav({ type: this.state.type, handleClick: this.handleClick })}
           </div>
-          <div style={{
-            flexGrow: 1,
-          }}>
+          <div style={{flexGrow: 1}}>
           {this.state.type === 0 && Books({ 
             list: this.state.list, 
             searchTerm: this.state.searchTerm, 
@@ -121,7 +112,7 @@ export default class Librarian extends React.Component {
           {this.state.type === 1 && <Readers list={this.state.readers}
                                              handleAddReader={this.handleAddReader}
                                              searchTerm={this.state.searchTerm}/>}
-          {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
+          {this.state.type === 2 && BookHistory({list: this.state.bookHistory})}
           {this.state.type === 3 && <LibrarianNotifications/>}
           {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
           </div>

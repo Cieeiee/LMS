@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import React from "react";
+import NoContent from "./NoContent";
 
 const styles = theme => ({
     row: {
@@ -39,46 +40,45 @@ function BorrowedTable(props) {
 
     return (
         <Grid item xs={12}>
-            <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <CustomTableCell>Title</CustomTableCell>
-                            <CustomTableCell numeric>Author</CustomTableCell>
-                            <CustomTableCell numeric>Barcode</CustomTableCell>
-                            <CustomTableCell numeric>Borrow Time</CustomTableCell>
-                            <CustomTableCell numeric>Return Time</CustomTableCell>
-                            <CustomTableCell numeric>Fine ($)</CustomTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {props.records.map(book => {
-                            return (
-                                <TableRow className={classes.row}>
-                                    <CustomTableCell component="th" scope="row">
-                                        {book.title}
-                                    </CustomTableCell>
-                                    <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.fine}</CustomTableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                    { props.total !== undefined && <TableFooter>
-                        <TableRow>
-                            <CustomTableCell>Total fine ($)</CustomTableCell>
-                            <CustomTableCell numeric/>
-                            <CustomTableCell numeric/>
-                            <CustomTableCell numeric/>
-                            <CustomTableCell numeric/>
-                            <CustomTableCell numeric>{props.total}</CustomTableCell>
-                        </TableRow>
-                    </TableFooter>}
-                </Table>
-            </Paper>
+            { props.records == false ? <NoContent/> :
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <CustomTableCell>Title</CustomTableCell>
+                        <CustomTableCell numeric>Author</CustomTableCell>
+                        <CustomTableCell numeric>Barcode</CustomTableCell>
+                        <CustomTableCell numeric>Borrow Time</CustomTableCell>
+                        <CustomTableCell numeric>Return Time</CustomTableCell>
+                        <CustomTableCell numeric>Fine ($)</CustomTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {props.records.map(book => {
+                        return (
+                            <TableRow className={classes.row}>
+                                <CustomTableCell component="th" scope="row">
+                                    {book.title}
+                                </CustomTableCell>
+                                <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
+                                <CustomTableCell numeric>{book.fine}</CustomTableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+                {props.total !== undefined && <TableFooter>
+                    <TableRow>
+                        <CustomTableCell>Total fine ($)</CustomTableCell>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric>{props.total}</CustomTableCell>
+                    </TableRow>
+                </TableFooter>}
+            </Table>}
         </Grid>
     );
 };

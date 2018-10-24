@@ -1,6 +1,6 @@
 // import {serverAdmin, serverReader} from "./config";
 
-const baseUrl = 'http://192.168.1.200:8080';
+const baseUrl = 'http://120.78.240.24:7922';
 //
 export const fetchBookList = async () => {
   try {
@@ -106,7 +106,18 @@ export const fetchReaderHistory = async id => {
     const result = await Response.json()
     return result
   } catch {
-    return null
+    return []
+  }
+}
+//
+export const fetchDeleteReader = async id => {
+  try {
+      const Response = await fetch(`${baseUrl}/librarian/deleteReader?id=${id}`)
+      const result = await Response.json()
+      return result
+  }
+  catch {
+      return null
   }
 }
 //

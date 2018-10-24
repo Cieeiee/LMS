@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import React from "react";
+import NoContent from "./NoContent";
 
 const styles = theme => ({
     row: {
@@ -38,32 +39,31 @@ function ReservingTable(props) {
 
     return (
         <Grid item xs={12}>
-            <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <CustomTableCell>Title</CustomTableCell>
-                            <CustomTableCell numeric>Author</CustomTableCell>
-                            <CustomTableCell numeric>Barcode</CustomTableCell>
-                            <CustomTableCell numeric>Reserve Time</CustomTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {props.records.map(book => {
-                            return (
-                                <TableRow className={classes.row}>
-                                    <CustomTableCell component="th" scope="row">
-                                        {book.title}
-                                    </CustomTableCell>
-                                    <CustomTableCell numeric>{book.author}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                    <CustomTableCell numeric>{book.reserveTime}</CustomTableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </Paper>
+            { props.records == false ? <NoContent/> :
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <CustomTableCell>Title</CustomTableCell>
+                        <CustomTableCell numeric>Author</CustomTableCell>
+                        <CustomTableCell numeric>Barcode</CustomTableCell>
+                        <CustomTableCell numeric>Reserve Time</CustomTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {props.records.map(book => {
+                        return (
+                            <TableRow className={classes.row}>
+                                <CustomTableCell component="th" scope="row">
+                                    {book.title}
+                                </CustomTableCell>
+                                <CustomTableCell numeric>{book.author}</CustomTableCell>
+                                <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                <CustomTableCell numeric>{book.reserveTime}</CustomTableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>}
         </Grid>
     );
 };

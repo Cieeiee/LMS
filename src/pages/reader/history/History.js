@@ -354,11 +354,11 @@ class ReaderHistoryClass extends React.Component {
                                     </div>
                                 </Grid>
                                 {this.state.tabValue === 0 &&
-                                <BorrowingTableWrapped records={this.state.borrowingRecord === undefined ? [] : this.state.borrowingRecord}/>}
+                                <BorrowingTableWrapped records={this.state.borrowingRecord}/>}
                                 {this.state.tabValue === 1 &&
-                                <ReservingTableWrapped records={this.state.reservingRecord === undefined ? [] : this.state.reservingRecord}/>}
+                                <ReservingTableWrapped records={this.state.reservingRecord}/>}
                                 {this.state.tabValue === 2 &&
-                                <BorrowedTableWrapped records={this.state.borrowedRecord === undefined ? [] : this.state.borrowedRecord} total={this.state.borrowedTotal}/>}
+                                <BorrowedTableWrapped records={this.state.borrowedRecord} total={this.state.borrowedTotal}/>}
                             </Paper>
                         </Grid>
                     </Grid>

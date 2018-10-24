@@ -138,27 +138,19 @@ export default class SearchedPage extends React.Component {
         this.reserveBook();
 
         return (
-            <React.Fragment>
+            <div>
                 <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
-                <div className={"flex-col"}
-                    style={{
-                        marginTop: 30,
-                        marginLeft: 10,
-                        marginRight: 10,
-                    }}
-                >
-                    <div className="grow">
-                        {
-                            this.state.bookList !== [] ?
-                                <BookList
-                                    bookList={this.state.bookList}
-                                    handleOpen={this.handleOpen}
-                                /> :
-                                <div>
-                                    No books found.
-                                </div>
-                        }
-                    </div>
+                <div style={{marginTop: 30}}>
+                    {
+                        this.state.bookList !== null ?
+                            <BookList
+                                bookList={this.state.bookList}
+                                handleOpen={this.handleOpen}
+                            /> :
+                            <div>
+                                No books founded.
+                            </div>
+                    }
                     <ReserveDialog
                         handleClose={this.handleClose("openReserve")}
                         handleReserve={this.handleReserve}
@@ -171,7 +163,7 @@ export default class SearchedPage extends React.Component {
                         message={this.state.returnMessage}
                     />
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

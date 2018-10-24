@@ -153,7 +153,7 @@ class PrimarySearchAppBar extends React.Component {
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
-                                color="inherit"
+                            color="inherit"
                             component={Link} to={`/reader/${this.props.loginUser}`}
                         >
                             <Home />

@@ -20,7 +20,7 @@ const Logo = require('./components/images/logo.jpg');
 export default class Reader extends React.Component {
     render() {
         return (
-            <div className="flex-col grow">
+            <div style={{width: '100%'}} className="flex-col grow">
                 <BrowserRouter>
                     <Switch>
                         <Route path='/reader/:loginUser' exact component={Home}/>
