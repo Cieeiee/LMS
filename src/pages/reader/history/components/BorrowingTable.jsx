@@ -39,7 +39,7 @@ function BorrowingTable(props) {
 
     return (
         <Grid item xs={12}>
-            { props.records == false ? <NoContent/> :
+            { props.records === undefined ? <NoContent/> :
             <Table>
                 <TableHead className={classes.head}>
                     <TableRow>

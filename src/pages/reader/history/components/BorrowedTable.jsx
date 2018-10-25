@@ -40,7 +40,7 @@ function BorrowedTable(props) {
 
     return (
         <Grid item xs={12}>
-            { props.records == false ? <NoContent/> :
+            { props.records === undefined ? <NoContent/> :
             <Table>
                 <TableHead>
                     <TableRow>
@@ -53,11 +53,11 @@ function BorrowedTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.records.map(book => {
+                    {props.reacords !== undefined && props.records.map(book => {
                         return (
                             <TableRow className={classes.row}>
                                 <CustomTableCell component="th" scope="row">
-                                    {book.title}
+                                  {book.title}
                                 </CustomTableCell>
                                 <CustomTableCell numeric>{book.author}</CustomTableCell>
                                 <CustomTableCell numeric>{book.barcode}</CustomTableCell>

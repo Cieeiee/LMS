@@ -11,7 +11,7 @@ import {
     fetchAddBook,
     fetchBookHistory,
     fetchUpdateBook,
-    fetchNotification, fetchDeleteReader
+    fetchNotification, fetchDownload, fetchDeleteReader
 } from './../../mock/index';
 import Footer from '../../mock/footer'
 import Books from './components/books/books.jsx';
@@ -33,7 +33,6 @@ export default class Librarian extends React.Component {
       readers: [], // all readers
       bookHistory: [], // ..
       notifications: [],
-      barcodeList: [],
       type: 0, // 条件渲染
       open: false, // confirm dialog
       book: {}, // book details
@@ -72,13 +71,16 @@ export default class Librarian extends React.Component {
     data.append('file', img)
     data.append('data', JSON.stringify(newBook))
     const res = await fetchAddBook(data)
-    window.open('/showBarcode')
+    const list = await fetchBookList()
+    for(let x of res) {
+      fetchDownload(x);
+    }
     this.setState({
       open: false,
       type: 0,
       snackOpen: true,
-      eventState: res.state,
-      barcodeList: res.barcode
+      eventState: true,
+      list
     })
   }
   handleBorrow = info => async () => {

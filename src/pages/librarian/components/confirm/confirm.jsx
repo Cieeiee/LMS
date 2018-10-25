@@ -11,6 +11,7 @@ export default class Confirm extends React.Component {
       img: null
     }
   }
+  handleChangeReaderId = e => this.setState({readerId: e.target.value})
   handleChange = name => e => this.setState({newBook: {...this.state.newBook, [name]: e.target.value}})
   handleChange1 = name => e => this.setState({updateBook: {...this.state.updateBook, [name]: e.target.value}})
   handleImg = e => this.setState({img: e.target.files[0]})
@@ -33,7 +34,7 @@ export default class Confirm extends React.Component {
                 margin='dense'
                 label='Reader'
                 fullWidth
-                onChange={this.handleChange('readerId')}
+                onChange={this.handleChangeReaderId}
               />
             </div>}
           {props.title === 'RETURN' &&
