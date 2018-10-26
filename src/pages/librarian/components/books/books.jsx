@@ -13,24 +13,26 @@ const Books = props => {
     <Table>
       <TableHead>
         <TableRow>
-          <CustomTableCell>ID</CustomTableCell>
-          <CustomTableCell numeric>ISBN</CustomTableCell>
+          <CustomTableCell>ISBN</CustomTableCell>
           <CustomTableCell numeric>title</CustomTableCell>
           <CustomTableCell numeric>author</CustomTableCell>
           <CustomTableCell numeric>category</CustomTableCell>
-          <CustomTableCell numeric>price</CustomTableCell>
+          <CustomTableCell numeric>location</CustomTableCell>
+            <CustomTableCell numeric>remain</CustomTableCell>
+            <CustomTableCell numeric>total</CustomTableCell>
           <CustomTableCell numeric><Button variant='outlined' color='inherit' onClick={props.handleOpen(null, 'ADD BOOK')}>add</Button></CustomTableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {typeof(props.list.filter) !== "undefined" && props.list.filter(isSearched(props.searchTerm)).map((item, index) =>
           <TableRow key={index} className="table-row">
-            <TableCell>{index}</TableCell>
-            <TableCell numeric>{item.isbn}</TableCell>
+            <TableCell>{item.isbn}</TableCell>
             <TableCell numeric>{item.title}</TableCell>
             <TableCell numeric>{item.author}</TableCell>
             <TableCell numeric>{item.category}</TableCell>
-            <TableCell numeric>{item.price}</TableCell>
+            <TableCell numeric>{item.location}</TableCell>
+              <TableCell numeric>{item.remain}</TableCell>
+              <TableCell numeric>{item.total}</TableCell>
             <TableCell numeric>
               <IconButton onClick={props.handleOpen(item.isbn, 'UPDATE BOOK')}>
                 <BuildOutlined/>

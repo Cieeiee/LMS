@@ -39,7 +39,7 @@ function ReservingTable(props) {
 
     return (
         <Grid item xs={12}>
-            { props.records === undefined ? <NoContent/> :
+            { props.records == false ? <NoContent/> :
             <Table>
                 <TableHead>
                     <TableRow>

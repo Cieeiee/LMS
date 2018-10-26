@@ -156,53 +156,53 @@ class ReaderHistoryClass extends React.Component {
     }
 
     getHistory = () => {
-        // try {
-        //     fetch(`${serverReader}/searchReader?id=${this.props.match.params.loginUser}`)
-        //         .then(Response => Response.json())
-        //         .then(result => {
-        //             this.setState({
-        //                 info: result.info,
-        //                 borrowingRecord: result.borrowingRecord,
-        //                 reservingRecord: result.reservingRecord,
-        //                 borrowedRecord: result.borrowedRecord,
-        //                 borrowedTotal: result.borrowedTotal,
-        //             });
-        //         })
-        // } catch {
-        //     this.setState({
-        //         info: [],
-        //         borrowingRecord: [],
-        //         reservingRecord: [],
-        //         borrowedRecord: [],
-        //         borrowedTotal: undefined,
-        //     })
-        // }
-        this.setState({
-          info: {
-            id: 17768689590,
-            name: 'lujiacheng',
-            email: '1397521279@qq.com',
-            deposit: 300
-          },
-          borrowingRecord: [
-            {
-              title: 'The Birth of Tragedy',
-              author: 'Friedrich Nietzsche',
-              barcode: '1745237778580',
-              borrowTime: '2018-10-25 03:25:55'
-            }
-          ],
-          reservingRecord: [
-            {
-              title: 'American Gods',
-              author: 'Neil Gaiman',
-              barcode: '3905868421318',
-              reserveTime: '2018-10-25 03:27:15'
-            }
-          ],
-          borrowedRecord: [],
-          borrowedTotal: 0
-        })
+        try {
+            fetch(`${serverReader}/searchReader?id=${this.props.match.params.loginUser}`)
+                .then(Response => Response.json())
+                .then(result => {
+                    this.setState({
+                        info: result.info,
+                        borrowingRecord: result.borrowingRecord,
+                        reservingRecord: result.reservingRecord,
+                        borrowedRecord: result.borrowedRecord,
+                        borrowedTotal: result.borrowedTotal,
+                    });
+                })
+        } catch {
+            this.setState({
+                info: [],
+                borrowingRecord: [],
+                reservingRecord: [],
+                borrowedRecord: [],
+                borrowedTotal: undefined,
+            })
+        }
+        // this.setState({
+        //   info: {
+        //     id: 17768689590,
+        //     name: 'lujiacheng',
+        //     email: '1397521279@qq.com',
+        //     deposit: 300
+        //   },
+        //   borrowingRecord: [
+        //     {
+        //       title: 'The Birth of Tragedy',
+        //       author: 'Friedrich Nietzsche',
+        //       barcode: '1745237778580',
+        //       borrowTime: '2018-10-25 03:25:55'
+        //     }
+        //   ],
+        //   reservingRecord: [
+        //     {
+        //       title: 'American Gods',
+        //       author: 'Neil Gaiman',
+        //       barcode: '3905868421318',
+        //       reserveTime: '2018-10-25 03:27:15'
+        //     }
+        //   ],
+        //   borrowedRecord: [],
+        //   borrowedTotal: 0
+        // })
     };
 
     handleChange = (which) => (event, value) => {

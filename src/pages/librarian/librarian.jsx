@@ -1,4 +1,4 @@
-import { Snackbar } from '@material-ui/core';
+import {Snackbar, TextField} from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -24,6 +24,11 @@ import './librarian.scss';
 import TopBar from './components/nav/TopBar';
 import LibrarianNotifications from "./components/notifications/notifications";
 import {fetchUpdateReader} from "../../mock";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import Button from "@material-ui/core/Button/Button";
 
 export default class Librarian extends React.Component {
   constructor(props) {
@@ -40,7 +45,9 @@ export default class Librarian extends React.Component {
       title: '', // confirm type
       snackOpen: false, // snackbar
       eventState: false, // fetch response
-      searchTerm: ''
+        openBarcode: false,
+      searchTerm: '',
+        barcodeImages: undefined,
     }
   }
   handleReloadReader = async () => {
@@ -49,6 +56,7 @@ export default class Librarian extends React.Component {
   }
   handleOpen = (barcode, title) => () => this.setState({open: true, barcode, title})
   handleClose = () => this.setState({open: false})
+    handleCloseBarcode = () => this.setState({openBarcode: false});
   handleSnackClose = () => this.setState({snackOpen: false})
   handleClick = index => this.setState({type: index})
   handleSearch = e => this.setState({searchTerm: e.target.value})
@@ -72,14 +80,17 @@ export default class Librarian extends React.Component {
     data.append('data', JSON.stringify(newBook))
     const res = await fetchAddBook(data)
     const list = await fetchBookList()
-    for(let x of res) {
-      fetchDownload(x);
-    }
+
+    // for(let x of res) {
+    //   fetchDownload(x);
+    // }
     this.setState({
+        openBarcode: true,
       open: false,
       type: 0,
       snackOpen: true,
       eventState: true,
+        barcodeImages: res,
       list
     })
   }
@@ -140,56 +151,76 @@ export default class Librarian extends React.Component {
   }
   render() {
     return (
-      <div style={{height: '100%'}}>
-        <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} whichTab={this.state.type}/>
-        <div style={{height: '100%', width: '100%', display: 'flex'}}>
-          <div>
-            {Nav({ type: this.state.type, handleClick: this.handleClick })}
-          </div>
-          <div style={{flexGrow: 1}}>
-          {this.state.type === 0 && Books({ 
-            list: this.state.list, 
-            searchTerm: this.state.searchTerm, 
-            handleDetail: this.handleDetail, 
-            handleOpen: this.handleOpen 
-          })}
-          {this.state.type === 1 && 
-            <Readers 
-              list={this.state.readers}
-              handleAddReader={this.handleAddReader}
-              handleReloadReader={this.handleReloadReader}
-              handleUpdateReader={this.handleUpdateReader}
-              handleDeleteReader={this.handleDeleteReader}
-              searchTerm={this.state.searchTerm}
-            />}
-          {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
-          {this.state.type === 3 && <LibrarianNotifications/>}
-          {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
-          </div>
+        <div className="flex-col grow">
+            <TopBar id={this.props.match.params.id} handleSearch={this.handleSearch} whichTab={this.state.type}/>
+            <div style={{width: '100%'}} className="flex-row grow">
+              <div>
+                {Nav({ type: this.state.type, handleClick: this.handleClick })}
+              </div>
+              <div style={{flexGrow: 1}}>
+              {this.state.type === 0 && Books({
+                list: this.state.list,
+                searchTerm: this.state.searchTerm,
+                handleDetail: this.handleDetail,
+                handleOpen: this.handleOpen,
+              })}
+              {this.state.type === 1 &&
+                <Readers
+                  list={this.state.readers}
+                  handleAddReader={this.handleAddReader}
+                  handleReloadReader={this.handleReloadReader}
+                  handleUpdateReader={this.handleUpdateReader}
+                  handleDeleteReader={this.handleDeleteReader}
+                  searchTerm={this.state.searchTerm}
+                />}
+              {this.state.type === 2 && BookHistory({ list: this.state.bookHistory })}
+              {this.state.type === 3 && <LibrarianNotifications/>}
+              {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
+              </div>
+            </div>
+            <Footer />
+            <Confirm
+              libid={this.props.match.params.id}
+              barcode={this.state.barcode}
+              title={this.state.title}
+              open={this.state.open}
+              handleClose={this.handleClose}
+              handleDelete={this.handleDelete}
+              handleBorrow={this.handleBorrow}
+              handleAddBook={this.handleAddBook}
+              handleUpdate={this.handleUpdateBook}
+            />
+              <Dialog
+                  fullWidth
+                  open={this.state.openBarcode}
+                  onClose={this.handleCloseBarcode}
+                  aria-labelledby="form-dialog-title"
+              >
+                  <DialogTitle id="form-dialog-title">Barcodes</DialogTitle>
+                  <DialogContent>
+                      <div className="flex-col">
+                          {this.state.barcodeImages !== undefined && this.state.barcodeImages.map(img =>
+                              <img src={img} alt='' width='500px' style={{marginBottom: 40}}/>
+                          )}
+                      </div>
+                  </DialogContent>
+                  <DialogActions>
+                      <Button onClick={this.handleCloseBarcode} color="primary">
+                          Close
+                      </Button>
+                  </DialogActions>
+              </Dialog>
+            <Snackbar
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left'
+              }}
+              open={this.state.snackOpen}
+              autoHideDuration={1500}
+              onClose={this.handleSnackClose}
+              message={this.state.eventState? 'succeed': 'failed'}
+            />
         </div>
-        <Footer />
-        <Confirm
-          libid={this.props.match.params.id}
-          barcode={this.state.barcode}
-          title={this.state.title}
-          open={this.state.open}
-          handleClose={this.handleClose}
-          handleDelete={this.handleDelete}
-          handleBorrow={this.handleBorrow}
-          handleAddBook={this.handleAddBook}
-          handleUpdate={this.handleUpdateBook}
-        />
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
-          }}
-          open={this.state.snackOpen}
-          autoHideDuration={1500}
-          onClose={this.handleSnackClose}
-          message={this.state.eventState? 'succeed': 'failed'}
-        />
-      </div>
     )
   }
 }
