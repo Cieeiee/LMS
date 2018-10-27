@@ -178,7 +178,7 @@ export default class Librarian extends React.Component {
               {this.state.type === 4 && Details({ book: this.state.book, handleOpen: this.handleOpen })}
               </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
             <Confirm
               libid={this.props.match.params.id}
               barcode={this.state.barcode}
