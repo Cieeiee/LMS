@@ -28,4 +28,3 @@ export default class Librarian extends React.Component {
         );
     }
 };
-

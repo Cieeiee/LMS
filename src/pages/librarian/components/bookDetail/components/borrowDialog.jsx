@@ -48,7 +48,7 @@ export default class BorrowDialog extends React.Component {
                         onClick={this.props.handleBorrow({
                             type: 0,
                             barcode: this.props.barcode,
-                            id: this.state.readerId,
+                            id: this.state.readerID,
                             state: 0
                         })}
                     >OK</Button>

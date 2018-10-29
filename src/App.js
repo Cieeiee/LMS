@@ -6,7 +6,6 @@ import NotFound from './pages/notFound/index'
 import Admin from './pages/admin/index'
 import Reader from './pages/reader/index'
 import Librarian from './pages/librarian/index'
-import Barcode from './pages/librarian/components/books/barcode'
 
 class App extends Component {
     render() {
@@ -19,7 +18,6 @@ class App extends Component {
                         <Route path='/admin' component={Admin} />
                         <Route path='/reader' component={Reader} />
                         <Route path='/librarian/:id' component={Librarian} />
-                        <Route path='/showBarcode' component={Barcode} />
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>
