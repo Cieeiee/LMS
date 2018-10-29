@@ -9,11 +9,12 @@
     "@material-ui/core": "^3.1.2",
     "@material-ui/icons": "^3.0.1",
     "node-sass": "^4.9.3",
+    "prop-types": "latest",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-intl-universal": "^1.14.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.4",
-    "prop-types": "latest"
+    "react-scripts": "2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,282 +1,218 @@
+import React from "react";
+import TopBar from "../nav/TopBar";
+import Nav from "../nav/nav";
 import {
-    Button,
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    TextField,
-    DialogActions,
-    Snackbar, withStyles, IconButton
-} from '@material-ui/core';
-import React from 'react';
-import {fetchDeleteReader, fetchReaderHistory, fetchReaderList} from '../../../../mock';
-import Typography from "@material-ui/core/Typography/Typography";
-import blue from "@material-ui/core/es/colors/blue";
-import {blueGrey} from "@material-ui/core/colors";
-import {BuildOutlined} from "@material-ui/icons";
+    fetchAddReader,
+    fetchDeleteReader,
+    fetchReaderHistory,
+    fetchReaderList,
+    fetchUpdateReader
+} from "../../../../mock";
+import Table from "@material-ui/core/Table/Table";
+import TableHead from "@material-ui/core/TableHead/TableHead";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import TableCell from "@material-ui/core/TableCell/TableCell";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import Button from "@material-ui/core/Button/Button";
+import {blue} from "@material-ui/core/colors";
+import {withStyles} from "@material-ui/core";
+import AddDialog from "./components/addDialog";
+import UpdateDialog from "./components/updateDialog";
+import DetailsDialog from "./components/detailsDialog";
+import MessageDialog from "../messageDialog";
+import { BuildOutlined } from '@material-ui/icons'
+
+const isSearched = searchTerm => item =>
+    item.id.toUpperCase().includes(searchTerm.toUpperCase())
 
 export default class Readers extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      // history: null,
-        borrowingHistory: [],
-        reservingHistory: [],
-        borrowedHistory: [],
-        deleteOpen: false,
-      newReader: {},
-      addOpen: false,
-        whoseDetails: undefined,
-        snackOpen: false,
-        eventStatus: 0,
-        updateOpen: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchTerm: '',
+            readerList: [],
+            borrowingHistory: [],
+            reservingHistory: [],
+            borrowedHistory: [],
+            openAdd: false,
+            openUpdate: false,
+            openDetails: false,
+            openSnack: false,
+            eventState: false,
+        }
     }
-  }
-  handleClose = () => this.setState({
-      open: false,
-      whoseDetails: undefined,
-  })
-  handleclose1 = () => this.setState({addOpen: false})
-  handleChange = name => e => this.setState({newReader: {...this.state.newReader, [name]: e.target.value}})
-    handleSnackClose = () => this.setState({snackOpen: false})
-  handleOpen = () => this.setState({addOpen: true})
-    handleOpenUpdate = id => () => this.setState({updateOpen: true, newReader: {...this.state.newReader, id:id}})
-    handleCloseUpdate = () => this.setState({updateOpen: false})
-  changeDateFormat = (d) => {
-    let date = new Date(d);
-    let changed = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    return changed;
-  }
+
+    handleSearch = e => this.setState({searchTerm: e.target.value});
+    handleOpen = (which, item) => () => {
+        this.setState({
+            [which]: true,
+            item
+        })
+    };
+    handleClose = (which) => () => {
+        this.setState({
+            [which]: false,
+            item: undefined,
+        })
+        if (which === "openSnack") {
+            this.setState({returnMessage: undefined})
+        }
+    };
+    handleUpdateReader = info => async () => {
+        const eventState = await fetchUpdateReader(info);
+        const readerList = await fetchReaderList();
+        this.setState({
+            openUpdate: false,
+            openSnack: true,
+            eventState,
+            readerList
+        })
+    };
+    handleAddReader = info => async () => {
+        const eventState =  await fetchAddReader(info)
+        const readerList = await fetchReaderList()
+        this.setState({
+            openAdd: false,
+            openSnack: true,
+            eventState,
+            readerList
+        })
+    }
+    handleDeleteReader = id => async () => {
+        const eventStatus = await fetchDeleteReader(id);
+        const readerList = await fetchReaderList()
+        this.setState({
+            openDetails: false,
+            openSnack: true,
+            eventStatus,
+            readerList
+        })
+    };
+    changeDateFormat = (d) => {
+        let date = new Date(d);
+        let changed = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        return changed;
+    }
     classifyHistory = (history) => {
-    let borrowing = [], reserving = [], borrowed = [];
-    for (let i in history) {
-      let h = history[i];
-      if (h.borrowTime !== null) {
-        h.borrowTime = this.changeDateFormat(h.borrowTime);
-      }
-      if (h.returnTime !== null) {
-        h.returnTime = this.changeDateFormat(h.returnTime);
-      }
-      if (h.reserveTime !== null) {
-        h.reserveTime = this.changeDateFormat(h.reserveTime);
-      }
-      if (h.borrowTime !== null && h.returnTime === null) {
-        borrowing.push(h);
-      }
-      else if (h.reserveTime !== null && h.borrowTime === null) {
-        reserving.push(h);
-      }
-      else if (h.borrowTime !== null && h.returnTime !== null) {
-        borrowed.push(h);
-      }
+        let borrowing = [], reserving = [], borrowed = [];
+        for (let i in history) {
+            let h = history[i];
+            if (h.borrowTime !== null) {
+                h.borrowTime = this.changeDateFormat(h.borrowTime);
+            }
+            if (h.returnTime !== null) {
+                h.returnTime = this.changeDateFormat(h.returnTime);
+            }
+            if (h.reserveTime !== null) {
+                h.reserveTime = this.changeDateFormat(h.reserveTime);
+            }
+            if (h.borrowTime !== null && h.returnTime === null) {
+                borrowing.push(h);
+            }
+            else if (h.reserveTime !== null && h.borrowTime === null) {
+                reserving.push(h);
+            }
+            else if (h.borrowTime !== null && h.returnTime !== null) {
+                borrowed.push(h);
+            }
+        }
+        this.setState({
+            borrowingHistory: borrowing,
+            reservingHistory: reserving,
+            borrowedHistory: borrowed,
+        });
+    };
+    handleDetails = id => async () => {
+        const history = await fetchReaderHistory(id);
+        await this.classifyHistory(history);
+        this.setState({
+            openDetails: true,
+            item: id,
+        })
     }
-    this.setState({
-       borrowingHistory: borrowing,
-       reservingHistory: reserving,
-       borrowedHistory: borrowed,
-    });
-  };
-  handleDetails = id => async () => {
-    const history = await fetchReaderHistory(id);
-    await this.classifyHistory(history);
-    this.setState({
-      open: true,
-        whoseDetails: id,
-    })
-  }
+    async componentDidMount() {
+        const readerList = await fetchReaderList()
+        this.setState({readerList})
+    }
 
     render() {
-    const props = this.props;
-
-    return([
-      <Table>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell>ID</CustomTableCell>
-            <CustomTableCell numeric>Name</CustomTableCell>
-            <CustomTableCell numeric>books borrowed</CustomTableCell>
-            <CustomTableCell numeric>books reserved</CustomTableCell>
-            <CustomTableCell numeric>deposit</CustomTableCell>
-            <CustomTableCell numeric><Button variant='outlined' color="inherit" onClick={this.handleOpen}>add</Button></CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {typeof(props.list.map) !== "undefined"
-            && props.list.filter(reader => reader.id.includes(props.searchTerm)).map((item, index) =>
-            <TableRow key={index} className="table-row">
-              <TableCell>{item.id}</TableCell>
-              <TableCell numeric>{item.name}</TableCell>
-              <TableCell numeric>{item.booksBorrowed}</TableCell>
-              <TableCell numeric>{item.booksReserved}</TableCell>
-              <TableCell numeric>{item.deposit}</TableCell>
-              <TableCell numeric>
-                  <IconButton onClick={this.handleOpenUpdate(item.id)}>
-                      <BuildOutlined/>
-                  </IconButton>
-                <Button variant='outlined' onClick={this.handleDetails(item.id)}>detail</Button>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>,
-      <Dialog
-        maxWidth='lg'
-        open={this.state.open}
-        onClose={this.handleClose}
-        scroll="paper"
-      >
-        {/*<DialogTitle>Borrow History</DialogTitle>*/}
-        <DialogContent>
-          <div style={{marginBottom: 10}}>
-              <Typography variant="title">Borrowing Books</Typography>
-              {this.state.borrowingHistory == false ? <Typography>No books borrowing.</Typography> :
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>barcode</TableCell>
-                    <TableCell>borrow time</TableCell>
-                    {/*<TableCell>fine</TableCell>*/}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.borrowingHistory.map(item =>
-                    <TableRow key={item.barcode}>
-                      <TableCell>{item.barcode}</TableCell>
-                      <TableCell>{item.borrowTime}</TableCell>
-                      {/*<TableCell>{item.fine}</TableCell>*/}
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>}
-          </div>
-
-          <div style={{marginBottom: 10}}>
-              <Typography variant="title">Reserving Books</Typography>
-              {this.state.reservingHistory == false ? <Typography>No books reserving.</Typography> :
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>barcode</TableCell>
-                            <TableCell>reserve time</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.reservingHistory.map(item =>
-                            <TableRow key={item.barcode}>
-                                <TableCell>{item.barcode}</TableCell>
-                                <TableCell>{item.reserveTime}</TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>}
-          </div>
-
-          <div style={{marginBottom: 10}}>
-              <Typography variant="title">Borrowed Books</Typography>
-              {this.state.borrowedHistory == false ? <Typography>No books borrowed.</Typography> :
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>barcode</TableCell>
-                        <TableCell>borrow time</TableCell>
-                        <TableCell>return time</TableCell>
-                        <TableCell>fine</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {this.state.borrowedHistory.map(item =>
-                        <TableRow key={item.barcode}>
-                            <TableCell>{item.barcode}</TableCell>
-                            <TableCell>{item.borrowTime}</TableCell>
-                            <TableCell>{item.returnTime}</TableCell>
-                            <TableCell>{item.fine}</TableCell>
-                        </TableRow>
-                    )}
-                </TableBody>
-            </Table>}
-          </div>
-
-          </DialogContent>
-            <DialogActions>
-                <Button onClick={this.handleClose}>cancel</Button>
-                <Button onClick={() => {
-                    props.handleDeleteReader(this.state.whoseDetails)();
-                    this.setState({open: false});
-                }}>delete the reader</Button>
-            </DialogActions>
-      </Dialog>,
-      <Dialog
-        open={this.state.addOpen}
-        onClose={this.handleclose1}
-      >
-        <DialogTitle>Add Reader</DialogTitle>
-        <DialogContent>
-          <TextField
-            margin='dense'
-            label='ID'
-            fullWidth
-            onChange={this.handleChange('id')}
-          />
-          <TextField
-            margin='dense'
-            label='password'
-            type='password'
-            fullWidth
-            onChange={this.handleChange('password')}
-          />
-          <TextField
-            margin='dense'
-            label='email'
-            type='email'
-            fullWidth
-            onChange={this.handleChange('email')}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button color='primary' onClick={this.handleclose1}>cancel</Button>
-          <Button color='primary' onClick={() => {
-              props.handleAddReader(this.state.newReader)()
-              this.setState({addOpen: false})
-          }}>OK</Button>
-        </DialogActions>
-      </Dialog>,
-        <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleCloseUpdate}
-        >
-            <DialogTitle>Update Reader</DialogTitle>
-            <DialogContent>
-                <TextField
-                    margin='dense'
-                    label='email'
-                    type='email'
-                    fullWidth
-                    onChange={this.handleChange('email')}
-                />
-                <TextField
-                    margin='dense'
-                    label='password'
-                    type='password'
-                    fullWidth
-                    onChange={this.handleChange('password')}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button color='primary' onClick={this.handleCloseUpdate}>cancel</Button>
-                <Button color='primary' onClick={() => {
-                    props.handleUpdateReader(this.state.newReader)()
-                    this.setState({updateOpen: false})
-                }}>OK</Button>
-            </DialogActions>
-        </Dialog>,
-    ])
-  }
+        return (
+            <div className="flex-col">
+                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <div style={{width: '100%'}} className="flex-row">
+                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "readers"})}
+                    <div className="grow">
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <CustomTableCell>ID</CustomTableCell>
+                                    <CustomTableCell numeric>Name</CustomTableCell>
+                                    <CustomTableCell numeric>books borrowed</CustomTableCell>
+                                    <CustomTableCell numeric>books reserved</CustomTableCell>
+                                    <CustomTableCell numeric>deposit</CustomTableCell>
+                                    <CustomTableCell numeric>
+                                        <Button
+                                            variant='outlined'
+                                            color="inherit"
+                                            onClick={this.handleOpen("openAdd", undefined)}
+                                        >
+                                            add
+                                        </Button>
+                                    </CustomTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {typeof(this.state.readerList.map) !== "undefined"
+                                && this.state.readerList.filter(isSearched(this.state.searchTerm)).map((item, index) =>
+                                    <TableRow key={index} className="table-row">
+                                        <TableCell>{item.id}</TableCell>
+                                        <TableCell numeric>{item.name}</TableCell>
+                                        <TableCell numeric>{item.booksBorrowed}</TableCell>
+                                        <TableCell numeric>{item.booksReserved}</TableCell>
+                                        <TableCell numeric>{item.deposit}</TableCell>
+                                        <TableCell numeric>
+                                            <IconButton onClick={this.handleOpen("openUpdate", item)}>
+                                                <BuildOutlined/>
+                                            </IconButton>
+                                            <Button variant='outlined' onClick={this.handleDetails(item)}>detail</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                        <AddDialog
+                            open={this.state.openAdd}
+                            handleClose={this.handleClose("openAdd")}
+                            handleAddReader={this.handleAddReader}
+                        />
+                        <UpdateDialog
+                            open={this.state.openUpdate}
+                            handleClose={this.handleClose("openUpdate")}
+                            handleUpdateReader={this.handleUpdateReader}
+                            reader={this.state.item}
+                        />
+                        <DetailsDialog
+                            borrowingHistory={this.state.borrowingHistory}
+                            reservingHistory={this.state.reservingHistory}
+                            borrowedHistory={this.state.borrowedHistory}
+                            open={this.state.openDetails}
+                            handleClose={this.handleClose("openDetails")}
+                            handleDeleteReader={this.handleDeleteReader}
+                            reader={this.state.item}
+                        />
+                        <MessageDialog
+                            handleClose={this.handleClose("openSnack")}
+                            open={this.state.openSnack}
+                            eventState={this.state.eventState}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
+
 
 const CustomTableCell = withStyles(theme => ({
     head: {

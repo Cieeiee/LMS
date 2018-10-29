@@ -43,14 +43,14 @@ export const fetchAddBook = async newBook => {
   }
 }
 //
-export const fetchUpdateBook = async newBook => {
+export const fetchUpdateBook = async updateBook => {
   try {
     const Response = await fetch(`${baseUrl}/updateBook`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify(newBook)
+      body: JSON.stringify(updateBook)
     })
     const result = await Response.json()
     return result

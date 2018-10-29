@@ -1,23 +1,40 @@
 import React from 'react'
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { BookOutlined, AccountCircleOutlined, HistoryOutlined, NotificationsOutlined } from '@material-ui/icons'
+import {Link} from "react-router-dom";
 
-export default props => 
-  <List style={{width: '250px', height: '100%', borderRight: '1px solid #cccccc'}}>
-    <ListItem button selected={props.type === 0 || props.type === 4} onClick={() => props.handleClick(0)}>
-        <BookOutlined/>
-      <ListItemText primary='Books' />
-    </ListItem>
-    <ListItem button selected={props.type === 1} onClick={() => props.handleClick(1)}>
-        <AccountCircleOutlined/>
-      <ListItemText primary='Readers' />
-    </ListItem>
-    <ListItem button selected={props.type === 2} onClick={() => props.handleClick(2)}>
-        <HistoryOutlined/>
-      <ListItemText primary='Delete History' />
-    </ListItem>
-    <ListItem button selected={props.type === 3} onClick={() => props.handleClick(3)}>
-        <NotificationsOutlined/>
-      <ListItemText primary='Notifications' />
-    </ListItem>
-  </List>
+export default props =>
+    <List style={{width: '250px', height: '100%', borderRight: '1px solid #cccccc'}}>
+        <ListItem
+            button
+            selected={props.whichFunction === "books"}
+            component={Link} to={`/librarian/${props.loginUser}/books`}
+        >
+            <BookOutlined/>
+            <ListItemText primary='Books' />
+        </ListItem>
+        <ListItem
+            button
+            selected={props.whichFunction === "readers"}
+            component={Link} to={`/librarian/${props.loginUser}/readers`}
+        >
+            <AccountCircleOutlined/>
+            <ListItemText primary='Readers' />
+        </ListItem>
+        <ListItem
+            button
+            selected={props.whichFunction === "history"}
+            component={Link} to={`/librarian/${props.loginUser}/history`}
+        >
+            <HistoryOutlined/>
+            <ListItemText primary='Delete History' />
+        </ListItem>
+        <ListItem
+            button
+            selected={props.whichFunction === "notifications"}
+            component={Link} to={`/librarian/${props.loginUser}/notifications`}
+        >
+            <NotificationsOutlined/>
+            <ListItemText primary='Notifications' />
+        </ListItem>
+    </List>

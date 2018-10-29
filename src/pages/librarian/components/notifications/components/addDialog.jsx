@@ -7,39 +7,47 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
 
-export default function AddDialog(props) {
-    return (
-        <Dialog
-            fullWidth
-            open={props.open}
-            onClose={props.handleClose}
-            aria-labelledby="form-dialog-title"
-        >
-            <DialogTitle id="form-dialog-title">Add a notification</DialogTitle>
-            <DialogContent>
-                {/*<DialogContentText>*/}
-                    {/**/}
-                {/*</DialogContentText>*/}
-                <TextField
-                    error={props.formError === "messageEmpty"}
-                    margin="normal"
-                    id="name"
-                    label={props.formError === "messageEmpty" ? "The message can not be empty" : "message"}
-                    fullWidth
-                    multiline
-                    value={props.message}
-                    onFocus={props.clearFormError}
-                    onChange={props.handleChange("message")}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={props.handleClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={props.handleAdd} color="primary">
-                    Subscribe
-                </Button>
-            </DialogActions>
-        </Dialog>
-    );
+export default class AddDialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: undefined,
+        }
+    }
+
+    handleChange = e => {this.setState({message: e.target.value})}
+
+    render() {
+        return (
+            <Dialog
+                fullWidth
+                open={this.props.open}
+                onClose={this.props.handleClose}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="form-dialog-title">Add a notification</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        error={this.props.formError === "messageEmpty"}
+                        margin="normal"
+                        id="name"
+                        label={this.props.formError === "messageEmpty" ? "The message can not be empty" : "message"}
+                        fullWidth
+                        multiline
+                        value={this.state.message}
+                        onFocus={this.props.clearFormError}
+                        onChange={this.handleChange}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.props.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.props.handleAdd(this.state.message)} color="primary">
+                        Subscribe
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        );
+    }
 }
