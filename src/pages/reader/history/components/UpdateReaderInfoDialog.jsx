@@ -10,6 +10,7 @@ import Switch from "@material-ui/core/Switch/Switch";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
 import '../../reader.scss'
+import * as intl from "react-intl-universal";
 
 export default function UpdateReaderInfoDialog(props) {
     return (
@@ -19,7 +20,7 @@ export default function UpdateReaderInfoDialog(props) {
             aria-labelledby="form-dialog-title"
             fullWidth
         >
-            <DialogTitle id="form-dialog-title">Update your information.</DialogTitle>
+            <DialogTitle id="form-dialog-title">{intl.get("form.formTitle.updateInformation")}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
 
@@ -28,7 +29,7 @@ export default function UpdateReaderInfoDialog(props) {
                     error={props.formError === "nameEmpty"}
                     margin="normal"
                     id="name"
-                    label={props.formError === "nameEmpty" ? "the name can not be empty!" : "Name"}
+                    label={props.formError === "nameEmpty" ? intl.get("form.nameEmpty") : intl.get("form.name")}
                     fullWidth
                     defaultValue={props.info!== undefined && props.info.name}
                     value={props.name}
@@ -42,9 +43,9 @@ export default function UpdateReaderInfoDialog(props) {
                     id="name"
                     label={
                         props.formError === "emailEmpty" ?
-                            "The email can not be empty" :
+                            intl.get("form.emailEmpty") :
                             props.formError === "emailIncorrect" ?
-                                "Incorrect email format." : "Email"
+                                intl.get("form.emailIncorrect") : intl.get("form.email")
                     }
                     type="email"
                     fullWidth
@@ -61,8 +62,8 @@ export default function UpdateReaderInfoDialog(props) {
                     id="name"
                     label={
                         props.formError === "passwordNotSame" ?
-                            "The passwords are not same!" : props.formError === "passwordEmpty" ?
-                            "The passwords can not be empty" : "Password"
+                            intl.get("form.passwordNotSame") : props.formError === "passwordEmpty" ?
+                            intl.get("form.passwordEmpty") : intl.get("form.password")
                     }
                     InputLabelProps={{
                         shrink: true,
@@ -81,7 +82,7 @@ export default function UpdateReaderInfoDialog(props) {
                     id="name"
                     label={
                         props.formError === "passwordNotSame" ?
-                            "The passwords are not same!" : "Confirm Password"
+                            intl.get("form.passwordNotSame") : intl.get("form.confirmPassword")
                     }
                     InputLabelProps={{
                         shrink: true,
@@ -106,15 +107,15 @@ export default function UpdateReaderInfoDialog(props) {
                                 color="primary"
                             />
                         }
-                        label={"change password"}
+                        label={intl.get("form.changePassword")}
                     />
                 </FormGroup>
                 <div className="grow"/>
                 <Button onClick={props.handleClose} color="primary">
-                    Cancel
+                    {intl.get("form.cancel")}
                 </Button>
                 <Button onClick={props.handleUpdate} color="primary">
-                    Update
+                    {intl.get("form.confirm")}
                 </Button>
             </DialogActions>
         </Dialog>

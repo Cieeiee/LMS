@@ -9,6 +9,7 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
+import * as intl from "react-intl-universal";
 
 
 export default function DetailsDialog(props) {
@@ -22,14 +23,14 @@ export default function DetailsDialog(props) {
             {/*<DialogTitle>Borrow History</DialogTitle>*/}
             <DialogContent>
                 <div style={{marginBottom: 10}}>
-                    <Typography variant="title">Borrowing Books</Typography>
-                    {props.borrowingHistory == false ? <Typography>No books borrowing.</Typography> :
+                    <Typography variant="title">{intl.get('form.formTitle.borrowingBooks')}</Typography>
+                    {props.borrowingHistory == false ? <Typography>{intl.get('form.formTitle.noBorrowing')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>barcode</TableCell>
-                                    <TableCell>borrow time</TableCell>
-                                    {/*<TableCell>fine</TableCell>*/}
+                                    <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.borrowTime')}</TableCell>
+                                    <TableCell>{intl.get('form.fine')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -37,7 +38,7 @@ export default function DetailsDialog(props) {
                                     <TableRow key={item.barcode}>
                                         <TableCell>{item.barcode}</TableCell>
                                         <TableCell>{item.borrowTime}</TableCell>
-                                        {/*<TableCell>{item.fine}</TableCell>*/}
+                                        <TableCell>{item.fine}</TableCell>
                                     </TableRow>
                                 )}
                             </TableBody>
@@ -45,13 +46,13 @@ export default function DetailsDialog(props) {
                 </div>
 
                 <div style={{marginBottom: 10}}>
-                    <Typography variant="title">Reserving Books</Typography>
-                    {props.reservingHistory == false ? <Typography>No books reserving.</Typography> :
+                    <Typography variant="title">{intl.get('form.formTitle.reservingBooks')}</Typography>
+                    {props.reservingHistory == false ? <Typography>{intl.get('form.formTitle.noReserving')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>barcode</TableCell>
-                                    <TableCell>reserve time</TableCell>
+                                    <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.reserveTime')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -66,15 +67,15 @@ export default function DetailsDialog(props) {
                 </div>
 
                 <div style={{marginBottom: 10}}>
-                    <Typography variant="title">Borrowed Books</Typography>
-                    {props.borrowedHistory == false ? <Typography>No books borrowed.</Typography> :
+                    <Typography variant="title">{intl.get('form.formTitle.borrowedBooks')}</Typography>
+                    {props.borrowedHistory == false ? <Typography>{intl.get('form.formTitle.noBorrowed')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>barcode</TableCell>
-                                    <TableCell>borrow time</TableCell>
-                                    <TableCell>return time</TableCell>
-                                    <TableCell>fine</TableCell>
+                                    <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.borrowTime')}</TableCell>
+                                    <TableCell>{intl.get('form.returnTime')}</TableCell>
+                                    <TableCell>{intl.get('form.fine')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -92,9 +93,9 @@ export default function DetailsDialog(props) {
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.handleClose}>cancel</Button>
-                <Button onClick={props.handleDeleteReader(props.reader && props.reader.id)}>
-                    delete the reader
+                <Button onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
+                <Button onClick={props.reader && props.handleDeleteReader(props.reader.id)}>
+                    {intl.get('form.formTitle.deleteReader')}
                 </Button>
             </DialogActions>
         </Dialog>

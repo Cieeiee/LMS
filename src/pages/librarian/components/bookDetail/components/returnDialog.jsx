@@ -6,6 +6,7 @@ import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default function ReturnDialog(props) {
     return (
@@ -14,18 +15,18 @@ export default function ReturnDialog(props) {
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
         >
-            <DialogTitle id="form-dialog-title">Return the Book?</DialogTitle>
+            <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.returnBook')}</DialogTitle>
             <DialogContent>
                 <TextField
                     margin='dense'
-                    label='Barcode'
+                    label={intl.get('form.barcode')}
                     fullWidth
                     defaultValue={props.barcode}
                     disabled
                 />
             </DialogContent>
             <DialogActions>
-                <Button color='primary' onClick={props.handleClose}>Cancel</Button>
+                <Button color='primary' onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
                 <Button
                     color='primary'
                     onClick={props.handleBorrow({
@@ -34,7 +35,7 @@ export default function ReturnDialog(props) {
                         state: 1
                     })}
                 >
-                    OK
+                    {intl.get('form.confirm')}
                 </Button>
             </DialogActions>
         </Dialog>

@@ -7,8 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { ExitToApp } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import { PeopleOutlined, DescriptionOutlined } from "@material-ui/icons"
+import { PeopleOutlined, DescriptionOutlined, MenuOutlined, SettingsOutlined } from "@material-ui/icons"
 import {serverAdmin} from "../../../mock/config";
+import Menu from "@material-ui/core/Menu/Menu";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import PasswordDialog from "./passwordDialog";
+import MessageDialog from "./messageDialog";
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     root: {
@@ -23,7 +28,7 @@ const styles = theme => ({
         // fontSize: 20
     },
     title: {
-        marginLeft: 10,
+        // marginLeft: 10,
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
@@ -42,10 +47,81 @@ class PrimarySearchAppBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            keywords: undefined,
-            bookList: [],
-            value: 0,
+            anchorEl: null,
+            openMenu: false,
+            openChangePassword: false,
+            formError: undefined,
+            password: undefined,
+            confirmPassword: undefined,
+            returnMessage: undefined,
         }
+    }
+
+    handleOpen = which => event => {
+        this.setState({
+            anchorEl: event.currentTarget,
+            [which]: true
+        })
+    }
+    handleClose = which => () => {
+        this.setState({
+            anchorEl: null,
+            password: undefined,
+            [which]: false
+        })
+    }
+    handleChange = which => e => {
+        this.setState({
+            [which]: e.target.value
+        })
+    }
+    clearFormError = () => {
+        this.setState({formError: undefined})
+    }
+    handleChangePassword = () => {
+        if (this.state.password === undefined || this.state.password.length === 0) {
+            this.setState({formError: "passwordEmpty"});
+            return;
+        }
+        if (this.state.password !== this.state.confirmPassword) {
+            this.setState({formError: "passwordNotSame"});
+            return;
+        }
+        fetch(`${serverAdmin}/admin/changePassword`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                password: this.state.password
+            })
+        })
+            .then(Response => Response.json())
+            .then(result => {
+                this.setState({eventStatus: result.state});
+            })
+            .catch(e => alert(e));
+    }
+    changePassword = () => {
+        if (this.state.eventStatus === 0) {
+            this.setState({
+                eventStatus: undefined,
+                openChangePassword: false,
+                returnMessage: intl.get('basic.failed')
+            });
+        }
+        if (this.state.eventStatus === 1) {
+            this.setState({
+                eventStatus: undefined,
+                openChangePassword: false,
+                returnMessage: intl.get('basic.success')
+            });
+        }
+    }
+    handleLanguage = (which) => () => {
+        window.location.search = `?lang=${which}`;
+        this.handleClose("openMenu")();
     }
 
     handleLogout = () => {
@@ -53,29 +129,48 @@ class PrimarySearchAppBar extends React.Component {
         window.location.href = '/';
     };
 
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
-
     render() {
         const { classes } = this.props;
+        this.changePassword();
 
         return (
             <div className={classes.root}>
                 <AppBar position="static" color="primary">
                     <Toolbar>
-                        {/*<IconButton*/}
-                            {/*className={classes.menuButton}*/}
-                            {/*color="inherit"*/}
-                            {/*component={Link} to='/admin'*/}
-                        {/*>*/}
-                            {/*<Home />*/}
-                        {/*</IconButton>*/}
+                        <IconButton
+                            aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+                            aria-haspopup="true"
+                            color="inherit"
+                            className={classes.menuButton}
+                            onClick={this.handleOpen("openMenu")}
+                        >
+                            <MenuOutlined/>
+                        </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={this.state.anchorEl}
+                            open={this.state.openMenu}
+                            onClose={this.handleClose("openMenu")}
+                        >
+                            <MenuItem onClick={this.handleLanguage("en-US")}>
+                                English
+                            </MenuItem>
+                            <MenuItem onClick={this.handleLanguage("zh-CN")}>
+                                中文
+                            </MenuItem>
+                        </Menu>
                         <Typography className={classes.title} variant="title" color="inherit" noWrap>
                             Bibliosoft
                         </Typography>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
+                            <IconButton
+                                color="inherit"
+                                style={{textTransform: 'none'}}
+                                onClick={this.handleOpen("openChangePassword")}
+                            >
+                                <SettingsOutlined/>
+                            </IconButton>
                             <IconButton
                                 color="inherit"
                                 component={Link} to={`/admin`}
@@ -99,6 +194,21 @@ class PrimarySearchAppBar extends React.Component {
                         </div>
                     </Toolbar>
                 </AppBar>
+                <PasswordDialog
+                    handleClose={this.handleClose("openChangePassword")}
+                    handleChangePassword={this.handleChangePassword}
+                    handleChange={this.handleChange}
+                    clearFormError={this.clearFormError}
+                    password={this.state.password}
+                    confrimPassword={this.state.confirmPassword}
+                    formError={this.state.formError}
+                    open={this.state.openChangePassword}
+                />
+                <MessageDialog
+                    handleClose={this.handleClose("returnMessage")}
+                    open={Boolean(this.state.returnMessage)}
+                    message={this.state.returnMessage}
+                />
             </div>
         );
     }

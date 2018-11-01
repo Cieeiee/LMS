@@ -9,27 +9,7 @@ import {TopBar} from "../components/TopBar";
 import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
 import {serverReader} from "../../../mock/config";
-
-const notifications = [
-    {
-        timestamp: "Jan 9, 2014",
-        message: "The time you have to return the book has been changed to five month"
-    },
-    {
-        timestamp: "Jan 9, 2014",
-        message: "The time you have to return the book has been changed to five month"
-    },
-    {
-        timestamp: "Jan 9, 2014",
-        message: "The time you have to return the book has been changed to five month"
-    },
-    {
-        timestamp: "Jan 9, 2014",
-        message: "The time you have to return the book has been changed to five month, " +
-            "The time you have to return the book has been changed to five month, " +
-            "The time you have to return the book has been changed to five month"
-    }
-];
+import * as intl from "react-intl-universal";
 
 export default class ReaderNotification extends React.Component {
     constructor(props) {
@@ -70,7 +50,7 @@ export default class ReaderNotification extends React.Component {
                          style={{marginBottom: 10}}
                     >
                         <Typography style={{fontSize: 50, marginLeft: 5}} className="col-mid">
-                            Notifications
+                            {intl.get("reader.notification.title")}
                         </Typography>
                     </div>
                     <List>

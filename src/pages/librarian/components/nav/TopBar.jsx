@@ -6,14 +6,23 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import { ExitToAppOutlined } from '@material-ui/icons'
+import {ExitToAppOutlined, MenuOutlined} from '@material-ui/icons'
 import SearchIcon from '@material-ui/icons/Search';
 import Button from "@material-ui/core/Button/Button";
 import {Link} from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import Menu from "@material-ui/core/Menu/Menu";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     root: {
         width: '100%',
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 12,
+        // fontSize: 20
     },
     grow: {
         flexGrow: 1,
@@ -67,43 +76,92 @@ const styles = theme => ({
     },
 });
 
-function SearchAppBar(props) {
-    const { classes, loginUser, handleSearch } = props;
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography className={classes.title} variant="title" color="inherit" noWrap>
-                        Bibliosoft
-                    </Typography>
-                    { ( handleSearch !== undefined ) && <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
+class SearchAppBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openMenu: false,
+            anchorEl: null,
+        }
+    }
+
+    handleLanguage = (which) => () => {
+        window.location.search = `?lang=${which}`;
+        this.handleClose("openMenu")();
+    }
+    handleOpen = which => event => {
+        this.setState({
+            anchorEl: event.currentTarget,
+            [which]: true
+        })
+    }
+    handleClose = which => () => {
+        this.setState({
+            anchorEl: null,
+            [which]: false
+        })
+    }
+
+    render() {
+        const { classes, loginUser, handleSearch } = this.props;
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+                            aria-haspopup="true"
+                            color="inherit"
+                            className={classes.menuButton}
+                            onClick={this.handleOpen("openMenu")}
+                        >
+                            <MenuOutlined/>
+                        </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={this.state.anchorEl}
+                            open={this.state.openMenu}
+                            onClose={this.handleClose("openMenu")}
+                        >
+                            <MenuItem onClick={this.handleLanguage("en-US")}>
+                                English
+                            </MenuItem>
+                            <MenuItem onClick={this.handleLanguage("zh-CN")}>
+                                中文
+                            </MenuItem>
+                        </Menu>
+                        <Typography className={classes.title} variant="title" color="inherit" noWrap>
+                            Bibliosoft
+                        </Typography>
+                        { ( handleSearch !== undefined ) && <div className={classes.search}>
+                            <div className={classes.searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                onChange={handleSearch}
+                                placeholder={intl.get('basic.Search')}
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                            />
+                        </div>}
+                        <div className={classes.grow} />
+                        <div style={{marginRight: 20}}>
+                            {loginUser}
                         </div>
-                        <InputBase
-                            onChange={handleSearch}
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                        />
-                    </div>}
-                    <div className={classes.grow} />
-                    <div style={{marginRight: 20}}>
-                        {loginUser}
-                    </div>
-                    <Button
-                        color="inherit" variant="outlined"
-                        component={Link} to="/"
-                    >
-                        logout
-                        <ExitToAppOutlined style={{marginLeft: 10}}/>
-                    </Button>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+                        <Button
+                            color="inherit" variant="outlined"
+                            component={Link} to="/"
+                        >
+                            {intl.get('basic.logout')}
+                            <ExitToAppOutlined style={{marginLeft: 10}}/>
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
 SearchAppBar.propTypes = {

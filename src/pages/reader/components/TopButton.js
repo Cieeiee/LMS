@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
-import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined} from '@material-ui/icons'
+import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined, SettingsOutlined} from '@material-ui/icons'
 import LibraryRules from "./libraryRules";
 import {serverReader} from "../../../mock/config";
+import * as intl from "react-intl-universal";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import Divider from "@material-ui/core/Divider/Divider";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import Menu from "@material-ui/core/Menu/Menu";
+import IconButton from "@material-ui/core/IconButton/IconButton";
 
 const styles = theme => ({
     button: {
@@ -33,12 +39,8 @@ class IconLabelButtons extends React.Component {
 
         this.state = {
             openRules: false,
-
-            // deposit: 300,
-            // fine: 0.01,
-            // maxReturnTime: 90,
-            // maxReserveTime: 2,
-            // maxBorrowNum: 5,
+            openMenu: false,
+            anchorEl: null,
         }
     };
 
@@ -62,14 +64,22 @@ class IconLabelButtons extends React.Component {
     };
 
 
-    handleClose = () => {
-        this.setState({openRules: false});
+    handleClose = which => () => {
+        this.setState({
+            [which]: false,
+            anchorEl: null,
+        });
     };
-
-    handleClick = () => {
-        this.setState({openRules: true});
+    handleOpen = which => event => {
+        this.setState({
+            [which]: true,
+            anchorEl: event.currentTarget
+        });
     };
-
+    handleLanguage = (which) => () => {
+        window.location.search = `?lang=${which}`;
+        this.handleClose("openMenu")();
+    }
     handleLogout = () => {
         fetch(`${serverReader}/logout`).catch(e => alert(e));
         window.location.href = '/';
@@ -79,15 +89,35 @@ class IconLabelButtons extends React.Component {
         const { classes } = this.props;
         return (
             <div className={classes.topBar}>
-                <Button
+                <IconButton
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+                    aria-haspopup="true"
                     variant="outlined"
-                    // color="secondary"
                     className={classes.button}
-                    onClick={this.handleClick}
+                    onClick={this.handleOpen("openMenu")}
                 >
-                    Rules
-                    <DescriptionOutlined className={classes.iconSmall} />
-                </Button>
+                    <SettingsOutlined/>
+                </IconButton>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={this.state.anchorEl}
+                    open={this.state.openMenu}
+                    onClose={this.handleClose("openMenu")}
+                >
+                    <MenuItem onClick={this.handleLanguage("en-US")}>
+                        English
+                    </MenuItem>
+                    <MenuItem onClick={this.handleLanguage("zh-CN")}>
+                        中文
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem onClick={() => this.setState({"openRules": true, "openMenu": false})}>
+                        <ListItemIcon>
+                            <DescriptionOutlined/>
+                        </ListItemIcon>
+                        {intl.get("reader.topButton.rules")}
+                    </MenuItem>
+                </Menu>
                 <div className={classes.growBlock}/>
                 <Button
                     variant="outlined"
@@ -95,7 +125,7 @@ class IconLabelButtons extends React.Component {
                     className={classes.button}
                     component={Link} to={`/reader/${this.props.loginUser}/history`}
                 >
-                    Profile
+                    {intl.get("reader.topButton.profile")}
                     <AccountCircleOutlined className={classes.iconSmall} />
                 </Button>
                 <Button
@@ -104,7 +134,7 @@ class IconLabelButtons extends React.Component {
                     className={classes.button}
                     component={Link} to={`/reader/${this.props.loginUser}/notification`}
                 >
-                    Notification
+                    {intl.get("reader.topButton.notification")}
                     <Notifications className={classes.iconSmall}/>
                 </Button>
                 <Button
@@ -113,12 +143,12 @@ class IconLabelButtons extends React.Component {
                     className={classes.button}
                     onClick={this.handleLogout}
                 >
-                    Logout
+                    {intl.get("reader.topButton.logout")}
                     <ExitToApp className={classes.iconSmall} />
                 </Button>
                 <LibraryRules
                     open={this.state.openRules}
-                    handleClose={this.handleClose}
+                    handleClose={this.handleClose("openRules")}
                     rules={{
                         deposit: this.state.deposit,
                         fine: this.state.fine,

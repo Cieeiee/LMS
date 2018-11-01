@@ -9,6 +9,8 @@ import {withStyles} from "@material-ui/core";
 import blue from "@material-ui/core/es/colors/blue";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import NoContent from "./NoContent";
+import * as intl from "react-intl-universal";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 const styles = theme => ({
     row: {
@@ -43,11 +45,11 @@ function BorrowingTable(props) {
             <Table>
                 <TableHead className={classes.head}>
                     <TableRow>
-                        <CustomTableCell>Title</CustomTableCell>
-                        <CustomTableCell numeric>Author</CustomTableCell>
-                        <CustomTableCell numeric>Barcode</CustomTableCell>
-                        <CustomTableCell numeric>Borrow Time</CustomTableCell>
-                        {/*<CustomTableCell numeric>Fine ($)</CustomTableCell>*/}
+                        <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.author")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -60,20 +62,20 @@ function BorrowingTable(props) {
                                 <CustomTableCell numeric>{book.author}</CustomTableCell>
                                 <CustomTableCell numeric>{book.barcode}</CustomTableCell>
                                 <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                {/*<CustomTableCell numeric>{book.fine}</CustomTableCell>*/}
+                                <CustomTableCell numeric>{book.fine}</CustomTableCell>
                             </TableRow>
                         );
                     })}
                 </TableBody>
-                {/*<TableFooter>*/}
-                    {/*<TableRow>*/}
-                        {/*<CustomTableCell>Total fine ($)</CustomTableCell>*/}
-                        {/*<CustomTableCell numeric/>*/}
-                        {/*<CustomTableCell numeric/>*/}
-                        {/*<CustomTableCell numeric/>*/}
-                        {/*<CustomTableCell numeric>{props.total}</CustomTableCell>*/}
-                    {/*</TableRow>*/}
-                {/*</TableFooter>*/}
+                <TableFooter>
+                    <TableRow>
+                        <CustomTableCell>{intl.get("form.totalFine")}</CustomTableCell>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric/>
+                        <CustomTableCell numeric>{props.total}</CustomTableCell>
+                    </TableRow>
+                </TableFooter>
             </Table>}
         </Grid>
     );

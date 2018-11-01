@@ -1,12 +1,12 @@
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default function LibraryRules(props) {
     return (
@@ -16,20 +16,17 @@ export default function LibraryRules(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Library Rules"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{intl.get("reader.rules.title")}</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    {/*The following are the rules of library now.*/}
-                </DialogContentText>
                 <TextField
-                    label="Deposit"
+                    label={intl.get("admin.rules.Deposit")}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                $
+                                {intl.get("admin.rules.Deposit_unit")}
                             </InputAdornment>
                         ),
                         readOnly: true,
@@ -37,17 +34,17 @@ export default function LibraryRules(props) {
                     margin="normal"
                     fullWidth
                     defaultValue={props.rules.deposit}
-                    helperText={"The deposit you have to pay before borrowing a book."}
+                    helperText={intl.get("admin.rules.Deposit_detail")}
                 />
                 <TextField
-                    label="Fine"
+                    label={intl.get("admin.rules.Fine")}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                $/day
+                                {intl.get("admin.rules.Fine_unit")}
                             </InputAdornment>
                         ),
                         readOnly: true,
@@ -55,17 +52,17 @@ export default function LibraryRules(props) {
                     margin="normal"
                     fullWidth
                     defaultValue={props.rules.fine}
-                    helperText={"The fine you have to pay if a book haven't been returned in time"}
+                    helperText={intl.get("admin.rules.Fine_detail")}
                 />
                 <TextField
-                    label="Time to return book"
+                    label={intl.get("admin.rules.TimeToReturnBook")}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                days
+                                {intl.get("admin.rules.TimeToReturnBook_unit")}
                             </InputAdornment>
                         ),
                         readOnly: true,
@@ -73,17 +70,17 @@ export default function LibraryRules(props) {
                     margin="normal"
                     fullWidth
                     defaultValue={props.rules.maxReturnTime}
-                    helperText={"The time limit after you borrowed a book"}
+                    helperText={intl.get("admin.rules.TimeToReturnBook_detail")}
                 />
                 <TextField
-                    label="Valid Time for reserving"
+                    label={intl.get("admin.rules.ValidTimeForReserving")}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                hours
+                                {intl.get("admin.rules.ValidTimeForReserving_unit")}
                             </InputAdornment>
                         ),
                         readOnly: true,
@@ -91,17 +88,17 @@ export default function LibraryRules(props) {
                     margin="normal"
                     fullWidth
                     defaultValue={props.rules.maxReserveTime}
-                    helperText={"The duration your reservation is valid."}
+                    helperText={intl.get("admin.rules.ValidTimeForReserving_detail")}
                 />
                 <TextField
-                    label="Maximum books to borrow"
+                    label={intl.get("admin.rules.MaximumBooksToBorrow")}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                books
+                                {intl.get("admin.rules.MaximumBooksToBorrow_unit")}
                             </InputAdornment>
                         ),
                         readOnly: true,
@@ -109,12 +106,12 @@ export default function LibraryRules(props) {
                     margin="normal"
                     fullWidth
                     defaultValue={props.rules.maxBorrowNum}
-                    helperText={"The maximum number of books you can borrow at a time."}
+                    helperText={intl.get("admin.rules.MaximumBooksToBorrow_detail")}
                 />
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
-                    Close
+                    {intl.get("form.cancel")}
                 </Button>
             </DialogActions>
         </Dialog>

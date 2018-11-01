@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import React from "react";
 import NoContent from "./NoContent";
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     row: {
@@ -43,10 +44,10 @@ function ReservingTable(props) {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <CustomTableCell>Title</CustomTableCell>
-                        <CustomTableCell numeric>Author</CustomTableCell>
-                        <CustomTableCell numeric>Barcode</CustomTableCell>
-                        <CustomTableCell numeric>Reserve Time</CustomTableCell>
+                        <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.author")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.reserveTime")}</CustomTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

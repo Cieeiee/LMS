@@ -15,6 +15,7 @@ import BorrowedTableWrapped from './components/BorrowedTable'
 import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
 import {serverReader} from "../../../mock/config";
+import * as intl from "react-intl-universal";
 
 const Logo = require('../components/images/logo.jpg');
 
@@ -56,79 +57,6 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
     },
 });
-
-// info: {
-//     id: '18292027797',
-//         name: 'asd123',
-//         email: '529012380@qq.com',
-//         deposit: 300,
-// },
-// record:
-//     [
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-23-13:12',
-//             returnTime: '2017-10-16-15:38',
-//             reserveTime: null,
-//             fine: 2.23
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-23-13:12',
-//             returnTime: '2017-10-16-15:38',
-//             reserveTime: null,
-//             fine: 1.02
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-23-13:12',
-//             returnTime: null,
-//             reserveTime: null,
-//             fine: 3
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-23-13:12',
-//             returnTime: null,
-//             reserveTime: null,
-//             fine: 0
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: null,
-//             returnTime: null,
-//             reserveTime: '2017-09-24-15:05',
-//             fine: 0
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-24-16:03',
-//             returnTime: null,
-//             reserveTime: '2017-09-24-15:05',
-//             fine: 0
-//         },
-//         {
-//             title: 'To live',
-//             author: 'Yu Hua',
-//             barcode: "2389787233",
-//             borrowTime: '2017-09-24-16:03',
-//             returnTime: null,
-//             reserveTime: '2017-09-24-15:05',
-//             fine: 0
-//         },
-//     ],
 
 class ReaderHistoryClass extends React.Component {
     constructor(props) {
@@ -177,32 +105,6 @@ class ReaderHistoryClass extends React.Component {
                 borrowedTotal: undefined,
             })
         }
-        // this.setState({
-        //   info: {
-        //     id: 17768689590,
-        //     name: 'lujiacheng',
-        //     email: '1397521279@qq.com',
-        //     deposit: 300
-        //   },
-        //   borrowingRecord: [
-        //     {
-        //       title: 'The Birth of Tragedy',
-        //       author: 'Friedrich Nietzsche',
-        //       barcode: '1745237778580',
-        //       borrowTime: '2018-10-25 03:25:55'
-        //     }
-        //   ],
-        //   reservingRecord: [
-        //     {
-        //       title: 'American Gods',
-        //       author: 'Neil Gaiman',
-        //       barcode: '3905868421318',
-        //       reserveTime: '2018-10-25 03:27:15'
-        //     }
-        //   ],
-        //   borrowedRecord: [],
-        //   borrowedTotal: 0
-        // })
     };
 
     handleChange = (which) => (event, value) => {
@@ -243,7 +145,7 @@ class ReaderHistoryClass extends React.Component {
         if (this.state.updateStatus === 0) {
             this.setState({
                 updateStatus: undefined,
-                returnMessage: "Update failed."
+                returnMessage: intl.get('basic.failed')
             });
         }
         if (this.state.updateStatus === 1) {
@@ -256,7 +158,7 @@ class ReaderHistoryClass extends React.Component {
             this.setState({
                 updateStatus: undefined,
                 info: updatedInfo,
-                returnMessage: "Update success."
+                returnMessage: intl.get('basic.success')
             });
         }
     };
@@ -359,17 +261,17 @@ class ReaderHistoryClass extends React.Component {
                                                 classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
                                             >
                                                 <Tab
-                                                    label="Borrowing"
+                                                    label={intl.get("reader.history.borrowing")}
                                                     icon={<MoveToInboxOutlined />}
                                                     classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
                                                 />
                                                 <Tab
-                                                    label="Reserving"
+                                                    label={intl.get("reader.history.reserving")}
                                                     icon={<AssignmentOutlined />}
                                                     classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
                                                 />
                                                 <Tab
-                                                    label="Borrowed"
+                                                    label={intl.get("reader.history.borrowed")}
                                                     icon={<HistoryOutlined />}
                                                     classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
                                                 />

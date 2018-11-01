@@ -1,11 +1,11 @@
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default class AddDialog extends React.Component {
     constructor(props) {
@@ -25,13 +25,13 @@ export default class AddDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Add a notification</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.addNotification')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         error={this.props.formError === "messageEmpty"}
                         margin="normal"
-                        id="name"
-                        label={this.props.formError === "messageEmpty" ? "The message can not be empty" : "message"}
+                        label={this.props.formError === "messageEmpty" ?
+                            intl.get('form.messageEmpty') : intl.get('form.message')}
                         fullWidth
                         multiline
                         value={this.state.message}
@@ -41,10 +41,10 @@ export default class AddDialog extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.handleClose} color="primary">
-                        Cancel
+                        {intl.get('form.cancel')}
                     </Button>
                     <Button onClick={this.props.handleAdd(this.state.message)} color="primary">
-                        Subscribe
+                        {intl.get('form.confirm')}
                     </Button>
                 </DialogActions>
             </Dialog>

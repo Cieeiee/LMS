@@ -4,7 +4,6 @@ import ManageLibrarians from "./manageLibrarians/manageLibrarians";
 import ManageRules from "./manageRules/manageRules";
 import ApplicationFooter from "../../mock/footer";
 
-
 export default function Admin(props) {
     return (
         <div className="flex-col grow">

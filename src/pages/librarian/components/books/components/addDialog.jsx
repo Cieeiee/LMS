@@ -6,6 +6,7 @@ import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default class AddDialog extends React.Component {
     constructor(props) {
@@ -27,11 +28,11 @@ export default class AddDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Add a Book</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.addBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         margin='dense'
-                        label='image'
+                        label={intl.get('form.image')}
                         fullWidth
                         type='file'
                         accept="image/*"
@@ -45,52 +46,52 @@ export default class AddDialog extends React.Component {
                     />
                     <TextField
                         margin='dense'
-                        label='title'
+                        label={intl.get('form.title')}
                         fullWidth
                         onChange={this.handleChange('title')}
                     />
                     <TextField
                         margin='dense'
-                        label='author'
+                        label={intl.get('form.author')}
                         fullWidth
                         onChange={this.handleChange('author')}
                     />
                     <TextField
                         margin='dense'
-                        label='category'
+                        label={intl.get('form.category')}
                         fullWidth
                         onChange={this.handleChange('category')}
                     />
                     <TextField
                         margin='dense'
-                        label='location'
+                        label={intl.get('form.location')}
                         fullWidth
                         onChange={this.handleChange('location')}
                     />
                     <TextField
                         margin='dense'
-                        label='price'
+                        label={intl.get('form.price')}
                         type='number'
                         fullWidth
                         onChange={this.handleChange('price')}
                     />
                     <TextField
                         margin='dense'
-                        label='number'
+                        label={intl.get('form.number')}
                         type='number'
                         fullWidth
                         onChange={this.handleChange('number')}
                     />
                     <TextField
                         margin='dense'
-                        label='introduction'
+                        label={intl.get('form.introduction')}
                         fullWidth
                         multiline
                         onChange={this.handleChange('introduction')}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary' onClick={this.props.handleClose}>Cancel</Button>
+                    <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         disabled={!(
                             this.state.newBook.isbn &&
@@ -104,7 +105,7 @@ export default class AddDialog extends React.Component {
                         )}
                         color='primary'
                         onClick={this.props.handleAddBook(this.state.img, this.state.newBook)}
-                    >OK</Button>
+                    >{intl.get('form.confirm')}</Button>
                 </DialogActions>
             </Dialog>
         );

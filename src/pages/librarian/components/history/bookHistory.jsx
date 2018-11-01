@@ -3,6 +3,8 @@ import {Table, TableBody, TableCell, TableHead, TableRow, withStyles} from '@mat
 import blue from "@material-ui/core/es/colors/blue";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
+import * as intl from "react-intl-universal";
+import {fetchBookHistory} from "../../../../mock";
 
 const isSearched = searchTerm => item =>
     item.title.toUpperCase().includes(searchTerm.toUpperCase())
@@ -12,11 +14,16 @@ export default class BookHistory extends React.Component {
         super(props);
         this.state = {
             searchTerm: '',
+            historyList: [],
         }
     }
 
     handleSearch = e => this.setState({searchTerm: e.target.value});
 
+    async componentDidMount() {
+        const historyList = await fetchBookHistory()
+        this.setState({historyList})
+    }
 
     render() {
         return(
@@ -28,21 +35,19 @@ export default class BookHistory extends React.Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <CustomTableCell>ID</CustomTableCell>
-                                    <CustomTableCell numeric>librarian id</CustomTableCell>
-                                    <CustomTableCell numeric>barcode</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.barcode')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.librarianID')}</CustomTableCell>
                                     <CustomTableCell numeric>ISBN</CustomTableCell>
-                                    <CustomTableCell numeric>title</CustomTableCell>
-                                    <CustomTableCell numeric>date</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.date')}</CustomTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.props.list && this.props.list.filter(isSearched(this.state.searchTerm))
+                                {this.state.historyList && this.state.historyList.filter(isSearched(this.state.searchTerm))
                                     .map((item, index) =>
                                     <TableRow key={index} className="table-row">
-                                        <TableCell>{item.num}</TableCell>
+                                        <TableCell>{item.barcode}</TableCell>
                                         <TableCell numeric>{item.id}</TableCell>
-                                        <TableCell numeric>{item.barcode}</TableCell>
                                         <TableCell numeric>{item.isbn}</TableCell>
                                         <TableCell numeric>{item.title}</TableCell>
                                         <TableCell numeric>{item.date}</TableCell>

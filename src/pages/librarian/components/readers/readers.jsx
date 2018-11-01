@@ -22,6 +22,7 @@ import UpdateDialog from "./components/updateDialog";
 import DetailsDialog from "./components/detailsDialog";
 import MessageDialog from "../messageDialog";
 import { BuildOutlined } from '@material-ui/icons'
+import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
     item.id.toUpperCase().includes(searchTerm.toUpperCase())
@@ -123,12 +124,12 @@ export default class Readers extends React.Component {
             borrowedHistory: borrowed,
         });
     };
-    handleDetails = id => async () => {
-        const history = await fetchReaderHistory(id);
+    handleDetails = item => async () => {
+        const history = await fetchReaderHistory(item.id);
         await this.classifyHistory(history);
         this.setState({
             openDetails: true,
-            item: id,
+            item: item,
         })
     }
     async componentDidMount() {
@@ -146,18 +147,18 @@ export default class Readers extends React.Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <CustomTableCell>ID</CustomTableCell>
-                                    <CustomTableCell numeric>Name</CustomTableCell>
-                                    <CustomTableCell numeric>books borrowed</CustomTableCell>
-                                    <CustomTableCell numeric>books reserved</CustomTableCell>
-                                    <CustomTableCell numeric>deposit</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.account')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.name')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.booksBorrowed')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.booksReserved')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.deposit')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
                                             variant='outlined'
                                             color="inherit"
                                             onClick={this.handleOpen("openAdd", undefined)}
                                         >
-                                            add
+                                            {intl.get('basic.add')}
                                         </Button>
                                     </CustomTableCell>
                                 </TableRow>
@@ -175,7 +176,9 @@ export default class Readers extends React.Component {
                                             <IconButton onClick={this.handleOpen("openUpdate", item)}>
                                                 <BuildOutlined/>
                                             </IconButton>
-                                            <Button variant='outlined' onClick={this.handleDetails(item)}>detail</Button>
+                                            <Button variant='outlined' onClick={this.handleDetails(item)}>
+                                                {intl.get('basic.details')}
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 )}

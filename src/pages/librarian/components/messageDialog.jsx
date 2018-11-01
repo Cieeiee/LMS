@@ -1,5 +1,6 @@
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default function MessageDialog(props) {
     return (
@@ -13,7 +14,8 @@ export default function MessageDialog(props) {
             autoHideDuration={1500}
             message={
                 <span id="message-id">
-                    {props.message ? props.message : props.eventState ? 'Success' : 'Failed'}
+                    {props.message ? props.message : props.eventState ?
+                        intl.get('basic.success') : intl.get('basic.failed')}
                 </span>
             }
         />

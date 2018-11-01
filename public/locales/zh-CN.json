@@ -1,0 +1,148 @@
+{
+  "admin": {
+    "librarians": {
+      "title": "图书馆员管理",
+      "accountExists": "该管理员账号已存在"
+    },
+    "rules": {
+      "title": "规则管理",
+      "Deposit": "押金",
+      "Deposit_detail": "读者交付押金后才能成为Bibliosoft的会员",
+      "Deposit_unit": "$",
+      "Fine": "罚金",
+      "Fine_detail": "没按时归还的图书每天需要缴纳的罚金",
+      "Fine_unit": "$",
+      "TimeToReturnBook": "还书的时限",
+      "TimeToReturnBook_detail": "归还借阅图书的时间限制",
+      "TimeToReturnBook_unit": "天",
+      "ValidTimeForReserving": "预约的有效时限",
+      "ValidTimeForReserving_detail": "借阅已预约的图书的最大时间限制",
+      "ValidTimeForReserving_unit": "时",
+      "MaximumBooksToBorrow": "借阅图书数量上限",
+      "MaximumBooksToBorrow_detail": "读者能同时借阅的图书的最大数量限制",
+      "MaximumBooksToBorrow_unit": "本"
+    }
+  },
+  "reader": {
+    "history": {
+      "borrowing": "正在借阅",
+      "reserving": "正在预约",
+      "borrowed": "借阅历史",
+      "noRecords": "暂无相关记录"
+    },
+    "notification": {
+      "title": "公告"
+    },
+    "rules": {
+      "title": "图书馆规则"
+    },
+    "topButton": {
+      "rules": "规则",
+      "profile": "个人信息",
+      "notification": "公告",
+      "logout": "登出"
+    },
+    "home": {
+      "search": "搜索",
+      "category": "类别"
+    },
+    "searched": {
+      "reserve": "预约",
+      "cannotBorrow": "目前不能借阅更多的书了"
+    }
+  },
+  "librarian": {
+    "nav": {
+      "books": "书籍管理",
+      "categories": "图书分类",
+      "readers": "读者管理",
+      "deleteHistory": "书籍删除历史",
+      "notifications": "公告",
+      "summary": "信息汇总"
+    }
+  },
+  "form": {
+    "formTitle": {
+      "changePassword": "修改密码",
+      "updateInformation": "更新个人信息",
+      "addLibrarian": "增加管理员",
+      "updateLibrarian": "更新管理员信息",
+      "deleteLibrarian": "确定删除该管理员吗?",
+      "reserveBook": "确定预约这本书吗?",
+      "addBook": "增加一本书",
+      "updateBook": "更新该书",
+      "barcodes": "条形码",
+      "borrowBook": "哪位读者借了这本书？",
+      "deleteBook": "确认删除该书吗？",
+      "lostBook": "这本书丢了吗？",
+      "returnBook": "归还这本书？",
+      "addNotification": "增加一条公告",
+      "deleteNotification": "删除这条公告？",
+      "updateNotification": "修改这条公告",
+      "addReader": "增加读者",
+      "updateReader": "更新读者信息",
+      "borrowingBooks": "正借阅的图书",
+      "reservingBooks": "正预约的图书",
+      "borrowedBooks": "曾借过的图书",
+      "noBorrowing": "没有正在借阅图书。",
+      "noReserving": "没有正在预约图书。",
+      "noBorrowed": "没有曾借阅图书。",
+      "deleteReader": "删除该读者"
+    },
+    "changePassword": "修改密码",
+
+    "author": "作者",
+    "barcode": "条形码",
+    "borrowTime": "借出时间",
+    "returnTime": "归还时间",
+    "reserveTime": "预约时间",
+    "fine": "罚金 ($)",
+    "totalFine": "总罚金 ($)",
+
+    "account": "账号",
+    "name": "姓名",
+    "email": "邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "title": "书名",
+    "price": "价格",
+    "category": "类别",
+    "introduction": "介绍",
+    "location": "位置",
+    "remain": "剩余",
+    "total": "总数",
+    "number": "数量",
+    "image": "图片",
+    "librarianID": "管理员账号",
+    "date": "日期",
+    "message": "内容",
+    "timestamp": "时间",
+    "booksBorrowed": "借阅图书 (本)",
+    "booksReserved": "预定图书 (本)",
+    "deposit": "押金 ($)",
+
+    "passwordNotSame": "两次输入的密码不同！",
+    "passwordEmpty": "密码不能为空",
+    "nameEmpty": "姓名不能为空",
+    "emailEmpty": "邮箱不能为空",
+    "emailIncorrect": "邮箱格式错误",
+    "messageEmpty": "公告内容不能为空",
+
+    "cancel": "取消",
+    "confirm": "确认",
+    "close": "关闭"
+  },
+  "basic": {
+    "update": "更新",
+    "delete": "删除",
+    "add": "增加",
+    "borrow": "借出",
+    "return": "归还",
+    "lost": "丢失",
+    "details": "详情",
+    "Search": "搜索...",
+    "success": "成功",
+    "failed": "失败",
+    "logout": "登出"
+  }
+}

@@ -2,6 +2,7 @@ import { PriorityHighOutlined } from '@material-ui/icons'
 import React from "react";
 import Typography from "@material-ui/core/Typography/Typography";
 import Avatar from "@material-ui/core/Avatar/Avatar";
+import * as intl from "react-intl-universal";
 
 export default function NoContent(props) {
     return (
@@ -17,7 +18,7 @@ export default function NoContent(props) {
                     color="textSecondary"
                     variant="title"
                 >
-                    No records founded.
+                    {intl.get("librarian.history.noRecords")}
                 </Typography>
             </div>
         </div>

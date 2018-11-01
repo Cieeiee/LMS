@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { LocationOnOutlined } from '@material-ui/icons'
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     card: {
@@ -73,36 +74,35 @@ function BookClass(props) {
 
                 <CardContent>
                     <div className="flex-row">
-                        <Typography component="p" color="textSecondary">
-                            ISBN:
-                        </Typography>
-                        <Typography style={{marginLeft: 60}}>
-                            {props.book.isbn}
-                        </Typography>
-                    </div>
-                    <div className="flex-row">
-                        <Typography component="p" color="textSecondary">
-                            price:
-                        </Typography>
-                        <Typography style={{marginLeft: 60}}>
-                            ${props.book.price}
-                        </Typography>
-                    </div>
-                    <div className="flex-row">
-                        <Typography component="p" color="textSecondary">
-                            category:
-                        </Typography>
-                        <Typography style={{marginLeft: 35}}>
-                            {props.book.category}
-                        </Typography>
+                        <div className="flex-col">
+                            <Typography component="p" color="textSecondary">
+                                ISBN:
+                            </Typography>
+                            <Typography component="p" color="textSecondary">
+                                {intl.get("form.price")}:
+                            </Typography>
+                            <Typography component="p" color="textSecondary">
+                                {intl.get("form.category")}:
+                            </Typography>
+                        </div>
+                        <div className="flex-col" style={{marginLeft: 20}}>
+                            <Typography>
+                                {props.book.isbn}
+                            </Typography>
+                            <Typography>
+                                ${props.book.price}
+                            </Typography>
+                            <Typography>
+                                {props.book.category}
+                            </Typography>
+                        </div>
                     </div>
                     <Typography component="p" color="textSecondary">
-                        introduction:
+                        {intl.get("form.introduction")}:
                     </Typography>
                     <Typography component="p" style={{textIndent: '2em'}}>
                         {props.book.introduction}
                     </Typography>
-
                 </CardContent>
 
                 <div className={classes.grow}/>
@@ -110,16 +110,16 @@ function BookClass(props) {
                 <div className="flex-row">
                     <CardContent className="flex-row">
                         <Button color="primary" disabled>
-                            REMAIN: {props.book.remain}
+                            {intl.get("form.remain")}: {props.book.remain}
                         </Button>
                         <Button color="primary" disabled>
-                            TOTAL: {props.book.total}
+                            {intl.get("form.total")}: {props.book.total}
                         </Button>
                     </CardContent>
                     <div className={classes.grow}/>
                     <CardActions className="flex-row">
                         <Button color="primary" onClick={props.handleOpen("openReserve", props.book)}>
-                            reserve
+                            {intl.get("reader.searched.reserve")}
                         </Button>
                     </CardActions>
                 </div>

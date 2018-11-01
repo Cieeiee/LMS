@@ -12,6 +12,7 @@ import AddDialog from "./components/addDialog";
 import UpdateDialog from "./components/updateDialog";
 import MessageDialog from "../messageDialog";
 import BarcodeDialog from "./components/barcodeDialog";
+import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
     item.title.toUpperCase().includes(searchTerm.toUpperCase())
@@ -98,19 +99,20 @@ class Books extends React.Component {
                             <TableHead>
                                 <TableRow>
                                     <CustomTableCell>ISBN</CustomTableCell>
-                                    <CustomTableCell numeric>title</CustomTableCell>
-                                    <CustomTableCell numeric>author</CustomTableCell>
-                                    <CustomTableCell numeric>category</CustomTableCell>
-                                    <CustomTableCell numeric>location</CustomTableCell>
-                                    <CustomTableCell numeric>remain</CustomTableCell>
-                                    <CustomTableCell numeric>total</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.author')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.category')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.location')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.price')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.remain')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.total')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
                                             variant='outlined'
                                             color='inherit'
                                             onClick={this.handleOpen('openAdd', undefined)}
                                         >
-                                            add
+                                            {intl.get('basic.add')}
                                         </Button>
                                     </CustomTableCell>
                                 </TableRow>
@@ -124,6 +126,7 @@ class Books extends React.Component {
                                         <TableCell numeric>{item.author}</TableCell>
                                         <TableCell numeric>{item.category}</TableCell>
                                         <TableCell numeric>{item.location}</TableCell>
+                                        <TableCell numeric>{item.price}</TableCell>
                                         <TableCell numeric>{item.remain}</TableCell>
                                         <TableCell numeric>{item.total}</TableCell>
                                         <TableCell numeric>
@@ -135,7 +138,7 @@ class Books extends React.Component {
                                                 component={Link}
                                                 to={`/librarian/${this.props.match.params.loginUser}/books/${item.isbn}`}
                                             >
-                                                detail
+                                                {intl.get('basic.details')}
                                             </Button>
                                         </TableCell>
                                     </TableRow>

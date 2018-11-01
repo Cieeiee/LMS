@@ -6,6 +6,7 @@ import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default function DeleteDialog(props) {
     return (
@@ -14,22 +15,22 @@ export default function DeleteDialog(props) {
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
         >
-            <DialogTitle id="form-dialog-title">Confirm to delete the book?</DialogTitle>
+            <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.deleteBook')}</DialogTitle>
             <DialogContent>
                 <TextField
                     margin='dense'
-                    label='Barcode'
+                    label={intl.get('form.barcode')}
                     fullWidth
                     defaultValue={props.barcode}
                     disabled
                 />
             </DialogContent>
             <DialogActions>
-                <Button color='primary' onClick={props.handleClose}>Cancel</Button>
+                <Button color='primary' onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
                 <Button
                     color='primary'
                     onClick={props.handleDelete(props.libID, props.barcode)}
-                >OK</Button>
+                >{intl.get('form.confirm')}</Button>
             </DialogActions>
         </Dialog>
     );

@@ -14,6 +14,8 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import CategoryPage from "./searched/catagory";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
 import ApplicationFooter from "../../mock/footer";
+import * as intl from "react-intl-universal";
+import {serverReader} from "../../mock/config";
 
 const Logo = require('./components/images/logo.jpg');
 
@@ -43,7 +45,7 @@ class Home extends React.Component {
 
         this.state = {
             keywords: undefined,
-
+            categories: ["literature", "CS"],
             openCategory: false,
         };
     };
@@ -53,15 +55,12 @@ class Home extends React.Component {
             keywords: e.target.value,
         })
     };
-
     handleOpen = which => () => {
         this.setState({[which]: true});
     };
-
     handleClose = which => () => {
         this.setState({[which]: false});
     };
-
     handleSearch = which => e => {
         if (which === "keyUp" && e.keyCode !== 13) {
             return;
@@ -72,10 +71,19 @@ class Home extends React.Component {
 
         window.location.href = `/reader/${this.props.match.params.loginUser}/search/${this.state.keywords}`;
     };
-
     handleCategory = which => () => {
         window.location.href = `/reader/${this.props.match.params.loginUser}/category/${which}`;
     };
+    componentDidMount() {
+        fetch(`${serverReader}/showCategories`)
+            .then(Response => Response.json())
+            .then(result => {
+                this.setState({
+                    categories: result.categories
+                });
+            })
+            .catch(e => alert(e));
+    }
 
     render() {
         return (
@@ -84,7 +92,7 @@ class Home extends React.Component {
                     <div className='reader-page'>
                         <div className='bg' style={{backgroundImage: `url(${Logo})`}} />
                         <TextField
-                            label='search'
+                            label={intl.get("basic.Search")}
                             variant='outlined'
                             style={{width: 600, margin: '30px 0 50px 0'}}
                             value={this.state.keywords}
@@ -98,7 +106,7 @@ class Home extends React.Component {
                                 style={{marginRight: 60, width: 150}}
                                 onClick={this.handleSearch("button")}
                             >
-                                search
+                                {intl.get("reader.home.search")}
                             </Button>
                             <Button
                                 variant='outlined'
@@ -109,11 +117,12 @@ class Home extends React.Component {
                                     this.anchorEl = node;
                                 }}
                             >
-                                Category
+                                {intl.get("reader.home.category")}
                             </Button>
                             <CategorySelect
                                 open={this.state.openCategory}
                                 handleCategory={this.handleCategory}
+                                categories={this.state.categories}
                                 anchorEl={this.anchorEl}
                                 handleClose={this.handleClose}
                             />
@@ -141,8 +150,11 @@ function CategorySelect(props) {
                     <Paper>
                         <ClickAwayListener onClickAway={props.handleClose("openCategory")}>
                             <MenuList>
-                                <MenuItem onClick={props.handleCategory("literature")}>literature</MenuItem>
-                                <MenuItem onClick={props.handleCategory("CS")}>CS</MenuItem>
+                                {props.categories && props.categories.map(category =>
+                                    <MenuItem onClick={props.handleCategory(category)}>
+                                        {category}
+                                    </MenuItem>
+                                )}
                             </MenuList>
                         </ClickAwayListener>
                     </Paper>

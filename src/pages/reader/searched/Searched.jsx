@@ -4,49 +4,13 @@ import MessageDialog from '../components/messageDialog'
 import ReserveDialog from "./components/reserveDialog";
 import BookList from "./components/bookList";
 import {serverReader} from "../../../mock/config";
-
-const Alive = require('../components/images/alive.jpeg');
-const alive =  {
-    isbn: "9787506355957",
-    title: "To live",
-    author: "Yu Hua",
-    introduction: "The book 'To Live' narrates the life stories of a country man called Fu Gui. He was born into a very rich family but he loved gambling. Eventually, he lost all his possessions and became poor. His father died after knowing this, while his mother became seriously ill. Fu Gui went to find a doctor but was forced to join the army on the way. Many years later, after many trials and hardships, Fu Gui went back home and found his mother had passed away while his wife had brought up his son and daughter on her own. Unfortunately, misfortune struck this family again. Fu Gui's wife, son, daughter and grandson died one by one. It was only Fu Gui and an old bull who remained alive. Despite all, Fu Gui was still braver, calmer and more alive than ever.",
-    location: "11-111-11",
-    remain: 2,
-    total: 5,
-    price: 12.01,
-    picture: Alive,
-    category: "novel",
-};
-
-const alive1= {
-    isbn: "9787506355957",
-    title: "To live",
-    author: "Yu Hua",
-    introduction: "",
-    location: "11-111-11",
-    remain: 2,
-    total: 5,
-    price: 12.01,
-    picture: Alive,
-    category: "novel",
-};
+import * as intl from "react-intl-universal";
 
 export default class SearchedPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // bookList: [
-            //     alive,
-            //     alive,
-            //     alive1,
-            //     alive,
-            //     alive1,
-            //     alive,
-            //     alive,
-            //     alive1,
-            // ],
             bookList: [],
             keywords: undefined,
             openReserve: undefined,
@@ -85,21 +49,21 @@ export default class SearchedPage extends React.Component {
                 reserveStatus: undefined,
                 openReserve: undefined,
                 bookList: updatedBookList,
-                returnMessage: "Reserve successfully."
+                returnMessage: intl.get('basic.success')
             })
         }
         if (this.state.reserveStatus === -1) {
             this.setState({
                 reserveStatus: undefined,
                 openReserve: undefined,
-                returnMessage: "You can not borrow more books now.",
+                returnMessage: intl.get('reader.searched.cannotBorrow'),
             });
         }
         if (this.state.reserveStatus === 0) {
             this.setState({
                 reserveStatus: undefined,
                 openReserve: undefined,
-                returnMessage: "Reserve failed."
+                returnMessage: intl.get('basic.failed')
             })
         }
     };
@@ -142,7 +106,7 @@ export default class SearchedPage extends React.Component {
                 <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
                 <div style={{marginTop: 30}}>
                     {
-                        this.state.bookList !== null ?
+                        this.state.bookList ?
                             <BookList
                                 bookList={this.state.bookList}
                                 handleOpen={this.handleOpen}

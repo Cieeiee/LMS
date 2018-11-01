@@ -9,6 +9,7 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Switch from "@material-ui/core/Switch/Switch";
 import FormGroup from "@material-ui/core/FormGroup/FormGroup";
+import * as intl from "react-intl-universal";
 
 export default function EditDialog(props) {
     return (
@@ -18,19 +19,15 @@ export default function EditDialog(props) {
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
         >
-            <DialogTitle id="form-dialog-title">Edit the librarian</DialogTitle>
+            <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.updateLibrarian')}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    Please enter the new email address or the new password here.
-                </DialogContentText>
                 <TextField
                     margin="normal"
                     id="name"
-                    label="ID"
+                    label={intl.get('form.account')}
                     fullWidth
                     defaultValue={props.account !== undefined && props.account.id}
                     disabled
-                    // variant="outlined"
                 />
                 <TextField
                     error={props.formError === "emailEmpty" || props.formError === "emailIncorrect"}
@@ -38,9 +35,9 @@ export default function EditDialog(props) {
                     id="name"
                     label={
                         props.formError === "emailEmpty" ?
-                            "The email can not be empty" :
+                            intl.get('form.emailEmpty') :
                             props.formError === "emailIncorrect" ?
-                            "Incorrect email format." : "Email"
+                                intl.get('form.emailIncorrect') : intl.get('form.email')
                     }
                     type="email"
                     fullWidth
@@ -56,8 +53,8 @@ export default function EditDialog(props) {
                     id="name"
                     label={
                         props.formError === "passwordNotSame" ?
-                            "The passwords are not same!" : props.formError === "passwordEmpty" ?
-                            "The passwords can not be empty" : "Password"
+                            intl.get('form.passwordNotSame') : props.formError === "passwordEmpty" ?
+                            intl.get('form.passwordEmpty') : intl.get('form.password')
                     }
                     type="password"
                     InputLabelProps={{
@@ -75,7 +72,7 @@ export default function EditDialog(props) {
                     id="name"
                     label={
                         props.formError === "passwordNotSame" ?
-                            "The passwords are not same!" : "Confirm password"
+                            intl.get('form.passwordNotSame') : intl.get('form.confirmPassword')
                     }
                     type="password"
                     InputLabelProps={{
@@ -99,15 +96,15 @@ export default function EditDialog(props) {
                                 color="primary"
                             />
                         }
-                        label={"change password"}
+                        label={intl.get('form.changePassword')}
                     />
                 </FormGroup>
                 <div className="grow"/>
                 <Button onClick={props.handleClose} color="primary">
-                    Cancel
+                    {intl.get('form.cancel')}
                 </Button>
                 <Button onClick={props.handleEdit} color="primary">
-                    Subscribe
+                    {intl.get('form.confirm')}
                 </Button>
             </DialogActions>
         </Dialog>

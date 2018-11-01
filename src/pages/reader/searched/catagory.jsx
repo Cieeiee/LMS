@@ -4,8 +4,7 @@ import MessageDialog from '../components/messageDialog'
 import ReserveDialog from "./components/reserveDialog";
 import BookList from "./components/bookList";
 import {serverReader} from "../../../mock/config";
-
-const Alive = require('../components/images/alive.jpeg');
+import * as intl from "react-intl-universal";
 
 export default class CategoryPage extends React.Component {
     constructor(props) {
@@ -50,21 +49,21 @@ export default class CategoryPage extends React.Component {
                 reserveStatus: undefined,
                 openReserve: undefined,
                 bookList: updatedBookList,
-                returnMessage: "Reserve successfully."
+                returnMessage: intl.get('basic.success')
             })
         }
         if (this.state.reserveStatus === -1) {
             this.setState({
                 reserveStatus: undefined,
                 openReserve: undefined,
-                returnMessage: "You can not borrow more books now.",
+                returnMessage: intl.get('librarian.searched.cannotBorrow'),
             });
         }
         if (this.state.reserveStatus === 0) {
             this.setState({
                 reserveStatus: undefined,
                 openReserve: undefined,
-                returnMessage: "There is no books can be reserved now."
+                returnMessage: intl.get('basic.failed')
             })
         }
     };

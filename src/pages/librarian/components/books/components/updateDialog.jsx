@@ -9,6 +9,7 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Switch from "@material-ui/core/Switch/Switch";
 import FormGroup from "@material-ui/core/FormGroup/FormGroup";
+import * as intl from "react-intl-universal";
 
 export default class UpdateDialog extends React.Component {
     constructor(props) {
@@ -25,6 +26,7 @@ export default class UpdateDialog extends React.Component {
         if (this.props.open && !this.state.init) {
             this.setState({
                 updateBook: {
+                    isbn: this.props.book.isbn,
                     title: this.props.book.title,
                     author: this.props.book.author,
                     category: this.props.book.category,
@@ -53,39 +55,39 @@ export default class UpdateDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Update the book</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.updateBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         margin='dense'
-                        label='title'
+                        label={intl.get('form.title')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.title}
                         onChange={this.handleChange('title')}
                     />
                     <TextField
                         margin='dense'
-                        label='author'
+                        label={intl.get('form.author')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.author}
                         onChange={this.handleChange('author')}
                     />
                     <TextField
                         margin='dense'
-                        label='category'
+                        label={intl.get('form.category')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.category}
                         onChange={this.handleChange('category')}
                     />
                     <TextField
                         margin='dense'
-                        label='location'
+                        label={intl.get('form.location')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.location}
                         onChange={this.handleChange('location')}
                     />
                     <TextField
                         margin='dense'
-                        label='new price'
+                        label={intl.get('form.price')}
                         type='number'
                         fullWidth
                         defaultValue={this.props.book && this.props.book.price}
@@ -93,7 +95,7 @@ export default class UpdateDialog extends React.Component {
                     />
                     <TextField
                         margin='dense'
-                        label='introduction'
+                        label={intl.get('form.introduction')}
                         multiline
                         fullWidth
                         defaultValue={this.props.book && this.props.book.introduction}
@@ -101,7 +103,7 @@ export default class UpdateDialog extends React.Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary' onClick={this.props.handleClose}>Cancel</Button>
+                    <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         disabled={!(
                             this.state.updateBook.title &&
@@ -113,7 +115,7 @@ export default class UpdateDialog extends React.Component {
                         )}
                         color='primary'
                         onClick={this.props.handleUpdateBook(this.state.updateBook)}
-                    >OK</Button>
+                    >{intl.get('form.confirm')}</Button>
                 </DialogActions>
             </Dialog>
         );

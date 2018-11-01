@@ -8,10 +8,22 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { Notifications, ExitToApp, Home, DescriptionOutlined, AccountCircleOutlined } from '@material-ui/icons'
+import {
+    Notifications,
+    ExitToApp,
+    Home,
+    DescriptionOutlined,
+    AccountCircleOutlined,
+    MenuOutlined
+} from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import LibraryRules from "./libraryRules";
 import {serverReader} from "../../../mock/config";
+import Menu from "@material-ui/core/Menu/Menu";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import Divider from "@material-ui/core/Divider/Divider";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     root: {
@@ -26,7 +38,7 @@ const styles = theme => ({
         // fontSize: 20
     },
     title: {
-        marginLeft: 10,
+        // marginLeft: 10,
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
@@ -88,13 +100,9 @@ class PrimarySearchAppBar extends React.Component {
         super(props);
         this.state = {
             keywords: undefined,
-
+            anchorEl: null,
             openRules: false,
-            // deposit: 300,
-            // fine: 0.01,
-            // maxReturnTime: 90,
-            // maxReserveTime: 2,
-            // maxBorrowNum: 5,
+            openMenu: false,
         }
     }
 
@@ -132,13 +140,24 @@ class PrimarySearchAppBar extends React.Component {
         window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}`;
     };
 
-    handleClick = () => {
-        this.setState({openRules: true});
+    handleOpen = which => event => {
+        this.setState({
+            [which]: true,
+            anchorEl: event.currentTarget
+        });
     };
 
-    handleClose = () => {
-        this.setState({openRules: false});
+    handleClose = which => () => {
+        this.setState({
+            [which]: false,
+            anchorEl: null,
+        });
     };
+
+    handleLanguage = (which) => () => {
+        window.location.search = `?lang=${which}`;
+        this.handleClose("openMenu")();
+    }
 
     componentDidMount() {
         this.getAllRules();
@@ -152,12 +171,34 @@ class PrimarySearchAppBar extends React.Component {
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton
-                            className={classes.menuButton}
+                            aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+                            aria-haspopup="true"
                             color="inherit"
-                            component={Link} to={`/reader/${this.props.loginUser}`}
+                            className={classes.menuButton}
+                            onClick={this.handleOpen("openMenu")}
                         >
-                            <Home />
+                            <MenuOutlined/>
                         </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={this.state.anchorEl}
+                            open={this.state.openMenu}
+                            onClose={this.handleClose("openMenu")}
+                        >
+                            <MenuItem onClick={this.handleLanguage("en-US")}>
+                                English
+                            </MenuItem>
+                            <MenuItem onClick={this.handleLanguage("zh-CN")}>
+                                中文
+                            </MenuItem>
+                            <Divider/>
+                            <MenuItem component={Link} to={`/reader/${this.props.loginUser}`}>
+                                <ListItemIcon>
+                                    <Home/>
+                                </ListItemIcon>
+                                Home
+                            </MenuItem>
+                        </Menu>
                         <Typography className={classes.title} variant="title" color="inherit" noWrap>
                             Bibliosoft
                         </Typography>
@@ -168,7 +209,7 @@ class PrimarySearchAppBar extends React.Component {
                                     <SearchIcon/>
                                 </div>
                                 <InputBase
-                                    placeholder="Search…"
+                                    placeholder={intl.get("basic.Search")}
                                     classes={{
                                         root: classes.inputRoot,
                                         input: classes.inputInput,
@@ -179,7 +220,7 @@ class PrimarySearchAppBar extends React.Component {
                                 />
                             </div>}
                         <div className={classes.sectionDesktop}>
-                            <IconButton color="inherit" onClick={this.handleClick}>
+                            <IconButton color="inherit" onClick={this.handleOpen("openRules")}>
                                 <DescriptionOutlined />
                             </IconButton>
                             <IconButton color="inherit" component={Link}
@@ -203,7 +244,7 @@ class PrimarySearchAppBar extends React.Component {
                 </AppBar>
                 <LibraryRules
                     open={this.state.openRules}
-                    handleClose={this.handleClose}
+                    handleClose={this.handleClose("openRules")}
                     rules={{
                         deposit: this.state.deposit,
                         fine: this.state.fine,

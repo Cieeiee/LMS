@@ -1,6 +1,5 @@
 import React from "react";
 import {TopBar} from "../components/TopBar";
-import {DescriptionOutlined} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
 import '../admin.scss'
@@ -11,19 +10,13 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
 import MessageDialog from '../components/messageDialog'
 import {serverAdmin} from "../../../mock/config";
+import * as intl from "react-intl-universal";
 
 export default class ManageRules extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // deposit: 300,
-            // fine: 0.01,
-            // maxReturnTime: 90,
-            // maxReserveTime: 2,
-            // maxBorrowNum: 5,
-
-
             changingID: undefined,
             returnMessage: undefined,
         };
@@ -92,13 +85,13 @@ export default class ManageRules extends React.Component {
         if (this.state.status === 1){
             this.setState({
                 status: undefined,
-                returnMessage: `${this.encode[this.state.changingID]} change success.`
+                returnMessage: intl.get('basic.success')
             });
         }
         if (this.state.status === 0) {
             this.setState({
                 status: undefined,
-                returnMessage: `${this.encode[this.state.changingID]} change failed.`
+                returnMessage: intl.get('basic.failed')
             });
         }
     };
@@ -113,9 +106,8 @@ export default class ManageRules extends React.Component {
                     <div className="flex-row"
                          style={{marginBottom: 10}}
                     >
-                        <DescriptionOutlined style={{fontSize: 50}} className="col-mid"/>
                         <Typography style={{fontSize: 50, marginLeft: 5}} className="col-mid">
-                            Rules Management
+                            {intl.get('admin.rules.title')}
                         </Typography>
                     </div>
 
@@ -125,16 +117,18 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title" gutterBottom>Deposit</Typography>
+                                        <Typography variant="title" gutterBottom>
+                                            {intl.get('admin.rules.Deposit')}
+                                        </Typography>
                                         <Typography variant="body1" color="textSecondary">
-                                            Paid by the reader to become the member of the Bibliosoft.
+                                            {intl.get('admin.rules.Deposit_detail')}
                                         </Typography>
                                     </div>
                                     <div className="grow"/>
                                     <TextField
                                         error={this.state.formError === "0empty"}
-                                        helperText={this.state.formError === "0empty" && "Please input right format!"}
-                                        label="Deposit"
+                                        helperText={this.state.formError === "0empty" && intl.get('form.wrongFormat')}
+                                        label={intl.get('admin.rules.Deposit')}
                                         type="number"
                                         InputLabelProps={{
                                             shrink: true,
@@ -142,7 +136,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    $
+                                                    {intl.get('admin.rules.Deposit_unit')}
                                                 </InputAdornment>
                                             ),
                                         }}
@@ -165,16 +159,18 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title" gutterBottom>Fine</Typography>
+                                        <Typography variant="title" gutterBottom>
+                                            {intl.get('admin.rules.Fine')}
+                                        </Typography>
                                         <Typography variant="body1" color="textSecondary">
-                                            Paid for the book which doesn't return in time.
+                                            {intl.get('admin.rules.Fine_detail')}
                                         </Typography>
                                     </div>
                                     <div className="grow"/>
                                     <TextField
                                         error={this.state.formError === "1empty"}
                                         helperText={this.state.formError === "1empty" && "Please input right format!"}
-                                        label="Fine"
+                                        label={intl.get('admin.rules.Fine')}
                                         type="number"
                                         InputLabelProps={{
                                             shrink: true,
@@ -182,7 +178,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    $/day
+                                                    {intl.get('admin.rules.Fine_unit')}
                                                 </InputAdornment>
                                             ),
                                         }}
@@ -202,16 +198,18 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title" gutterBottom>Time to return book</Typography>
+                                        <Typography variant="title" gutterBottom>
+                                            {intl.get('admin.rules.TimeToReturnBook')}
+                                        </Typography>
                                         <Typography variant="body1" color="textSecondary">
-                                            Time limit for returning the book after borrowing.
+                                            {intl.get('admin.rules.TimeToReturnBook_detail')}
                                         </Typography>
                                     </div>
                                     <div className="grow"/>
                                     <TextField
                                         error={this.state.formError === "2empty"}
                                         helperText={this.state.formError === "2empty" && "Please input right format!"}
-                                        label="Time to return book"
+                                        label={intl.get('admin.rules.TimeToReturnBook')}
                                         type="number"
                                         InputLabelProps={{
                                             shrink: true,
@@ -219,7 +217,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    days
+                                                    {intl.get('admin.rules.TimeToReturnBook_unit')}
                                                 </InputAdornment>
                                             ),
                                         }}
@@ -239,16 +237,18 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title" gutterBottom>Valid Time for reserving</Typography>
+                                        <Typography variant="title" gutterBottom>
+                                            {intl.get('admin.rules.ValidTimeForReserving')}
+                                        </Typography>
                                         <Typography variant="body1" color="textSecondary">
-                                            The valid time that a reader can borrow the book reserved after reserving.
+                                            {intl.get('admin.rules.ValidTimeForReserving_detail')}
                                         </Typography>
                                     </div>
                                     <div className="grow"/>
                                     <TextField
                                         error={this.state.formError === "3empty"}
                                         helperText={this.state.formError === "3empty" && "Please input right format!"}
-                                        label="Valid Time for reserving"
+                                        label={intl.get('admin.rules.ValidTimeForReserving')}
                                         type="number"
                                         InputLabelProps={{
                                             shrink: true,
@@ -256,7 +256,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    hours
+                                                    {intl.get('admin.rules.ValidTimeForReserving_unit')}
                                                 </InputAdornment>
                                             ),
                                         }}
@@ -276,16 +276,18 @@ export default class ManageRules extends React.Component {
                             <Paper style={{padding: 20}}>
                                 <div className="flex-row">
                                     <div>
-                                        <Typography variant="title" gutterBottom>Maximum books to borrow</Typography>
+                                        <Typography variant="title" gutterBottom>
+                                            {intl.get('admin.rules.MaximumBooksToBorrow')}
+                                        </Typography>
                                         <Typography variant="body1" color="textSecondary">
-                                            The maximum number of books that a reader can borrow meanwhile.
+                                            {intl.get('admin.rules.MaximumBooksToBorrow_detail')}
                                         </Typography>
                                     </div>
                                     <div className="grow"/>
                                     <TextField
                                         error={this.state.formError === "4empty"}
                                         helperText={this.state.formError === "4empty" && "Please input right format!"}
-                                        label="Maximum books to borrow"
+                                        label={intl.get('admin.rules.MaximumBooksToBorrow')}
                                         type="number"
                                         InputLabelProps={{
                                             shrink: true,
@@ -293,7 +295,7 @@ export default class ManageRules extends React.Component {
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment variant="outlined" position="start">
-                                                    books
+                                                    {intl.get('admin.rules.MaximumBooksToBorrow_unit')}
                                                 </InputAdornment>
                                             ),
                                         }}

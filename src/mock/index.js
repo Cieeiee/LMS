@@ -45,7 +45,7 @@ export const fetchAddBook = async newBook => {
 //
 export const fetchUpdateBook = async updateBook => {
   try {
-    const Response = await fetch(`${baseUrl}/updateBook`, {
+    const Response = await fetch(`${baseUrl}/librarian/updateBook`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

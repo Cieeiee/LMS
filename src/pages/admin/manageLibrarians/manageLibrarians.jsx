@@ -9,7 +9,7 @@ import blue from "@material-ui/core/es/colors/blue";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import Paper from "@material-ui/core/Paper/Paper";
 import Button from "@material-ui/core/Button/Button";
-import { CreateOutlined, DeleteOutlined, PeopleOutlined } from "@material-ui/icons"
+import { CreateOutlined, DeleteOutlined, SearchOutlined } from "@material-ui/icons"
 import Typography from "@material-ui/core/Typography/Typography";
 import MessageDialog from '../components/messageDialog'
 import DeleteDialog from './components/deleteDialog'
@@ -17,6 +17,9 @@ import AddDialog from './components/addDialog'
 import EditDialog from './components/editDialog'
 import '../admin.scss'
 import {serverAdmin} from "../../../mock/config";
+import TextField from "@material-ui/core/TextField/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
+import * as intl from "react-intl-universal";
 
 const styles = theme => ({
     row: {
@@ -26,24 +29,8 @@ const styles = theme => ({
     },
 });
 
-const librariansExample = [
-    {
-        id: 'xzcq123',
-        email: '5124925467@qq.com'
-    },
-    {
-        id: 'xq',
-        email: '1231847819@qq.com'
-    },
-    {
-        id: 'zsljfd',
-        email: '1509481267@qq.com'
-    },
-    {
-        id: 'xz23',
-        email: '1294535467@qq.com'
-    }
-    ];
+const isSearched = searchTerm => item =>
+    item.id.toUpperCase().includes(searchTerm.toUpperCase());
 
 class ManageLibrariansClass extends React.Component {
     constructor(props) {
@@ -51,20 +38,15 @@ class ManageLibrariansClass extends React.Component {
 
         this.state = {
             librarians: [],
-            // librarians: librariansExample,
             openDelete: undefined,
             openEdit: undefined,
             openAdd: false,
             returnMessage: undefined,
 
-            ID: undefined,
-            email: undefined,
-            password: undefined,
-            confirmPassword: undefined,
-
-            changePassword: false,
             formError: undefined,
             status: undefined,
+
+            searchTerm: '',
         }
     }
 
@@ -84,10 +66,6 @@ class ManageLibrariansClass extends React.Component {
             openEdit: undefined,
             openAdd: false,
             returnMessage: undefined,
-            ID: undefined,
-            email: undefined,
-            password: undefined,
-            confirmPassword: undefined,
             formError: undefined,
         });
     };
@@ -128,7 +106,7 @@ class ManageLibrariansClass extends React.Component {
             this.setState({
                 deleteStatus: undefined,
                 openDelete: undefined,
-                returnMessage: "Delete failed."
+                returnMessage: intl.get('basic.failed')
             });
         }
         if (this.state.deleteStatus === 1) {
@@ -139,7 +117,7 @@ class ManageLibrariansClass extends React.Component {
                 deleteStatus: undefined,
                 openDelete: undefined,
                 librarians: updated_librarians,
-                returnMessage: "Delete success."
+                returnMessage: intl.get('basic.success')
             });
         }
     }
@@ -189,7 +167,7 @@ class ManageLibrariansClass extends React.Component {
             this.setState({
                 editStatus: undefined,
                 openEdit: undefined,
-                returnMessage: "Update failed."
+                returnMessage: intl.get('basic.failed')
             });
         }
         if (this.state.editStatus === 1) {
@@ -204,7 +182,7 @@ class ManageLibrariansClass extends React.Component {
                 editStatus: undefined,
                 openEdit: undefined,
                 librarians: updated_librarians,
-                returnMessage: "Update success."
+                returnMessage: intl.get('basic.success')
             });
         }
     };
@@ -256,14 +234,14 @@ class ManageLibrariansClass extends React.Component {
             this.setState({
                 addStatus: undefined,
                 openAdd: false,
-                returnMessage: "Add Librarian failed."
+                returnMessage: intl.get('basic.failed')
             });
         }
         if (this.state.addStatus === 0) {
             this.setState({
                 addStatus: undefined,
                 openAdd: false,
-                returnMessage: "The ID of the librarian already exists."
+                returnMessage: intl.get('admin.librarians.accountExists')
             });
         }
         if (this.state.addStatus === 1) {
@@ -276,7 +254,7 @@ class ManageLibrariansClass extends React.Component {
                 addStatus: undefined,
                 openAdd: false,
                 librarians: updated_librarians,
-                returnMessage: "Add Librarian success."
+                returnMessage: intl.get('basic.success')
             });
         }
     };
@@ -308,29 +286,40 @@ class ManageLibrariansClass extends React.Component {
 
         return (
             <React.Fragment>
-                <TopBar />
+                <TopBar/>
                 <div className="mid-div flex-col">
                     <div className="flex-row"
                         style={{marginBottom: 10}}
                     >
-                        <PeopleOutlined style={{
-                            fontSize: 50,
-                            marginTop: "auto",
-                            marginBottom: "auto",
-                            marginRight: 5,
-                        }}/>
                         <Typography style={{fontSize: 50}} className="col-mid">
-                            Librarians Management
+                            {intl.get('admin.librarians.title')}
                         </Typography>
-                        <div className="grow"/>
-                        <Button variant="outlined" color="secondary"
-                                style={{
-                                    marginTop: 27,
-                                    height: 40
+                    </div>
+                    <div className="flex-row" style={{marginBottom: 10}}>
+                        <div className="flex-row">
+                            {/*<SearchOutlined style={{margin: "auto auto"}}/>*/}
+                            <TextField
+                                style={{margin: "auto auto"}}
+                                placeholder={intl.get('basic.Search')}
+                                value={this.state.searchTerm}
+                                onChange={this.handleChange("searchTerm")}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchOutlined />
+                                        </InputAdornment>
+                                    ),
                                 }}
-                                onClick={this.handleOpen("openAdd", true)}
+                            />
+                        </div>
+                        <div className="grow"/>
+                        <Button
+                            variant="outlined"
+                            color="inherit"
+                            style={{width: 150}}
+                            onClick={this.handleOpen("openAdd", true)}
                         >
-                            Add Librarian
+                            {intl.get('basic.add')}
                         </Button>
                         <AddDialog handleClose={this.handleClose}
                                    handleAdd={this.handleAdd}
@@ -348,14 +337,15 @@ class ManageLibrariansClass extends React.Component {
                         <Table>
                             <TableHead className={classes.head}>
                                 <TableRow>
-                                    <CustomTableCell>Account</CustomTableCell>
-                                    <CustomTableCell>Email</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.account')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.email')}</CustomTableCell>
                                     <CustomTableCell/>
                                     <CustomTableCell/>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.librarians.map(librarian => {
+                                {this.state.librarians.filter(isSearched(this.state.searchTerm))
+                                    .map(librarian => {
                                     return (
                                         <TableRow className={classes.row} key={librarian.id}>
                                             <CustomTableCell component="th" scope="row">
@@ -365,13 +355,13 @@ class ManageLibrariansClass extends React.Component {
                                             <CustomTableCell padding="checkbox">
                                                 <Button onClick={this.handleOpen("openEdit", librarian)}>
                                                     <CreateOutlined style={{marginRight: 3}}/>
-                                                    Edit
+                                                    {intl.get('basic.update')}
                                                 </Button>
                                             </CustomTableCell>
                                             <CustomTableCell padding="checkbox">
                                                 <Button onClick={this.handleOpen("openDelete", librarian)}>
                                                     <DeleteOutlined style={{marginRight: 3}}/>
-                                                    Delete
+                                                    {intl.get('basic.delete')}
                                                 </Button>
                                             </CustomTableCell>
                                         </TableRow>
@@ -395,6 +385,7 @@ class ManageLibrariansClass extends React.Component {
                         <DeleteDialog
                             handleClose={this.handleClose}
                             handleDelete={this.handleDelete(this.state.openDelete)}
+                            account={this.state.openDelete}
                             open={this.state.openDelete !== undefined}
                         />
                         <MessageDialog

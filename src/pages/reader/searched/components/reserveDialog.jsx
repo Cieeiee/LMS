@@ -5,6 +5,8 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
+import * as intl from "react-intl-universal";
+import {TextField} from "@material-ui/core";
 
 export default function ReserveDialog(props) {
     return (
@@ -14,18 +16,23 @@ export default function ReserveDialog(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Reserve the book?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{intl.get('form.formTitle.reserveBook')}</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Once you reserve the book, the book will been reserved for you.
-                </DialogContentText>
+                <TextField
+                    margin="normal"
+                    id="name"
+                    label={intl.get('form.title')}
+                    fullWidth
+                    defaultValue={props.book !== undefined && props.book.title}
+                    disabled
+                />
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
-                    Cancel
+                    {intl.get('form.cancel')}
                 </Button>
                 <Button onClick={props.handleReserve(props.book)} color="primary" autoFocus>
-                    Ok
+                    {intl.get('form.confirm')}
                 </Button>
             </DialogActions>
         </Dialog>

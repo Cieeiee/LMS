@@ -13,6 +13,7 @@ import DeleteDialog from "./components/deleteDialog";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import MessageDialog from "../messageDialog";
+import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
     item.message.toUpperCase().includes(searchTerm.toUpperCase())
@@ -137,16 +138,21 @@ export default class LibrarianNotifications extends React.Component {
                 <div style={{width: '100%'}} className="flex-row">
                     {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "notifications"})}
                     <div className="grow">
-                        <Button
-                            color="primary"
-                            style={{
-                                margin: "20px auto 20px auto"
-                            }}
-                            onClick={this.handleOpen("openAdd", undefined)}
-                            fullWidth
-                        >
-                            Add Notification
-                        </Button>
+                        <div className="flex-row">
+                            <div className="grow"/>
+                            <Button
+                                color="secondary"
+                                style={{margin: "20px 20px"}}
+                                onClick={this.handleOpen("openAdd", undefined)}
+                                variant="contained"
+                                size="large"
+                            >
+                                {intl.get('basic.add')}
+                            </Button>
+                        </div>
+                        <List>
+                            {MessageLists}
+                        </List>
                         <AddDialog handleClose={this.handleClose("openAdd")}
                                    handleAdd={this.handleAdd}
                                    handleChange={this.handleChange}
@@ -155,9 +161,6 @@ export default class LibrarianNotifications extends React.Component {
                                    formError={this.state.formError}
                                    open={this.state.openAdd}
                         />
-                        <List>
-                            {MessageLists}
-                        </List>
                         <EditDialog
                             handleClose={this.handleClose("openEdit")}
                             handleEdit={this.handleEdit}
@@ -201,10 +204,10 @@ function OneNotification(props) {
                 secondary={props.notifications.timestamp}
             />
             <Button onClick={props.openEdit}>
-                update
+                {intl.get('basic.update')}
             </Button>
             <Button onClick={props.openDelete}>
-                delete
+                {intl.get('basic.delete')}
             </Button>
         </ListItem>
     );

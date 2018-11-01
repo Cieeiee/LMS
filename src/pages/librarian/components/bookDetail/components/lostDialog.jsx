@@ -5,6 +5,7 @@ import {DialogContentText, TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
+import * as intl from "react-intl-universal";
 
 export default class LostDialog extends React.Component {
     constructor(props) {
@@ -24,25 +25,18 @@ export default class LostDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Which reader lost the book?</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.lostBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         margin='dense'
-                        label='Barcode'
+                        label={intl.get('form.barcode')}
                         fullWidth
                         defaultValue={this.props.barcode}
                         disabled
                     />
-                    <TextField
-                        autoFocus
-                        margin='dense'
-                        label='Reader ID'
-                        fullWidth
-                        onChange={this.handleChange('readerID')}
-                    />
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary' onClick={this.props.handleClose}>Cancel</Button>
+                    <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         color='primary'
                         onClick={this.props.handleBorrow({
@@ -50,7 +44,7 @@ export default class LostDialog extends React.Component {
                             barcode: this.props.barcode,
                             state: 0
                         })}
-                    >OK</Button>
+                    >{intl.get('basic.confirm')}</Button>
                 </DialogActions>
             </Dialog>
         );
