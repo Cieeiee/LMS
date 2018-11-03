@@ -143,8 +143,10 @@ export default class BookDetails extends React.Component {
                                 <TableRow>
                                     <TableCell>{intl.get('form.barcode')}</TableCell>
                                     <TableCell>{intl.get('form.title')}</TableCell>
-                                    <TableCell numeric>{intl.get('basic.borrow')}/{intl.get('basic.return')}</TableCell>
-                                    <TableCell numeric>{intl.get('basic.delete')}</TableCell>
+                                    {/*<TableCell numeric>{intl.get('basic.borrow')}/{intl.get('basic.return')}</TableCell>*/}
+                                    {/*<TableCell numeric>{intl.get('basic.delete')}</TableCell>*/}
+                                    <TableCell/>
+                                    <TableCell/>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

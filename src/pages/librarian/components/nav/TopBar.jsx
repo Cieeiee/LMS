@@ -133,19 +133,20 @@ class SearchAppBar extends React.Component {
                         <Typography className={classes.title} variant="title" color="inherit" noWrap>
                             Bibliosoft
                         </Typography>
-                        { ( handleSearch !== undefined ) && <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                onChange={handleSearch}
-                                placeholder={intl.get('basic.Search')}
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                            />
-                        </div>}
+                        { ( handleSearch !== undefined ) &&
+                            <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <SearchIcon />
+                                </div>
+                                <InputBase
+                                    onChange={handleSearch}
+                                    placeholder={intl.get('basic.Search')}
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                />
+                            </div>}
                         <div className={classes.grow} />
                         <div style={{marginRight: 20}}>
                             {loginUser}

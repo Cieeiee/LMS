@@ -10,6 +10,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Switch from "@material-ui/core/Switch/Switch";
 import FormGroup from "@material-ui/core/FormGroup/FormGroup";
 import * as intl from "react-intl-universal";
+import InputLabel from "@material-ui/core/InputLabel/InputLabel";
+import Select from "@material-ui/core/Select/Select";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import FormControl from "@material-ui/core/FormControl/FormControl";
 
 export default class UpdateDialog extends React.Component {
     constructor(props) {
@@ -17,11 +21,15 @@ export default class UpdateDialog extends React.Component {
         this.state = {
             updateBook: {},
             init: false,
+            category: undefined,
         }
     }
 
     handleChange = name => e => this.setState({updateBook: {...this.state.updateBook, [name]: e.target.value}})
-
+    handleChangeSelect = event => {this.setState({
+        category: event.target.value,
+        updateBook: {...this.state.updateBook, category: this.state.category}})
+    }
     handleInit = () => {
         if (this.props.open && !this.state.init) {
             this.setState({
@@ -34,6 +42,7 @@ export default class UpdateDialog extends React.Component {
                     location: this.props.book.location,
                     price: this.props.book.price,
                 },
+                category: this.props.book.category,
                 init: true
             })
         }
@@ -71,13 +80,22 @@ export default class UpdateDialog extends React.Component {
                         defaultValue={this.props.book && this.props.book.author}
                         onChange={this.handleChange('author')}
                     />
-                    <TextField
-                        margin='dense'
-                        label={intl.get('form.category')}
-                        fullWidth
-                        defaultValue={this.props.book && this.props.book.category}
-                        onChange={this.handleChange('category')}
-                    />
+                    <FormControl fullWidth>
+                        <InputLabel>{intl.get('form.category')}</InputLabel>
+                        <Select
+                            onChange={this.handleChangeSelect}
+                            value={this.state.category}
+                        >
+                            { intl.getInitOptions().currentLocale === 'en-US' ?
+                                this.props.categories.map(category =>
+                                    <MenuItem value={category.en}>{category.en}</MenuItem>
+                                ) :
+                                this.props.categories.map(category =>
+                                    <MenuItem value={category.zh}>{category.zh}</MenuItem>
+                                )
+                            }
+                        </Select>
+                    </FormControl>
                     <TextField
                         margin='dense'
                         label={intl.get('form.location')}

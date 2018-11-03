@@ -7,18 +7,27 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
 import * as intl from "react-intl-universal";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import InputLabel from "@material-ui/core/InputLabel/InputLabel";
+import Select from "@material-ui/core/Select/Select";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 
 export default class AddDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             newBook: {},
+            category: '',
             img: null,
         }
     }
 
     handleChange = name => e => this.setState({newBook: {...this.state.newBook, [name]: e.target.value}})
-
+    handleChangeSelect = event => {this.setState({
+        category: event.target.value,
+        newBook: {...this.state.newBook, category: this.state.category}
+        })
+    }
     handleImg = e => this.setState({img: e.target.files[0]})
 
     render() {
@@ -56,12 +65,22 @@ export default class AddDialog extends React.Component {
                         fullWidth
                         onChange={this.handleChange('author')}
                     />
-                    <TextField
-                        margin='dense'
-                        label={intl.get('form.category')}
-                        fullWidth
-                        onChange={this.handleChange('category')}
-                    />
+                    <FormControl fullWidth>
+                        <InputLabel>{intl.get('form.category')}</InputLabel>
+                        <Select
+                            value={this.state.category}
+                            onChange={this.handleChangeSelect}
+                        >
+                            { intl.getInitOptions().currentLocale === 'en-US' ?
+                                this.props.categories.map(category =>
+                                    <MenuItem value={category.en}>{category.en}</MenuItem>
+                                ) :
+                                this.props.categories.map(category =>
+                                    <MenuItem value={category.zh}>{category.zh}</MenuItem>
+                                )
+                            }
+                        </Select>
+                    </FormControl>
                     <TextField
                         margin='dense'
                         label={intl.get('form.location')}

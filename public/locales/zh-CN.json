@@ -87,7 +87,10 @@
       "noBorrowing": "没有正在借阅图书。",
       "noReserving": "没有正在预约图书。",
       "noBorrowed": "没有曾借阅图书。",
-      "deleteReader": "删除该读者"
+      "deleteReader": "删除该读者",
+      "addCategory": "增加一个分类",
+      "deleteCategory": "删除该分类？",
+      "updateCategory": "修改该分类"
     },
     "changePassword": "修改密码",
 
@@ -118,7 +121,7 @@
     "message": "内容",
     "timestamp": "时间",
     "booksBorrowed": "借阅图书 (本)",
-    "booksReserved": "预定图书 (本)",
+    "booksReserved": "预约图书 (本)",
     "deposit": "押金 ($)",
 
     "passwordNotSame": "两次输入的密码不同！",
@@ -127,7 +130,11 @@
     "emailEmpty": "邮箱不能为空",
     "emailIncorrect": "邮箱格式错误",
     "messageEmpty": "公告内容不能为空",
+    "enEmpty": "分类的英文不能为空",
+    "zhEmpty": "分类的中文不能为空",
 
+    "English": "英文",
+    "Chinese": "中文",
     "cancel": "取消",
     "confirm": "确认",
     "close": "关闭"

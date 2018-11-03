@@ -7,7 +7,7 @@ import blue from "@material-ui/core/es/colors/blue";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import {Link} from "react-router-dom";
-import {fetchAddBook, fetchBookList, fetchDownload, fetchUpdateBook} from "../../../../mock";
+import {fetchAddBook, fetchBookList, fetchDownload, fetchShowCategories, fetchUpdateBook} from "../../../../mock";
 import AddDialog from "./components/addDialog";
 import UpdateDialog from "./components/updateDialog";
 import MessageDialog from "../messageDialog";
@@ -15,7 +15,11 @@ import BarcodeDialog from "./components/barcodeDialog";
 import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
-    item.title.toUpperCase().includes(searchTerm.toUpperCase())
+    item.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.author.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.category.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.isbn.indexOf(searchTerm) === 0 ||
+    item.location.includes(searchTerm)
 
 class Books extends React.Component {
     constructor(props) {
@@ -23,6 +27,7 @@ class Books extends React.Component {
 
         this.state = {
             bookList: [],
+            categories: [],
             searchTerm: '',
             openAdd: false,
             openUpdate: false,
@@ -84,7 +89,18 @@ class Books extends React.Component {
 
     async componentDidMount() {
         const bookList = await fetchBookList();
-        this.setState({bookList});
+        // const categories = await fetchShowCategories();
+        const categories = [
+            {
+                en: "Literature",
+                zh: "文学"
+            },
+            {
+                en: "CS",
+                zh: "计算机科学与技术"
+            }
+        ]
+        this.setState({bookList, categories});
     }
 
 
@@ -130,7 +146,10 @@ class Books extends React.Component {
                                         <TableCell numeric>{item.remain}</TableCell>
                                         <TableCell numeric>{item.total}</TableCell>
                                         <TableCell numeric>
-                                            <IconButton onClick={this.handleOpen('openUpdate', item)}>
+                                            <IconButton
+                                                onClick={this.handleOpen('openUpdate', item)}
+                                                style={{marginRight: 10}}
+                                            >
                                                 <BuildOutlined/>
                                             </IconButton>
                                             <Button
@@ -148,6 +167,7 @@ class Books extends React.Component {
                         <AddDialog
                             open={this.state.openAdd}
                             handleClose={this.handleClose("openAdd")}
+                            categories={this.state.categories}
                             handleAddBook={this.handleAddBook}
                         />
                         <BarcodeDialog
@@ -159,6 +179,7 @@ class Books extends React.Component {
                             open={this.state.openUpdate}
                             handleClose={this.handleClose("openUpdate")}
                             handleUpdateBook={this.handleUpdateBook}
+                            categories={this.state.categories}
                             book={this.state.item}
                         />
                         <MessageDialog

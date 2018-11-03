@@ -25,7 +25,8 @@ import { BuildOutlined } from '@material-ui/icons'
 import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
-    item.id.toUpperCase().includes(searchTerm.toUpperCase())
+    item.id.indexOf(searchTerm) === 0 ||
+    item.name.toUpperCase().includes(searchTerm.toUpperCase())
 
 export default class Readers extends React.Component {
     constructor(props) {
@@ -173,7 +174,10 @@ export default class Readers extends React.Component {
                                         <TableCell numeric>{item.booksReserved}</TableCell>
                                         <TableCell numeric>{item.deposit}</TableCell>
                                         <TableCell numeric>
-                                            <IconButton onClick={this.handleOpen("openUpdate", item)}>
+                                            <IconButton
+                                                onClick={this.handleOpen("openUpdate", item)}
+                                                style={{marginRight: 10}}
+                                            >
                                                 <BuildOutlined/>
                                             </IconButton>
                                             <Button variant='outlined' onClick={this.handleDetails(item)}>

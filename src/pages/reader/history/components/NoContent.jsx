@@ -9,7 +9,7 @@ export default function NoContent(props) {
         <div className="flex-col">
             <Avatar style={{
                 padding: 15,
-                margin: "20px auto 20px auto",
+                margin: "40px auto 20px auto",
             }} >
                 <PriorityHighOutlined style={{fontSize: 50,}}/>
             </Avatar>
@@ -18,7 +18,7 @@ export default function NoContent(props) {
                     color="textSecondary"
                     variant="title"
                 >
-                    {intl.get("librarian.history.noRecords")}
+                    {intl.get("reader.history.noRecords")}
                 </Typography>
             </div>
         </div>

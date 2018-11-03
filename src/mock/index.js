@@ -201,3 +201,47 @@ export const fetchDownload = url => {
     window.URL.revokeObjectURL(url);
   }))
 }
+
+export const fetchShowCategories = async () => {
+    try {
+        const Response = await fetch(`${baseUrl}/showCategories`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchAddCategories = async (en, zh) => {
+    try {
+        const Response = await fetch(`${baseUrl}/addCategory?en=${en}&zh=${zh}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchUpdateCategories = async (en, en_changed, zh_changed) => {
+    try {
+        const Response = await fetch(`${baseUrl}/changeCategory?en=${en}&en_changed=${en_changed}&zh_changed=${zh_changed}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchDeleteCategories = async (en) => {
+    try {
+        const Response = await fetch(`${baseUrl}/deleteCategory?en=${en}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}

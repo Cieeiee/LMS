@@ -87,7 +87,10 @@
       "noBorrowing": "No books borrowing.",
       "noReserving": "No books reserving.",
       "noBorrowed": "No books borrowed.",
-      "deleteReader": "delete the reader"
+      "deleteReader": "delete the reader",
+      "addCategory": "Add a category",
+      "deleteCategory": "Delete the category?",
+      "updateCategory": "Update the category"
     },
     "changePassword": "change password",
 
@@ -127,7 +130,11 @@
     "emailEmpty": "The email can not be empty",
     "emailIncorrect": "Incorrect email format",
     "messageEmpty": "The message can not be empty",
+    "enEmpty": "The English of the category can not be empty",
+    "zhEmpty": "The Chinese of the category can not be empty",
 
+    "English": "English",
+    "Chinese": "Chinese",
     "cancel": "cancel",
     "confirm": "confirm",
     "close": "close"

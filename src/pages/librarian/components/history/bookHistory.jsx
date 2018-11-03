@@ -7,7 +7,11 @@ import * as intl from "react-intl-universal";
 import {fetchBookHistory} from "../../../../mock";
 
 const isSearched = searchTerm => item =>
-    item.title.toUpperCase().includes(searchTerm.toUpperCase())
+    item.id.indexOf(searchTerm) === 0 ||
+    item.barcode.indexOf(searchTerm) === 0 ||
+    item.isbn.indexOf(searchTerm) === 0 ||
+    item.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.date.includes(searchTerm)
 
 export default class BookHistory extends React.Component {
     constructor(props) {

@@ -16,7 +16,8 @@ import MessageDialog from "../messageDialog";
 import * as intl from "react-intl-universal";
 
 const isSearched = searchTerm => item =>
-    item.message.toUpperCase().includes(searchTerm.toUpperCase())
+    item.message.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.timestamp.includes(searchTerm)
 
 export default class LibrarianNotifications extends React.Component {
     constructor(props) {
@@ -155,7 +156,6 @@ export default class LibrarianNotifications extends React.Component {
                         </List>
                         <AddDialog handleClose={this.handleClose("openAdd")}
                                    handleAdd={this.handleAdd}
-                                   handleChange={this.handleChange}
                                    clearFormError={this.clearFormError}
                                    notification={this.state.item}
                                    formError={this.state.formError}
