@@ -26,22 +26,31 @@ export default class AddDialog extends React.Component {
                 <DialogTitle>{intl.get('form.formTitle.addReader')}</DialogTitle>
                 <DialogContent>
                     <TextField
+                        error={this.props.formError === "accountEmpty"}
                         margin='dense'
-                        label={intl.get('form.account')}
+                        label={this.props.formError === "accountEmpty" ?
+                            intl.get('form.accountEmpty') : intl.get('form.account')}
                         fullWidth
+                        onFocus={this.props.clearFormError}
                         onChange={this.handleChange('id')}
                     />
                     <TextField
+                        error={this.props.formError === "nameEmpty"}
                         margin='dense'
-                        label={intl.get('form.name')}
+                        label={this.props.formError === "nameEmpty" ?
+                            intl.get('form.nameEmpty') : intl.get('form.name')}
                         fullWidth
+                        onFocus={this.props.clearFormError}
                         onChange={this.handleChange('name')}
                     />
                     <TextField
+                        error={this.props.formError === "emailEmpty"}
                         margin='dense'
-                        label={intl.get('form.email')}
+                        label={this.props.formError === "emailEmpty" ?
+                            intl.get('form.emailEmpty') : intl.get('form.email')}
                         type='email'
                         fullWidth
+                        onFocus={this.props.clearFormError}
                         onChange={this.handleChange('email')}
                     />
                 </DialogContent>

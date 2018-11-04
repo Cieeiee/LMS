@@ -42,6 +42,7 @@ export default class Readers extends React.Component {
             openDetails: false,
             openSnack: false,
             eventState: false,
+            formError: undefined,
         }
     }
 
@@ -56,12 +57,24 @@ export default class Readers extends React.Component {
         this.setState({
             [which]: false,
             item: undefined,
+            formError: undefined
         })
         if (which === "openSnack") {
             this.setState({returnMessage: undefined})
         }
     };
+    clearFormError = () => {
+        this.setState({formError: undefined})
+    }
     handleUpdateReader = info => async () => {
+        if (info.name === undefined || info.name.length === 0) {
+            this.setState({formError: "nameEmpty"})
+            return
+        }
+        if (info.email === undefined || info.email.length === 0) {
+            this.setState({formError: "emailEmpty"})
+            return
+        }
         const eventState = await fetchUpdateReader(info);
         const readerList = await fetchReaderList();
         this.setState({
@@ -72,6 +85,18 @@ export default class Readers extends React.Component {
         })
     };
     handleAddReader = info => async () => {
+        if (info.id === undefined || info.id.length === 0) {
+            this.setState({formError: "accountEmpty"})
+            return
+        }
+        if (info.name === undefined || info.name.length === 0) {
+            this.setState({formError: "nameEmpty"})
+            return
+        }
+        if (info.email === undefined || info.email.length === 0) {
+            this.setState({formError: "emailEmpty"})
+            return
+        }
         const eventState =  await fetchAddReader(info)
         const readerList = await fetchReaderList()
         this.setState({
@@ -194,11 +219,15 @@ export default class Readers extends React.Component {
                             open={this.state.openAdd}
                             handleClose={this.handleClose("openAdd")}
                             handleAddReader={this.handleAddReader}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                         />
                         <UpdateDialog
                             open={this.state.openUpdate}
                             handleClose={this.handleClose("openUpdate")}
                             handleUpdateReader={this.handleUpdateReader}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                             reader={this.state.item}
                         />
                         <DetailsDialog

@@ -127,6 +127,7 @@
 
     "passwordNotSame": "The passwords are not same!",
     "passwordEmpty": "The passwords can not be empty",
+    "accountEmpty": "The account can not be empty",
     "nameEmpty": "The name can not be empty",
     "emailEmpty": "The email can not be empty",
     "emailIncorrect": "Incorrect email format",
