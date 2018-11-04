@@ -15,7 +15,7 @@ export default function BarcodeDialog(props) {
             onClose={props.handleClose}
         >
             <DialogContent>
-                <img src={`${serverReader}/root/library/barcode_picture/${props.barcode}.png`}
+                <img src={`${serverReader}/barcode_picture?imgName=${props.barcode}.png`}
                      alt='' width='500px'/>
             </DialogContent>
             <DialogActions>
