@@ -30,6 +30,17 @@ export const fetchDetails = async isbn => {
   }
 }
 //
+export const fetchAddBookNumber = async info => {
+    try {
+        const Response = await fetch(`${baseUrl}/increaseBookNumber?isbn=${info.isbn}&number=${info.number}`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
 export const fetchAddBook = async newBook => {
   try {
     const Response = await fetch(`${baseUrl}/librarian/addBook`, {

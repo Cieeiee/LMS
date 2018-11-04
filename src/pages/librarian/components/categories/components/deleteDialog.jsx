@@ -21,14 +21,14 @@ export default function DeleteDialog(props) {
                     margin="normal"
                     label={intl.get('form.English')}
                     fullWidth
-                    defaultValue={props.category && props.category.en}
+                    defaultValue={props.category && props.category.categoryEn}
                     disabled
                 />
                 <TextField
                     margin="normal"
                     label={intl.get('form.Chinese')}
                     fullWidth
-                    defaultValue={props.category && props.category.zh}
+                    defaultValue={props.category && props.category.categoryCh}
                     disabled
                 />
             </DialogContent>
@@ -36,7 +36,7 @@ export default function DeleteDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get('form.cancel')}
                 </Button>
-                <Button onClick={props.category && props.handleDelete(props.category.en)} color="primary" autoFocus>
+                <Button onClick={props.category && props.handleDelete(props.category.categoryEn)} color="primary" autoFocus>
                     {intl.get('form.confirm')}
                 </Button>
             </DialogActions>

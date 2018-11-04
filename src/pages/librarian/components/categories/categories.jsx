@@ -16,10 +16,11 @@ import EditDialog from "./components/editDialog";
 import DeleteDialog from "./components/deleteDialog";
 import {withStyles} from "@material-ui/core";
 import blue from "@material-ui/core/es/colors/blue";
+import MessageDialog from "../messageDialog";
 
 const isSearched = searchTerm => item =>
-    item.en.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.zh.includes(searchTerm)
+    item.categoryEn.toUpperCase().includes(searchTerm.toUpperCase()) ||
+    item.categoryCh.includes(searchTerm)
 
 export default class Categories extends React.Component {
     constructor(props) {
@@ -48,6 +49,7 @@ export default class Categories extends React.Component {
         this.setState({
             [which]: false,
             item: undefined,
+            formError: undefined,
         })
         if (which === "openSnack") {
             this.setState({returnMessage: undefined})
@@ -103,17 +105,17 @@ export default class Categories extends React.Component {
         })
     }
     async componentDidMount() {
-        // const categoryList = await fetchShowCategories();
-        const categoryList = [
-            {
-                en: "Literature",
-                zh: "文学"
-            },
-            {
-                en: "CS",
-                zh: "计算机科学与技术"
-            }
-        ]
+        const categoryList = await fetchShowCategories();
+        // const categoryList = [
+        //     {
+        //         en: "Literature",
+        //         zh: "文学"
+        //     },
+        //     {
+        //         en: "CS",
+        //         zh: "计算机科学与技术"
+        //     }
+        // ]
         this.setState({categoryList})
     }
 
@@ -144,8 +146,8 @@ export default class Categories extends React.Component {
                                 {this.state.categoryList
                                 && this.state.categoryList.filter(isSearched(this.state.searchTerm)).map((item, index) =>
                                     <TableRow key={index} className="table-row">
-                                        <TableCell>{item.en}</TableCell>
-                                        <TableCell numeric>{item.zh}</TableCell>
+                                        <TableCell>{item.categoryEn}</TableCell>
+                                        <TableCell numeric>{item.categoryCh}</TableCell>
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen("openUpdate", item)}
@@ -180,6 +182,12 @@ export default class Categories extends React.Component {
                                 handleDelete={this.handleDelete}
                                 category={this.state.item}
                                 open={this.state.openDelete}
+                            />
+                            <MessageDialog
+                                handleClose={this.handleClose("openSnack")}
+                                open={this.state.openSnack}
+                                message={this.state.returnMessage}
+                                eventState={this.state.eventState}
                             />
                         </Table>
                     </div>

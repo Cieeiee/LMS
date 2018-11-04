@@ -1,7 +1,6 @@
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
@@ -46,6 +45,9 @@ export default class AddDialog extends React.Component {
                         type='file'
                         accept="image/*"
                         onChange={this.handleImg}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
                         margin='dense'
@@ -73,10 +75,10 @@ export default class AddDialog extends React.Component {
                         >
                             { intl.getInitOptions().currentLocale === 'en-US' ?
                                 this.props.categories.map(category =>
-                                    <MenuItem value={category.en}>{category.en}</MenuItem>
+                                    <MenuItem value={category.categoryEn}>{category.categoryEn}</MenuItem>
                                 ) :
                                 this.props.categories.map(category =>
-                                    <MenuItem value={category.zh}>{category.zh}</MenuItem>
+                                    <MenuItem value={category.categoryEn}>{category.categoryCh}</MenuItem>
                                 )
                             }
                         </Select>
@@ -116,7 +118,7 @@ export default class AddDialog extends React.Component {
                             this.state.newBook.isbn &&
                             this.state.newBook.title &&
                             this.state.newBook.author &&
-                            this.state.newBook.category &&
+                            this.state.category &&
                             this.state.newBook.introduction &&
                             this.state.newBook.location &&
                             this.state.newBook.price &&

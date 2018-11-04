@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableBody, TableHead, TableRow, TableCell, Button } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography/Typography";
 import '../../librarian.scss'
-import {fetchBorrow, fetchDeleteBook, fetchDetails} from "../../../../mock";
+import {fetchAddBookNumber, fetchBorrow, fetchDeleteBook, fetchDetails} from "../../../../mock";
 import MessageDialog from "../messageDialog";
 import BorrowDialog from "./components/borrowDialog";
 import DeleteDialog from "./components/deleteDialog";
@@ -14,9 +14,11 @@ import * as intl from "react-intl-universal";
 import TextField from "@material-ui/core/TextField/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import {SearchOutlined} from "@material-ui/icons";
+import AddDialog from "./components/addDialog";
+import BarcodeDialog from "./components/barcodeDialog";
 
 const isSearched = searchTerm => item =>
-    item.barcode.includes(searchTerm);
+    item.barcode.indexOf(searchTerm) === 0;
 
 export default class BookDetails extends React.Component {
     constructor(props) {
@@ -24,10 +26,12 @@ export default class BookDetails extends React.Component {
         this.state = {
             book: {bookClass: {}, state: []},
             openSnack: false,
+            openAdd: false,
             openBorrow: false,
             openReturn: false,
             openLost: false,
             openDelete: false,
+            openBarcode: false,
             eventStatus: false,
             item: undefined,
             searchTerm: "",
@@ -52,7 +56,16 @@ export default class BookDetails extends React.Component {
     handleChange = which => e => {
         this.setState({[which]: e.target.value})
     }
-
+    handleAdd = info => async () => {
+        const eventState = await fetchAddBookNumber(info)
+        const book = await fetchDetails(this.props.match.params.isbn);
+        this.setState({
+            openAdd: false,
+            openSnack: true,
+            eventState,
+            book
+        })
+    }
     handleBorrow = info => async () => {
         const eventState = await fetchBorrow(info)
         const book = await fetchDetails(this.props.match.params.isbn);
@@ -124,19 +137,29 @@ export default class BookDetails extends React.Component {
                             </div>
                         </div>
 
-                        <TextField
-                            style={{margin: "50px auto 0 0"}}
-                            placeholder={intl.get('basic.Search')}
-                            value={this.state.searchTerm}
-                            onChange={this.handleChange("searchTerm")}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchOutlined />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
+                        <div className="flex-row" style={{margin: "50px auto 0 0"}}>
+                            <TextField
+                                placeholder={intl.get('basic.Search')}
+                                value={this.state.searchTerm}
+                                onChange={this.handleChange("searchTerm")}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchOutlined />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <div className="grow"/>
+                            <Button
+                                style={{marginRight: 20, width: 100}}
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleOpen("openAdd", this.state.book.bookClass.isbn)}
+                            >
+                                {intl.get('basic.add')}
+                            </Button>
+                        </div>
 
                         <Table>
                             <TableHead>
@@ -153,7 +176,12 @@ export default class BookDetails extends React.Component {
                                 {this.state.book.state.filter(isSearched(this.state.searchTerm))
                                     .map(item =>
                                     <TableRow key={item.barcode}>
-                                        <TableCell>{item.barcode}</TableCell>
+                                        <TableCell
+                                            className="barcode"
+                                            onClick={this.handleOpen("openBarcode", item.barcode)}
+                                        >
+                                            {item.barcode}
+                                        </TableCell>
                                         <TableCell>{this.state.book.bookClass.title}</TableCell>
                                         <TableCell numeric>
                                             {item.availability !== 1 ?
@@ -194,6 +222,12 @@ export default class BookDetails extends React.Component {
                                 )}
                             </TableBody>
                         </Table>
+                        <AddDialog
+                            open={this.state.openAdd}
+                            handleClose={this.handleClose("openAdd")}
+                            handleAdd={this.handleAdd}
+                            isbn={this.state.item}
+                        />
                         <BorrowDialog
                             open={this.state.openBorrow}
                             handleClose={this.handleClose("openBorrow")}
@@ -217,6 +251,11 @@ export default class BookDetails extends React.Component {
                             open={this.state.openReturn}
                             handleClose={this.handleClose("openReturn")}
                             handleBorrow={this.handleBorrow}
+                            barcode={this.state.item}
+                        />
+                        <BarcodeDialog
+                            open={this.state.openBarcode}
+                            handleClose={this.handleClose("openBarcode")}
                             barcode={this.state.item}
                         />
                         <MessageDialog

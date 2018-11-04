@@ -69,7 +69,7 @@
       "updateLibrarian": "更新管理员信息",
       "deleteLibrarian": "确定删除该管理员吗?",
       "reserveBook": "确定预约这本书吗?",
-      "addBook": "增加一本书",
+      "addBook": "增加书籍",
       "updateBook": "更新该书",
       "barcodes": "条形码",
       "borrowBook": "哪位读者借了这本书？",
@@ -123,6 +123,7 @@
     "booksBorrowed": "借阅图书 (本)",
     "booksReserved": "预约图书 (本)",
     "deposit": "押金 ($)",
+    "reader": "读者",
 
     "passwordNotSame": "两次输入的密码不同！",
     "passwordEmpty": "密码不能为空",

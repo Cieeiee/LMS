@@ -61,7 +61,8 @@ class Books extends React.Component {
         data.append('file', img)
         data.append('data', JSON.stringify(newBook))
         const res = await fetchAddBook(data)
-        const bookList = await fetchBookList()
+        let bookList = await fetchBookList()
+        bookList = await this.getChinese(bookList, this.state.categories)
 
         for(let x of res) {
             fetchDownload(x);
@@ -77,7 +78,8 @@ class Books extends React.Component {
     }
     handleUpdateBook = updateBook => async () => {
         const eventState = await fetchUpdateBook(updateBook)
-        const bookList = await fetchBookList()
+        let bookList = await fetchBookList()
+        bookList = await this.getChinese(bookList, this.state.categories)
 
         this.setState({
             eventState,
@@ -86,20 +88,20 @@ class Books extends React.Component {
             bookList,
         })
     }
+    getChinese = (bookList, categories) => {
+        const _bookList = []
+        for (let book of bookList) {
+            book["categoryCh"] = categories.find(which => which.categoryEn === book.category).categoryCh
+            _bookList.push(book)
+        }
+        return _bookList
+    }
 
     async componentDidMount() {
-        const bookList = await fetchBookList();
-        // const categories = await fetchShowCategories();
-        const categories = [
-            {
-                en: "Literature",
-                zh: "文学"
-            },
-            {
-                en: "CS",
-                zh: "计算机科学与技术"
-            }
-        ]
+        let bookList = await fetchBookList();
+        const categories = await fetchShowCategories();
+        bookList = this.getChinese(bookList, categories)
+
         this.setState({bookList, categories});
     }
 
@@ -140,7 +142,10 @@ class Books extends React.Component {
                                         <TableCell>{item.isbn}</TableCell>
                                         <TableCell numeric>{item.title}</TableCell>
                                         <TableCell numeric>{item.author}</TableCell>
-                                        <TableCell numeric>{item.category}</TableCell>
+                                        <TableCell numeric>{ intl.getInitOptions().currentLocale === "zh-CN" ?
+                                            item.categoryCh : item.category
+                                        }
+                                        </TableCell>
                                         <TableCell numeric>{item.location}</TableCell>
                                         <TableCell numeric>{item.price}</TableCell>
                                         <TableCell numeric>{item.remain}</TableCell>
@@ -176,10 +181,10 @@ class Books extends React.Component {
                             barcodeImages={this.state.barcodeImages}
                         />
                         <UpdateDialog
-                            open={this.state.openUpdate}
+                            categories={this.state.categories}
                             handleClose={this.handleClose("openUpdate")}
                             handleUpdateBook={this.handleUpdateBook}
-                            categories={this.state.categories}
+                            open={this.state.openUpdate}
                             book={this.state.item}
                         />
                         <MessageDialog

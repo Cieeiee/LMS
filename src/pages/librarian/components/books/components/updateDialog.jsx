@@ -88,10 +88,10 @@ export default class UpdateDialog extends React.Component {
                         >
                             { intl.getInitOptions().currentLocale === 'en-US' ?
                                 this.props.categories.map(category =>
-                                    <MenuItem value={category.en}>{category.en}</MenuItem>
+                                    <MenuItem value={category.categoryEn}>{category.categoryEn}</MenuItem>
                                 ) :
                                 this.props.categories.map(category =>
-                                    <MenuItem value={category.zh}>{category.zh}</MenuItem>
+                                    <MenuItem value={category.categoryEn}>{category.categoryCh}</MenuItem>
                                 )
                             }
                         </Select>
