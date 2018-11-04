@@ -96,7 +96,7 @@ export default class Login extends React.Component {
         if (this.state.loginStatus === 0)
             window.location.href = '/reader/' + this.state.account;
         if (this.state.loginStatus === 1)
-            window.location.href = '/librarian/' + this.state.account;
+            window.location.href = `/librarian/${this.state.account}/books`;
     };
 
     handleFindPassword = event => {

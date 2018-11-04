@@ -143,7 +143,7 @@ export default class LibrarianNotifications extends React.Component {
                             <div className="grow"/>
                             <Button
                                 color="secondary"
-                                style={{margin: "20px 20px"}}
+                                style={{margin: "20px 30px"}}
                                 onClick={this.handleOpen("openAdd", undefined)}
                                 variant="contained"
                                 size="large"
@@ -203,10 +203,10 @@ function OneNotification(props) {
                 primary={props.notifications.message}
                 secondary={props.notifications.timestamp}
             />
-            <Button onClick={props.openEdit}>
+            <Button onClick={props.openEdit} color="primary">
                 {intl.get('basic.update')}
             </Button>
-            <Button onClick={props.openDelete}>
+            <Button onClick={props.openDelete} color="secondary">
                 {intl.get('basic.delete')}
             </Button>
         </ListItem>

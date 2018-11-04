@@ -55,9 +55,9 @@ export default class EditDialog extends React.Component {
                         label={this.props.formError === "enEmpty" ?
                             intl.get('form.enEmpty') : intl.get('form.English')}
                         fullWidth
-                        defaultValue={this.props.category && this.props.category.en}
+                        defaultValue={this.props.category && this.props.category.categoryEn}
                         onFocus={this.props.clearFormError}
-                        onChange={this.handleChange("en")}
+                        onChange={this.handleChange("categoryEn")}
                     />
                     <TextField
                         error={this.props.formError === "zhEmpty"}
@@ -66,9 +66,9 @@ export default class EditDialog extends React.Component {
                             intl.get('form.zhEmpty') : intl.get('form.Chinese')}
                         type="name"
                         fullWidth
-                        defaultValue={this.props.category && this.props.category.zh}
+                        defaultValue={this.props.category && this.props.category.categoryCh}
                         onFocus={this.props.clearFormError}
-                        onChange={this.handleChange("zh")}
+                        onChange={this.handleChange("categoryCh")}
                     />
                 </DialogContent>
                 <DialogActions>
@@ -76,8 +76,8 @@ export default class EditDialog extends React.Component {
                         {intl.get('form.cancel')}
                     </Button>
                     <Button
-                        onClick={this.props.category && this.props.handleUpdate(this.props.category.en,
-                            this.state.updateCategory.en, this.state.updateCategory.zh)}
+                        onClick={this.props.category && this.props.handleUpdate(this.props.category.categoryEn,
+                            this.state.updateCategory.categoryEn, this.state.updateCategory.categoryCh)}
                         color="primary"
                     >
                         {intl.get('form.confirm')}

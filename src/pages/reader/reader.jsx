@@ -15,7 +15,8 @@ import CategoryPage from "./searched/catagory";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
 import ApplicationFooter from "../../mock/footer";
 import * as intl from "react-intl-universal";
-import {serverReader} from "../../mock/config";
+import {serverAdmin, serverLibrarian, serverReader} from "../../mock/config";
+import {fetchShowCategories} from "../../mock";
 
 const Logo = require('./components/images/logo.jpg');
 
@@ -74,15 +75,9 @@ class Home extends React.Component {
     handleCategory = which => () => {
         window.location.href = `/reader/${this.props.match.params.loginUser}/category/${which}`;
     };
-    componentDidMount() {
-        fetch(`${serverReader}/showCategories`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    categories: result.categories
-                });
-            })
-            .catch(e => console.log(e));
+    async componentDidMount() {
+        const categories = await fetchShowCategories();
+        this.setState({categories});
     }
 
     render() {
@@ -151,8 +146,9 @@ function CategorySelect(props) {
                         <ClickAwayListener onClickAway={props.handleClose("openCategory")}>
                             <MenuList>
                                 {props.categories && props.categories.map(category =>
-                                    <MenuItem onClick={props.handleCategory(category)}>
-                                        {category}
+                                    <MenuItem onClick={props.handleCategory(category.categoryEn)}>
+                                        {intl.getInitOptions().currentLocale === 'en-US'  ?
+                                            category.categoryEn : category.categoryCh }
                                     </MenuItem>
                                 )}
                             </MenuList>

@@ -51,7 +51,7 @@ function ReservingTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.records.map(book => {
+                    {props.records && props.records.map(book => {
                         return (
                             <TableRow className={classes.row}>
                                 <CustomTableCell component="th" scope="row">

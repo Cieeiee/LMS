@@ -12,3 +12,7 @@
 .table-row:nth-of-type(odd){
   background: #E3F2FD;
 }
+.barcode:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

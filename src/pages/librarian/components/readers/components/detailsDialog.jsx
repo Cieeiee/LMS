@@ -15,16 +15,17 @@ import * as intl from "react-intl-universal";
 export default function DetailsDialog(props) {
     return (
         <Dialog
-            maxWidth='lg'
+            // maxWidth='lg'
+            fullWidth
             open={props.open}
             onClose={props.handleClose}
             scroll="paper"
         >
             {/*<DialogTitle>Borrow History</DialogTitle>*/}
             <DialogContent>
-                <div style={{marginBottom: 10}}>
-                    <Typography variant="title">{intl.get('form.formTitle.borrowingBooks')}</Typography>
-                    {props.borrowingHistory == false ? <Typography>{intl.get('form.formTitle.noBorrowing')}</Typography> :
+                <div style={{marginBottom: 40}}>
+                    <Typography variant="title" gutterBottom>{intl.get('form.formTitle.borrowingBooks')}</Typography>
+                    {props.borrowingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowing')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>
@@ -45,9 +46,9 @@ export default function DetailsDialog(props) {
                         </Table>}
                 </div>
 
-                <div style={{marginBottom: 10}}>
-                    <Typography variant="title">{intl.get('form.formTitle.reservingBooks')}</Typography>
-                    {props.reservingHistory == false ? <Typography>{intl.get('form.formTitle.noReserving')}</Typography> :
+                <div style={{marginBottom: 40}}>
+                    <Typography variant="title" gutterBottom>{intl.get('form.formTitle.reservingBooks')}</Typography>
+                    {props.reservingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noReserving')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>
@@ -66,9 +67,9 @@ export default function DetailsDialog(props) {
                         </Table>}
                 </div>
 
-                <div style={{marginBottom: 10}}>
-                    <Typography variant="title">{intl.get('form.formTitle.borrowedBooks')}</Typography>
-                    {props.borrowedHistory == false ? <Typography>{intl.get('form.formTitle.noBorrowed')}</Typography> :
+                <div style={{marginBottom: 40}}>
+                    <Typography variant="title" gutterBottom>{intl.get('form.formTitle.borrowedBooks')}</Typography>
+                    {props.borrowedHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowed')}</Typography> :
                         <Table>
                             <TableHead>
                                 <TableRow>

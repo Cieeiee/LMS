@@ -54,6 +54,7 @@ export default function AddDialog(props) {
                     }
                     type="password"
                     fullWidth
+                    defaultValue="00010001"
                     value={props.password}
                     onFocus={props.clearFormError}
                     onChange={props.handleChange("password")}
@@ -68,6 +69,7 @@ export default function AddDialog(props) {
                     }
                     type="password"
                     fullWidth
+                    defaultValue="00010001"
                     value={props.confirmPassword}
                     onFocus={props.clearFormError}
                     onChange={props.handleChange("confirmPassword")}

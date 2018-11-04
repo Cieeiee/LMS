@@ -150,6 +150,7 @@ export default class Readers extends React.Component {
                                 <TableRow>
                                     <CustomTableCell>{intl.get('form.account')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.name')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.email')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.booksBorrowed')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.booksReserved')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.deposit')}</CustomTableCell>
@@ -170,6 +171,7 @@ export default class Readers extends React.Component {
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell numeric>{item.name}</TableCell>
+                                        <TableCell numeric>{item.email}</TableCell>
                                         <TableCell numeric>{item.booksBorrowed}</TableCell>
                                         <TableCell numeric>{item.booksReserved}</TableCell>
                                         <TableCell numeric>{item.deposit}</TableCell>

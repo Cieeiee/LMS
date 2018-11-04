@@ -69,7 +69,7 @@
       "updateLibrarian": "Update the librarian",
       "deleteLibrarian": "Delete the librarian?",
       "reserveBook": "Reserve the book?",
-      "addBook": "Add a book",
+      "addBook": "Add books",
       "updateBook": "Update the book",
       "barcodes": "Barcodes",
       "borrowBook": "Which Reader borrow the book?",
@@ -123,6 +123,7 @@
     "booksBorrowed": "books borrowed",
     "booksReserved": "books reserved",
     "deposit": "deposit ($)",
+    "reader": "reader",
 
     "passwordNotSame": "The passwords are not same!",
     "passwordEmpty": "The passwords can not be empty",

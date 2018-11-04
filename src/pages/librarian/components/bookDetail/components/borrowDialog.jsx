@@ -37,7 +37,7 @@ export default class BorrowDialog extends React.Component {
                     <TextField
                         autoFocus
                         margin='dense'
-                        label={intl.get('basic.reader')}
+                        label={intl.get('form.reader')}
                         fullWidth
                         onChange={this.handleChange("readerID")}
                     />

@@ -27,16 +27,24 @@ export default class UpdateDialog extends React.Component {
                 <DialogContent>
                     <TextField
                         margin='dense'
-                        label={intl.get('form.password')}
-                        type='password'
+                        label={intl.get('form.account')}
                         fullWidth
-                        onChange={this.handleChange('password')}
+                        defaultValue={this.props.reader && this.props.reader.id}
+                        disabled
+                    />
+                    <TextField
+                        margin='dense'
+                        label={intl.get('form.name')}
+                        fullWidth
+                        defaultValue={this.props.reader && this.props.reader.name}
+                        onChange={this.handleChange('name')}
                     />
                     <TextField
                         margin='dense'
                         label={intl.get('form.email')}
                         type='email'
                         fullWidth
+                        defaultValue={this.props.reader && this.props.reader.email}
                         onChange={this.handleChange('email')}
                     />
                 </DialogContent>
