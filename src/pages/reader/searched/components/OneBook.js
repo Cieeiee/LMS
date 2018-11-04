@@ -93,7 +93,8 @@ function BookClass(props) {
                                 ${props.book.price}
                             </Typography>
                             <Typography>
-                                {props.book.category}
+                                {intl.getInitOptions().currentLocale === 'en-US' ?
+                                    props.book.category : props.book.categoryCh}
                             </Typography>
                         </div>
                     </div>

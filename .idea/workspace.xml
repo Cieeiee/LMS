@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3612d19a-a6ef-481f-9819-dd6bc31f6df8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en-US.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/zh-CN.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/zh-CN.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,32 +121,32 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="79" />
-          <entry key="JSX Harmony" value="4179" />
-          <entry key="JavaScript" value="333" />
+          <entry key="JSX Harmony" value="4607" />
+          <entry key="JavaScript" value="676" />
           <entry key="SCSS" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="4" />
-          <entry key="JSX Harmony" value="42" />
-          <entry key="JavaScript" value="6" />
+          <entry key="JSX Harmony" value="47" />
+          <entry key="JavaScript" value="9" />
           <entry key="SCSS" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="333" />
+          <entry key="js" value="676" />
           <entry key="json" value="79" />
-          <entry key="jsx" value="4179" />
+          <entry key="jsx" value="4607" />
           <entry key="scss" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="6" />
+          <entry key="js" value="9" />
           <entry key="json" value="4" />
-          <entry key="jsx" value="42" />
+          <entry key="jsx" value="47" />
           <entry key="scss" value="1" />
         </counts>
       </usages-collector>
@@ -156,52 +155,49 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="61" column="52" lean-forward="true" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
+            <state relative-caret-position="352">
+              <caret line="103" lean-forward="true" selection-start-line="103" selection-end-line="103" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/mock/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
-              <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
+            <state relative-caret-position="273">
+              <caret line="260" column="13" selection-start-line="260" selection-start-column="13" selection-end-line="260" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+            <state relative-caret-position="22">
+              <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="112" column="32" lean-forward="true" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="32" />
+            <state relative-caret-position="61">
+              <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
               <folding>
-                <element signature="e#0#53#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mock/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -216,37 +212,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+            <state relative-caret-position="287">
+              <caret line="180" column="94" lean-forward="true" selection-start-line="180" selection-start-column="94" selection-end-line="180" selection-end-column="94" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="44" column="51" lean-forward="true" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
+            <state relative-caret-position="374">
+              <caret line="97" column="41" lean-forward="true" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/locales/en-US.json">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/bookList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="129" column="4" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/locales/zh-CN.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="129" column="27" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="27" />
+            <state relative-caret-position="154">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="17" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -262,7 +267,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>delete</find>
       <find>status</find>
       <find>bookList</find>
       <find>this</find>
@@ -292,6 +296,7 @@
       <find>returnMessage</find>
       <find>translate</find>
       <find>reader</find>
+      <find>baseUrl</find>
     </findStrings>
     <replaceStrings>
       <replace>CustomTableCell</replace>
@@ -301,6 +306,7 @@
       <replace>tabValue</replace>
       <replace>this.state</replace>
       <replace>this.props</replace>
+      <replace>serverLibrarian</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -317,7 +323,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/barcodeDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" />
@@ -326,8 +331,6 @@
         <option value="$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/components/TopButton.js" />
-        <option value="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" />
-        <option value="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx" />
@@ -357,17 +360,20 @@
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/mock/index.js" />
         <option value="$PROJECT_DIR$/src/pages/librarian/librarian.scss" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" />
         <option value="$PROJECT_DIR$/src/pages/login/librarianAndReader/login.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" />
         <option value="$PROJECT_DIR$/public/locales/en-US.json" />
         <option value="$PROJECT_DIR$/public/locales/zh-CN.json" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/mock/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" />
+        <option value="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx" />
       </list>
     </option>
   </component>
@@ -552,6 +558,31 @@
               <item name="history" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LMS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="reader" type="462c0819:PsiDirectoryNode" />
+              <item name="notification" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LMS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="reader" type="462c0819:PsiDirectoryNode" />
+              <item name="searched" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LMS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="reader" type="462c0819:PsiDirectoryNode" />
+              <item name="searched" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -647,12 +678,12 @@
       <workItem from="1541228026451" duration="4589000" />
       <workItem from="1541233124260" duration="18000" />
       <workItem from="1541219374929" duration="10825000" />
-      <workItem from="1541307612493" duration="15906000" />
+      <workItem from="1541307612493" duration="19607000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="483726000" />
+    <option name="totallyTimeSpent" value="487427000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -681,7 +712,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3294979" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49683878" weight="0.34093377" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49683878" visible="true" weight="0.34093377" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50316125" side_tool="true" weight="0.33984798" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49868214" weight="0.3294979" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
@@ -702,34 +733,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/messageDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/TopBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="117" column="54" selection-start-line="117" selection-start-column="54" selection-end-line="117" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="94" column="15" selection-start-line="94" selection-start-column="15" selection-end-line="94" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/History.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3720">
@@ -978,20 +981,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mock/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mock/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -1018,23 +1007,6 @@
           <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="180" column="94" lean-forward="true" selection-start-line="180" selection-start-column="94" selection-end-line="180" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1098,10 +1070,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="180" column="94" lean-forward="true" selection-start-line="180" selection-start-column="94" selection-end-line="180" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/bookList.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="17" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="260" column="13" selection-start-line="260" selection-start-column="13" selection-end-line="260" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="61" column="52" lean-forward="true" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
+        <state relative-caret-position="352">
+          <caret line="103" lean-forward="true" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="97" column="41" lean-forward="true" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
