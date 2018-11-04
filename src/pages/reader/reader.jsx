@@ -82,7 +82,7 @@ class Home extends React.Component {
                     categories: result.categories
                 });
             })
-            .catch(e => alert(e));
+            .catch(e => console.log(e));
     }
 
     render() {
