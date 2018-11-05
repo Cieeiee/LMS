@@ -25,7 +25,7 @@ export default class AddDialog extends React.Component {
     handleChange = name => e => this.setState({newBook: {...this.state.newBook, [name]: e.target.value}})
     handleChangeSelect = event => {this.setState({
         category: event.target.value,
-        newBook: {...this.state.newBook, category: this.state.category}
+        newBook: {...this.state.newBook, category: event.target.value}
         })
     }
     handleImg = e => this.setState({img: e.target.files[0]})

@@ -33,6 +33,7 @@ export default class LibrarianNotifications extends React.Component {
             item: undefined,
             formError: undefined,
             searchTerm: '',
+            processing: false,
         };
     }
 
@@ -44,6 +45,7 @@ export default class LibrarianNotifications extends React.Component {
             return;
         }
 
+        await this.setState({processing: true})
         const eventState = await fetchAddNotification(message);
         const announcements = await this.getNotification();
 
@@ -51,6 +53,7 @@ export default class LibrarianNotifications extends React.Component {
             notifications: announcements,
             openSnack: true,
             openAdd: false,
+            processing: false,
             eventState
         })
     };
@@ -60,12 +63,15 @@ export default class LibrarianNotifications extends React.Component {
             this.setState({formError: "messageEmpty"});
             return;
         }
+
+        await this.setState({processing: true})
         const eventState = await fetchUpdateNotification(notification.timestamp, message);
         const announcements = await this.getNotification();
         this.setState({
             notifications: announcements,
             openSnack: true,
             openEdit: undefined,
+            processing: false,
             eventState
         })
     };
@@ -73,10 +79,13 @@ export default class LibrarianNotifications extends React.Component {
     handleDelete = (notification) => async () => {
         const eventState = await fetchDeleteNotification(notification.timestamp);
         const announcements = await this.getNotification();
+
+        await this.setState({processing: true})
         this.setState({
             notifications: announcements,
             openSnack: true,
             openDelete: undefined,
+            processing: false,
             eventState
         })
     };
@@ -160,6 +169,7 @@ export default class LibrarianNotifications extends React.Component {
                                    notification={this.state.item}
                                    formError={this.state.formError}
                                    open={this.state.openAdd}
+                                   processing={this.state.processing}
                         />
                         <EditDialog
                             handleClose={this.handleClose("openEdit")}
@@ -168,12 +178,14 @@ export default class LibrarianNotifications extends React.Component {
                             formError={this.state.formError}
                             notification={this.state.item}
                             open={this.state.openEdit}
+                            processing={this.state.processing}
                         />
                         <DeleteDialog
                             handleClose={this.handleClose("openDelete")}
                             handleDelete={this.handleDelete}
                             notification={this.state.item}
                             open={this.state.openDelete}
+                            processing={this.state.processing}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}

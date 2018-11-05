@@ -73,6 +73,7 @@ export default class EditDialog extends React.Component {
                     <Button
                         onClick={this.props.handleEdit(this.props.notification, this.state.message)}
                         color="primary"
+                        disabled={this.props.processing}
                     >
                         {intl.get('form.confirm')}
                     </Button>

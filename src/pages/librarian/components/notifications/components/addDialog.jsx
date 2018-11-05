@@ -33,6 +33,8 @@ export default class AddDialog extends React.Component {
     }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 fullWidth
@@ -58,7 +60,11 @@ export default class AddDialog extends React.Component {
                     <Button onClick={this.props.handleClose} color="primary">
                         {intl.get('form.cancel')}
                     </Button>
-                    <Button onClick={this.props.handleAdd(this.state.message)} color="primary">
+                    <Button
+                        onClick={this.props.handleAdd(this.state.message)}
+                        color="primary"
+                        disabled={this.props.processing}
+                    >
                         {intl.get('form.confirm')}
                     </Button>
                 </DialogActions>
