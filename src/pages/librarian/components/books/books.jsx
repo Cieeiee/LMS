@@ -65,7 +65,14 @@ class Books extends React.Component {
         const res = await fetchAddBook(data)
         let bookList = await fetchBookList()
         bookList = await this.getChinese(bookList, this.state.categories)
-
+        if(res === null) {
+          this.setState({
+            eventState: false,
+            openAdd: false,
+            openSnack: true
+          })
+          return
+        }
         for(let x of res) {
             fetchDownload(x);
         }

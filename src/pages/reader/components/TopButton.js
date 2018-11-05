@@ -56,7 +56,7 @@ class IconLabelButtons extends React.Component {
                     maxBorrowNum: result.maxBorrowNum,
                 });
             })
-            .catch(e => alert(e));
+            .catch(e => console.log(e));
     };
 
     componentDidMount() {
@@ -76,14 +76,11 @@ class IconLabelButtons extends React.Component {
             anchorEl: event.currentTarget
         });
     };
-    handleLanguage = (which) => () => {
+    handleLanguage = which => () => {
         window.location.search = `?lang=${which}`;
         this.handleClose("openMenu")();
     }
-    handleLogout = () => {
-        fetch(`${serverReader}/logout`).catch(e => alert(e));
-        window.location.href = '/';
-    };
+    handleLogout = () => window.location.href = '/'
 
     render() {
         const { classes } = this.props;
