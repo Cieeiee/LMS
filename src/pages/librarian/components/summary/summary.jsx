@@ -1,23 +1,7 @@
 import React from "react";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
-import {
-    G2,
-    Chart,
-    Geom,
-    Axis,
-    Tooltip,
-    Coord,
-    Label,
-    Legend,
-    View,
-    Guide,
-    Shape,
-    Facet,
-    Util
-} from "bizcharts";
 import DataSet from "@antv/data-set";
-import Typography from "@material-ui/core/Typography/Typography";
 import * as intl from "react-intl-universal";
 import {fetchLibraryInfo} from "../../../../mock";
 import DailyIncome from "./components/daily";
@@ -73,22 +57,38 @@ export default class Summary extends React.Component {
     }
 
     async componentDidMount() {
-        const dailyData = await fetchLibraryInfo(0)
-        const weeklyData = await fetchLibraryInfo(1)
-        const monthlyData = await fetchLibraryInfo(2)
+        let dailyData = await fetchLibraryInfo(0)
+        let weeklyData = await fetchLibraryInfo(1)
+        let monthlyData = await fetchLibraryInfo(2)
+        const dailyDS = new DataSet();
+        dailyData = dailyDS.createView().source(dailyData)
+        const weeklyDS = new DataSet();
+        weeklyData = weeklyDS.createView().source(weeklyData)
+        const monthlyDS = new DataSet();
+        monthlyData = monthlyDS.createView().source(monthlyData)
+
+        dailyData.transform({
+            type: "fold",
+            fields: ["totalDeposit", "totalFine"],
+            key: "city",
+            value: "income",
+        });
+        weeklyData.transform({
+            type: "fold",
+            fields: ["totalDeposit", "totalFine"],
+            key: "city",
+            value: "income",
+        });
+        monthlyData.transform({
+            type: "fold",
+            fields: ["totalDeposit", "totalFine"],
+            key: "city",
+            value: "income",
+        });
         this.setState({dailyData, weeklyData, monthlyData})
     }
 
     render() {
-        const ds = new DataSet();
-        const dv = ds.createView().source(data);
-        dv.transform({
-            type: "fold",
-            fields: ["deposit", "fine"],
-            key: "city",
-            value: "income",
-        });
-        console.log(dv);
         const cols = {
             income: {
                 range: [0, 1],
@@ -105,9 +105,9 @@ export default class Summary extends React.Component {
                 <div style={{width: '100%'}} className="flex-row">
                     {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "summary"})}
                     <div className="grow flex-col">
-                        <DailyIncome dv={dv} cols={cols}/>
-                        <WeeklyIncome dv={dv} cols={cols}/>
-                        <MonthlyIncome dv={dv} cols={cols}/>
+                        <DailyIncome dv={this.state.dailyData} cols={cols}/>
+                        <WeeklyIncome dv={this.state.weeklyData} cols={cols}/>
+                        <MonthlyIncome dv={this.state.monthlyData} cols={cols}/>
                     </div>
                 </div>
             </div>

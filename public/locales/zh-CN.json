@@ -159,6 +159,8 @@
     "weeklyIncome": "每周收入",
     "monthlyIncome": "每月收入",
     "income": "收入 ($)",
-    "date": "日期"
+    "date": "日期",
+    "deposit": "押金",
+    "fine": "罚金"
   }
 }

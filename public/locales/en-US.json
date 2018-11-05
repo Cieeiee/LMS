@@ -90,7 +90,9 @@
       "deleteReader": "delete the reader",
       "addCategory": "Add a category",
       "deleteCategory": "Delete the category?",
-      "updateCategory": "Update the category"
+      "updateCategory": "Update the category",
+      "findPassword": "Find password",
+      "findPasswordText": "Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you."
     },
     "changePassword": "change password",
 
@@ -159,6 +161,9 @@
     "weeklyIncome": "Weekly Income",
     "monthlyIncome": "Monthly Income",
     "income": "income ($)",
-    "date": "date"
+    "date": "date",
+    "deposit": "deposit",
+    "fine": "fine"
+
   }
 }
