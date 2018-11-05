@@ -95,7 +95,10 @@ export default function DetailsDialog(props) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
-                <Button onClick={props.reader && props.handleDeleteReader(props.reader.id)}>
+                <Button
+                    onClick={props.reader && props.handleDeleteReader(props.reader.id)}
+                    processing={props.processing}
+                >
                     {intl.get('form.formTitle.deleteReader')}
                 </Button>
             </DialogActions>

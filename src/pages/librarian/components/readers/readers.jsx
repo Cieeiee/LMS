@@ -44,6 +44,7 @@ export default class Readers extends React.Component {
             eventState: false,
             formError: undefined,
             returnMessage: undefined,
+            processing: false,
         }
     }
 
@@ -76,9 +77,11 @@ export default class Readers extends React.Component {
             this.setState({formError: "emailEmpty"})
             return
         }
+        await this.setState({processing: true})
         const eventState = await fetchUpdateReader(info);
         const readerList = await fetchReaderList();
         this.setState({
+            processing: false,
             openUpdate: false,
             openSnack: true,
             eventState,
@@ -98,6 +101,7 @@ export default class Readers extends React.Component {
             this.setState({formError: "emailEmpty"})
             return
         }
+        await this.setState({processing: true})
         const eventState =  await fetchAddReader(info)
         const readerList = await fetchReaderList()
         let returnMessage = '';
@@ -108,6 +112,7 @@ export default class Readers extends React.Component {
         if (eventState === 1)
             returnMessage = intl.get('basic.failed')
         this.setState({
+            processing: false,
             openAdd: false,
             openSnack: true,
             eventState,
@@ -116,9 +121,11 @@ export default class Readers extends React.Component {
         })
     }
     handleDeleteReader = id => async () => {
+        await this.setState({processing: true})
         const eventStatus = await fetchDeleteReader(id);
         const readerList = await fetchReaderList()
         this.setState({
+            processing: false,
             openDetails: false,
             openSnack: true,
             eventStatus,
@@ -230,6 +237,7 @@ export default class Readers extends React.Component {
                             handleAddReader={this.handleAddReader}
                             formError={this.state.formError}
                             clearFormError={this.clearFormError}
+                            processing={this.state.processing}
                         />
                         <UpdateDialog
                             open={this.state.openUpdate}
@@ -238,6 +246,7 @@ export default class Readers extends React.Component {
                             formError={this.state.formError}
                             clearFormError={this.clearFormError}
                             reader={this.state.item}
+                            processing={this.state.processing}
                         />
                         <DetailsDialog
                             borrowingHistory={this.state.borrowingHistory}
@@ -247,6 +256,7 @@ export default class Readers extends React.Component {
                             handleClose={this.handleClose("openDetails")}
                             handleDeleteReader={this.handleDeleteReader}
                             reader={this.state.item}
+                            processing={this.state.processing}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}

@@ -60,6 +60,7 @@ export default class LostDialog extends React.Component {
                             barcode: this.props.barcode,
                             state: 0
                         })}
+                        disabled={this.props.processing}
                     >{intl.get('form.confirm')}</Button>
                 </DialogActions>
             </Dialog>

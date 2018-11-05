@@ -36,7 +36,11 @@ export default function DeleteDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get('form.cancel')}
                 </Button>
-                <Button onClick={props.category && props.handleDelete(props.category.categoryEn)} color="primary" autoFocus>
+                <Button
+                    onClick={props.category && props.handleDelete(props.category.categoryEn)}
+                    color="primary"
+                    disabled={props.processing}
+                >
                     {intl.get('form.confirm')}
                 </Button>
             </DialogActions>

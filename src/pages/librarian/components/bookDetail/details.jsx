@@ -35,6 +35,7 @@ export default class BookDetails extends React.Component {
             eventStatus: false,
             item: undefined,
             searchTerm: "",
+            processing: false,
         }
     }
 
@@ -57,19 +58,23 @@ export default class BookDetails extends React.Component {
         this.setState({[which]: e.target.value})
     }
     handleAdd = info => async () => {
+        await this.setState({processing: true})
         const eventState = await fetchAddBookNumber(info)
         const book = await fetchDetails(this.props.match.params.isbn);
         this.setState({
             openAdd: false,
             openSnack: true,
+            processing: false,
             eventState,
             book
         })
     }
     handleBorrow = info => async () => {
+        await this.setState({processing: true})
         const eventState = await fetchBorrow(info)
         const book = await fetchDetails(this.props.match.params.isbn);
         this.setState({
+            processing: false,
             openBorrow: false,
             openReturn: false,
             openLost: false,
@@ -79,9 +84,11 @@ export default class BookDetails extends React.Component {
         })
     }
     handleDelete = (id, barcode) => async () => {
+        await this.setState({processing: true})
         const eventState =  await fetchDeleteBook(id, barcode);
         const book = await fetchDetails(this.props.match.params.isbn);
         this.setState({
+            processing: false,
             openDelete: false,
             openSnack: true,
             eventState,
@@ -227,12 +234,14 @@ export default class BookDetails extends React.Component {
                             handleClose={this.handleClose("openAdd")}
                             handleAdd={this.handleAdd}
                             isbn={this.state.item}
+                            processing={this.state.processing}
                         />
                         <BorrowDialog
                             open={this.state.openBorrow}
                             handleClose={this.handleClose("openBorrow")}
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
+                            processing={this.state.processing}
                         />
                         <DeleteDialog
                             open={this.state.openDelete}
@@ -240,18 +249,21 @@ export default class BookDetails extends React.Component {
                             handleDelete={this.handleDelete}
                             libID={this.props.match.params.loginUser}
                             barcode={this.state.item}
+                            processing={this.state.processing}
                         />
                         <LostDialog
                             open={this.state.openLost}
                             handleClose={this.handleClose("openLost")}
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
+                            processing={this.state.processing}
                         />
                         <ReturnDialog
                             open={this.state.openReturn}
                             handleClose={this.handleClose("openReturn")}
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
+                            processing={this.state.processing}
                         />
                         <BarcodeDialog
                             open={this.state.openBarcode}
@@ -262,6 +274,7 @@ export default class BookDetails extends React.Component {
                             handleClose={this.handleClose("openSnack")}
                             open={this.state.openSnack}
                             eventState={this.state.eventState}
+                            processing={this.state.processing}
                         />
                     </div>
                 </div>

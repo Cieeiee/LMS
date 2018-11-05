@@ -103,7 +103,11 @@ export default function EditDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get('form.cancel')}
                 </Button>
-                <Button onClick={props.handleEdit} color="primary">
+                <Button
+                    onClick={props.handleEdit}
+                    color="primary"
+                    disabled={props.processing}
+                >
                     {intl.get('form.confirm')}
                 </Button>
             </DialogActions>

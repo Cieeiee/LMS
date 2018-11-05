@@ -111,7 +111,7 @@ export default function LibraryRules(props) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
-                    {intl.get("form.cancel")}
+                    {intl.get("form.close")}
                 </Button>
             </DialogActions>
         </Dialog>

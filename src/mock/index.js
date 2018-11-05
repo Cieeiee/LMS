@@ -1,5 +1,98 @@
 import {serverAdmin, serverLibrarian, serverReader} from './config'
-//
+
+//admin
+export const fetchAdminChangePassword = async password => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/changePassword`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                password: password
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+export const fetchShowLibrarians = async () => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/showLibrarian`)
+        const result = await Response.json()
+        return result.librarians
+    }
+    catch {
+        return []
+    }
+}
+export const fetchDeleteLibrarian = async id => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/deleteLibrarian`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+export const fetchAddLibrarian = async (id, email, password) => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/addLibrarian`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                email: email,
+                password: password
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+export const fetchUpdateLibrarian = async (id, email, password) => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/updateLibrarian`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                email: email,
+                password: password
+            })
+        })
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+//librarian
 export const fetchBookList = async () => {
   try {
     const Response = await fetch(`${serverLibrarian}/booklist`)

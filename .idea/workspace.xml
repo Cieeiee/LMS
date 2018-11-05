@@ -2,9 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3612d19a-a6ef-481f-9819-dd6bc31f6df8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,32 +145,32 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="94" />
-          <entry key="JSX Harmony" value="5891" />
-          <entry key="JavaScript" value="676" />
+          <entry key="JSX Harmony" value="8429" />
+          <entry key="JavaScript" value="1533" />
           <entry key="SCSS" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="6" />
-          <entry key="JSX Harmony" value="78" />
-          <entry key="JavaScript" value="9" />
+          <entry key="JSX Harmony" value="103" />
+          <entry key="JavaScript" value="12" />
           <entry key="SCSS" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="676" />
+          <entry key="js" value="1533" />
           <entry key="json" value="94" />
-          <entry key="jsx" value="5891" />
+          <entry key="jsx" value="8429" />
           <entry key="scss" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="9" />
+          <entry key="js" value="12" />
           <entry key="json" value="6" />
-          <entry key="jsx" value="78" />
+          <entry key="jsx" value="103" />
           <entry key="scss" value="1" />
         </counts>
       </usages-collector>
@@ -154,22 +179,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="65" column="24" lean-forward="true" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/mock/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
-              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+              <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mock/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1108">
+              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -178,61 +209,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/components/TopBar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1945">
-              <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1467">
-              <caret line="79" column="24" lean-forward="true" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1563">
-              <caret line="83" column="10" lean-forward="true" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+            <state relative-caret-position="865">
+              <caret line="101" column="25" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -241,9 +221,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
+            <state relative-caret-position="66">
+              <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -252,10 +233,61 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="382">
+              <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="844">
+              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="448">
+              <caret line="141" column="31" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="113" column="41" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#53#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -271,7 +303,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>status</find>
       <find>bookList</find>
       <find>this</find>
       <find>value</find>
@@ -301,6 +332,7 @@
       <find>translate</find>
       <find>reader</find>
       <find>baseUrl</find>
+      <find>processing</find>
     </findStrings>
     <replaceStrings>
       <replace>CustomTableCell</replace>
@@ -327,41 +359,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/barcodeDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/reader/history/History.js" />
-        <option value="$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/components/TopButton.js" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/category/category.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/NoContent.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/history/bookHistory.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/mock/config.js" />
         <option value="$PROJECT_DIR$/src/pages/reader/reader.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/librarian.scss" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" />
         <option value="$PROJECT_DIR$/src/pages/login/librarianAndReader/login.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/mock/index.js" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" />
         <option value="$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx" />
@@ -369,15 +381,35 @@
         <option value="$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx" />
         <option value="$PROJECT_DIR$/public/locales/zh-CN.json" />
         <option value="$PROJECT_DIR$/public/locales/en-US.json" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" />
+        <option value="$PROJECT_DIR$/src/mock/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx" />
       </list>
     </option>
   </component>
@@ -447,33 +479,14 @@
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="bookDetail" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="bookDetail" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -481,94 +494,17 @@
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="manageLibrarians" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="manageLibrarians" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="categories" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="categories" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="nav" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="readers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="readers" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="summary" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
@@ -591,6 +527,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="reader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LMS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="reader" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
@@ -730,12 +674,12 @@
       <workItem from="1541233124260" duration="18000" />
       <workItem from="1541219374929" duration="10825000" />
       <workItem from="1541307612493" duration="20504000" />
-      <workItem from="1541378352331" duration="4636000" />
+      <workItem from="1541378352331" duration="11331000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492960000" />
+    <option name="totallyTimeSpent" value="499655000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -764,7 +708,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32899022" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49683878" weight="0.33984798" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49683878" visible="true" weight="0.33984798" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50316125" side_tool="true" weight="0.33984798" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49868214" weight="0.3294979" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
@@ -785,30 +729,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/history/bookHistory.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/UpdateReaderInfoDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1738">
@@ -816,27 +736,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="189" column="66" lean-forward="true" selection-start-line="189" selection-start-column="66" selection-end-line="189" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="303" column="61" lean-forward="true" selection-start-line="303" selection-start-column="61" selection-end-line="303" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -871,18 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="71" column="28" lean-forward="true" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mock/footer.jsx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -904,35 +795,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/bookList.jsx" />
-    <entry file="file://$PROJECT_DIR$/src/mock/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5720">
-          <caret line="260" column="13" selection-start-line="260" selection-start-column="13" selection-end-line="260" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/Searched.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mock/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -967,124 +840,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="180" column="94" lean-forward="true" selection-start-line="180" selection-start-column="94" selection-end-line="180" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/barcodeDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="88" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="44" column="51" lean-forward="true" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="763">
-          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1619">
-          <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1467">
-          <caret line="79" column="24" lean-forward="true" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -1101,37 +856,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1563">
-          <caret line="83" column="10" lean-forward="true" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1945">
-          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+        <state relative-caret-position="585">
+          <caret line="75" column="30" lean-forward="true" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
@@ -1148,12 +874,263 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        <state relative-caret-position="177">
+          <caret line="79" column="8" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/borrowDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="75" column="21" lean-forward="true" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/barcodeDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-58">
+          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4580">
+          <caret line="236" column="38" selection-start-line="236" selection-start-column="28" selection-end-line="236" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/barcodeDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="20" column="88" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="134" column="51" lean-forward="true" selection-start-line="134" selection-start-column="51" selection-end-line="134" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="194" column="61" selection-start-line="194" selection-start-column="61" selection-end-line="194" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/editDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="81" column="55" selection-start-line="81" selection-start-column="55" selection-end-line="81" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/deleteDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/categories/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4049">
+          <caret line="46" column="22" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="79" column="21" lean-forward="true" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="100" column="17" lean-forward="true" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/passwordDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1108">
+          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/TopBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="865">
+          <caret line="101" column="25" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="43" lean-forward="true" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="844">
+          <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="141" column="31" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="113" column="41" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>

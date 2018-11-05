@@ -14,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import PasswordDialog from "./passwordDialog";
 import MessageDialog from "./messageDialog";
 import * as intl from "react-intl-universal";
+import {fetchAdminChangePassword} from "../../../mock";
 
 const styles = theme => ({
     root: {
@@ -78,7 +79,7 @@ class PrimarySearchAppBar extends React.Component {
     clearFormError = () => {
         this.setState({formError: undefined})
     }
-    handleChangePassword = () => {
+    handleChangePassword = async () => {
         if (this.state.password === undefined || this.state.password.length === 0) {
             this.setState({formError: "passwordEmpty"});
             return;
@@ -87,37 +88,20 @@ class PrimarySearchAppBar extends React.Component {
             this.setState({formError: "passwordNotSame"});
             return;
         }
-        fetch(`${serverAdmin}/admin/changePassword`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                password: this.state.password
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({eventStatus: result.state});
-            })
-            .catch(e => alert(e));
-    }
-    changePassword = () => {
-        if (this.state.eventStatus === 0) {
-            this.setState({
-                eventStatus: undefined,
-                openChangePassword: false,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
-        if (this.state.eventStatus === 1) {
-            this.setState({
-                eventStatus: undefined,
-                openChangePassword: false,
-                returnMessage: intl.get('basic.success')
-            });
-        }
+        await this.setState({processing: true})
+        const eventStatus = await fetchAdminChangePassword(this.state.password)
+        let returnMessage = '';
+        if (eventStatus)
+            returnMessage = intl.get('basic.success')
+        else
+            returnMessage = intl.get('basic.failed')
+
+        this.setState({
+            processing: false,
+            openChangePassword: false,
+            returnMessage
+        });
+
     }
     handleLanguage = (which) => () => {
         window.location.search = `?lang=${which}`;
@@ -131,7 +115,6 @@ class PrimarySearchAppBar extends React.Component {
 
     render() {
         const { classes } = this.props;
-        this.changePassword();
 
         return (
             <div className={classes.root}>
@@ -203,6 +186,7 @@ class PrimarySearchAppBar extends React.Component {
                     confrimPassword={this.state.confirmPassword}
                     formError={this.state.formError}
                     open={this.state.openChangePassword}
+                    processing={this.state.processing}
                 />
                 <MessageDialog
                     handleClose={this.handleClose("returnMessage")}

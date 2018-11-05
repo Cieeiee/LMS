@@ -16,10 +16,10 @@ import DeleteDialog from './components/deleteDialog'
 import AddDialog from './components/addDialog'
 import EditDialog from './components/editDialog'
 import '../admin.scss'
-import {serverAdmin} from "../../../mock/config";
 import TextField from "@material-ui/core/TextField/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import * as intl from "react-intl-universal";
+import {fetchAddLibrarian, fetchDeleteLibrarian, fetchShowLibrarians, fetchUpdateLibrarian} from "../../../mock";
 
 const styles = theme => ({
     row: {
@@ -45,8 +45,12 @@ class ManageLibrariansClass extends React.Component {
 
             formError: undefined,
             status: undefined,
-
+            processing: false,
             searchTerm: '',
+            ID: undefined,
+            email: undefined,
+            password: undefined,
+            confirmPassword: undefined,
         }
     }
 
@@ -67,6 +71,10 @@ class ManageLibrariansClass extends React.Component {
             openAdd: false,
             returnMessage: undefined,
             formError: undefined,
+            ID: undefined,
+            email: undefined,
+            password: undefined,
+            confirmPassword: undefined,
         });
     };
 
@@ -83,46 +91,25 @@ class ManageLibrariansClass extends React.Component {
         }
     };
 
-    handleDelete = (librarian) => () => {
-        fetch(`${serverAdmin}/admin/deleteLibrarian`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: librarian.id,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({deleteStatus: result.state});
-            })
-            .catch(e => alert(e));
+    handleDelete = (librarian) => async () => {
+        await this.setState({processing: true})
+        const eventState = await fetchDeleteLibrarian(librarian.id)
+        const librarians = await fetchShowLibrarians()
+        let returnMessage = ''
+        if (eventState)
+            returnMessage = intl.get('basic.success')
+        else
+            returnMessage = intl.get('basic.failed')
+
+        this.setState({
+            processing: false,
+            openDelete: undefined,
+            librarians,
+            returnMessage
+        });
     };
 
-    deleteLibrarian() {
-        if (this.state.deleteStatus === 0) {
-            this.setState({
-                deleteStatus: undefined,
-                openDelete: undefined,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
-        if (this.state.deleteStatus === 1) {
-            const updated_librarians = this.state.librarians.filter(lib =>
-                lib.id !== this.state.openDelete.id
-            );
-            this.setState({
-                deleteStatus: undefined,
-                openDelete: undefined,
-                librarians: updated_librarians,
-                returnMessage: intl.get('basic.success')
-            });
-        }
-    }
-
-    handleEdit = (librarian) => () => {
+    handleEdit = (librarian) => async () => {
         if (this.state.email === undefined || this.state.email.length === 0) {
             this.setState({formError: "emailEmpty"});
             return;
@@ -142,52 +129,23 @@ class ManageLibrariansClass extends React.Component {
                 return;
             }
         }
-
-        fetch(`${serverAdmin}/admin/updateLibrarian`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: librarian.id,
-                email: this.state.email,
-                password: this.state.password
-            })
+        await this.setState({processing: true})
+        const eventState = await fetchUpdateLibrarian(librarian.id, this.state.email, this.state.password)
+        const librarians = await fetchShowLibrarians()
+        let returnMessage = ''
+        if (eventState)
+            returnMessage = intl.get('basic.success')
+        else
+            returnMessage = intl.get('basic.failed')
+        this.setState({
+            processing: false,
+            openEdit: undefined,
+            returnMessage,
+            librarians
         })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({editStatus: result.state});
-            })
-            .catch(e => alert(e));
     };
 
-    editLibrarian = () => {
-        if (this.state.editStatus === 0) {
-            this.setState({
-                editStatus: undefined,
-                openEdit: undefined,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
-        if (this.state.editStatus === 1) {
-            const updated_librarians = this.state.librarians;
-            for (let i in updated_librarians) {
-                if (updated_librarians[i].id === this.state.openEdit.id) {
-                    updated_librarians[i].email = this.state.email;
-                    break;
-                }
-            }
-            this.setState({
-                editStatus: undefined,
-                openEdit: undefined,
-                librarians: updated_librarians,
-                returnMessage: intl.get('basic.success')
-            });
-        }
-    };
-
-    handleAdd = () => {
+    handleAdd = async () => {
         if (this.state.ID === undefined || this.state.ID.length === 0) {
             this.setState({formError: "nameEmpty"});
             return;
@@ -209,80 +167,41 @@ class ManageLibrariansClass extends React.Component {
             this.setState({formError: "passwordNotSame"});
             return;
         }
+        await this.setState({processing: true})
+        const eventState = await fetchAddLibrarian(this.state.ID, this.state.email, this.state.password)
+        const librarians = await fetchShowLibrarians()
+        let returnMessage = ''
+        if (eventState === -1)
+            returnMessage = intl.get('admin.librarians.accountExists')
+        else if (eventState === 1)
+            returnMessage = intl.get('basic.success')
+        else
+            returnMessage = intl.get('basic.failed')
 
-        fetch(`${serverAdmin}/admin/addLibrarian`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.ID,
-                email: this.state.email,
-                password: this.state.password
-            })
+        this.setState({
+            processing: false,
+            openAdd: false,
+            ID: undefined,
+            email: undefined,
+            password: undefined,
+            confirmPassword: undefined,
+            returnMessage,
+            librarians
         })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({addStatus: result.state});
-            })
-            .catch(e => alert(e));
-    };
-
-    addLibrarian = () => {
-        if (this.state.addStatus === -1) {
-            this.setState({
-                addStatus: undefined,
-                openAdd: false,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
-        if (this.state.addStatus === 0) {
-            this.setState({
-                addStatus: undefined,
-                openAdd: false,
-                returnMessage: intl.get('admin.librarians.accountExists')
-            });
-        }
-        if (this.state.addStatus === 1) {
-            const new_librarian = {
-                id: this.state.ID,
-                email: this.state.email
-            };
-            const updated_librarians = [...this.state.librarians, new_librarian];
-            this.setState({
-                addStatus: undefined,
-                openAdd: false,
-                librarians: updated_librarians,
-                returnMessage: intl.get('basic.success')
-            });
-        }
     };
 
     clearFormError = () => {
         this.setState({formError: undefined});
     };
 
-    getAllLibrarians = () => {
-        fetch(`${serverAdmin}/admin/showLibrarian`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    librarians: result.librarians
-                });
-            })
-            .catch(e => alert(e));
-    };
 
-    componentDidMount() {
-        this.getAllLibrarians()
+    async componentDidMount() {
+        const librarians = await fetchShowLibrarians()
+        this.setState({librarians})
     };
 
     render() {
         const { classes } = this.props;
-        this.deleteLibrarian();
-        this.editLibrarian();
-        this.addLibrarian();
 
         return (
             <React.Fragment>
@@ -321,17 +240,6 @@ class ManageLibrariansClass extends React.Component {
                         >
                             {intl.get('basic.add')}
                         </Button>
-                        <AddDialog handleClose={this.handleClose}
-                                   handleAdd={this.handleAdd}
-                                   handleChange={this.handleChange}
-                                   clearFormError={this.clearFormError}
-                                   ID={this.state.ID}
-                                   email={this.state.email}
-                                   password={this.state.password}
-                                   confrimPassword={this.state.confirmPassword}
-                                   formError={this.state.formError}
-                                   open={this.state.openAdd}
-                        />
                     </div>
                     <Paper>
                         <Table>
@@ -369,6 +277,18 @@ class ManageLibrariansClass extends React.Component {
                                 })}
                             </TableBody>
                         </Table>
+                        <AddDialog handleClose={this.handleClose}
+                                   handleAdd={this.handleAdd}
+                                   handleChange={this.handleChange}
+                                   clearFormError={this.clearFormError}
+                                   ID={this.state.ID}
+                                   email={this.state.email}
+                                   password={this.state.password}
+                                   confrimPassword={this.state.confirmPassword}
+                                   formError={this.state.formError}
+                                   open={this.state.openAdd}
+                                   processing={this.state.processing}
+                        />
                         <EditDialog
                             handleClose={this.handleClose}
                             handleEdit={this.handleEdit(this.state.openEdit)}
@@ -381,12 +301,14 @@ class ManageLibrariansClass extends React.Component {
                             confrimPassword={this.state.confirmPassword}
                             formError={this.state.formError}
                             open={this.state.openEdit !== undefined}
+                            processing={this.state.processing}
                         />
                         <DeleteDialog
                             handleClose={this.handleClose}
                             handleDelete={this.handleDelete(this.state.openDelete)}
                             account={this.state.openDelete}
                             open={this.state.openDelete !== undefined}
+                            processing={this.state.processing}
                         />
                         <MessageDialog
                             handleClose={this.handleClose}

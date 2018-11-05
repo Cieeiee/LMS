@@ -37,6 +37,7 @@ class Books extends React.Component {
             returnMessage: undefined,
             eventState: false,
             openSnack: false,
+            processing: false,
         }
     }
 
@@ -57,6 +58,7 @@ class Books extends React.Component {
         }
     };
     handleAddBook = (img, newBook) => async () => {
+        await this.setState({processing: true})
         let data = new FormData()
         data.append('file', img)
         data.append('data', JSON.stringify(newBook))
@@ -73,10 +75,12 @@ class Books extends React.Component {
             openBarcode: true,
             openSnack: true,
             barcodeImages: res,
+            processing: false,
             bookList
         })
     }
     handleUpdateBook = updateBook => async () => {
+        await this.setState({processing: true})
         const eventState = await fetchUpdateBook(updateBook)
         let bookList = await fetchBookList()
         bookList = await this.getChinese(bookList, this.state.categories)
@@ -85,6 +89,7 @@ class Books extends React.Component {
             eventState,
             openUpdate: false,
             openSnack: true,
+            processing: false,
             bookList,
         })
     }
@@ -174,6 +179,7 @@ class Books extends React.Component {
                             handleClose={this.handleClose("openAdd")}
                             categories={this.state.categories}
                             handleAddBook={this.handleAddBook}
+                            processing={this.state.processing}
                         />
                         <BarcodeDialog
                             open={this.state.openBarcode}
@@ -186,6 +192,7 @@ class Books extends React.Component {
                             handleUpdateBook={this.handleUpdateBook}
                             open={this.state.openUpdate}
                             book={this.state.item}
+                            processing={this.state.processing}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}

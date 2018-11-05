@@ -60,6 +60,7 @@ export default class AddDialog extends React.Component {
                             isbn: this.props.isbn,
                             number: this.state.number,
                         })}
+                        disabled={this.props.processing}
                     >{intl.get('form.confirm')}</Button>
                 </DialogActions>
             </Dialog>
