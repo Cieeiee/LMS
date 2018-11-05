@@ -43,6 +43,7 @@ export default class Readers extends React.Component {
             openSnack: false,
             eventState: false,
             formError: undefined,
+            returnMessage: undefined,
         }
     }
 
@@ -99,10 +100,18 @@ export default class Readers extends React.Component {
         }
         const eventState =  await fetchAddReader(info)
         const readerList = await fetchReaderList()
+        let returnMessage = '';
+        if (eventState === -1)
+            returnMessage = intl.get('form.accountExists')
+        if (eventState === 0)
+            returnMessage = intl.get('basic.success')
+        if (eventState === 1)
+            returnMessage = intl.get('basic.failed')
         this.setState({
             openAdd: false,
             openSnack: true,
             eventState,
+            returnMessage,
             readerList
         })
     }
@@ -243,6 +252,7 @@ export default class Readers extends React.Component {
                             handleClose={this.handleClose("openSnack")}
                             open={this.state.openSnack}
                             eventState={this.state.eventState}
+                            message={this.state.returnMessage}
                         />
                     </div>
                 </div>

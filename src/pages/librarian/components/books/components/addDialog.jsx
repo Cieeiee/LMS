@@ -18,6 +18,7 @@ export default class AddDialog extends React.Component {
             newBook: {},
             category: '',
             img: null,
+            init: false,
         }
     }
 
@@ -28,8 +29,23 @@ export default class AddDialog extends React.Component {
         })
     }
     handleImg = e => this.setState({img: e.target.files[0]})
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                newBook: {},
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                newBook: {},
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
         return (
             <Dialog
                 open={this.props.open}

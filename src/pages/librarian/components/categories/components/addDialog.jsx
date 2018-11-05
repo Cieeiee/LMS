@@ -11,7 +11,8 @@ export default class AddDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newCategory: {}
+            newCategory: {},
+            init: false,
         }
     }
 
@@ -21,8 +22,24 @@ export default class AddDialog extends React.Component {
             [name]: e.target.value
         }
     })}
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                newCategory: {},
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                newCategory: {},
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 fullWidth

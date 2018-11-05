@@ -12,12 +12,29 @@ export default class AddDialog extends React.Component {
         super(props);
         this.state = {
             newReader: {},
+            init: false,
         }
     }
 
     handleChange = name => e => this.setState({newReader: {...this.state.newReader, [name]: e.target.value}})
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                newReader: {},
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                newReader: {},
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 open={this.props.open}

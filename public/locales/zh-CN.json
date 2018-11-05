@@ -134,6 +134,7 @@
     "messageEmpty": "公告内容不能为空",
     "enEmpty": "分类的英文不能为空",
     "zhEmpty": "分类的中文不能为空",
+    "accountExists": "账号已存在",
 
     "English": "英文",
     "Chinese": "中文",

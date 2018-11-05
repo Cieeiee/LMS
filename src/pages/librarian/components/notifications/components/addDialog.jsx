@@ -12,10 +12,25 @@ export default class AddDialog extends React.Component {
         super(props);
         this.state = {
             message: undefined,
+            init: false,
         }
     }
 
     handleChange = e => {this.setState({message: e.target.value})}
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                message: undefined,
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                message: undefined,
+                init: false
+            })
+        }
+    }
 
     render() {
         return (

@@ -134,6 +134,7 @@
     "messageEmpty": "The message can not be empty",
     "enEmpty": "The English of the category can not be empty",
     "zhEmpty": "The Chinese of the category can not be empty",
+    "accountExists": "The account already exists",
 
     "English": "English",
     "Chinese": "Chinese",

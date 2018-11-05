@@ -12,13 +12,29 @@ export default class LostDialog extends React.Component {
         super(props);
         this.state = {
             readerID: undefined,
+            init: false,
         }
     }
 
     handleChange = name => e => this.setState({[name]: e.target.value})
-
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                readerID: undefined,
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                readerID: undefined,
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 open={this.props.open}
