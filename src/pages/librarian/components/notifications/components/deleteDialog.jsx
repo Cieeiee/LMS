@@ -32,7 +32,7 @@ export default function DeleteDialog(props) {
                 <Button
                     onClick={props.handleDelete(props.notification)}
                     color="primary"
-                    disabled={this.props.processing}
+                    disabled={props.processing}
                 >
                     {intl.get('form.confirm')}
                 </Button>

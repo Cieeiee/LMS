@@ -130,7 +130,7 @@ export default class UpdateDialog extends React.Component {
                             this.state.updateBook.introduction &&
                             this.state.updateBook.location &&
                             this.state.updateBook.price
-                        )}
+                        ) || this.props.processing}
                         color='primary'
                         onClick={this.props.handleUpdateBook(this.state.updateBook)}
                     >{intl.get('form.confirm')}</Button>

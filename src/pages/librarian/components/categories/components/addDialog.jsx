@@ -77,6 +77,7 @@ export default class AddDialog extends React.Component {
                     <Button
                         onClick={this.props.handleAdd(this.state.newCategory.en, this.state.newCategory.zh)}
                         color="primary"
+                        disabled={this.props.processing}
                     >
                         {intl.get('form.confirm')}
                     </Button>

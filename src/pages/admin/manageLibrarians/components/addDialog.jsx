@@ -54,7 +54,6 @@ export default function AddDialog(props) {
                     }
                     type="password"
                     fullWidth
-                    defaultValue="00010001"
                     value={props.password}
                     onFocus={props.clearFormError}
                     onChange={props.handleChange("password")}
@@ -69,7 +68,6 @@ export default function AddDialog(props) {
                     }
                     type="password"
                     fullWidth
-                    defaultValue="00010001"
                     value={props.confirmPassword}
                     onFocus={props.clearFormError}
                     onChange={props.handleChange("confirmPassword")}
@@ -80,7 +78,11 @@ export default function AddDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get('form.cancel')}
                 </Button>
-                <Button onClick={props.handleAdd} color="primary">
+                <Button
+                    onClick={props.handleAdd}
+                    color="primary"
+                    disabled={props.processing}
+                >
                     {intl.get('form.confirm')}
                 </Button>
             </DialogActions>

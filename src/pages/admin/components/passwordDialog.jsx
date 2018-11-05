@@ -52,7 +52,11 @@ export default function PasswordDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get('form.cancel')}
                 </Button>
-                <Button onClick={props.handleChangePassword} color="primary">
+                <Button
+                    onClick={props.handleChangePassword}
+                    color="primary"
+                    disabled={props.processing}
+                >
                     {intl.get('form.confirm')}
                 </Button>
             </DialogActions>

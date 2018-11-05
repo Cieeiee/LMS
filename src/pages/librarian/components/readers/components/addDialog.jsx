@@ -73,7 +73,11 @@ export default class AddDialog extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
-                    <Button color='primary' onClick={this.props.handleAddReader(this.state.newReader)}>
+                    <Button
+                        color='primary'
+                        onClick={this.props.handleAddReader(this.state.newReader)}
+                        disabled={this.props.processing}
+                    >
                         {intl.get('form.confirm')}
                     </Button>
                 </DialogActions>

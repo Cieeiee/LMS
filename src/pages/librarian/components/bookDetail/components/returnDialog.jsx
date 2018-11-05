@@ -34,6 +34,7 @@ export default function ReturnDialog(props) {
                         barcode: props.barcode,
                         state: 1
                     })}
+                    disabled={props.processing}
                 >
                     {intl.get('form.confirm')}
                 </Button>

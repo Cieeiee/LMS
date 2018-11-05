@@ -30,6 +30,7 @@ export default function DeleteDialog(props) {
                 <Button
                     color='primary'
                     onClick={props.handleDelete(props.libID, props.barcode)}
+                    disabled={props.processing}
                 >{intl.get('form.confirm')}</Button>
             </DialogActions>
         </Dialog>

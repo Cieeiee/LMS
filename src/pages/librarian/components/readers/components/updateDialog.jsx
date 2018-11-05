@@ -73,11 +73,15 @@ export default class UpdateDialog extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
-                    <Button color='primary' onClick={this.props.handleUpdateReader({
-                        id: this.props.reader && this.props.reader.id,
-                        name: this.state.updateReader.name,
-                        email: this.state.updateReader.email,
-                    })}>
+                    <Button
+                        color='primary'
+                        onClick={this.props.handleUpdateReader({
+                            id: this.props.reader && this.props.reader.id,
+                            name: this.state.updateReader.name,
+                            email: this.state.updateReader.email,
+                        })}
+                        disabled={this.props.processing}
+                    >
                         {intl.get('form.confirm')}
                     </Button>
                 </DialogActions>

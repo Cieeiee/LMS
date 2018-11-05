@@ -70,6 +70,7 @@ export default class BorrowDialog extends React.Component {
                             id: this.state.readerID,
                             state: 0
                         })}
+                        disabled={this.props.processing}
                     >{intl.get('form.confirm')}</Button>
                 </DialogActions>
             </Dialog>

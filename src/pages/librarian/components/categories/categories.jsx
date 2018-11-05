@@ -35,6 +35,7 @@ export default class Categories extends React.Component {
             eventState: false,
             item: undefined,
             formError: undefined,
+            processing: false,
         }
     }
 
@@ -67,9 +68,11 @@ export default class Categories extends React.Component {
             this.setState({formError: "zhEmpty"})
             return
         }
+        await this.setState({processing: true})
         const eventState = await fetchAddCategories(en, zh);
         const categoryList = await fetchShowCategories();
         this.setState({
+            processing: false,
             openSnack: true,
             openAdd: false,
             eventState,
@@ -85,9 +88,11 @@ export default class Categories extends React.Component {
             this.setState({formError: "zhEmpty"})
             return
         }
+        await this.setState({processing: true})
         const eventState = await fetchUpdateCategories(en, en_changed, zh_changed);
         const categoryList = await fetchShowCategories();
         this.setState({
+            processing: false,
             openSnack: true,
             openUpdate: false,
             eventState,
@@ -95,9 +100,11 @@ export default class Categories extends React.Component {
         })
     }
     handleDelete = (en) => async () => {
+        await this.setState({processing: true})
         const eventState = await fetchDeleteCategories(en);
         const categoryList = await fetchShowCategories();
         this.setState({
+            processing: false,
             openSnack: true,
             openDelete: false,
             eventState,
@@ -106,16 +113,6 @@ export default class Categories extends React.Component {
     }
     async componentDidMount() {
         const categoryList = await fetchShowCategories();
-        // const categoryList = [
-        //     {
-        //         en: "Literature",
-        //         zh: "文学"
-        //     },
-        //     {
-        //         en: "CS",
-        //         zh: "计算机科学与技术"
-        //     }
-        // ]
         this.setState({categoryList})
     }
 
@@ -168,6 +165,7 @@ export default class Categories extends React.Component {
                                        category={this.state.item}
                                        formError={this.state.formError}
                                        open={this.state.openAdd}
+                                       processing={this.state.processing}
                             />
                             <EditDialog
                                 handleClose={this.handleClose("openUpdate")}
@@ -176,12 +174,14 @@ export default class Categories extends React.Component {
                                 formError={this.state.formError}
                                 category={this.state.item}
                                 open={this.state.openUpdate}
+                                processing={this.state.processing}
                             />
                             <DeleteDialog
                                 handleClose={this.handleClose("openDelete")}
                                 handleDelete={this.handleDelete}
                                 category={this.state.item}
                                 open={this.state.openDelete}
+                                processing={this.state.processing}
                             />
                             <MessageDialog
                                 handleClose={this.handleClose("openSnack")}

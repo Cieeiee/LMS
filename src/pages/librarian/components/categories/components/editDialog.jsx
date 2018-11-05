@@ -79,6 +79,7 @@ export default class EditDialog extends React.Component {
                         onClick={this.props.category && this.props.handleUpdate(this.props.category.categoryEn,
                             this.state.updateCategory.categoryEn, this.state.updateCategory.categoryCh)}
                         color="primary"
+                        disabled={this.props.processing}
                     >
                         {intl.get('form.confirm')}
                     </Button>

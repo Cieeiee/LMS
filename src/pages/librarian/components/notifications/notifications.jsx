@@ -77,10 +77,9 @@ export default class LibrarianNotifications extends React.Component {
     };
 
     handleDelete = (notification) => async () => {
+        await this.setState({processing: true})
         const eventState = await fetchDeleteNotification(notification.timestamp);
         const announcements = await this.getNotification();
-
-        await this.setState({processing: true})
         this.setState({
             notifications: announcements,
             openSnack: true,

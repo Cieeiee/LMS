@@ -146,8 +146,9 @@ export default class AddDialog extends React.Component {
                             this.state.newBook.location &&
                             this.state.newBook.price &&
                             this.state.newBook.number &&
-                            this.state.newBook.number !== '0'
-                        )}
+                            this.state.newBook.number !== '0' &&
+                            this.state.newBook.number
+                        ) || this.props.processing}
                         color='primary'
                         onClick={this.props.handleAddBook(this.state.img, this.state.newBook)}
                     >{intl.get('form.confirm')}</Button>
