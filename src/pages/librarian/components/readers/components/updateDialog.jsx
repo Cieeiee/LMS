@@ -12,12 +12,29 @@ export default class UpdateDialog extends React.Component {
         super(props);
         this.state = {
             updateReader: {},
+            init: false,
         }
     }
 
     handleChange = name => e => this.setState({updateReader: {...this.state.updateReader, [name]: e.target.value}})
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                updateReader: this.props.reader,
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init){
+            this.setState({
+                updateReader: {},
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 open={this.props.open}
@@ -33,18 +50,24 @@ export default class UpdateDialog extends React.Component {
                         disabled
                     />
                     <TextField
+                        error={this.props.formError === "nameEmpty"}
                         margin='dense'
-                        label={intl.get('form.name')}
+                        label={this.props.formError === "nameEmpty" ?
+                            intl.get('form.nameEmpty') : intl.get('form.name')}
                         fullWidth
                         defaultValue={this.props.reader && this.props.reader.name}
+                        onFocus={this.props.clearFormError}
                         onChange={this.handleChange('name')}
                     />
                     <TextField
+                        error={this.props.formError === "emailEmpty"}
                         margin='dense'
-                        label={intl.get('form.email')}
+                        label={this.props.formError === "emailEmpty" ?
+                            intl.get('form.emailEmpty') : intl.get('form.email')}
                         type='email'
                         fullWidth
                         defaultValue={this.props.reader && this.props.reader.email}
+                        onFocus={this.props.clearFormError}
                         onChange={this.handleChange('email')}
                     />
                 </DialogContent>
@@ -52,8 +75,8 @@ export default class UpdateDialog extends React.Component {
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button color='primary' onClick={this.props.handleUpdateReader({
                         id: this.props.reader && this.props.reader.id,
+                        name: this.state.updateReader.name,
                         email: this.state.updateReader.email,
-                        password: this.state.updateReader.password,
                     })}>
                         {intl.get('form.confirm')}
                     </Button>

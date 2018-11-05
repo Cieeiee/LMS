@@ -14,7 +14,7 @@ export default function MessageDialog(props) {
             autoHideDuration={1500}
             message={
                 <span id="message-id">
-                    {props.message ? props.message : props.eventState ?
+                    {props.message ? props.message : props.eventState === true ?
                         intl.get('basic.success') : intl.get('basic.failed')}
                 </span>
             }

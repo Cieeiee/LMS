@@ -2,9 +2,11 @@ import React from "react";
 import {TopBar} from "../components/TopBar";
 import MessageDialog from '../components/messageDialog'
 import ReserveDialog from "./components/reserveDialog";
-import BookList from "./components/bookList";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
+import {fetchSearchBookByCategory, fetchShowCategories} from "../../../mock";
+import {Grid} from "@material-ui/core";
+import {OneBook} from "./components/OneBook";
 
 export default class CategoryPage extends React.Component {
     constructor(props) {
@@ -12,6 +14,7 @@ export default class CategoryPage extends React.Component {
 
         this.state = {
             bookList: [],
+            categories: undefined,
             keywords: undefined,
             openReserve: undefined,
             loginUser: undefined,
@@ -19,22 +22,21 @@ export default class CategoryPage extends React.Component {
             reserveStatus: undefined,
         };
     };
-
-    componentDidMount() {
-        this.handleSearch();
+    getChinese = (bookList, categories) => {
+        const _bookList = []
+        for (let book of bookList) {
+            book["categoryCh"] = categories.find(which => which.categoryEn === book.category).categoryCh
+            _bookList.push(book)
+        }
+        return _bookList
     }
 
-
-    handleSearch = () => {
-        fetch(`${serverReader}/searchCategory?category=${this.props.match.params.category}`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    bookList: result.books,
-                });
-            })
-            .catch(e => alert(e));
-    };
+    async componentDidMount() {
+        let bookList = await fetchSearchBookByCategory(this.props.match.params.category)
+        const categories = await fetchShowCategories();
+        bookList = this.getChinese(bookList.books, categories)
+        this.setState({bookList, categories})
+    }
 
     reserveBook = () => {
         if (this.state.reserveStatus === 1) {
@@ -112,10 +114,21 @@ export default class CategoryPage extends React.Component {
                      }}
                 >
                     <div className="grow">
-                        <BookList
-                            bookList={this.state.bookList}
-                            handleOpen={this.handleOpen}
-                        />
+                        {/*<BookList*/}
+                            {/*bookList={this.state.bookList}*/}
+                            {/*handleOpen={this.handleOpen}*/}
+                        {/*/>*/}
+                        <Grid container spacing={16} style={{width: "100%"}}>
+                            {this.state.bookList.map(book =>
+                                <Grid item xs={6}>
+                                    <OneBook
+                                        key={book.isbn}
+                                        book={book}
+                                        handleOpen={this.handleOpen}
+                                    />
+                                </Grid>
+                            )}
+                        </Grid>
                     </div>
                     <ReserveDialog
                         handleClose={this.handleClose("openReserve")}

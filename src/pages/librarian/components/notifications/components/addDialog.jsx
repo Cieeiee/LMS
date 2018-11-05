@@ -12,12 +12,29 @@ export default class AddDialog extends React.Component {
         super(props);
         this.state = {
             message: undefined,
+            init: false,
         }
     }
 
     handleChange = e => {this.setState({message: e.target.value})}
+    handleInit = () => {
+        if (this.props.open && !this.state.init) {
+            this.setState({
+                message: undefined,
+                init: true
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                message: undefined,
+                init: false
+            })
+        }
+    }
 
     render() {
+        this.handleInit()
+
         return (
             <Dialog
                 fullWidth
@@ -43,7 +60,11 @@ export default class AddDialog extends React.Component {
                     <Button onClick={this.props.handleClose} color="primary">
                         {intl.get('form.cancel')}
                     </Button>
-                    <Button onClick={this.props.handleAdd(this.state.message)} color="primary">
+                    <Button
+                        onClick={this.props.handleAdd(this.state.message)}
+                        color="primary"
+                        disabled={this.props.processing}
+                    >
                         {intl.get('form.confirm')}
                     </Button>
                 </DialogActions>

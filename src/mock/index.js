@@ -1,8 +1,8 @@
-const baseUrl = 'http://120.78.240.24:7922'
+import {serverAdmin, serverLibrarian, serverReader} from './config'
 //
 export const fetchBookList = async () => {
   try {
-    const Response = await fetch(`${baseUrl}/booklist`)
+    const Response = await fetch(`${serverLibrarian}/booklist`)
     const result = await Response.json()
     return result
   } catch {
@@ -12,7 +12,7 @@ export const fetchBookList = async () => {
 //
 export const fetchReaderList = async () => {
   try {
-    const Response = await fetch(`${baseUrl}/readerList`)
+    const Response = await fetch(`${serverLibrarian}/readerList`)
     const result = await Response.json()
     return result
   } catch {
@@ -22,7 +22,7 @@ export const fetchReaderList = async () => {
 //
 export const fetchDetails = async isbn => {
   try {
-    const Response = await fetch(`${baseUrl}/details?isbn=${isbn}`)
+    const Response = await fetch(`${serverLibrarian}/details?isbn=${isbn}`)
     const result = await Response.json()
     return result
   } catch {
@@ -32,7 +32,7 @@ export const fetchDetails = async isbn => {
 //
 export const fetchAddBookNumber = async info => {
     try {
-        const Response = await fetch(`${baseUrl}/increaseBookNumber?isbn=${info.isbn}&number=${info.number}`)
+        const Response = await fetch(`${serverLibrarian}/increaseBookNumber?isbn=${info.isbn}&number=${info.number}`)
         const result = await Response.json()
         return result
     }
@@ -43,7 +43,7 @@ export const fetchAddBookNumber = async info => {
 
 export const fetchAddBook = async newBook => {
   try {
-    const Response = await fetch(`${baseUrl}/librarian/addBook`, {
+    const Response = await fetch(`${serverLibrarian}/librarian/addBook`, {
       method: 'POST',
       body: newBook
     })
@@ -56,7 +56,7 @@ export const fetchAddBook = async newBook => {
 //
 export const fetchUpdateBook = async updateBook => {
   try {
-    const Response = await fetch(`${baseUrl}/librarian/updateBook`, {
+    const Response = await fetch(`${serverLibrarian}/librarian/updateBook`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -72,7 +72,7 @@ export const fetchUpdateBook = async updateBook => {
 //
 export const fetchDeleteBook = async (id, barcode) => {
   try {
-    const Response = await fetch(`${baseUrl}/deleteBook?id=${id}&barcode=${barcode}`)
+    const Response = await fetch(`${serverLibrarian}/deleteBook?id=${id}&barcode=${barcode}`)
     const result = await Response.json()
     return result
   } catch {
@@ -82,7 +82,7 @@ export const fetchDeleteBook = async (id, barcode) => {
 //
 export const fetchBookHistory = async () => {
   try {
-    const Response = await fetch(`${baseUrl}/bookHistory`)
+    const Response = await fetch(`${serverLibrarian}/bookHistory`)
     const result = await Response.json()
     return result
   } catch {
@@ -92,7 +92,7 @@ export const fetchBookHistory = async () => {
 //
 export const fetchBorrow = async info => {
   try {
-    const Response = await fetch(`${baseUrl}/librarian/borrow`, {
+    const Response = await fetch(`${serverLibrarian}/librarian/borrow`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -108,7 +108,7 @@ export const fetchBorrow = async info => {
 //
 export const fetchReaderHistory = async id => {
   try {
-    const Response = await fetch(`${baseUrl}/readerHistory?id=${id}`)
+    const Response = await fetch(`${serverLibrarian}/readerHistory?id=${id}`)
     const result = await Response.json()
     return result
   } catch {
@@ -118,7 +118,7 @@ export const fetchReaderHistory = async id => {
 //
 export const fetchUpdateReader = async info => {
   try{
-      const Response = await fetch(`${baseUrl}/updateReader`, {
+      const Response = await fetch(`${serverLibrarian}/updateReader`, {
           method: 'POST',
           headers: {
               'Content-type': 'application/json'
@@ -134,7 +134,7 @@ export const fetchUpdateReader = async info => {
 //
 export const fetchDeleteReader = async id => {
   try {
-      const Response = await fetch(`${baseUrl}/deleteReader?id=${id}`)
+      const Response = await fetch(`${serverLibrarian}/deleteReader?id=${id}`)
       const result = await Response.json()
       return result
   }
@@ -145,7 +145,7 @@ export const fetchDeleteReader = async id => {
 //
 export const fetchAddReader = async info => {
   try {
-    const Response = await fetch(`${baseUrl}/addReader`, {
+    const Response = await fetch(`${serverLibrarian}/addReader`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -161,7 +161,7 @@ export const fetchAddReader = async info => {
 
 export const fetchNotification = async () => {
   try {
-    const Response = await fetch(`${baseUrl}/showAnnouncement`);
+    const Response = await fetch(`${serverLibrarian}/showAnnouncement`);
     const result = await Response.json();
     return result
   } catch {
@@ -171,7 +171,7 @@ export const fetchNotification = async () => {
 
 export const fetchAddNotification = async (message) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/addAnnouncement?message=${message}`);
+        const Response = await fetch(`${serverLibrarian}/librarian/addAnnouncement?message=${message}`);
         const result = await Response.json();
         return result
     } catch {
@@ -181,7 +181,7 @@ export const fetchAddNotification = async (message) => {
 
 export const fetchDeleteNotification = async (timestamp) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/deleteAnnouncement?timestamp=${timestamp}`);
+        const Response = await fetch(`${serverLibrarian}/librarian/deleteAnnouncement?timestamp=${timestamp}`);
         const result = await Response.json();
         return result
     } catch {
@@ -191,7 +191,7 @@ export const fetchDeleteNotification = async (timestamp) => {
 
 export const fetchUpdateNotification = async (timestamp, message) => {
     try {
-        const Response = await fetch(`${baseUrl}/librarian/updateAnnouncement?timestamp=${timestamp}&message=${message}`);
+        const Response = await fetch(`${serverLibrarian}/librarian/updateAnnouncement?timestamp=${timestamp}&message=${message}`);
         const result = await Response.json();
         return result
     } catch {
@@ -215,7 +215,7 @@ export const fetchDownload = url => {
 
 export const fetchShowCategories = async () => {
     try {
-        const Response = await fetch(`${baseUrl}/showCategories`)
+        const Response = await fetch(`${serverLibrarian}/showCategories`)
         const result = await Response.json();
         return result
     }
@@ -226,7 +226,7 @@ export const fetchShowCategories = async () => {
 
 export const fetchAddCategories = async (en, zh) => {
     try {
-        const Response = await fetch(`${baseUrl}/addCategory?en=${en}&zh=${zh}`)
+        const Response = await fetch(`${serverLibrarian}/addCategory?en=${en}&zh=${zh}`)
         const result = await Response.json();
         return result
     }
@@ -237,7 +237,7 @@ export const fetchAddCategories = async (en, zh) => {
 
 export const fetchUpdateCategories = async (en, en_changed, zh_changed) => {
     try {
-        const Response = await fetch(`${baseUrl}/changeCategory?en=${en}&en_changed=${en_changed}&zh_changed=${zh_changed}`)
+        const Response = await fetch(`${serverLibrarian}/changeCategory?en=${en}&en_changed=${en_changed}&zh_changed=${zh_changed}`)
         const result = await Response.json();
         return result
     }
@@ -248,11 +248,34 @@ export const fetchUpdateCategories = async (en, en_changed, zh_changed) => {
 
 export const fetchDeleteCategories = async (en) => {
     try {
-        const Response = await fetch(`${baseUrl}/deleteCategory?en=${en}`)
+        const Response = await fetch(`${serverLibrarian}/deleteCategory?en=${en}`)
         const result = await Response.json();
         return result
     }
     catch {
         return null
+    }
+}
+
+// reader
+export const fetchSearchBookByCategory = async (term) => {
+    try {
+        const Response = await fetch(`${serverReader}/searchCategory?category=${term}`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchSearchBookByKeywords = async (term) => {
+    try {
+        const Response = await fetch(`${serverReader}/searchBooks?keywords=${term}`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return []
     }
 }

@@ -127,12 +127,14 @@
 
     "passwordNotSame": "两次输入的密码不同！",
     "passwordEmpty": "密码不能为空",
+    "accountEmpty": "账号不能为空",
     "nameEmpty": "姓名不能为空",
     "emailEmpty": "邮箱不能为空",
     "emailIncorrect": "邮箱格式错误",
     "messageEmpty": "公告内容不能为空",
     "enEmpty": "分类的英文不能为空",
     "zhEmpty": "分类的中文不能为空",
+    "accountExists": "账号已存在",
 
     "English": "英文",
     "Chinese": "中文",
