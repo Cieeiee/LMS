@@ -153,6 +153,12 @@
     "Search": "Search...",
     "success": "Success",
     "failed": "Failed",
-    "logout": "logout"
+    "logout": "logout",
+
+    "dailyIncome": "Daily Income",
+    "weeklyIncome": "Weekly Income",
+    "monthlyIncome": "Monthly Income",
+    "income": "income ($)",
+    "date": "date"
   }
 }

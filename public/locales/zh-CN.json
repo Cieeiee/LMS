@@ -153,6 +153,12 @@
     "Search": "搜索...",
     "success": "成功",
     "failed": "失败",
-    "logout": "登出"
+    "logout": "登出",
+
+    "dailyIncome": "每日收入",
+    "weeklyIncome": "每周收入",
+    "monthlyIncome": "每月收入",
+    "income": "收入 ($)",
+    "date": "日期"
   }
 }

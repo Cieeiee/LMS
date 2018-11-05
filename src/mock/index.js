@@ -350,6 +350,17 @@ export const fetchDeleteCategories = async (en) => {
     }
 }
 
+export const fetchLibraryInfo = async (which) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/librarian/showLibraryInfo?which=${which}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
 // reader
 export const fetchSearchBookByCategory = async (term) => {
     try {
