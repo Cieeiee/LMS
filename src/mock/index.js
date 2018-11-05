@@ -361,6 +361,17 @@ export const fetchLibraryInfo = async (which) => {
     }
 }
 
+export const fetchSearchIsbn = async which => {
+  try {
+      const Response = await fetch(`${serverLibrarian}/searchIsbn?isbn=${which}`)
+      const result = await Response.json();
+      return result
+  }
+  catch {
+      return {}
+  }
+}
+
 // reader
 export const fetchSearchBookByCategory = async (term) => {
     try {

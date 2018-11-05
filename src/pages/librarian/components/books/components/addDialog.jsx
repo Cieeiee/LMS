@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl/FormControl";
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import { fetchSearchIsbn } from './../../../../../mock/index';
 
 export default class AddDialog extends React.Component {
     constructor(props) {
@@ -19,7 +20,14 @@ export default class AddDialog extends React.Component {
             category: '',
             img: null,
             init: false,
+            isFilled: false
         }
+    }
+
+    handleIsbn = isbn => async () => {
+      let data = await fetchSearchIsbn(isbn)
+      data.isbn = isbn
+      this.setState({ newBook: data, isFilled: true })
     }
 
     handleChange = name => e => this.setState({newBook: {...this.state.newBook, [name]: e.target.value}})
@@ -69,11 +77,18 @@ export default class AddDialog extends React.Component {
                         margin='dense'
                         label='ISBN'
                         fullWidth
+                        value={this.state.newBook.isbn}
                         onChange={this.handleChange('isbn')}
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position='end'>
-                              <Button color='primary'>{intl.get('reader.home.search')}</Button>
+                              <Button 
+                                color='primary' 
+                                onClick={this.handleIsbn(this.state.newBook.isbn)}
+                                disabled={!this.state.newBook.isbn}
+                              >
+                                {intl.get('reader.home.search')}
+                              </Button>
                             </InputAdornment>
                           )
                         }}
@@ -82,13 +97,21 @@ export default class AddDialog extends React.Component {
                         margin='dense'
                         label={intl.get('form.title')}
                         fullWidth
+                        value={this.state.newBook.title}
                         onChange={this.handleChange('title')}
+                        InputLabelProps={{
+                          shrink: this.state.isFilled,
+                      }}
                     />
                     <TextField
                         margin='dense'
                         label={intl.get('form.author')}
                         fullWidth
+                        value={this.state.newBook.author}
                         onChange={this.handleChange('author')}
+                        InputLabelProps={{
+                          shrink: this.state.isFilled,
+                      }}
                     />
                     <FormControl fullWidth>
                         <InputLabel>{intl.get('form.category')}</InputLabel>
@@ -110,6 +133,7 @@ export default class AddDialog extends React.Component {
                         margin='dense'
                         label={intl.get('form.location')}
                         fullWidth
+                        value={this.state.newBook.location}
                         onChange={this.handleChange('location')}
                     />
                     <TextField
@@ -117,13 +141,18 @@ export default class AddDialog extends React.Component {
                         label={intl.get('form.price')}
                         type='number'
                         fullWidth
+                        value={this.state.newBook.price}
                         onChange={this.handleChange('price')}
+                        InputLabelProps={{
+                          shrink: this.state.isFilled,
+                      }}
                     />
                     <TextField
                         margin='dense'
                         label={intl.get('form.number')}
                         type='number'
                         fullWidth
+                        value={this.state.newBook.number}
                         onChange={this.handleChange('number')}
                     />
                     <TextField
@@ -131,7 +160,11 @@ export default class AddDialog extends React.Component {
                         label={intl.get('form.introduction')}
                         fullWidth
                         multiline
+                        value={this.state.newBook.introduction}
                         onChange={this.handleChange('introduction')}
+                        InputLabelProps={{
+                          shrink: this.state.isFilled,
+                      }}
                     />
                 </DialogContent>
                 <DialogActions>

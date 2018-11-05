@@ -3,7 +3,7 @@ import '../login.scss'
 import { TextField, Button, Paper} from '@material-ui/core'
 import FindPasswordDialog from "./findPasswordDialog";
 import MessageDialog from "../components/MessageDialog";
-import {serverReader} from "../../../mock/config";
+import {serverReader, serverLibrarian} from "../../../mock/config";
 
 const backgroundImage = require('../components/library.jpg');
 
@@ -118,7 +118,7 @@ export default class Login extends React.Component {
 
         this.handleClose("openFind")();
 
-        fetch(`${serverReader}/findPassword`, {
+        fetch(`${serverLibrarian}/findPassword`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
