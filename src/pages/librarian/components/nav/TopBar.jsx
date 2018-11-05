@@ -153,7 +153,7 @@ class SearchAppBar extends React.Component {
                         </div>
                         <Button
                             color="inherit" variant="outlined"
-                            component={Link} to="/"
+                            onClick={() => window.location.href = '/'}
                         >
                             {intl.get('basic.logout')}
                             <ExitToAppOutlined style={{marginLeft: 10}}/>

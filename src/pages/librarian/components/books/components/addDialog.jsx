@@ -1,7 +1,7 @@
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import {TextField} from "@material-ui/core";
+import {TextField, InputAdornment} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
@@ -70,6 +70,13 @@ export default class AddDialog extends React.Component {
                         label='ISBN'
                         fullWidth
                         onChange={this.handleChange('isbn')}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position='end'>
+                              <Button color='primary'>{intl.get('reader.home.search')}</Button>
+                            </InputAdornment>
+                          )
+                        }}
                     />
                     <TextField
                         margin='dense'
@@ -138,7 +145,8 @@ export default class AddDialog extends React.Component {
                             this.state.newBook.introduction &&
                             this.state.newBook.location &&
                             this.state.newBook.price &&
-                            this.state.newBook.number
+                            this.state.newBook.number &&
+                            this.state.newBook.number !== '0'
                         )}
                         color='primary'
                         onClick={this.props.handleAddBook(this.state.img, this.state.newBook)}
