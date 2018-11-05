@@ -107,7 +107,7 @@ export default class Summary extends React.Component {
                     <div className="grow flex-col">
                         <DailyIncome dv={this.state.dailyData} cols={cols}/>
                         <WeeklyIncome dv={this.state.weeklyData} cols={cols}/>
-                        <MonthlyIncome dv={this.state.monthlyData} cols={cols}/>
+                        <MonthlyIncome dv={this.state.weeklyData} cols={cols}/>
                     </div>
                 </div>
             </div>

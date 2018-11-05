@@ -16,6 +16,7 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import {SearchOutlined} from "@material-ui/icons";
 import AddDialog from "./components/addDialog";
 import BarcodeDialog from "./components/barcodeDialog";
+import ShowBarcode from "./components/showBarcode";
 
 const isSearched = searchTerm => item =>
     item.barcode.indexOf(searchTerm) === 0;
@@ -32,10 +33,12 @@ export default class BookDetails extends React.Component {
             openLost: false,
             openDelete: false,
             openBarcode: false,
+            openShowBarcodes: false,
             eventStatus: false,
             item: undefined,
             searchTerm: "",
             processing: false,
+            barcodeImages: undefined,
         }
     }
 
@@ -48,7 +51,7 @@ export default class BookDetails extends React.Component {
     handleClose = (which) => () => {
         this.setState({
             [which]: false,
-            item: undefined,
+            item: undefined
         })
         if (which === "openSnack") {
             this.setState({returnMessage: undefined})
@@ -59,12 +62,20 @@ export default class BookDetails extends React.Component {
     }
     handleAdd = info => async () => {
         await this.setState({processing: true})
-        const eventState = await fetchAddBookNumber(info)
+        const barcodeImages = await fetchAddBookNumber(info)
+
         const book = await fetchDetails(this.props.match.params.isbn);
+        let eventState = undefined
+        if (barcodeImages)
+            eventState = true
+        else
+            eventState = false
         this.setState({
             openAdd: false,
             openSnack: true,
+            openShowBarcodes: true,
             processing: false,
+            barcodeImages,
             eventState,
             book
         })
@@ -269,6 +280,11 @@ export default class BookDetails extends React.Component {
                             open={this.state.openBarcode}
                             handleClose={this.handleClose("openBarcode")}
                             barcode={this.state.item}
+                        />
+                        <ShowBarcode
+                            open={this.state.openShowBarcodes}
+                            handleClose={this.handleClose("openShowBarcodes")}
+                            barcodeImages={this.state.barcodeImages}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}
