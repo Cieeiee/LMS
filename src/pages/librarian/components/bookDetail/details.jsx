@@ -98,7 +98,15 @@ export default class BookDetails extends React.Component {
         }
         await this.setState({processing: true})
         const fine = await fetchPayFine(info)
-        if (fine === -1) {
+        if (fine === -2) {
+            this.setState({
+                returnMessage: intl.get('message.barcodeError'),
+                openLost: false,
+                openReturn: false,
+                step: 0
+            })
+        }
+        else if (fine === -1) {
             this.setState({
                 returnMessage: intl.get('message.systemError'),
                 openLost: false,

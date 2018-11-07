@@ -23,6 +23,9 @@ import DetailsDialog from "./components/detailsDialog";
 import MessageDialog from "../messageDialog";
 import { BuildOutlined } from '@material-ui/icons'
 import * as intl from "react-intl-universal";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 const isSearched = searchTerm => item =>
     item.id.indexOf(searchTerm) === 0 ||
@@ -45,9 +48,18 @@ export default class Readers extends React.Component {
             formError: undefined,
             returnMessage: undefined,
             processing: false,
+            page: 0,
+            rowsPerPage: 10,
         }
     }
 
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     handleSearch = e => this.setState({searchTerm: e.target.value});
     handleOpen = (which, item) => () => {
         this.setState({
@@ -200,6 +212,10 @@ export default class Readers extends React.Component {
     }
 
     render() {
+        const { readerList, rowsPerPage, page } = this.state;
+        let readerListToShow = []
+        if (readerList) readerListToShow = readerList.filter(isSearched(this.state.searchTerm))
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, readerListToShow.length - page * rowsPerPage);
         return (
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
@@ -227,8 +243,7 @@ export default class Readers extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {typeof(this.state.readerList.map) !== "undefined"
-                                && this.state.readerList.filter(isSearched(this.state.searchTerm)).map((item, index) =>
+                                {readerListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell numeric>{item.name}</TableCell>
@@ -249,7 +264,25 @@ export default class Readers extends React.Component {
                                         </TableCell>
                                     </TableRow>
                                 )}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 57 * emptyRows }}>
+                                        <TableCell colSpan={7} />
+                                    </TableRow>
+                                )}
                             </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        colSpan={7}
+                                        count={readerListToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        ActionsComponent={TablePaginationFooter}
+                                    />
+                                </TableRow>
+                            </TableFooter>
                         </Table>
                         <AddDialog
                             open={this.state.openAdd}

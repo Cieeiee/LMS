@@ -205,6 +205,7 @@
     "categoryExists": "The category already exists.",
     "noPermission": "No permission to do that",
     "accountExists": "The account already exists.",
-    "stillBorrowingBooks": "Can not delete now. The account have books borrowing."
+    "stillBorrowingBooks": "Can not delete now. The account have books borrowing.",
+    "barcode": "The barcode is wrong."
   }
 }

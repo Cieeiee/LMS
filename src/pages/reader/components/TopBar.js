@@ -188,15 +188,14 @@ class PrimarySearchAppBar extends React.Component {
                             <MenuItem onClick={this.handleLanguage("zh-CN")}>
                                 中文
                             </MenuItem>
-                            <Divider/>
-                            <MenuItem component={Link} to={`/reader/${this.props.loginUser}`}>
-                                <ListItemIcon>
-                                    <Home/>
-                                </ListItemIcon>
-                                Home
-                            </MenuItem>
                         </Menu>
-                        <Typography className={classes.title} variant="title" color="inherit" noWrap>
+                        <Typography
+                            className={`${classes.title} title`}
+                            variant="title"
+                            color="inherit"
+                            noWrap
+                            onClick={() => window.location.href = `/reader/${this.props.loginUser}`}
+                        >
                             Bibliosoft
                         </Typography>
                         <div className={classes.grow} />

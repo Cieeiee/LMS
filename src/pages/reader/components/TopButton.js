@@ -90,7 +90,7 @@ class IconLabelButtons extends React.Component {
                     className={classes.button}
                     onClick={this.handleOpen("openMenu")}
                 >
-                    <SettingsOutlined/>
+                    {intl.get('basic.language')}
                 </IconButton>
                 <Menu
                     id="simple-menu"
@@ -104,14 +104,16 @@ class IconLabelButtons extends React.Component {
                     <MenuItem onClick={this.handleLanguage("zh-CN")}>
                         中文
                     </MenuItem>
-                    <Divider/>
-                    <MenuItem onClick={() => this.setState({"openRules": true, "openMenu": false})}>
-                        <ListItemIcon>
-                            <DescriptionOutlined/>
-                        </ListItemIcon>
-                        {intl.get("reader.topButton.rules")}
-                    </MenuItem>
                 </Menu>
+                <Button
+                    // variant="outlined"
+                    // color="secondary"
+                    className={classes.button}
+                    onClick={() => this.setState({"openRules": true, "openMenu": false})}
+                >
+                    {intl.get("reader.topButton.rules")}
+                    <DescriptionOutlined className={classes.iconSmall} />
+                </Button>
                 <div className={classes.growBlock}/>
                 <Button
                     variant="outlined"

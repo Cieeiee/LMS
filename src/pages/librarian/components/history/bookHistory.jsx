@@ -5,6 +5,9 @@ import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import * as intl from "react-intl-universal";
 import {fetchBookHistory} from "../../../../mock";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 const isSearched = searchTerm => item =>
     item.id.indexOf(searchTerm) === 0 ||
@@ -19,9 +22,18 @@ export default class BookHistory extends React.Component {
         this.state = {
             searchTerm: '',
             historyList: [],
+            page: 0,
+            rowsPerPage: 10,
         }
     }
 
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     handleSearch = e => this.setState({searchTerm: e.target.value});
 
     async componentDidMount() {
@@ -30,6 +42,11 @@ export default class BookHistory extends React.Component {
     }
 
     render() {
+        const { historyList, rowsPerPage, page } = this.state;
+        let historyListToShow = []
+        if (historyList) historyListToShow = historyList.filter(isSearched(this.state.searchTerm))
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, historyListToShow.length - page * rowsPerPage);
+
         return(
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
@@ -47,7 +64,7 @@ export default class BookHistory extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.historyList && this.state.historyList.filter(isSearched(this.state.searchTerm))
+                                {historyListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.barcode}</TableCell>
@@ -57,7 +74,25 @@ export default class BookHistory extends React.Component {
                                         <TableCell numeric>{item.date}</TableCell>
                                     </TableRow>
                                 )}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 48 * emptyRows }}>
+                                        <TableCell colSpan={5} />
+                                    </TableRow>
+                                )}
                             </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        colSpan={5}
+                                        count={historyListToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        ActionsComponent={TablePaginationFooter}
+                                    />
+                                </TableRow>
+                            </TableFooter>
                         </Table>
                     </div>
                 </div>

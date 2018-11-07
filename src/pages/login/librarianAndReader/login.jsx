@@ -38,14 +38,6 @@ export default class Login extends React.Component {
         else {
             this.setState({[which]: false});
         }
-
-        if (which === "openFind") {
-            this.setState({
-                ID: undefined,
-                email: undefined,
-                formError: undefined,
-            })
-        }
     };
 
     handleClearFormError = () => {
@@ -54,7 +46,10 @@ export default class Login extends React.Component {
 
     handleOpen = which => () => {
         this.setState({
-            [which]: true
+            [which]: true,
+            processing: false,
+            ID: undefined,
+            email: undefined,
         });
     };
 
@@ -62,16 +57,12 @@ export default class Login extends React.Component {
         event.preventDefault();
 
         if (this.state.account === undefined || this.state.account.length === 0) {
-            this.setState({
-                formError: "accountEmpty",
-            });
+            this.setState({formError: "accountEmpty"});
             return;
         }
 
         if (this.state.password === undefined || this.state.password.length === 0) {
-            this.setState({
-                formError: "passwordEmpty"
-            });
+            this.setState({formError: "passwordEmpty"});
             return;
         }
 
@@ -83,7 +74,7 @@ export default class Login extends React.Component {
             window.location.href = `/librarian/${this.state.account}/books`;
     };
 
-    handleFindPassword = event => {
+    handleFindPassword = async event => {
         event.preventDefault();
 
         if (this.state.ID === undefined) {
@@ -100,10 +91,12 @@ export default class Login extends React.Component {
             return;
         }
 
-        this.handleClose("openFind")();
-
-        const findStatus = fetchFindPassword(this.state.ID, this.state.email)
-        this.setState({findStatus});
+        await this.setState({processing: true})
+        const findStatus = await fetchFindPassword(this.state.ID, this.state.email)
+        this.setState({
+            findStatus,
+            openFind: false,
+        });
     };
 
     render() {
@@ -153,6 +146,7 @@ export default class Login extends React.Component {
                     handleChange={this.handleChange}
                     handleFindPassword={this.handleFindPassword}
                     handleClearFormError={this.handleClearFormError}
+                    processing={this.state.processing}
                     formError={this.state.formError}
                     ID={this.state.ID}
                     email={this.state.email}

@@ -13,6 +13,9 @@ import UpdateDialog from "./components/updateDialog";
 import MessageDialog from "../messageDialog";
 import BarcodeDialog from "./components/barcodeDialog";
 import * as intl from "react-intl-universal";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 
 const isSearched = searchTerm => item =>
     item.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
@@ -37,9 +40,18 @@ class Books extends React.Component {
             returnMessage: undefined,
             openSnack: false,
             processing: false,
+            page: 0,
+            rowsPerPage: 10,
         }
     }
 
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     handleSearch = e => this.setState({searchTerm: e.target.value});
     handleOpen = (which, item) => () => {
         this.setState({
@@ -128,6 +140,12 @@ class Books extends React.Component {
 
 
     render() {
+        const { bookList, rowsPerPage, page } = this.state;
+        let bookListToShow = []
+        if (bookList) bookListToShow = bookList.filter(isSearched(this.state.searchTerm))
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, bookListToShow.length - page * rowsPerPage);
+
+
         return(
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
@@ -157,8 +175,7 @@ class Books extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {typeof(this.state.bookList.filter) !== "undefined" &&
-                                this.state.bookList.filter(isSearched(this.state.searchTerm)).map((item, index) =>
+                                {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.isbn}</TableCell>
                                         <TableCell numeric>{item.title}</TableCell>
@@ -188,7 +205,25 @@ class Books extends React.Component {
                                         </TableCell>
                                     </TableRow>
                                 )}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 57 * emptyRows }}>
+                                        <TableCell colSpan={9} />
+                                    </TableRow>
+                                )}
                             </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        colSpan={9}
+                                        count={bookListToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        ActionsComponent={TablePaginationFooter}
+                                    />
+                                </TableRow>
+                            </TableFooter>
                         </Table>
                         <AddDialog
                             open={this.state.openAdd}

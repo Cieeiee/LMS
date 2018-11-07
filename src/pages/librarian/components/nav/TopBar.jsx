@@ -8,14 +8,14 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import {DescriptionOutlined, ExitToAppOutlined, MenuOutlined} from '@material-ui/icons'
 import SearchIcon from '@material-ui/icons/Search';
-import Button from "@material-ui/core/Button/Button";
-import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import * as intl from "react-intl-universal";
 import LibraryRules from "../../../reader/components/libraryRules";
-import {fetchShowRules} from "../../../../mock";
+import {fetchShowRules, fetchUpdateLibrarian} from "../../../../mock";
+import PasswordDialog from "./component/passwordDialog";
+import MessageDialog from "../messageDialog";
 
 const styles = theme => ({
     root: {
@@ -84,6 +84,7 @@ class SearchAppBar extends React.Component {
         this.state = {
             openMenu: false,
             anchorEl: null,
+            openChangePassword: false,
         }
     }
 
@@ -91,10 +92,45 @@ class SearchAppBar extends React.Component {
         window.location.search = `?lang=${which}`;
         this.handleClose("openMenu")();
     }
+    handleChange = which => e => {
+        this.setState({
+            [which]: e.target.value
+        })
+    }
+    clearFormError = () => {
+        this.setState({formError: undefined})
+    }
+    handleChangePassword = async () => {
+        if (this.state.password === undefined || this.state.password.length === 0) {
+            this.setState({formError: "passwordEmpty"});
+            return;
+        }
+        if (this.state.password !== this.state.confirmPassword) {
+            this.setState({formError: "passwordNotSame"});
+            return;
+        }
+        await this.setState({processing: true})
+        const eventStatus = await fetchUpdateLibrarian(this.props.loginUser, null, this.state.password)
+        let returnMessage = '';
+        if (eventStatus)
+            returnMessage = intl.get('message.success')
+        else
+            returnMessage = intl.get('message.systemError')
+
+        this.setState({
+            processing: false,
+            openChangePassword: false,
+            returnMessage
+        });
+
+    }
     handleOpen = which => event => {
         this.setState({
             anchorEl: event.currentTarget,
-            [which]: true
+            [which]: true,
+            processing: false,
+            password: undefined,
+            confirmPassword: undefined,
         })
     }
     handleClose = which => () => {
@@ -102,6 +138,9 @@ class SearchAppBar extends React.Component {
             anchorEl: null,
             [which]: false
         })
+        if (which === "openSnack") {
+            this.setState({returnMessage: undefined})
+        }
     }
     async componentDidMount() {
         const result = await fetchShowRules()
@@ -161,7 +200,11 @@ class SearchAppBar extends React.Component {
                                 />
                             </div>}
                         <div className={classes.grow} />
-                        <div style={{marginRight: 20}}>
+                        <div
+                            style={{marginRight: 20}}
+                            className="loginUser"
+                            onClick={this.handleOpen("openChangePassword")}
+                        >
                             {loginUser}
                         </div>
                         <IconButton
@@ -188,6 +231,22 @@ class SearchAppBar extends React.Component {
                         maxReserveTime: this.state.maxReserveTime,
                         maxBorrowNum: this.state.maxBorrowNum,
                     }}
+                />
+                <PasswordDialog
+                    handleClose={this.handleClose("openChangePassword")}
+                    handleChangePassword={this.handleChangePassword}
+                    handleChange={this.handleChange}
+                    clearFormError={this.clearFormError}
+                    password={this.state.password}
+                    confrimPassword={this.state.confirmPassword}
+                    formError={this.state.formError}
+                    open={this.state.openChangePassword}
+                    processing={this.state.processing}
+                />
+                <MessageDialog
+                    handleClose={this.handleClose("openSnack")}
+                    open={Boolean(this.state.returnMessage)}
+                    message={this.state.returnMessage}
                 />
             </div>
         );

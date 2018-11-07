@@ -14,6 +14,7 @@ import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import MessageDialog from "../messageDialog";
 import * as intl from "react-intl-universal";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const isSearched = searchTerm => item =>
     item.message.toUpperCase().includes(searchTerm.toUpperCase()) ||
@@ -146,10 +147,13 @@ export default class LibrarianNotifications extends React.Component {
                     <Nav loginUser={this.props.match.params.loginUser} whichFunction={"notifications"}/>
                     <div className="grow">
                         <div className="flex-row">
+                            <Typography style={{fontSize: 50, margin: "20px 0 10px 20px"}}>
+                                {intl.get('reader.notification.title')}
+                            </Typography>
                             <div className="grow"/>
                             <Button
                                 color="secondary"
-                                style={{margin: "20px 30px"}}
+                                style={{margin: "auto 30px 20px 0"}}
                                 onClick={this.handleOpen("openAdd", undefined)}
                                 variant="contained"
                                 size="large"

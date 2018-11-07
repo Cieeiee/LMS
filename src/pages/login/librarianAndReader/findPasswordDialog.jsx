@@ -50,7 +50,12 @@ export default function FindPasswordDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={props.handleFindPassword} color="primary" autoFocus>
+                <Button
+                    onClick={props.handleFindPassword}
+                    color="primary"
+                    autoFocus
+                    disabled={props.processing}
+                >
                     Confirm
                 </Button>
             </DialogActions>

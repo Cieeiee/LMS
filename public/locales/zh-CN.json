@@ -202,7 +202,7 @@
     "categoryExists": "该分类已存在",
     "noPermission": "没有操作权限",
     "accountExists": "账号已存在",
-    "stillBorrowingBooks": "该账号还有在借图书，无法删除"
-
+    "stillBorrowingBooks": "该账号还有在借图书，无法删除",
+    "barcode": "条形码错误"
   }
 }

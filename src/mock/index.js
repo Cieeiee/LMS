@@ -394,7 +394,7 @@ export const fetchSearchIsbn = async which => {
 
 export const fetchPayFine = async (info) => {
     try {
-        const Response = await fetch(`${serverLibrarian}/fine?barCode=${info.barcode}&state=${info.state}`)
+        const Response = await fetch(`${serverLibrarian}/fine?barcode=${info.barcode}&state=${info.state}`)
         const result = await Response.json();
         return result
     }
@@ -427,7 +427,7 @@ export const fetchFindPassword = async (ID, email) => {
     try {
         const Response = await fetch(`${serverLibrarian}/findPassword?id=${ID}&email=${email}`)
         const result = await Response.json()
-        return result.state
+        return result
     } catch {
         return null
     }

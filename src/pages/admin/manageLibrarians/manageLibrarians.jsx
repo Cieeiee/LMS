@@ -55,7 +55,7 @@ class ManageLibrariansClass extends React.Component {
     }
 
     handleOpen = (which, account) => () => {
-        this.setState({[which]: account});
+        this.setState({[which]: account, processing: false});
         if (account !== true) {
             this.setState({
                 ID: account.name,
@@ -102,7 +102,6 @@ class ManageLibrariansClass extends React.Component {
             returnMessage = intl.get('basic.failed')
 
         this.setState({
-            processing: false,
             openDelete: undefined,
             librarians,
             returnMessage
@@ -138,7 +137,6 @@ class ManageLibrariansClass extends React.Component {
         else
             returnMessage = intl.get('basic.failed')
         this.setState({
-            processing: false,
             openEdit: undefined,
             returnMessage,
             librarians
@@ -159,16 +157,8 @@ class ManageLibrariansClass extends React.Component {
             this.setState({formError: "emailIncorrect"});
             return;
         }
-        if (this.state.password === undefined || this.state.email.length === 0) {
-            this.setState({formError: "passwordEmpty"});
-            return;
-        }
-        if (this.state.password !== this.state.confirmPassword) {
-            this.setState({formError: "passwordNotSame"});
-            return;
-        }
         await this.setState({processing: true})
-        const eventState = await fetchAddLibrarian(this.state.ID, this.state.email, this.state.password)
+        const eventState = await fetchAddLibrarian(this.state.ID, this.state.email, "00010001")
         const librarians = await fetchShowLibrarians()
         let returnMessage = ''
         if (eventState === -1)
@@ -179,7 +169,6 @@ class ManageLibrariansClass extends React.Component {
             returnMessage = intl.get('basic.failed')
 
         this.setState({
-            processing: false,
             openAdd: false,
             ID: undefined,
             email: undefined,

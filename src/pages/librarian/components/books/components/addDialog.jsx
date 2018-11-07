@@ -41,13 +41,19 @@ export default class AddDialog extends React.Component {
         if (this.props.open && !this.state.init) {
             this.setState({
                 newBook: {},
-                init: true
+                init: true,
+                category: '',
+                img: null,
+                isFilled: false,
             })
         }
         if (!this.props.open && this.state.init) {
             this.setState({
                 newBook: {},
-                init: false
+                init: false,
+                category: '',
+                img: null,
+                isFilled: false,
             })
         }
     }
