@@ -45,7 +45,6 @@ function ReservingTable(props) {
                 <TableHead>
                     <TableRow>
                         <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.author")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.reserveTime")}</CustomTableCell>
                     </TableRow>
@@ -57,7 +56,6 @@ function ReservingTable(props) {
                                 <CustomTableCell component="th" scope="row">
                                     {book.title}
                                 </CustomTableCell>
-                                <CustomTableCell numeric>{book.author}</CustomTableCell>
                                 <CustomTableCell numeric>{book.barcode}</CustomTableCell>
                                 <CustomTableCell numeric>{book.reserveTime}</CustomTableCell>
                             </TableRow>

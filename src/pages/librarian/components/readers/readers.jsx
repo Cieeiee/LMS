@@ -170,13 +170,13 @@ export default class Readers extends React.Component {
             if (h.reserveTime !== null) {
                 h.reserveTime = this.changeDateFormat(h.reserveTime);
             }
-            if (h.borrowTime !== null && h.returnTime === null) {
+            if (h.state === 1) {
                 borrowing.push(h);
             }
-            else if (h.reserveTime !== null && h.borrowTime === null) {
+            else if (h.state === 0) {
                 reserving.push(h);
             }
-            else if (h.borrowTime !== null && h.returnTime !== null) {
+            else if (h.state === 2 || h.state === 3) {
                 borrowed.push(h);
             }
         }

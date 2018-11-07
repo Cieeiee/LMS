@@ -79,7 +79,6 @@ export default class ReturnDialog extends React.Component {
                     open={this.props.open}
                     onClose={this.props.handleClose}
                     aria-labelledby="form-dialog-title"
-                    fullWidth
                 >
                     <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.payFine')}</DialogTitle>
                     <DialogContent>

@@ -16,6 +16,7 @@ import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
+import {fetchSearchReader} from "../../../mock";
 
 const Logo = require('../components/images/logo.jpg');
 
@@ -64,10 +65,11 @@ class ReaderHistoryClass extends React.Component {
 
         this.state = {
             info: [],
-            borrowingRecord: [],
-            reservingRecord: [],
-            borrowedRecord: [],
+            borrowingHistory: [],
+            reservingHistory: [],
+            borrowedHistory: [],
             borrowedTotal: undefined,
+            borrowingTotal: undefined,
             tabValue: 0,
             openUpdate: false,
             formError: undefined,
@@ -83,28 +85,35 @@ class ReaderHistoryClass extends React.Component {
         }
     }
 
-    getHistory = () => {
-        try {
-            fetch(`${serverReader}/searchReader?id=${this.props.match.params.loginUser}`)
-                .then(Response => Response.json())
-                .then(result => {
-                    this.setState({
-                        info: result.info,
-                        borrowingRecord: result.borrowingRecord,
-                        reservingRecord: result.reservingRecord,
-                        borrowedRecord: result.borrowedRecord,
-                        borrowedTotal: result.borrowedTotal,
-                    });
-                })
-        } catch {
+    getHistory = async () => {
+        const result = await fetchSearchReader(this.props.match.params.loginUser)
+        await this.classifyHistory(result.list)
+        if (result) {
             this.setState({
-                info: [],
-                borrowingRecord: [],
-                reservingRecord: [],
-                borrowedRecord: [],
-                borrowedTotal: undefined,
-            })
+                info: result.info,
+                borrowedTotal: result.borrowedTotal,
+                borrowingTotal: result.borrowingTotal
+            });
         }
+    };
+    classifyHistory = (history) => {
+        let borrowing = [], reserving = [], borrowed = [];
+        for (let h of history) {
+            if (h.state === 1) {
+                borrowing.push(h);
+            }
+            else if (h.state === 0) {
+                reserving.push(h);
+            }
+            else if (h.state === 2 || h.state === 3) {
+                borrowed.push(h);
+            }
+        }
+        this.setState({
+            borrowingHistory: borrowing,
+            reservingHistory: reserving,
+            borrowedHistory: borrowed,
+        });
     };
 
     handleChange = (which) => (event, value) => {
@@ -280,11 +289,11 @@ class ReaderHistoryClass extends React.Component {
                                     </div>
                                 </Grid>
                                 {this.state.tabValue === 0 &&
-                                <BorrowingTableWrapped records={this.state.borrowingRecord}/>}
+                                <BorrowingTableWrapped records={this.state.borrowingHistory} total={this.state.borrowingTotal}/>}
                                 {this.state.tabValue === 1 &&
-                                <ReservingTableWrapped records={this.state.reservingRecord}/>}
+                                <ReservingTableWrapped records={this.state.reservingHistory}/>}
                                 {this.state.tabValue === 2 &&
-                                <BorrowedTableWrapped records={this.state.borrowedRecord} total={this.state.borrowedTotal}/>}
+                                <BorrowedTableWrapped records={this.state.borrowedHistory} total={this.state.borrowedTotal}/>}
                             </Paper>
                         </Grid>
                     </Grid>

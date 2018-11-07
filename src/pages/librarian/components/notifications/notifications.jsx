@@ -28,8 +28,6 @@ export default class LibrarianNotifications extends React.Component {
             openEdit: undefined,
             openDelete: undefined,
             openAdd: false,
-            openSnack: false,
-            eventState: false,
             item: undefined,
             formError: undefined,
             searchTerm: '',
@@ -48,13 +46,11 @@ export default class LibrarianNotifications extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchAddNotification(message);
         const announcements = await this.getNotification();
-
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
             notifications: announcements,
-            openSnack: true,
             openAdd: false,
-            processing: false,
-            eventState
+            returnMessage
         })
     };
 
@@ -67,12 +63,11 @@ export default class LibrarianNotifications extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchUpdateNotification(notification.timestamp, message);
         const announcements = await this.getNotification();
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
             notifications: announcements,
-            openSnack: true,
             openEdit: undefined,
-            processing: false,
-            eventState
+            returnMessage
         })
     };
 
@@ -80,17 +75,16 @@ export default class LibrarianNotifications extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchDeleteNotification(notification.timestamp);
         const announcements = await this.getNotification();
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
             notifications: announcements,
-            openSnack: true,
             openDelete: undefined,
-            processing: false,
-            eventState
+            returnMessage
         })
     };
 
     handleOpen = (which, item) => () => {
-        this.setState({[which]: true, item})
+        this.setState({[which]: true, item, processing: false})
     };
 
     handleClose = which => () => {
@@ -99,6 +93,9 @@ export default class LibrarianNotifications extends React.Component {
             formError: undefined,
             item: undefined,
         });
+        if (which === "openSnack") {
+            this.setState({returnMessage: undefined})
+        }
     };
 
     clearFormError = () => {
@@ -189,9 +186,8 @@ export default class LibrarianNotifications extends React.Component {
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}
-                            open={this.state.openSnack}
+                            open={Boolean(this.state.returnMessage)}
                             message={this.state.returnMessage}
-                            eventState={this.state.eventState}
                         />
                     </div>
                 </div>

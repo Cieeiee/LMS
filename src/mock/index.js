@@ -476,3 +476,14 @@ export const fetchShowRules = async () => {
         return []
     }
 }
+
+export const fetchSearchReader = async (id) => {
+    try {
+        const Response = await fetch(`${serverReader}/searchReader?id=${id}`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return null
+    }
+}

@@ -46,7 +46,6 @@ function BorrowingTable(props) {
                 <TableHead className={classes.head}>
                     <TableRow>
                         <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.author")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
@@ -59,7 +58,6 @@ function BorrowingTable(props) {
                                 <CustomTableCell component="th" scope="row">
                                     {book.title}
                                 </CustomTableCell>
-                                <CustomTableCell numeric>{book.author}</CustomTableCell>
                                 <CustomTableCell numeric>{book.barcode}</CustomTableCell>
                                 <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
                                 <CustomTableCell numeric>{book.fine}</CustomTableCell>
@@ -70,7 +68,6 @@ function BorrowingTable(props) {
                 <TableFooter>
                     <TableRow>
                         <CustomTableCell>{intl.get("form.totalFine")}</CustomTableCell>
-                        <CustomTableCell numeric/>
                         <CustomTableCell numeric/>
                         <CustomTableCell numeric/>
                         <CustomTableCell numeric>{props.total}</CustomTableCell>

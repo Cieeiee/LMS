@@ -95,7 +95,8 @@
       "addCategory": "增加一个分类",
       "deleteCategory": "删除该分类？",
       "updateCategory": "修改该分类",
-      "payFine": "读者需要支付的罚金"
+      "payFine": "读者需要支付的罚金",
+      "readerDetails": "读者详情"
     },
     "changePassword": "修改密码",
 
@@ -154,9 +155,11 @@
     "cancel": "取消",
     "confirm": "确认",
     "close": "关闭",
-    "paid": "已付"
+    "paid": "已付",
+    "description": "说明"
   },
   "basic": {
+    "language": "Zh",
     "update": "更新",
     "delete": "删除",
     "add": "增加",

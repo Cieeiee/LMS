@@ -45,11 +45,12 @@ function BorrowedTable(props) {
                 <TableHead>
                     <TableRow>
                         <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.author")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.returnTime")}</CustomTableCell>
+                        <CustomTableCell numeric>{intl.get("form.description")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,10 +60,10 @@ function BorrowedTable(props) {
                                 <CustomTableCell component="th" scope="row">
                                   {book.title}
                                 </CustomTableCell>
-                                <CustomTableCell numeric>{book.author}</CustomTableCell>
                                 <CustomTableCell numeric>{book.barcode}</CustomTableCell>
                                 <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
                                 <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
+                                <CustomTableCell numeric>{book.state === 3 && intl.get('basic.lost')}</CustomTableCell>
                                 <CustomTableCell numeric>{book.fine}</CustomTableCell>
                             </TableRow>
                         );

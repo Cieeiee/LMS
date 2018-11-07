@@ -174,7 +174,7 @@ class PrimarySearchAppBar extends React.Component {
                             className={classes.menuButton}
                             onClick={this.handleOpen("openMenu")}
                         >
-                            <MenuOutlined/>
+                            {intl.get('basic.language')}
                         </IconButton>
                         <Menu
                             id="simple-menu"

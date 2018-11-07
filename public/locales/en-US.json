@@ -97,7 +97,8 @@
       "updateCategory": "Update the category",
       "findPassword": "Find password",
       "findPasswordText": "Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you.",
-      "payFine": "The fine that reader have to pay"
+      "payFine": "The fine that reader have to pay",
+      "readerDetails": "Reader Details"
     },
 
     "changePassword": "change password",
@@ -157,9 +158,11 @@
     "cancel": "cancel",
     "confirm": "confirm",
     "close": "close",
-    "paid": "paid"
+    "paid": "paid",
+    "description": "description"
   },
   "basic": {
+    "language": "En",
     "update": "update",
     "delete": "delete",
     "add": "add",

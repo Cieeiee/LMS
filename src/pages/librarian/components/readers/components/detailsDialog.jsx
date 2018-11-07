@@ -15,13 +15,34 @@ import * as intl from "react-intl-universal";
 export default function DetailsDialog(props) {
     return (
         <Dialog
-            // maxWidth='lg'
+            maxWidth='lg'
+            fullWidth
+            // fullScreen
             open={props.open}
             onClose={props.handleClose}
             scroll="paper"
         >
-            {/*<DialogTitle>Borrow History</DialogTitle>*/}
             <DialogContent>
+                <div className="flex-col" style={{marginBottom: 40}}>
+                    <Typography style={{fontSize: 50, margin: "0 auto 20px auto"}}>
+                        {intl.get('form.formTitle.readerDetails')}
+                    </Typography>
+                    <div className="flex-row" style={{marginBottom: 5}}>
+                        <Typography color="textSecondary" style={{marginLeft: 'auto'}}>
+                            {intl.get('form.account')}: {props.reader && props.reader.id}
+                        </Typography>
+                    </div>
+                    <div className="flex-row" style={{marginBottom: 5}}>
+                        <Typography color="textSecondary" style={{marginLeft: 'auto'}}>
+                            {intl.get('form.name')}: {props.reader && props.reader.name}
+                        </Typography>
+                    </div>
+                    <div className="flex-row" style={{marginBottom: 5}}>
+                        <Typography color="textSecondary" style={{marginLeft: 'auto'}}>
+                            {intl.get('form.email')}: {props.reader && props.reader.email}
+                        </Typography>
+                    </div>
+                </div>
                 <div style={{marginBottom: 40}}>
                     <Typography variant="title" gutterBottom>{intl.get('form.formTitle.borrowingBooks')}</Typography>
                     {props.borrowingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowing')}</Typography> :
@@ -29,6 +50,7 @@ export default function DetailsDialog(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.title')}</TableCell>
                                     <TableCell>{intl.get('form.borrowTime')}</TableCell>
                                     <TableCell>{intl.get('form.fine')}</TableCell>
                                 </TableRow>
@@ -37,6 +59,7 @@ export default function DetailsDialog(props) {
                                 {props.borrowingHistory.map(item =>
                                     <TableRow key={item.barcode}>
                                         <TableCell>{item.barcode}</TableCell>
+                                        <TableCell>{item.title}</TableCell>
                                         <TableCell>{item.borrowTime}</TableCell>
                                         <TableCell>{item.fine}</TableCell>
                                     </TableRow>
@@ -52,6 +75,7 @@ export default function DetailsDialog(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.title')}</TableCell>
                                     <TableCell>{intl.get('form.reserveTime')}</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -59,6 +83,7 @@ export default function DetailsDialog(props) {
                                 {props.reservingHistory.map(item =>
                                     <TableRow key={item.barcode}>
                                         <TableCell>{item.barcode}</TableCell>
+                                        <TableCell>{item.title}</TableCell>
                                         <TableCell>{item.reserveTime}</TableCell>
                                     </TableRow>
                                 )}
@@ -73,18 +98,22 @@ export default function DetailsDialog(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>{intl.get('form.barcode')}</TableCell>
+                                    <TableCell>{intl.get('form.title')}</TableCell>
                                     <TableCell>{intl.get('form.borrowTime')}</TableCell>
                                     <TableCell>{intl.get('form.returnTime')}</TableCell>
                                     <TableCell>{intl.get('form.fine')}</TableCell>
+                                    <TableCell>{intl.get('form.description')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {props.borrowedHistory.map(item =>
                                     <TableRow key={item.barcode}>
                                         <TableCell>{item.barcode}</TableCell>
+                                        <TableCell>{item.title}</TableCell>
                                         <TableCell>{item.borrowTime}</TableCell>
                                         <TableCell>{item.returnTime}</TableCell>
                                         <TableCell>{item.fine}</TableCell>
+                                        <TableCell>{item.state === 3 && intl.get('basic.lost')}</TableCell>
                                     </TableRow>
                                 )}
                             </TableBody>
