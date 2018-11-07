@@ -215,8 +215,8 @@ export default class ManageRules extends React.Component {
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment variant="outlined" position="start">
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
                                                     {intl.get('admin.rules.TimeToReturnBook_unit')}
                                                 </InputAdornment>
                                             ),
@@ -254,8 +254,8 @@ export default class ManageRules extends React.Component {
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment variant="outlined" position="start">
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
                                                     {intl.get('admin.rules.ValidTimeForReserving_unit')}
                                                 </InputAdornment>
                                             ),
@@ -293,8 +293,8 @@ export default class ManageRules extends React.Component {
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment variant="outlined" position="start">
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
                                                     {intl.get('admin.rules.MaximumBooksToBorrow_unit')}
                                                 </InputAdornment>
                                             ),
