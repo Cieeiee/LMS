@@ -116,7 +116,7 @@ class IconLabelButtons extends React.Component {
                 </Button>
                 <div className={classes.growBlock}/>
                 <Button
-                    variant="outlined"
+                    // variant="outlined"
                     color="secondary"
                     className={classes.button}
                     component={Link} to={`/reader/${this.props.loginUser}/history`}
@@ -125,7 +125,7 @@ class IconLabelButtons extends React.Component {
                     <AccountCircleOutlined className={classes.iconSmall} />
                 </Button>
                 <Button
-                    variant="outlined"
+                    // variant="outlined"
                     color="primary"
                     className={classes.button}
                     component={Link} to={`/reader/${this.props.loginUser}/notification`}
@@ -134,7 +134,7 @@ class IconLabelButtons extends React.Component {
                     <Notifications className={classes.iconSmall}/>
                 </Button>
                 <Button
-                    variant="outlined"
+                    // variant="outlined"
                     color="default"
                     className={classes.button}
                     onClick={this.handleLogout}
