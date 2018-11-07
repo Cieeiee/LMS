@@ -70,6 +70,13 @@ export default class AddDialog extends React.Component {
                         onFocus={this.props.clearFormError}
                         onChange={this.handleChange('email')}
                     />
+                    <TextField
+                      margin='dense'
+                      label={intl.get('form.password')}
+                      value='12345678'
+                      disabled
+                      fullWidth
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
