@@ -159,7 +159,8 @@
     "confirm": "confirm",
     "close": "close",
     "paid": "paid",
-    "description": "description"
+    "description": "description",
+    "select": "select"
   },
   "basic": {
     "language": "En",

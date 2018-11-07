@@ -17,7 +17,7 @@ export default function BarcodeDialog(props) {
             <DialogContent>
                 <div className="flex-col">
                     {props.barcodeImages !== undefined && props.barcodeImages.map(img =>
-                        <img src={img} alt='' width='200px' style={{marginBottom: 40}}/>
+                        <img src={`http://${img}`} alt='' width='300px' style={{marginBottom: 40}}/>
                     )}
                 </div>
             </DialogContent>

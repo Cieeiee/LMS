@@ -156,7 +156,8 @@
     "confirm": "确认",
     "close": "关闭",
     "paid": "已付",
-    "description": "说明"
+    "description": "说明",
+    "select": "选择"
   },
   "basic": {
     "language": "Zh",
