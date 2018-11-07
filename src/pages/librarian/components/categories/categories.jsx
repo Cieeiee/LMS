@@ -43,7 +43,8 @@ export default class Categories extends React.Component {
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
-            item
+            item,
+            processing: false,
         })
     };
     handleClose = (which) => () => {
@@ -71,11 +72,20 @@ export default class Categories extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchAddCategories(en, zh);
         const categoryList = await fetchShowCategories();
+        let returnMessage = ''
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.categoryExists')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
-            openSnack: true,
             openAdd: false,
-            eventState,
+            returnMessage,
             categoryList,
         })
     }
@@ -91,11 +101,20 @@ export default class Categories extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchUpdateCategories(en, en_changed, zh_changed);
         const categoryList = await fetchShowCategories();
+        let returnMessage = ''
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.categoryExists')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
-            openSnack: true,
             openUpdate: false,
-            eventState,
+            returnMessage,
             categoryList,
         })
     }
@@ -103,11 +122,10 @@ export default class Categories extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchDeleteCategories(en);
         const categoryList = await fetchShowCategories();
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
-            processing: false,
-            openSnack: true,
             openDelete: false,
-            eventState,
+            returnMessage,
             categoryList,
         })
     }
@@ -121,7 +139,7 @@ export default class Categories extends React.Component {
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div style={{width: '100%'}} className="flex-row">
-                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "categories"})}
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"categories"}/>
                     <div className="grow">
                         <Table>
                             <TableHead>
@@ -185,9 +203,8 @@ export default class Categories extends React.Component {
                             />
                             <MessageDialog
                                 handleClose={this.handleClose("openSnack")}
-                                open={this.state.openSnack}
+                                open={Boolean(this.state.returnMessage)}
                                 message={this.state.returnMessage}
-                                eventState={this.state.eventState}
                             />
                         </Table>
                     </div>

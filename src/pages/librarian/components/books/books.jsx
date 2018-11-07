@@ -35,7 +35,6 @@ class Books extends React.Component {
             item: undefined,
             barcodeImages: undefined,
             returnMessage: undefined,
-            eventState: false,
             openSnack: false,
             processing: false,
         }
@@ -45,7 +44,8 @@ class Books extends React.Component {
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
-            item
+            item,
+            processing: false
         })
     };
     handleClose = (which) => () => {
@@ -65,39 +65,48 @@ class Books extends React.Component {
         const res = await fetchAddBook(data)
         let bookList = await fetchBookList()
         bookList = await this.getChinese(bookList, this.state.categories)
-        if(res === null) {
-          this.setState({
-            eventState: false,
-            openAdd: false,
-            openSnack: true
-          })
-          return
-        }
-        for(let x of res) {
-            fetchDownload(x);
+        let returnMessage = ''
+        switch (res.state) {
+            case -1:
+                returnMessage = intl.get('message.bookExists')
+                break;
+            case -2:
+                returnMessage = intl.get('message.pictureError')
+                break;
+            case -3:
+                returnMessage = intl.get('message.IOError')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
         }
         this.setState({
-            eventState: true,
             openAdd: false,
-            openBarcode: true,
-            openSnack: true,
-            barcodeImages: res,
-            processing: false,
+            returnMessage,
             bookList
         })
+        if(res.state === 1) {
+            this.setState({
+                openBarcode: true,
+                barcodeImages: res.barcode
+            })
+            for(let x of res.barcode) {
+                fetchDownload(x);
+            }
+        }
     }
     handleUpdateBook = updateBook => async () => {
         await this.setState({processing: true})
         const eventState = await fetchUpdateBook(updateBook)
         let bookList = await fetchBookList()
         bookList = await this.getChinese(bookList, this.state.categories)
-
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
-            eventState,
             openUpdate: false,
-            openSnack: true,
-            processing: false,
             bookList,
+            returnMessage,
         })
     }
     getChinese = (bookList, categories) => {
@@ -123,7 +132,7 @@ class Books extends React.Component {
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div style={{width: '100%'}} className="flex-row">
-                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "books"})}
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"books"}/>
                     <div className="grow">
                         <Table>
                             <TableHead>
@@ -203,9 +212,8 @@ class Books extends React.Component {
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}
-                            open={this.state.openSnack}
+                            open={Boolean(this.state.returnMessage)}
                             message={this.state.returnMessage}
-                            eventState={this.state.eventState}
                         />
                     </div>
                 </div>

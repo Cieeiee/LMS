@@ -1,6 +1,26 @@
 import {serverAdmin, serverLibrarian, serverReader} from './config'
 
 //admin
+export const fetchAdminLogin = async (account, password) => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/login`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: account,
+                password: password,
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
 export const fetchAdminChangePassword = async password => {
     try {
         const Response = await fetch(`${serverAdmin}/admin/changePassword`, {
@@ -372,7 +392,47 @@ export const fetchSearchIsbn = async which => {
   }
 }
 
+export const fetchPayFine = async (info) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/fine?barCode=${info.barcode}&state=${info.state}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
 // reader
+export const fetchReaderLibrarianLogin = async (account, password) => {
+    try {
+        const Response = await fetch(`${serverReader}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: account,
+                password: password,
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    } catch {
+        return null
+    }
+}
+
+export const fetchFindPassword = async (ID, email) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/findPassword?id=${ID}&email=${email}`)
+        const result = await Response.json()
+        return result.state
+    } catch {
+        return null
+    }
+}
+
 export const fetchSearchBookByCategory = async (term) => {
     try {
         const Response = await fetch(`${serverReader}/searchCategory?category=${term}`)
@@ -387,6 +447,28 @@ export const fetchSearchBookByCategory = async (term) => {
 export const fetchSearchBookByKeywords = async (term) => {
     try {
         const Response = await fetch(`${serverReader}/searchBooks?keywords=${term}`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchShowNotification = async () => {
+    try {
+        const Response = await fetch(`${serverReader}/showAnnouncement`)
+        const result = await Response.json()
+        return result.announcements
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchShowRules = async () => {
+    try {
+        const Response = await fetch(`${serverReader}/showRules`)
         const result = await Response.json()
         return result
     }

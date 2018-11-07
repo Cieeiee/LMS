@@ -16,7 +16,6 @@ export default function DetailsDialog(props) {
     return (
         <Dialog
             // maxWidth='lg'
-            fullWidth
             open={props.open}
             onClose={props.handleClose}
             scroll="paper"

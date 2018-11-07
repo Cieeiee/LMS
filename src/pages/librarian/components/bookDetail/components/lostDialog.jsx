@@ -6,39 +6,15 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
 import * as intl from "react-intl-universal";
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 
-export default class LostDialog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            readerID: undefined,
-            init: false,
-        }
-    }
-
-    handleChange = name => e => this.setState({[name]: e.target.value})
-    handleInit = () => {
-        if (this.props.open && !this.state.init) {
-            this.setState({
-                readerID: undefined,
-                init: true
-            })
-        }
-        if (!this.props.open && this.state.init) {
-            this.setState({
-                readerID: undefined,
-                init: false
-            })
-        }
-    }
-
-    render() {
-        this.handleInit()
-
-        return (
+export default function LostDialog(props) {
+    return (
+        <div>
+            {props.step === 0 &&
             <Dialog
-                open={this.props.open}
-                onClose={this.props.handleClose}
+                open={props.open}
+                onClose={props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
                 <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.lostBook')}</DialogTitle>
@@ -47,23 +23,63 @@ export default class LostDialog extends React.Component {
                         margin='dense'
                         label={intl.get('form.barcode')}
                         fullWidth
-                        defaultValue={this.props.barcode}
+                        defaultValue={props.barcode}
                         disabled
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
+                    <Button color='primary' onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         color='primary'
-                        onClick={this.props.handleBorrow({
-                            type: 1,
-                            barcode: this.props.barcode,
-                            state: 0
-                        })}
-                        disabled={this.props.processing}
+                        onClick={
+                            props.handlePayFine({
+                                barcode: props.barcode,
+                                state: 0
+                            })
+                        }
+                        disabled={props.processing}
                     >{intl.get('form.confirm')}</Button>
                 </DialogActions>
-            </Dialog>
-        );
-    }
+            </Dialog>}
+            {props.step === 1 &&
+            <Dialog
+                open={props.open}
+                onClose={props.handleClose}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.payFine')}</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        margin='dense'
+                        label={intl.get('form.fineNoUnit')}
+                        fullWidth
+                        defaultValue={props.fine}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    {intl.get("admin.rules.Fine_unit")}
+                                </InputAdornment>
+                            ),
+                            readOnly: true,
+                        }}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button color='primary' onClick={props.handleClose}>{intl.get('form.cancel')}</Button>
+                    <Button
+                        color='primary'
+                        onClick={props.handleBorrow({
+                            type: 1,
+                            barcode: props.barcode,
+                            state: 0
+                        })}
+                        disabled={props.processing}
+                    >{intl.get('form.paid')}</Button>
+                </DialogActions>
+            </Dialog>}
+        </div>
+    );
 }

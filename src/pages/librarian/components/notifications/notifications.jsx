@@ -121,6 +121,7 @@ export default class LibrarianNotifications extends React.Component {
     getNotification = async () => {
         let announcements = await fetchNotification();
         let changed = this.changeFormat(announcements);
+        changed.sort((x1, x2) => x1.timestamp < x2.timestamp ? 1 : -1)
         return changed;
     };
 
@@ -145,7 +146,7 @@ export default class LibrarianNotifications extends React.Component {
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div style={{width: '100%'}} className="flex-row">
-                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "notifications"})}
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"notifications"}/>
                     <div className="grow">
                         <div className="flex-row">
                             <div className="grow"/>

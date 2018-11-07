@@ -9,7 +9,6 @@ import * as intl from "react-intl-universal";
 export default function BarcodeDialog(props) {
     return (
         <Dialog
-            fullWidth
             open={props.open}
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
@@ -18,7 +17,7 @@ export default function BarcodeDialog(props) {
             <DialogContent>
                 <div className="flex-col">
                     {props.barcodeImages !== undefined && props.barcodeImages.map(img =>
-                        <img src={img} alt='' width='500px' style={{marginBottom: 40}}/>
+                        <img src={img} alt='' width='200px' style={{marginBottom: 40}}/>
                     )}
                 </div>
             </DialogContent>

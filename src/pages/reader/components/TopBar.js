@@ -24,6 +24,7 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import Divider from "@material-ui/core/Divider/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import * as intl from "react-intl-universal";
+import {fetchShowRules} from "../../../mock";
 
 const styles = theme => ({
     root: {
@@ -106,19 +107,15 @@ class PrimarySearchAppBar extends React.Component {
         }
     }
 
-    getAllRules = () => {
-        fetch(`${serverReader}/showRules`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    deposit: result.deposit,
-                    fine: result.fine,
-                    maxReturnTime: result.maxReturnTime,
-                    maxReserveTime: result.maxReserveTime,
-                    maxBorrowNum: result.maxBorrowNum,
-                });
-            })
-            .catch(e => alert(e));
+    getAllRules = async () => {
+        const result = await fetchShowRules()
+        this.setState({
+            deposit: result.deposit,
+            fine: result.fine,
+            maxReturnTime: result.maxReturnTime,
+            maxReserveTime: result.maxReserveTime,
+            maxBorrowNum: result.maxBorrowNum,
+        });
     };
 
     handleLogout = () => {

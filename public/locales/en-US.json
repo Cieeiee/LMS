@@ -8,10 +8,10 @@
       "title": "Rules Management",
       "Deposit": "Deposit",
       "Deposit_detail": "Paid by the reader to become the member of the Bibliosoft.",
-      "Deposit_unit": "$",
+      "Deposit_unit": "￥",
       "Fine": "Fine",
       "Fine_detail": "Paid for the book per day which doesn't return in time.",
-      "Fine_unit": "$",
+      "Fine_unit": "￥",
       "TimeToReturnBook": "Time to return book",
       "TimeToReturnBook_detail": "Time limit for returning the book after borrowing.",
       "TimeToReturnBook_unit": "days",
@@ -58,7 +58,11 @@
       "readers": "Readers",
       "deleteHistory": "Delete History",
       "notifications": "Notifications",
-      "summary": "Summary"
+      "summary": "Summary",
+      "borrowBook": "Borrow Book",
+      "returnBook": "Return Book",
+      "lostBook": "Lost Book",
+      "deleteBook": "Delete Book"
     }
   },
   "form": {
@@ -92,8 +96,10 @@
       "deleteCategory": "Delete the category?",
       "updateCategory": "Update the category",
       "findPassword": "Find password",
-      "findPasswordText": "Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you."
+      "findPasswordText": "Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you.",
+      "payFine": "The fine that reader have to pay"
     },
+
     "changePassword": "change password",
 
     "author": "author",
@@ -101,8 +107,8 @@
     "borrowTime": "borrow time",
     "returnTime": "return time",
     "reserveTime": "reserve time",
-    "fine": "fine ($)",
-    "totalFine": "Total Fine ($)",
+    "fine": "fine (￥)",
+    "totalFine": "Total Fine (￥)",
 
     "account": "account",
     "name": "name",
@@ -124,8 +130,13 @@
     "timestamp": "timestamp",
     "booksBorrowed": "books borrowed",
     "booksReserved": "books reserved",
-    "deposit": "deposit ($)",
+    "deposit": "deposit (￥)",
     "reader": "reader",
+    "fineNoUnit": "fine",
+    "bookState": "state",
+    "inLibrary": "in library",
+    "borrowed": "borrowed",
+    "reserved": "reserved",
 
     "passwordNotSame": "The passwords are not same!",
     "passwordEmpty": "The passwords can not be empty",
@@ -137,12 +148,16 @@
     "enEmpty": "The English of the category can not be empty",
     "zhEmpty": "The Chinese of the category can not be empty",
     "accountExists": "The account already exists",
+    "barcodeEmpty": "The barcode can not be empty",
+    "readerEmpty": "The reader can not be empty",
+    "numberEmpty": "The number can not be empty",
 
     "English": "English",
     "Chinese": "Chinese",
     "cancel": "cancel",
     "confirm": "confirm",
-    "close": "close"
+    "close": "close",
+    "paid": "paid"
   },
   "basic": {
     "update": "update",
@@ -157,13 +172,36 @@
     "failed": "Failed",
     "logout": "logout",
 
-    "dailyIncome": "Daily Income",
-    "weeklyIncome": "Weekly Income",
-    "monthlyIncome": "Monthly Income",
-    "income": "income ($)",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "incomeUnit": "income (￥)",
+    "incomeTitle": "Income Summary",
+    "bookUnit": "number of books",
+    "bookTitle": "Borrow & Return Summary",
+    "accountUnit": "number of account",
+    "accountTitle": "Reader Account Summary",
     "date": "date",
     "deposit": "deposit",
-    "fine": "fine"
-
+    "fine": "fine",
+    "numBorrowedBook": "books borrowed",
+    "numReturnedBook": "books returned",
+    "numCreateAccount": "account created",
+    "numDeleteAccount": "account deleted"
+  },
+  "message": {
+    "systemError": "system error. please check the form again.",
+    "readerNotExists": "The reader not exists.",
+    "excessBorrow": "The reader can not borrow more books.",
+    "notReserver": "The book is reserved by others now.",
+    "success": "Success.",
+    "bookStillBorrowed": "Can not delete now. The book have not been returned yet.",
+    "bookExists": "The book already exists.",
+    "pictureError": "Something wrong with the picture.",
+    "IOError": "Something wrong with the IO.",
+    "categoryExists": "The category already exists.",
+    "noPermission": "No permission to do that",
+    "accountExists": "The account already exists.",
+    "stillBorrowingBooks": "Can not delete now. The account have books borrowing."
   }
 }

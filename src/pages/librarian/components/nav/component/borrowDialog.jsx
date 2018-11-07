@@ -1,6 +1,7 @@
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
@@ -12,6 +13,7 @@ export default class BorrowDialog extends React.Component {
         super(props);
         this.state = {
             readerID: undefined,
+            barcode: undefined,
             init: false,
         }
 
@@ -22,12 +24,14 @@ export default class BorrowDialog extends React.Component {
         if (this.props.open && !this.state.init) {
             this.setState({
                 readerID: undefined,
+                barcode: undefined,
                 init: true
             })
         }
         if (!this.props.open && this.state.init) {
             this.setState({
                 readerID: undefined,
+                barcode: undefined,
                 init: false
             })
         }
@@ -42,18 +46,20 @@ export default class BorrowDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.borrowBook')}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('librarian.nav.borrowBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
+                        error={this.props.formError === "barcodeEmpty"}
                         margin='dense'
-                        label={intl.get('form.barcode')}
+                        label={this.props.formError === "barcodeEmpty" ?
+                            intl.get('form.barcodeEmpty') : intl.get('form.barcode')}
                         fullWidth
-                        defaultValue={this.props.barcode}
-                        disabled
+                        value={this.state.barcode}
+                        onFocus={this.props.clearFormError}
+                        onChange={this.handleChange("barcode")}
                     />
                     <TextField
                         error={this.props.formError === "readerEmpty"}
-                        autoFocus
                         margin='dense'
                         label={this.props.formError === "readerEmpty"?
                             intl.get('form.readerEmpty') : intl.get('form.reader')}
@@ -69,7 +75,7 @@ export default class BorrowDialog extends React.Component {
                         color='primary'
                         onClick={this.props.handleBorrow({
                             type: 0,
-                            barcode: this.props.barcode,
+                            barcode: this.state.barcode,
                             id: this.state.readerID,
                             state: 0
                         })}

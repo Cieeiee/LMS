@@ -11,11 +11,10 @@ export default function MessageDialog(props) {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            autoHideDuration={1500}
+            autoHideDuration={5000}
             message={
                 <span id="message-id">
-                    {props.message ? props.message : props.eventState === true ?
-                        intl.get('basic.success') : intl.get('basic.failed')}
+                    {props.message}
                 </span>
             }
         />

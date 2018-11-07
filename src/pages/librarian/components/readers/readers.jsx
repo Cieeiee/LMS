@@ -52,7 +52,8 @@ export default class Readers extends React.Component {
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
-            item
+            item,
+            processing: false
         })
     };
     handleClose = (which) => () => {
@@ -80,11 +81,20 @@ export default class Readers extends React.Component {
         await this.setState({processing: true})
         const eventState = await fetchUpdateReader(info);
         const readerList = await fetchReaderList();
+        let returnMessage = ''
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.noPermission')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
             openUpdate: false,
-            openSnack: true,
-            eventState,
+            returnMessage,
             readerList
         })
     };
@@ -104,31 +114,41 @@ export default class Readers extends React.Component {
         await this.setState({processing: true})
         const eventState =  await fetchAddReader(info)
         const readerList = await fetchReaderList()
-        let returnMessage = '';
-        if (eventState === -1)
-            returnMessage = intl.get('form.accountExists')
-        if (eventState === 0)
-            returnMessage = intl.get('basic.failed')
-        if (eventState === 1)
-            returnMessage = intl.get('basic.success')
+        let returnMessage = ''
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.accountExists')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
             openAdd: false,
-            openSnack: true,
-            eventState,
             returnMessage,
             readerList
         })
     }
     handleDeleteReader = id => async () => {
         await this.setState({processing: true})
-        const eventStatus = await fetchDeleteReader(id);
+        const eventState = await fetchDeleteReader(id);
         const readerList = await fetchReaderList()
+        let returnMessage = ''
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.stillBorrowingBooks')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
             openDetails: false,
-            openSnack: true,
-            eventStatus,
+            returnMessage,
             readerList
         })
     };
@@ -184,13 +204,14 @@ export default class Readers extends React.Component {
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div style={{width: '100%'}} className="flex-row">
-                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "readers"})}
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"readers"}/>
                     <div className="grow">
                         <Table>
                             <TableHead>
                                 <TableRow>
                                     <CustomTableCell>{intl.get('form.account')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.name')}</CustomTableCell>
+                                    <CustomTableCell numeric>{intl.get('form.email')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.booksBorrowed')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.booksReserved')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.deposit')}</CustomTableCell>
@@ -211,6 +232,7 @@ export default class Readers extends React.Component {
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell numeric>{item.name}</TableCell>
+                                        <TableCell numeric>{item.email}</TableCell>
                                         <TableCell numeric>{item.booksBorrowed}</TableCell>
                                         <TableCell numeric>{item.booksReserved}</TableCell>
                                         <TableCell numeric>{item.deposit}</TableCell>
@@ -258,8 +280,7 @@ export default class Readers extends React.Component {
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}
-                            open={this.state.openSnack}
-                            eventState={this.state.eventState}
+                            open={Boolean(this.state.returnMessage)}
                             message={this.state.returnMessage}
                         />
                     </div>

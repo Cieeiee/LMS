@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Paper, TextField} from "@material-ui/core";
 import MessageDialog from "../components/MessageDialog";
 import {serverAdmin} from "../../../mock/config";
+import {fetchAdminLogin} from "../../../mock";
 
 const backgroundImage = require('../components/library.jpg');
 
@@ -31,7 +32,7 @@ export default class AdminLogin extends React.Component {
         this.setState({formError: undefined});
     };
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
 
         if (this.state.account === undefined || this.state.account.length === 0) {
@@ -48,31 +49,13 @@ export default class AdminLogin extends React.Component {
             return;
         }
 
-        fetch(`${serverAdmin}/admin/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.account,
-                password: this.state.password,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({loginStatus: result.state});
-            })
-            .catch(e => alert(e));
-    };
-
-    loginUser = () => {
-        if (this.state.loginStatus === 1)
+        const loginStatus = await fetchAdminLogin(this.state.account, this.state.password)
+        this.setState({loginStatus});
+        if (loginStatus === 1)
             window.location.href = '/admin';
     };
 
     render() {
-        this.loginUser();
 
         return (
             <div className='admin-login'>

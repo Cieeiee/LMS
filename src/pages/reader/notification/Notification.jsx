@@ -10,6 +10,7 @@ import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
+import {fetchShowNotification} from "../../../mock";
 
 export default class ReaderNotification extends React.Component {
     constructor(props) {
@@ -20,19 +21,10 @@ export default class ReaderNotification extends React.Component {
         };
     }
 
-    getNotification = () => {
-        fetch(`${serverReader}/showAnnouncement`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    notifications: result.announcements
-                });
-            })
-            .catch(e => alert(e));
-    };
-
-    componentDidMount() {
-        this.getNotification();
+    async componentDidMount() {
+        const notifications = await fetchShowNotification()
+        notifications.sort((x1, x2) => x1.timestamp < x2.timestamp ? 1 : -1)
+        this.setState({notifications})
     }
 
     render() {

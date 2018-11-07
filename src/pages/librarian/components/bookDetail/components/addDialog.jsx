@@ -45,11 +45,14 @@ export default class AddDialog extends React.Component {
                 <DialogContent>
                     <TextField
                         autoFocus
+                        error={this.props.formError === "numberEmpty"}
                         margin='dense'
-                        label={intl.get('form.number')}
+                        label={this.props.formError === "numberEmpty" ?
+                            intl.get("form.numberEmpty") : intl.get('form.number')}
                         fullWidth
                         value={this.state.number}
                         onChange={this.handleChange("number")}
+                        onFocus={this.props.clearFormError}
                     />
                 </DialogContent>
                 <DialogActions>

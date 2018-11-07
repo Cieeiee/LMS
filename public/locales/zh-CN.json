@@ -8,10 +8,10 @@
       "title": "规则管理",
       "Deposit": "押金",
       "Deposit_detail": "读者交付押金后才能成为Bibliosoft的会员",
-      "Deposit_unit": "$",
+      "Deposit_unit": "￥",
       "Fine": "罚金",
       "Fine_detail": "没按时归还的图书每天需要缴纳的罚金",
-      "Fine_unit": "$",
+      "Fine_unit": "￥",
       "TimeToReturnBook": "还书的时限",
       "TimeToReturnBook_detail": "归还借阅图书的时间限制",
       "TimeToReturnBook_unit": "天",
@@ -58,7 +58,11 @@
       "readers": "读者管理",
       "deleteHistory": "书籍删除历史",
       "notifications": "公告",
-      "summary": "信息汇总"
+      "summary": "信息汇总",
+      "borrowBook": "借阅图书",
+      "returnBook": "归还图书",
+      "lostBook": "丢失图书",
+      "deleteBook": "删除图书"
     }
   },
   "form": {
@@ -90,7 +94,8 @@
       "deleteReader": "删除该读者",
       "addCategory": "增加一个分类",
       "deleteCategory": "删除该分类？",
-      "updateCategory": "修改该分类"
+      "updateCategory": "修改该分类",
+      "payFine": "读者需要支付的罚金"
     },
     "changePassword": "修改密码",
 
@@ -99,8 +104,8 @@
     "borrowTime": "借出时间",
     "returnTime": "归还时间",
     "reserveTime": "预约时间",
-    "fine": "罚金 ($)",
-    "totalFine": "总罚金 ($)",
+    "fine": "罚金 (￥)",
+    "totalFine": "总罚金 (￥)",
 
     "account": "账号",
     "name": "姓名",
@@ -122,8 +127,13 @@
     "timestamp": "时间",
     "booksBorrowed": "借阅图书 (本)",
     "booksReserved": "预约图书 (本)",
-    "deposit": "押金 ($)",
+    "deposit": "押金 (￥)",
     "reader": "读者",
+    "fineNoUnit": "罚金",
+    "bookState": "状态",
+    "inLibrary": "在馆",
+    "borrowed": "已借出",
+    "reserved": "被预约",
 
     "passwordNotSame": "两次输入的密码不同！",
     "passwordEmpty": "密码不能为空",
@@ -135,12 +145,16 @@
     "enEmpty": "分类的英文不能为空",
     "zhEmpty": "分类的中文不能为空",
     "accountExists": "账号已存在",
+    "barcodeEmpty": "条形码不能为空",
+    "readerEmpty": "读者不能为空",
+    "numberEmpty": "数量不能为空",
 
     "English": "英文",
     "Chinese": "中文",
     "cancel": "取消",
     "confirm": "确认",
-    "close": "关闭"
+    "close": "关闭",
+    "paid": "已付"
   },
   "basic": {
     "update": "更新",
@@ -155,12 +169,37 @@
     "failed": "失败",
     "logout": "登出",
 
-    "dailyIncome": "每日收入",
-    "weeklyIncome": "每周收入",
-    "monthlyIncome": "每月收入",
-    "income": "收入 ($)",
+    "daily": "每日",
+    "weekly": "每周",
+    "monthly": "每月",
+    "incomeUnit": "收入 (￥)",
+    "incomeTitle": "收入汇总",
+    "bookUnit": "本数",
+    "bookTitle": "借还书汇总",
+    "accountUnit": "个数",
+    "accountTitle": "读者注册销户汇总",
     "date": "日期",
     "deposit": "押金",
-    "fine": "罚金"
+    "fine": "罚金",
+    "numBorrowedBook": "借出图书数量",
+    "numReturnedBook": "归还图书数量",
+    "numCreateAccount": "注册数量",
+    "numDeleteAccount": "注销数量"
+  },
+  "message": {
+    "systemError": "系统错误，请检查表格是否正确填写",
+    "readerNotExists": "该读者不存在",
+    "excessBorrow": "该读者借书数量达到上限",
+    "notReserver": "该书已经被别人预约了",
+    "success": "成功",
+    "bookStillBorrowed": "该书尚未归还，无法删除",
+    "bookExists": "该书已存在",
+    "pictureError": "上传图片发生错误",
+    "IOError": "IO发生错误",
+    "categoryExists": "该分类已存在",
+    "noPermission": "没有操作权限",
+    "accountExists": "账号已存在",
+    "stillBorrowingBooks": "该账号还有在借图书，无法删除"
+
   }
 }

@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import Menu from "@material-ui/core/Menu/Menu";
 import IconButton from "@material-ui/core/IconButton/IconButton";
+import {fetchShowRules} from "../../../mock";
 
 const styles = theme => ({
     button: {
@@ -44,19 +45,15 @@ class IconLabelButtons extends React.Component {
         }
     };
 
-    getAllRules = () => {
-        fetch(`${serverReader}/showRules`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    deposit: result.deposit,
-                    fine: result.fine,
-                    maxReturnTime: result.maxReturnTime,
-                    maxReserveTime: result.maxReserveTime,
-                    maxBorrowNum: result.maxBorrowNum,
-                });
-            })
-            .catch(e => console.log(e));
+    getAllRules = async () => {
+        const result = await fetchShowRules()
+        this.setState({
+            deposit: result.deposit,
+            fine: result.fine,
+            maxReturnTime: result.maxReturnTime,
+            maxReserveTime: result.maxReserveTime,
+            maxBorrowNum: result.maxBorrowNum,
+        });
     };
 
     componentDidMount() {

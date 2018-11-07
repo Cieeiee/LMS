@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableBody, TableHead, TableRow, TableCell, Button } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography/Typography";
 import '../../librarian.scss'
-import {fetchAddBookNumber, fetchBorrow, fetchDeleteBook, fetchDetails} from "../../../../mock";
+import {fetchAddBookNumber, fetchBorrow, fetchDeleteBook, fetchDetails, fetchPayFine} from "../../../../mock";
 import MessageDialog from "../messageDialog";
 import BorrowDialog from "./components/borrowDialog";
 import DeleteDialog from "./components/deleteDialog";
@@ -34,75 +34,146 @@ export default class BookDetails extends React.Component {
             openDelete: false,
             openBarcode: false,
             openShowBarcodes: false,
-            eventStatus: false,
             item: undefined,
             searchTerm: "",
             processing: false,
             barcodeImages: undefined,
+            step: 0,
+            formError: undefined
         }
     }
 
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
-            item
+            item,
+            step: 0,
+            processing: false
         })
     };
     handleClose = (which) => () => {
         this.setState({
             [which]: false,
-            item: undefined
+            item: undefined,
+            step: 0,
+            formError: undefined
         })
         if (which === "openSnack") {
             this.setState({returnMessage: undefined})
         }
     };
+    clearFormError = () => {
+        this.setState({formError: undefined})
+    }
     handleChange = which => e => {
         this.setState({[which]: e.target.value})
     }
     handleAdd = info => async () => {
+        if (info.number === undefined || info.number.length === 0) {
+            this.setState({formError: "numberEmpty"})
+            return
+        }
         await this.setState({processing: true})
         const barcodeImages = await fetchAddBookNumber(info)
 
         const book = await fetchDetails(this.props.match.params.isbn);
-        let eventState = undefined
-        if (barcodeImages)
-            eventState = true
+        let returnMessage = ''
+        if (barcodeImages === null)
+            returnMessage = intl.get('message.systemError')
         else
-            eventState = false
+            returnMessage = intl.get('message.success')
+
         this.setState({
             openAdd: false,
-            openSnack: true,
             openShowBarcodes: true,
-            processing: false,
             barcodeImages,
-            eventState,
+            returnMessage,
             book
         })
     }
+    handlePayFine = info => async () => {
+        if (info.barcode === undefined || info.barcode.length === 0) {
+            this.setState({formError: "barcodeEmpty"})
+            return
+        }
+        await this.setState({processing: true})
+        const fine = await fetchPayFine(info)
+        if (fine === -1) {
+            this.setState({
+                returnMessage: intl.get('message.systemError'),
+                openLost: false,
+                openReturn: false,
+                step: 0
+            })
+        }
+        else {
+            this.setState({
+                step: 1,
+                processing: false,
+                fine
+            })
+        }
+    }
     handleBorrow = info => async () => {
+        if (info.barcode === undefined || info.barcode.length === 0) {
+            this.setState({formError: "barcodeEmpty"})
+            return
+        }
+        if (info.type === 0 && (info.id === undefined || info.id.length === 0)) {
+            this.setState({formError: "readerEmpty"})
+            return
+        }
         await this.setState({processing: true})
         const eventState = await fetchBorrow(info)
         const book = await fetchDetails(this.props.match.params.isbn);
+        let returnMessage = ''
+        switch(eventState) {
+            case -1:
+                returnMessage = intl.get('message.readerNotExists')
+                break;
+            case -2:
+                returnMessage = intl.get('message.excessBorrow')
+                break;
+            case -3:
+                returnMessage = intl.get('message.notReserver')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
             openBorrow: false,
             openReturn: false,
             openLost: false,
-            openSnack: true,
-            eventState,
+            step: 0,
+            returnMessage,
             book
         })
     }
     handleDelete = (id, barcode) => async () => {
+        if (barcode === undefined || barcode.length === 0) {
+            this.setState({formError: "barcodeEmpty"})
+            return
+        }
         await this.setState({processing: true})
         const eventState =  await fetchDeleteBook(id, barcode);
         const book = await fetchDetails(this.props.match.params.isbn);
+        let returnMessage = ''
+        switch(eventState) {
+            case -1:
+                returnMessage = intl.get('message.bookStillBorrowed')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
         this.setState({
-            processing: false,
             openDelete: false,
-            openSnack: true,
-            eventState,
+            returnMessage,
             book
         })
     }
@@ -117,7 +188,7 @@ export default class BookDetails extends React.Component {
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div className="flex-row">
-                    {Nav({loginUser: this.props.match.params.loginUser, whichFunction: "books"})}
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"books"}/>
                     <div style={{margin: "40px auto 0 auto",width: "60%"}}>
                         <div className="flex-row">
                             <img src={this.state.book.bookClass.picture} alt='' height='400px' />
@@ -184,6 +255,7 @@ export default class BookDetails extends React.Component {
                                 <TableRow>
                                     <TableCell>{intl.get('form.barcode')}</TableCell>
                                     <TableCell>{intl.get('form.title')}</TableCell>
+                                    <TableCell>{intl.get('form.bookState')}</TableCell>
                                     {/*<TableCell numeric>{intl.get('basic.borrow')}/{intl.get('basic.return')}</TableCell>*/}
                                     {/*<TableCell numeric>{intl.get('basic.delete')}</TableCell>*/}
                                     <TableCell/>
@@ -201,6 +273,13 @@ export default class BookDetails extends React.Component {
                                             {item.barcode}
                                         </TableCell>
                                         <TableCell>{this.state.book.bookClass.title}</TableCell>
+                                        <TableCell>
+                                            <Typography color="textSecondary">
+                                                {item.availability === 0 && intl.get("form.inLibrary")}
+                                                {item.availability === 1 && intl.get("form.borrowed")}
+                                                {item.availability === 2 && intl.get("form.reserved")}
+                                            </Typography>
+                                        </TableCell>
                                         <TableCell numeric>
                                             {item.availability !== 1 ?
                                                 <Button
@@ -246,6 +325,8 @@ export default class BookDetails extends React.Component {
                             handleAdd={this.handleAdd}
                             isbn={this.state.item}
                             processing={this.state.processing}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                         />
                         <BorrowDialog
                             open={this.state.openBorrow}
@@ -253,6 +334,8 @@ export default class BookDetails extends React.Component {
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
                             processing={this.state.processing}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                         />
                         <DeleteDialog
                             open={this.state.openDelete}
@@ -268,6 +351,9 @@ export default class BookDetails extends React.Component {
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
                             processing={this.state.processing}
+                            step={this.state.step}
+                            handlePayFine={this.handlePayFine}
+                            fine={this.state.fine}
                         />
                         <ReturnDialog
                             open={this.state.openReturn}
@@ -275,6 +361,9 @@ export default class BookDetails extends React.Component {
                             handleBorrow={this.handleBorrow}
                             barcode={this.state.item}
                             processing={this.state.processing}
+                            step={this.state.step}
+                            handlePayFine={this.handlePayFine}
+                            fine={this.state.fine}
                         />
                         <BarcodeDialog
                             open={this.state.openBarcode}
@@ -288,9 +377,8 @@ export default class BookDetails extends React.Component {
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}
-                            open={this.state.openSnack}
-                            eventState={this.state.eventState}
-                            processing={this.state.processing}
+                            open={Boolean(this.state.returnMessage)}
+                            message={this.state.returnMessage}
                         />
                     </div>
                 </div>

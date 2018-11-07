@@ -4,6 +4,7 @@ import { TextField, Button, Paper} from '@material-ui/core'
 import FindPasswordDialog from "./findPasswordDialog";
 import MessageDialog from "../components/MessageDialog";
 import {serverReader, serverLibrarian} from "../../../mock/config";
+import {fetchFindPassword, fetchReaderLibrarianLogin} from "../../../mock";
 
 const backgroundImage = require('../components/library.jpg');
 
@@ -57,7 +58,7 @@ export default class Login extends React.Component {
         });
     };
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
 
         if (this.state.account === undefined || this.state.account.length === 0) {
@@ -74,28 +75,11 @@ export default class Login extends React.Component {
             return;
         }
 
-        fetch(`${serverReader}/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.account,
-                password: this.state.password,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({loginStatus: result.state});
-            })
-            .catch(e => alert(e));
-    };
-
-    loginUser = () => {
-        if (this.state.loginStatus === 0)
+        const loginStatus = await fetchReaderLibrarianLogin(this.state.account, this.state.password)
+        this.setState({loginStatus});
+        if (loginStatus === 0)
             window.location.href = '/reader/' + this.state.account;
-        if (this.state.loginStatus === 1)
+        if (loginStatus === 1)
             window.location.href = `/librarian/${this.state.account}/books`;
     };
 
@@ -118,26 +102,11 @@ export default class Login extends React.Component {
 
         this.handleClose("openFind")();
 
-        fetch(`${serverLibrarian}/findPassword`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.ID,
-                email: this.state.email,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({findStatus: result.state});
-            })
-            .catch(e => alert(e));
+        const findStatus = fetchFindPassword(this.state.ID, this.state.email)
+        this.setState({findStatus});
     };
 
     render() {
-        this.loginUser();
 
         return (
             <div className='admin-login'>
@@ -200,8 +169,18 @@ export default class Login extends React.Component {
                 />
                 <MessageDialog
                     handleClose={this.handleClose("findStatus")}
+                    open={this.state.findStatus === -2}
+                    message={"User not exists or no permission"}
+                />
+                <MessageDialog
+                    handleClose={this.handleClose("findStatus")}
+                    open={this.state.findStatus === -1}
+                    message={"User name doesn't match the email."}
+                />
+                <MessageDialog
+                    handleClose={this.handleClose("findStatus")}
                     open={this.state.findStatus === 0}
-                    message={"Incorrect email or ID."}
+                    message={"Sorry, system error happened."}
                 />
                 <MessageDialog
                     handleClose={this.handleClose("findStatus")}
