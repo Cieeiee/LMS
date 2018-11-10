@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import '../../reader.scss'
 
-const Reader = require('../../components/images/reader.jpg');
+const Reader = require('../../../../images/reader.jpg');
 
 export default function ReaderInfo(props) {
     return (

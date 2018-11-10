@@ -39,7 +39,6 @@ export default class UpdateDialog extends React.Component {
                     author: this.props.book.author,
                     category: this.props.book.category,
                     introduction: this.props.book.introduction,
-                    location: this.props.book.location,
                     price: this.props.book.price,
                 },
                 category: this.props.book.category,
@@ -98,13 +97,6 @@ export default class UpdateDialog extends React.Component {
                     </FormControl>
                     <TextField
                         margin='dense'
-                        label={intl.get('form.location')}
-                        fullWidth
-                        defaultValue={this.props.book && this.props.book.location}
-                        onChange={this.handleChange('location')}
-                    />
-                    <TextField
-                        margin='dense'
                         label={intl.get('form.price')}
                         type='number'
                         fullWidth
@@ -128,7 +120,6 @@ export default class UpdateDialog extends React.Component {
                             this.state.updateBook.author &&
                             this.state.updateBook.category &&
                             this.state.updateBook.introduction &&
-                            this.state.updateBook.location &&
                             this.state.updateBook.price
                         ) || this.props.processing}
                         color='primary'

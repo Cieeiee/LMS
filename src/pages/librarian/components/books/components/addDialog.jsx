@@ -11,6 +11,7 @@ import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { fetchSearchIsbn } from './../../../../../mock/index';
+import Typography from "@material-ui/core/Typography/Typography";
 
 export default class AddDialog extends React.Component {
     constructor(props) {
@@ -18,10 +19,12 @@ export default class AddDialog extends React.Component {
         this.state = {
             newBook: {},
             category: '',
+            location: '',
             img: null,
             imgPreview: undefined,
             init: false,
-            isFilled: false
+            isFilled: false,
+            openISBN: true,
         }
     }
 
@@ -30,11 +33,18 @@ export default class AddDialog extends React.Component {
       data.isbn = isbn
       this.setState({ newBook: data, isFilled: true })
     }
-
+    handleOpen = which => () => {this.setState({[which]: true})}
+    handleClose = which => () => {
+        this.setState({
+            [which]: false,
+            newBook: {...this.state.newBook, isbn: 0}
+        })
+    }
     handleChange = name => e => this.setState({newBook: {...this.state.newBook, [name]: e.target.value}})
-    handleChangeSelect = event => {this.setState({
-        category: event.target.value,
-        newBook: {...this.state.newBook, category: event.target.value}
+    handleChangeSelect = name => event => {
+        this.setState({
+            [name]: event.target.value,
+            newBook: {...this.state.newBook, [name]: event.target.value}
         })
     }
     handleImg = e => {
@@ -56,19 +66,17 @@ export default class AddDialog extends React.Component {
                 newBook: {},
                 init: true,
                 category: '',
+                location: '',
                 img: null,
                 imgName: undefined,
                 imgPreview: undefined,
                 isFilled: false,
+                openISBN: true,
             })
         }
         if (!this.props.open && this.state.init) {
             this.setState({
-                newBook: {},
                 init: false,
-                category: '',
-                img: null,
-                isFilled: false,
             })
         }
     }
@@ -120,19 +128,9 @@ export default class AddDialog extends React.Component {
                                 </TextField>
                             </label>
                             <img src={this.state.imgPreview} width="100%" alt=""/>
-                            {/*<TextField*/}
-                            {/*margin='dense'*/}
-                            {/*label={intl.get('form.image')}*/}
-                            {/*type='file'*/}
-                            {/*accept="image/*"*/}
-                            {/*onChange={this.handleImg}*/}
-                            {/*InputLabelProps={{*/}
-                            {/*shrink: true,*/}
-                            {/*}}*/}
-                            {/*/>*/}
                         </div>
                         <div className="flex-col grow">
-                            <TextField
+                            {this.state.openISBN && <TextField
                                 margin='dense'
                                 label='ISBN'
                                 fullWidth
@@ -151,14 +149,24 @@ export default class AddDialog extends React.Component {
                                         </InputAdornment>
                                     )
                                 }}
-                            />
+                            />}
+                            {this.state.openISBN &&
+                            <Typography
+                                color="primary"
+                                className="loginUser"
+                                variant="caption"
+                                // style={{marginLeft: "auto"}}
+                                onClick={this.handleClose("openISBN")}
+                            >
+                                {intl.get('form.noISBN')}
+                            </Typography>}
                             <TextField
                                 margin='dense'
                                 label={intl.get('form.title')}
                                 fullWidth
                                 value={this.state.newBook.title}
                                 onChange={this.handleChange('title')}
-                                InputLabelProps={{
+                                InputLabelProps={this.state.openISBN && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
@@ -168,7 +176,7 @@ export default class AddDialog extends React.Component {
                                 fullWidth
                                 value={this.state.newBook.author}
                                 onChange={this.handleChange('author')}
-                                InputLabelProps={{
+                                InputLabelProps={this.state.openISBN && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
@@ -179,7 +187,7 @@ export default class AddDialog extends React.Component {
                                 fullWidth
                                 value={this.state.newBook.price}
                                 onChange={this.handleChange('price')}
-                                InputLabelProps={{
+                                InputLabelProps={this.state.openISBN && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
@@ -190,7 +198,7 @@ export default class AddDialog extends React.Component {
                                 multiline
                                 value={this.state.newBook.introduction}
                                 onChange={this.handleChange('introduction')}
-                                InputLabelProps={{
+                                InputLabelProps={this.state.openISBN && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
@@ -198,7 +206,7 @@ export default class AddDialog extends React.Component {
                                 <InputLabel>{intl.get('form.category')}</InputLabel>
                                 <Select
                                     value={this.state.category}
-                                    onChange={this.handleChangeSelect}
+                                    onChange={this.handleChangeSelect("category")}
                                 >
                                     { intl.getInitOptions().currentLocale === 'en-US' ?
                                         this.props.categories.map(category =>
@@ -210,13 +218,25 @@ export default class AddDialog extends React.Component {
                                     }
                                 </Select>
                             </FormControl>
-                            <TextField
-                                margin='dense'
-                                label={intl.get('form.location')}
-                                fullWidth
-                                value={this.state.newBook.location}
-                                onChange={this.handleChange('location')}
-                            />
+                            <FormControl margin='dense' fullWidth>
+                                <InputLabel>{intl.get('form.location')}</InputLabel>
+                                <Select
+                                    value={this.state.location}
+                                    onChange={this.handleChangeSelect("location")}
+                                >
+                                    {
+                                        this.props.locationList && this.props.locationList.map(location =>
+                                            <MenuItem value={location.location}>{location.location}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                            {/*<TextField*/}
+                                {/*margin='dense'*/}
+                                {/*label={intl.get('form.location')}*/}
+                                {/*fullWidth*/}
+                                {/*value={this.state.newBook.location}*/}
+                                {/*onChange={this.handleChange('location')}*/}
+                            {/*/>*/}
                             <TextField
                                 margin='dense'
                                 label={intl.get('form.number')}
@@ -232,7 +252,7 @@ export default class AddDialog extends React.Component {
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         disabled={!(
-                            this.state.newBook.isbn &&
+                            (!this.state.openISBN || this.state.newBook.isbn) &&
                             this.state.newBook.title &&
                             this.state.newBook.author &&
                             this.state.category &&

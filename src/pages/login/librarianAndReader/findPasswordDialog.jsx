@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
 import {TextField} from "@material-ui/core";
+import * as intl from "react-intl-universal";
 
 export default function FindPasswordDialog(props) {
     return (
@@ -15,16 +16,16 @@ export default function FindPasswordDialog(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Find your password"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{intl.get("form.formTitle.findPassword")}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you.
+                    {intl.get("form.formTitle.findPasswordText")}
                 </DialogContentText>
                 <TextField
                     error={props.formError === "IDEmpty"}
                     margin="normal"
                     id="name"
-                    label={props.formError === "IDEmpty" ? "The ID can not be empty" : "ID"}
+                    label={props.formError === "IDEmpty" ? intl.get("form.accountEmpty") : intl.get("form.account")}
                     fullWidth
                     value={props.ID}
                     onChange={props.handleChange("ID")}
@@ -36,9 +37,9 @@ export default function FindPasswordDialog(props) {
                     id="name"
                     label={
                         props.formError === "emailEmpty" ?
-                            "The email can not be empty" :
+                            intl.get("form.emailEmpty") :
                             props.formError === "emailIncorrect" ?
-                                "Incorrect email format." : "Email"
+                                intl.get("form.emailIncorrect") : intl.get("form.email")
                     }
                     fullWidth
                     value={props.email}
@@ -48,7 +49,7 @@ export default function FindPasswordDialog(props) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
-                    Cancel
+                    {intl.get("form.cancel")}
                 </Button>
                 <Button
                     onClick={props.handleFindPassword}
@@ -56,7 +57,7 @@ export default function FindPasswordDialog(props) {
                     autoFocus
                     disabled={props.processing}
                 >
-                    Confirm
+                    {intl.get("form.confirm")}
                 </Button>
             </DialogActions>
         </Dialog>

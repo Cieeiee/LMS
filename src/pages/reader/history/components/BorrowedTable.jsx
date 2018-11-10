@@ -10,6 +10,8 @@ import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import React from "react";
 import NoContent from "./NoContent";
 import * as intl from "react-intl-universal";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 
 const styles = theme => ({
     row: {
@@ -35,53 +37,93 @@ const CustomTableCell = withStyles(theme => ({
     }
 }))(TableCell);
 
-function BorrowedTable(props) {
-    const { classes } = props;
+class BorrowedTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: 0,
+            rowsPerPage: 5,
+        }
+    }
 
-    return (
-        <Grid item xs={12}>
-            { props.records == false ? <NoContent/> :
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.returnTime")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.description")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {props.records && props.records.map(book => {
-                        return (
-                            <TableRow className={classes.row}>
-                                <CustomTableCell component="th" scope="row">
-                                  {book.title}
-                                </CustomTableCell>
-                                <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
-                                <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
-                                <CustomTableCell numeric>{book.state === 3 && intl.get('basic.lost')}</CustomTableCell>
-                                <CustomTableCell numeric>{book.fine}</CustomTableCell>
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
+    render() {
+        const { classes, records } = this.props;
+        const { rowsPerPage, page } = this.state;
+        let recordsToShow = []
+        if (records) recordsToShow = records
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, recordsToShow.length - page * rowsPerPage);
+
+        return (
+            <Grid item xs={12}>
+                { this.props.records == false ? <NoContent/> :
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
+                                <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
+                                <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
+                                <CustomTableCell numeric>{intl.get("form.returnTime")}</CustomTableCell>
+                                <CustomTableCell numeric>{intl.get("form.description")}</CustomTableCell>
+                                <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
+
                             </TableRow>
-                        );
-                    })}
-                </TableBody>
-                {props.total !== undefined && <TableFooter>
-                    <TableRow>
-                        <CustomTableCell>{intl.get("form.totalFine")}</CustomTableCell>
-                        <CustomTableCell numeric/>
-                        <CustomTableCell numeric/>
-                        <CustomTableCell numeric/>
-                        <CustomTableCell numeric/>
-                        <CustomTableCell numeric>{props.total}</CustomTableCell>
-                    </TableRow>
-                </TableFooter>}
-            </Table>}
-        </Grid>
-    );
+                        </TableHead>
+                        <TableBody>
+                            {recordsToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map(book => {
+                                return (
+                                    <TableRow className={classes.row}>
+                                        <CustomTableCell component="th" scope="row">
+                                            {book.title}
+                                        </CustomTableCell>
+                                        <CustomTableCell numeric>{book.barcode}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.returnTime}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.state === 3 && intl.get('basic.lost')}</CustomTableCell>
+                                        <CustomTableCell numeric>{book.fine}</CustomTableCell>
+                                    </TableRow>
+                                );
+                            })}
+                            {emptyRows > 0 && (
+                                <TableRow style={{ height: 48 * emptyRows }}>
+                                    <TableCell colSpan={6} />
+                                </TableRow>
+                            )}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TablePagination
+                                    colSpan={6}
+                                    count={recordsToShow.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onChangePage={this.handleChangePage}
+                                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                    ActionsComponent={TablePaginationFooter}
+                                />
+                            </TableRow>
+                        </TableFooter>
+                        {/*{this.props.total !== undefined && <TableFooter>*/}
+                            {/*<TableRow>*/}
+                                {/*<CustomTableCell>{intl.get("form.totalFine")}</CustomTableCell>*/}
+                                {/*<CustomTableCell numeric/>*/}
+                                {/*<CustomTableCell numeric/>*/}
+                                {/*<CustomTableCell numeric/>*/}
+                                {/*<CustomTableCell numeric/>*/}
+                                {/*<CustomTableCell numeric>{this.props.total}</CustomTableCell>*/}
+                            {/*</TableRow>*/}
+                        {/*</TableFooter>}*/}
+                    </Table>}
+            </Grid>
+        );
+    }
 };
 
 const BorrowedTableWrapped = withStyles(styles)(BorrowedTable);

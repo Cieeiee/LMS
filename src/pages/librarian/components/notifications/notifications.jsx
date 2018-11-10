@@ -15,6 +15,14 @@ import Nav from "../nav/nav";
 import MessageDialog from "../messageDialog";
 import * as intl from "react-intl-universal";
 import Typography from "@material-ui/core/Typography/Typography";
+import Paper from "@material-ui/core/Paper/Paper";
+import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import Table from "@material-ui/core/Table/Table";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import {TableCell} from "@material-ui/core";
 
 const isSearched = searchTerm => item =>
     item.message.toUpperCase().includes(searchTerm.toUpperCase()) ||
@@ -33,9 +41,17 @@ export default class LibrarianNotifications extends React.Component {
             formError: undefined,
             searchTerm: '',
             processing: false,
+            page: 0,
+            rowsPerPage: 9,
         };
     }
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
 
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     handleSearch = e => this.setState({searchTerm: e.target.value});
 
     handleAdd = message => async () => {
@@ -119,7 +135,7 @@ export default class LibrarianNotifications extends React.Component {
     getNotification = async () => {
         let announcements = await fetchNotification();
         let changed = this.changeFormat(announcements);
-        changed.sort((x1, x2) => x1.timestamp < x2.timestamp ? 1 : -1)
+        // changed.sort((x1, x2) => x1.timestamp < x2.timestamp ? 1 : -1)
         return changed;
     };
 
@@ -131,7 +147,13 @@ export default class LibrarianNotifications extends React.Component {
     }
 
     render() {
-        const MessageLists = this.state.notifications.filter(isSearched(this.state.searchTerm))
+        const { notifications, rowsPerPage, page } = this.state;
+        let notificationsToShow = []
+        if (notifications) notificationsToShow = notifications.filter(isSearched(this.state.searchTerm))
+        notificationsToShow.sort((x1, x2) => new Date(x1.timestamp) < new Date(x2.timestamp) ? 1 : -1)
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, notificationsToShow.length - page * rowsPerPage);
+
+        const MessageLists = notificationsToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map(notification =>
             <OneNotification
                 key={notification.timestamp}
@@ -164,6 +186,28 @@ export default class LibrarianNotifications extends React.Component {
                         <List>
                             {MessageLists}
                         </List>
+                        <Table>
+                            <TableBody>
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 68.5 * emptyRows }}>
+                                        <TableCell />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        count={notificationsToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        rowsPerPageOptions={[5, 9, 15]}
+                                        ActionsComponent={TablePaginationFooter}
+                                    />
+                                </TableRow>
+                            </TableFooter>
+                        </Table>
                         <AddDialog handleClose={this.handleClose("openAdd")}
                                    handleAdd={this.handleAdd}
                                    clearFormError={this.clearFormError}

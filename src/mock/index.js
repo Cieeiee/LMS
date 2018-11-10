@@ -145,7 +145,7 @@ export const fetchDetails = async isbn => {
 //
 export const fetchAddBookNumber = async info => {
     try {
-        const Response = await fetch(`${serverLibrarian}/increaseBookNumber?isbn=${info.isbn}&number=${info.number}`)
+        const Response = await fetch(`${serverLibrarian}/increaseBookNumber?isbn=${info.isbn}&number=${info.number}&location=${info.location}`)
         const result = await Response.json()
         return result
     }
@@ -370,6 +370,62 @@ export const fetchDeleteCategories = async (en) => {
     }
 }
 
+export const fetchShowLocations = async () => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/showLocations`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchAddLocations = async (location) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/addLocation?location=${location}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchUpdateLocations = async (location, location_changed) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/changeLocation?old=${location}&change=${location_changed}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchDeleteLocations = async (location) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/deleteLocation?location=${location}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchUpdateBookLocation = async (barcode, location) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/updateBookLocation?barcode=${barcode}&location=${location}`)
+        const result = await Response.json();
+        return result
+    }
+    catch {
+        return null
+    }
+}
+
+
 export const fetchLibraryInfo = async (which) => {
     try {
         const Response = await fetch(`${serverLibrarian}/librarian/showLibraryInfo?which=${which}`)
@@ -482,6 +538,38 @@ export const fetchSearchReader = async (id) => {
         const Response = await fetch(`${serverReader}/searchReader?id=${id}`)
         const result = await Response.json()
         return result
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchBookDetails = async (isbn) => {
+    try {
+        const Response = await fetch(`${serverReader}/bookDetails?isbn=${isbn}`)
+        const result = await Response.json()
+        return result.bookList
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchReserveBook = async (id, barcode) => {
+    try {
+        const Response = await fetch(`${serverReader}/reader/reserveBook`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                barcode: barcode,
+            })
+        })
+        const result = await Response.json()
+        return result.state
     }
     catch {
         return null

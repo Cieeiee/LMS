@@ -13,7 +13,7 @@ export default function NoContent(props) {
             }} >
                 <PriorityHighOutlined style={{fontSize: 50,}}/>
             </Avatar>
-            <div style={{margin: "0 auto 20px auto"}}>
+            <div style={{margin: "0 auto 60px auto"}}>
                 <Typography
                     color="textSecondary"
                     variant="title"

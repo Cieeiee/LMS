@@ -4,7 +4,7 @@ import MessageDialog from "../components/MessageDialog";
 import {serverAdmin} from "../../../mock/config";
 import {fetchAdminLogin} from "../../../mock";
 
-const backgroundImage = require('../components/library.jpg');
+const backgroundImage = require('../../../images/library.jpg');
 
 export default class AdminLogin extends React.Component {
     constructor(props) {

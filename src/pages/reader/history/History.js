@@ -18,7 +18,7 @@ import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
 import {fetchSearchReader} from "../../../mock";
 
-const Logo = require('../components/images/logo.jpg');
+const Logo = require('../../../images/logo.jpg');
 
 const styles = theme => ({
     tabsRoot: {

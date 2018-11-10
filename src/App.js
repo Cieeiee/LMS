@@ -66,16 +66,30 @@ class App extends Component {
             <div className="flex-col" style={{height: "100%"}}>
                 <BrowserRouter>
                     <Switch>
-                        <Route path='/' exact component={Login} />
+                        <Route path='/' exact component={LinkToGuest}/>
+                        <Route path='/login' exact component={Login} />
                         <Route path='/admin/login' exact component={AdminLogin} />
                         <Route path='/admin' component={Admin} />
                         <Route path='/reader' component={Reader} />
-                        <Route path='/librarian/:id' component={Librarian} />
+                        <Route path='/librarian' component={Librarian} />
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>
             </div>
         );
+    }
+}
+
+class LinkToGuest extends React.Component {
+
+    componentDidMount() {
+        window.location.href = "/reader/guest"
+    }
+
+    render() {
+        return (
+            <div/>
+        )
     }
 }
 

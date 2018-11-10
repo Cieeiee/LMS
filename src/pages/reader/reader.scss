@@ -39,6 +39,10 @@
   width: 60%;
   margin: 30px auto 20px auto;
 }
+.mid-div-larger {
+  width: 80%;
+  margin: 30px auto 20px auto;
+}
 .col-mid {
   margin: auto 0 auto 0;
 }
@@ -58,4 +62,7 @@
 }
 .title:hover {
   cursor: pointer;
+}
+.table-row-grey:nth-of-type(odd) {
+  background: #F5F5F5;
 }

@@ -11,18 +11,15 @@ import SearchIcon from '@material-ui/icons/Search';
 import {
     Notifications,
     ExitToApp,
-    Home,
     DescriptionOutlined,
     AccountCircleOutlined,
-    MenuOutlined
+    VpnKeyOutlined
 } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import LibraryRules from "./libraryRules";
 import {serverReader} from "../../../mock/config";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import Divider from "@material-ui/core/Divider/Divider";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import * as intl from "react-intl-universal";
 import {fetchShowRules} from "../../../mock";
 
@@ -219,22 +216,30 @@ class PrimarySearchAppBar extends React.Component {
                             <IconButton color="inherit" onClick={this.handleOpen("openRules")}>
                                 <DescriptionOutlined />
                             </IconButton>
-                            <IconButton color="inherit" component={Link}
+                            {this.props.loginUser !== "guest" && <IconButton color="inherit" component={Link}
                                         to={`/reader/${this.props.loginUser}/history`}
                             >
                                 <AccountCircleOutlined />
-                            </IconButton>
+                            </IconButton>}
                             <IconButton color="inherit" component={Link}
                                         to={`/reader/${this.props.loginUser}/notification`}
                             >
                                 <Notifications />
                             </IconButton>
-                            <IconButton
-                                color="inherit"
-                                onClick={this.handleLogout}
-                            >
-                                <ExitToApp />
-                            </IconButton>
+                            {this.props.loginUser !== "guest" ?
+                                <IconButton
+                                    color="inherit"
+                                    onClick={this.handleLogout}
+                                >
+                                    <ExitToApp />
+                                </IconButton> :
+                                <IconButton
+                                    color="inherit"
+                                    onClick={() => window.location.href = '/login'}
+                                >
+                                    <VpnKeyOutlined />
+                                </IconButton>
+                            }
                         </div>
                     </Toolbar>
                 </AppBar>

@@ -1,12 +1,23 @@
 import React from "react";
 import {TopBar} from "../components/TopBar";
 import MessageDialog from '../components/messageDialog'
-import ReserveDialog from "./components/reserveDialog";
-import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
-import {fetchSearchBookByCategory, fetchShowCategories} from "../../../mock";
-import {Grid} from "@material-ui/core";
+import {
+    fetchSearchBookByCategory,
+    fetchSearchBookByKeywords,
+    fetchShowCategories
+} from "../../../mock";
+import {
+    Grid,
+    Table,
+    TableRow,
+} from "@material-ui/core";
 import {OneBook} from "./components/OneBook";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../mock/tablePaginationFooter";
+import '../reader.scss'
+import DetailsDialog from "./components/detailsDialog";
 
 export default class CategoryPage extends React.Component {
     constructor(props) {
@@ -15,12 +26,21 @@ export default class CategoryPage extends React.Component {
         this.state = {
             bookList: [],
             categories: undefined,
-            keywords: undefined,
-            openReserve: undefined,
-            loginUser: undefined,
+            openDetails: false,
             returnMessage: undefined,
-            reserveStatus: undefined,
+            item: undefined,
+            page: 0,
+            rowsPerPage: 10,
+            processing: false,
         };
+    };
+
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
     };
     getChinese = (bookList, categories) => {
         const _bookList = []
@@ -30,111 +50,88 @@ export default class CategoryPage extends React.Component {
         }
         return _bookList
     }
+    getBookList = async () => {
+        let bookList = []
+        if (this.props.match.params.searchType === 'category')
+            bookList = await fetchSearchBookByCategory(this.props.match.params.keywords)
+        else
+            bookList = await fetchSearchBookByKeywords(this.props.match.params.keywords)
 
-    async componentDidMount() {
-        let bookList = await fetchSearchBookByCategory(this.props.match.params.category)
         const categories = await fetchShowCategories();
         bookList = this.getChinese(bookList.books, categories)
         this.setState({bookList, categories})
     }
 
-    reserveBook = () => {
-        if (this.state.reserveStatus === 1) {
-            let updatedBookList = this.state.bookList;
-            for (let i in updatedBookList) {
-                if (updatedBookList[i].isbn === this.state.openReserve.isbn) {
-                    updatedBookList[i].remain -= 1;
-                    break;
-                }
-            }
-            this.setState({
-                reserveStatus: undefined,
-                openReserve: undefined,
-                bookList: updatedBookList,
-                returnMessage: intl.get('basic.success')
-            })
-        }
-        if (this.state.reserveStatus === -1) {
-            this.setState({
-                reserveStatus: undefined,
-                openReserve: undefined,
-                returnMessage: intl.get('librarian.searched.cannotBorrow'),
-            });
-        }
-        if (this.state.reserveStatus === 0) {
-            this.setState({
-                reserveStatus: undefined,
-                openReserve: undefined,
-                returnMessage: intl.get('basic.failed')
-            })
-        }
-    };
-
-    handleReserve = book => () => {
-        fetch(`${serverReader}/reader/reserveBook`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.props.match.params.loginUser,
-                isbn: book.isbn,
-            })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({reserveStatus: result.state});
-            })
-            .catch(e => alert(e));
-    };
+    async componentDidMount() {
+        await this.getBookList()
+    }
 
     handleOpen = (which, value) => () => {
-        this.setState({[which]: value});
+        if (which === "openDetails" && this.props.match.params.loginUser === "guest") {
+            this.setState({
+                returnMessage: intl.get("message.loginFirst")
+            })
+            return;
+        }
+        this.setState({
+            [which]: true,
+            item: value,
+            processing: false,
+        });
     };
 
     handleClose = which => () => {
-        if (which === "returnMessage" || which === "openReserve")
+        if (which === "returnMessage")
             this.setState({[which]: undefined});
         else
             this.setState({[which]: false});
+        if (which === "openDetails") {
+            this.getBookList()
+        }
     };
 
     render() {
-        this.reserveBook();
+        const { bookList, rowsPerPage, page } = this.state;
+        let bookListToShow = bookList
 
         return (
             <React.Fragment>
                 <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
-                <div className={"flex-col"}
-                     style={{
-                         marginTop: 30,
-                         marginLeft: 10,
-                         marginRight: 10,
-                     }}
-                >
+
+                <div style={{margin: "20px 0 20px 0"}}>
                     <div className="grow">
-                        {/*<BookList*/}
-                            {/*bookList={this.state.bookList}*/}
-                            {/*handleOpen={this.handleOpen}*/}
-                        {/*/>*/}
-                        <Grid container spacing={16} style={{width: "100%"}}>
-                            {this.state.bookList.map(book =>
-                                <Grid item xs={6}>
-                                    <OneBook
-                                        key={book.isbn}
-                                        book={book}
-                                        handleOpen={this.handleOpen}
+                        <Table>
+                            <Grid container spacing={16} style={{width: "100%"}}>
+                                {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(book =>
+                                    <Grid item xs={6}>
+                                        <OneBook
+                                            key={book.isbn}
+                                            book={book}
+                                            handleOpen={this.handleOpen("openDetails", book)}
+                                        />
+                                    </Grid>
+                                )}
+                            </Grid>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        count={bookListToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        ActionsComponent={TablePaginationFooter}
                                     />
-                                </Grid>
-                            )}
-                        </Grid>
+                                </TableRow>
+                            </TableFooter>
+                        </Table>
                     </div>
-                    <ReserveDialog
-                        handleClose={this.handleClose("openReserve")}
+                    <DetailsDialog
+                        open={this.state.openDetails}
+                        handleClose={this.handleClose("openDetails")}
                         handleReserve={this.handleReserve}
-                        open={this.state.openReserve !== undefined}
-                        book={this.state.openReserve}
+                        reader={this.props.match.params.loginUser}
+                        book={this.state.item}
                     />
                     <MessageDialog
                         handleClose={this.handleClose("returnMessage")}

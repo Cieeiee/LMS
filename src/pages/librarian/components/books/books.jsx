@@ -7,7 +7,14 @@ import blue from "@material-ui/core/es/colors/blue";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import {Link} from "react-router-dom";
-import {fetchAddBook, fetchBookList, fetchDownload, fetchShowCategories, fetchUpdateBook} from "../../../../mock";
+import {
+    fetchAddBook,
+    fetchBookList,
+    fetchDownload,
+    fetchShowCategories,
+    fetchShowLocations,
+    fetchUpdateBook
+} from "../../../../mock";
 import AddDialog from "./components/addDialog";
 import UpdateDialog from "./components/updateDialog";
 import MessageDialog from "../messageDialog";
@@ -21,8 +28,7 @@ const isSearched = searchTerm => item =>
     item.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
     item.author.toUpperCase().includes(searchTerm.toUpperCase()) ||
     item.category.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.isbn.indexOf(searchTerm) === 0 ||
-    item.location.includes(searchTerm)
+    item.isbn.indexOf(searchTerm) === 0
 
 class Books extends React.Component {
     constructor(props) {
@@ -31,6 +37,7 @@ class Books extends React.Component {
         this.state = {
             bookList: [],
             categories: [],
+            locationList: [],
             searchTerm: '',
             openAdd: false,
             openUpdate: false,
@@ -41,7 +48,7 @@ class Books extends React.Component {
             openSnack: false,
             processing: false,
             page: 0,
-            rowsPerPage: 10,
+            rowsPerPage: 12,
         }
     }
 
@@ -133,9 +140,10 @@ class Books extends React.Component {
     async componentDidMount() {
         let bookList = await fetchBookList();
         const categories = await fetchShowCategories();
+        const locationList = await fetchShowLocations();
         bookList = this.getChinese(bookList, categories)
 
-        this.setState({bookList, categories});
+        this.setState({bookList, categories, locationList});
     }
 
 
@@ -147,9 +155,9 @@ class Books extends React.Component {
 
 
         return(
-            <div className="flex-col">
+            <div className="flex-col grow">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
-                <div style={{width: '100%'}} className="flex-row">
+                <div style={{width: '100%'}} className="flex-row grow">
                     <Nav loginUser={this.props.match.params.loginUser} whichFunction={"books"}/>
                     <div className="grow">
                         <Table>
@@ -159,7 +167,6 @@ class Books extends React.Component {
                                     <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.author')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.category')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.location')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.price')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.remain')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.total')}</CustomTableCell>
@@ -175,7 +182,8 @@ class Books extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) =>
+                                {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.isbn}</TableCell>
                                         <TableCell numeric>{item.title}</TableCell>
@@ -184,7 +192,6 @@ class Books extends React.Component {
                                             item.categoryCh : item.category
                                         }
                                         </TableCell>
-                                        <TableCell numeric>{item.location}</TableCell>
                                         <TableCell numeric>{item.price}</TableCell>
                                         <TableCell numeric>{item.remain}</TableCell>
                                         <TableCell numeric>{item.total}</TableCell>
@@ -218,6 +225,7 @@ class Books extends React.Component {
                                         count={bookListToShow.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
+                                        rowsPerPageOptions={[5, 12, 20]}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                         ActionsComponent={TablePaginationFooter}
@@ -229,6 +237,7 @@ class Books extends React.Component {
                             open={this.state.openAdd}
                             handleClose={this.handleClose("openAdd")}
                             categories={this.state.categories}
+                            locationList={this.state.locationList}
                             handleAddBook={this.handleAddBook}
                             processing={this.state.processing}
                         />

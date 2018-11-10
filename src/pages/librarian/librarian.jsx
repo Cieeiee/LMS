@@ -9,6 +9,7 @@ import BookHistory from "./components/history/bookHistory";
 import LibrarianNotifications from "./components/notifications/notifications";
 import Categories from "./components/categories/categories";
 import Summary from "./components/summary/summary";
+import Locations from "./components/locations/locations";
 
 export default class Librarian extends React.Component {
     render() {
@@ -20,6 +21,7 @@ export default class Librarian extends React.Component {
                             <Route path='/librarian/:loginUser/books' exact component={Books}/>
                             <Route path='/librarian/:loginUser/books/:isbn' component={BookDetails}/>
                             <Route path='/librarian/:loginUser/categories' component={Categories}/>
+                            <Route path='/librarian/:loginUser/locations' component={Locations}/>
                             <Route path='/librarian/:loginUser/readers' component={Readers}/>
                             <Route path='/librarian/:loginUser/history' component={BookHistory}/>
                             <Route path='/librarian/:loginUser/notifications' component={LibrarianNotifications}/>

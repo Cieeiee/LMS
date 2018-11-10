@@ -4,7 +4,6 @@ import {Route, BrowserRouter, Switch,} from 'react-router-dom'
 import './reader.scss'
 import { TopButton } from "./components/TopButton";
 import ReaderHistory from "./history/History";
-import SearchedPage from "./searched/Searched";
 import ReaderNotification from "./notification/Notification"
 import Popper from "@material-ui/core/Popper/Popper";
 import Grow from "@material-ui/core/Grow/Grow";
@@ -15,10 +14,9 @@ import CategoryPage from "./searched/catagory";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
 import ApplicationFooter from "../../mock/footer";
 import * as intl from "react-intl-universal";
-import {serverAdmin, serverLibrarian, serverReader} from "../../mock/config";
 import {fetchShowCategories} from "../../mock";
 
-const Logo = require('./components/images/logo.jpg');
+const Logo = require('../../images/logo.jpg');
 
 export default class Reader extends React.Component {
     render() {
@@ -28,8 +26,7 @@ export default class Reader extends React.Component {
                     <Switch>
                         <Route path='/reader/:loginUser' exact component={Home}/>
                         <Route path='/reader/:loginUser/history' component={ReaderHistory}/>
-                        <Route path='/reader/:loginUser/search/:keywords' component={SearchedPage}/>
-                        <Route path='/reader/:loginUser/category/:category' component={CategoryPage}/>
+                        <Route path='/reader/:loginUser/:searchType/:keywords' component={CategoryPage}/>
                         <Route path='/reader/:loginUser/notification' component={ReaderNotification}/>
                     </Switch>
                 </BrowserRouter>

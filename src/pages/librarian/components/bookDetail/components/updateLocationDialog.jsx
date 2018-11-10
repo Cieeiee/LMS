@@ -11,11 +11,10 @@ import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 
-export default class AddDialog extends React.Component {
+export default class UpdateLocationDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            number: undefined,
             location: '',
             init: false
         }
@@ -25,14 +24,12 @@ export default class AddDialog extends React.Component {
     handleInit = () => {
         if (this.props.open && !this.state.init) {
             this.setState({
-                number: undefined,
                 location: '',
                 init: true
             })
         }
         if (!this.props.open && this.state.init) {
             this.setState({
-                number: undefined,
                 location: '',
                 init: false
             })
@@ -48,18 +45,14 @@ export default class AddDialog extends React.Component {
                 onClose={this.props.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.addBook')}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.updateBookLocation')}</DialogTitle>
                 <DialogContent>
                     <TextField
-                        error={this.props.formError === "numberEmpty"}
                         margin='dense'
-                        label={this.props.formError === "numberEmpty" ?
-                            intl.get("form.numberEmpty") : this.props.formError === "numberEmpty" ?
-                                intl.get("form.numberZero") : intl.get('form.number')}
+                        label={intl.get('form.barcode')}
                         fullWidth
-                        value={this.state.number}
-                        onChange={this.handleChange("number")}
-                        onFocus={this.props.clearFormError}
+                        defaultValue={this.props.barcode}
+                        disabled
                     />
                     <FormControl
                         error={this.props.formError === "locationEmpty"}
@@ -87,13 +80,11 @@ export default class AddDialog extends React.Component {
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         color='primary'
-                        onClick={this.props.handleAdd({
-                            isbn: this.props.isbn,
-                            number: this.state.number,
-                            location: this.state.location
-                        })}
+                        onClick={this.props.handleUpdateLocation(this.props.barcode, this.state.location)}
                         disabled={this.props.processing}
-                    >{intl.get('form.confirm')}</Button>
+                    >
+                        {intl.get('form.confirm')}
+                    </Button>
                 </DialogActions>
             </Dialog>
         );

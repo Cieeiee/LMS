@@ -11,24 +11,45 @@ import Typography from "@material-ui/core/Typography/Typography";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
 import {fetchShowNotification} from "../../../mock";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import {TableCell} from "@material-ui/core";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../mock/tablePaginationFooter";
+import Table from "@material-ui/core/Table/Table";
 
 export default class ReaderNotification extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            notifications: []
+            notifications: [],
+            page: 0,
+            rowsPerPage: 8,
         };
     }
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
 
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     async componentDidMount() {
         const notifications = await fetchShowNotification()
-        notifications.sort((x1, x2) => x1.timestamp < x2.timestamp ? 1 : -1)
         this.setState({notifications})
     }
 
     render() {
-        const MessageLists = this.state.notifications.map(notification =>
+        const { notifications, rowsPerPage, page } = this.state;
+        let notificationsToShow = []
+        if (notifications) notificationsToShow = notifications
+        notificationsToShow.sort((x1, x2) => new Date(x1.timestamp) < new Date(x2.timestamp) ? 1 : -1)
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, notificationsToShow.length - page * rowsPerPage);
+
+        const MessageLists = notificationsToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map(notification =>
             <OneNotification
                 key={notification.timestamp}
                 notification={notification}
@@ -48,6 +69,27 @@ export default class ReaderNotification extends React.Component {
                     <List>
                         {MessageLists}
                     </List>
+                    <Table>
+                        <TableBody>
+                            {emptyRows > 0 && (
+                                <TableRow style={{ height: 68.5 * emptyRows }}>
+                                    <TableCell />
+                                </TableRow>
+                            )}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TablePagination
+                                    count={notificationsToShow.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onChangePage={this.handleChangePage}
+                                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                    ActionsComponent={TablePaginationFooter}
+                                />
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
                 </div>
             </React.Fragment>
         );

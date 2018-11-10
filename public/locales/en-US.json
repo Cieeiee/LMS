@@ -40,21 +40,22 @@
       "rules": "rules",
       "profile": "profile",
       "notification": "notification",
-      "logout": "logout"
+      "logout": "logout",
+      "login": "login"
     },
     "home": {
       "search": "search",
       "category": "category"
     },
     "searched": {
-      "reserve": "reserve",
-      "cannotBorrow": "You can not borrow more books now"
+      "reserve": "reserve"
     }
   },
   "librarian": {
     "nav": {
       "books": "Books",
       "categories": "Categories",
+      "locations": "Locations",
       "readers": "Readers",
       "deleteHistory": "Delete History",
       "notifications": "Notifications",
@@ -95,10 +96,15 @@
       "addCategory": "Add a category",
       "deleteCategory": "Delete the category?",
       "updateCategory": "Update the category",
+      "addLocation": "Add a location",
+      "deleteLocation": "Delete the location?",
+      "updateLocation": "Update the location",
       "findPassword": "Find password",
       "findPasswordText": "Enter your ID (your phone number) and email correctly, then an email with your password will be sent to you.",
       "payFine": "The fine that reader have to pay",
-      "readerDetails": "Reader Details"
+      "readerDetails": "Reader Details",
+      "bookDetails": "Book Details",
+      "updateBookLocation": "Update Book Location"
     },
 
     "changePassword": "change password",
@@ -152,6 +158,8 @@
     "barcodeEmpty": "The barcode can not be empty",
     "readerEmpty": "The reader can not be empty",
     "numberEmpty": "The number can not be empty",
+    "numberZero": "The number can not be zero",
+    "locationEmpty": "The location can not be empty",
 
     "English": "English",
     "Chinese": "Chinese",
@@ -160,7 +168,8 @@
     "close": "close",
     "paid": "paid",
     "description": "description",
-    "select": "select"
+    "select": "select",
+    "noISBN": "The book added has no ISBN?"
   },
   "basic": {
     "language": "En",
@@ -191,7 +200,14 @@
     "numBorrowedBook": "books borrowed",
     "numReturnedBook": "books returned",
     "numCreateAccount": "account created",
-    "numDeleteAccount": "account deleted"
+    "numDeleteAccount": "account deleted",
+    "searchResult": "Search Result",
+    "forgetPassword": "Forget your password?",
+    "login": "login",
+    "deletedHistory": "Book Deleted History",
+    "lostHistory": "Book Lost History",
+    "librarian": "librarian",
+    "reader": "reader"
   },
   "message": {
     "systemError": "system error. please check the form again.",
@@ -207,6 +223,13 @@
     "noPermission": "No permission to do that",
     "accountExists": "The account already exists.",
     "stillBorrowingBooks": "Can not delete now. The account have books borrowing.",
-    "barcode": "The barcode is wrong."
+    "barcodeError": "No such book with this barcode.",
+    "locationExists": "The location exists.",
+    "loginFirst": "Please log in first.",
+    "cannotReserve": "You can not reserve more books now",
+    "incorrectAccountOrPassword": "Incorrect account or password",
+    "accountNotExists": "Account doesn't exist",
+    "accountEmailNotMatch": "The account and the email doesn't match.",
+    "successFindPassword": "Success! Check your email for your password."
   }
 }

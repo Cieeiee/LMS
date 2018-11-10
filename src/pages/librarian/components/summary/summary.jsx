@@ -32,6 +32,7 @@ export default class Summary extends React.Component {
     }
 
     handleChangeTab = (which) => (event, value) => {
+        event.preventDefault()
         this.setState({[which]: value})
     }
 

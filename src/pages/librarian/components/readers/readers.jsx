@@ -49,7 +49,7 @@ export default class Readers extends React.Component {
             returnMessage: undefined,
             processing: false,
             page: 0,
-            rowsPerPage: 10,
+            rowsPerPage: 12,
         }
     }
 
@@ -279,6 +279,7 @@ export default class Readers extends React.Component {
                                         page={page}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        rowsPerPageOptions={[5, 12, 20]}
                                         ActionsComponent={TablePaginationFooter}
                                     />
                                 </TableRow>

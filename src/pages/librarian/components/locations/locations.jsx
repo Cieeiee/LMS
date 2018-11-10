@@ -10,7 +10,13 @@ import TableBody from "@material-ui/core/TableBody/TableBody";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import {BuildOutlined} from "@material-ui/icons";
-import {fetchAddCategories, fetchDeleteCategories, fetchShowCategories, fetchUpdateCategories} from "../../../../mock";
+import {
+    fetchAddLocations,
+    fetchAddlocations, fetchDeleteLocations,
+    fetchDeletelocations, fetchShowLocations,
+    fetchShowlocations, fetchUpdateLocations,
+    fetchUpdatelocations
+} from "../../../../mock";
 import AddDialog from "./components/addDialog";
 import EditDialog from "./components/editDialog";
 import DeleteDialog from "./components/deleteDialog";
@@ -22,20 +28,18 @@ import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 const isSearched = searchTerm => item =>
-    item.categoryEn.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.categoryCh.includes(searchTerm)
+    item.location.toUpperCase().includes(searchTerm.toUpperCase())
 
-export default class Categories extends React.Component {
+export default class Locations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             searchTerm: '',
-            categoryList: undefined,
+            locationList: [],
             openAdd: false,
             openUpdate: false,
             openDelete: false,
             openSnack: false,
-            eventState: false,
             item: undefined,
             formError: undefined,
             processing: false,
@@ -71,22 +75,18 @@ export default class Categories extends React.Component {
     clearFormError = () => {
         this.setState({formError: undefined})
     }
-    handleAdd = (en, zh) => async () => {
-        if (en === undefined || en.length === 0) {
-            this.setState({formError: "enEmpty"})
-            return
-        }
-        if (zh === undefined || zh.length === 0) {
-            this.setState({formError: "zhEmpty"})
+    handleAdd = (location) => async () => {
+        if (location === undefined || location.length === 0) {
+            this.setState({formError: "locationEmpty"})
             return
         }
         await this.setState({processing: true})
-        const eventState = await fetchAddCategories(en, zh);
-        const categoryList = await fetchShowCategories();
+        const eventState = await fetchAddLocations(location);
+        const locationList = await fetchShowLocations();
         let returnMessage = ''
         switch (eventState) {
             case -1:
-                returnMessage = intl.get('message.categoryExists')
+                returnMessage = intl.get('message.locationExists')
                 break;
             case 1:
                 returnMessage = intl.get('message.success')
@@ -97,25 +97,21 @@ export default class Categories extends React.Component {
         this.setState({
             openAdd: false,
             returnMessage,
-            categoryList,
+            locationList,
         })
     }
-    handleUpdate = (en, en_changed, zh_changed) => async () => {
-        if (en_changed === undefined || en_changed.length === 0) {
-            this.setState({formError: "enEmpty"})
-            return
-        }
-        if (zh_changed === undefined || zh_changed.length === 0) {
-            this.setState({formError: "zhEmpty"})
+    handleUpdate = (location, location_changed) => async () => {
+        if (location_changed === undefined || location_changed.length === 0) {
+            this.setState({formError: "locationEmpty"})
             return
         }
         await this.setState({processing: true})
-        const eventState = await fetchUpdateCategories(en, en_changed, zh_changed);
-        const categoryList = await fetchShowCategories();
+        const eventState = await fetchUpdateLocations(location, location_changed);
+        const locationList = await fetchShowLocations();
         let returnMessage = ''
         switch (eventState) {
             case -1:
-                returnMessage = intl.get('message.categoryExists')
+                returnMessage = intl.get('message.locationExists')
                 break;
             case 1:
                 returnMessage = intl.get('message.success')
@@ -126,42 +122,41 @@ export default class Categories extends React.Component {
         this.setState({
             openUpdate: false,
             returnMessage,
-            categoryList,
+            locationList,
         })
     }
-    handleDelete = (en) => async () => {
+    handleDelete = (location) => async () => {
         await this.setState({processing: true})
-        const eventState = await fetchDeleteCategories(en);
-        const categoryList = await fetchShowCategories();
+        const eventState = await fetchDeleteLocations(location);
+        const locationList = await fetchShowLocations();
         let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         this.setState({
             openDelete: false,
             returnMessage,
-            categoryList,
+            locationList,
         })
     }
     async componentDidMount() {
-        const categoryList = await fetchShowCategories();
-        this.setState({categoryList})
+        const locationList = await fetchShowLocations();
+        this.setState({locationList})
     }
 
     render() {
-        const { categoryList, rowsPerPage, page } = this.state;
-        let categoryListToShow = []
-        if (categoryList) categoryListToShow = categoryList.filter(isSearched(this.state.searchTerm))
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, categoryListToShow.length - page * rowsPerPage);
+        const { locationList, rowsPerPage, page } = this.state;
+        let locationListToShow = []
+        if (locationList) locationListToShow = locationList.filter(isSearched(this.state.searchTerm))
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, locationListToShow.length - page * rowsPerPage);
 
         return (
             <div className="flex-col">
                 <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"categories"}/>
+                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"locations"}/>
                     <div className="grow">
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <CustomTableCell>{intl.get('form.English')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.Chinese')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.location')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
                                             variant='outlined'
@@ -174,11 +169,10 @@ export default class Categories extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {categoryListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                {locationListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((item, index) =>
                                     <TableRow key={index} className="table-row">
-                                        <TableCell>{item.categoryEn}</TableCell>
-                                        <TableCell numeric>{item.categoryCh}</TableCell>
+                                        <TableCell>{item.location}</TableCell>
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen("openUpdate", item)}
@@ -194,15 +188,15 @@ export default class Categories extends React.Component {
                                 )}
                                 {emptyRows > 0 && (
                                     <TableRow style={{ height: 57 * emptyRows }}>
-                                        <TableCell colSpan={3} />
+                                        <TableCell colSpan={2} />
                                     </TableRow>
                                 )}
                             </TableBody>
                             <TableFooter>
                                 <TableRow>
                                     <TablePagination
-                                        colSpan={3}
-                                        count={categoryListToShow.length}
+                                        colSpan={2}
+                                        count={locationListToShow.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
                                         rowsPerPageOptions={[5, 12, 20]}
@@ -215,7 +209,6 @@ export default class Categories extends React.Component {
                             <AddDialog handleClose={this.handleClose("openAdd")}
                                        handleAdd={this.handleAdd}
                                        clearFormError={this.clearFormError}
-                                       category={this.state.item}
                                        formError={this.state.formError}
                                        open={this.state.openAdd}
                                        processing={this.state.processing}
@@ -225,14 +218,14 @@ export default class Categories extends React.Component {
                                 handleUpdate={this.handleUpdate}
                                 clearFormError={this.clearFormError}
                                 formError={this.state.formError}
-                                category={this.state.item}
+                                location={this.state.item}
                                 open={this.state.openUpdate}
                                 processing={this.state.processing}
                             />
                             <DeleteDialog
                                 handleClose={this.handleClose("openDelete")}
                                 handleDelete={this.handleDelete}
-                                category={this.state.item}
+                                location={this.state.item}
                                 open={this.state.openDelete}
                                 processing={this.state.processing}
                             />

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
-import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined, SettingsOutlined} from '@material-ui/icons'
+import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined, VpnKeyOutlined} from '@material-ui/icons'
 import LibraryRules from "./libraryRules";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
@@ -115,7 +115,7 @@ class IconLabelButtons extends React.Component {
                     <DescriptionOutlined className={classes.iconSmall} />
                 </Button>
                 <div className={classes.growBlock}/>
-                <Button
+                {this.props.loginUser !== "guest" && <Button
                     // variant="outlined"
                     color="secondary"
                     className={classes.button}
@@ -123,7 +123,7 @@ class IconLabelButtons extends React.Component {
                 >
                     {intl.get("reader.topButton.profile")}
                     <AccountCircleOutlined className={classes.iconSmall} />
-                </Button>
+                </Button>}
                 <Button
                     // variant="outlined"
                     color="primary"
@@ -133,7 +133,7 @@ class IconLabelButtons extends React.Component {
                     {intl.get("reader.topButton.notification")}
                     <Notifications className={classes.iconSmall}/>
                 </Button>
-                <Button
+                {this.props.loginUser !== "guest" ? <Button
                     // variant="outlined"
                     color="default"
                     className={classes.button}
@@ -141,7 +141,17 @@ class IconLabelButtons extends React.Component {
                 >
                     {intl.get("reader.topButton.logout")}
                     <ExitToApp className={classes.iconSmall} />
-                </Button>
+                </Button> :
+                    <Button
+                        // variant="outlined"
+                        color="default"
+                        className={classes.button}
+                        onClick={() => window.location.href = '/login'}
+                    >
+                        {intl.get("reader.topButton.login")}
+                        <VpnKeyOutlined className={classes.iconSmall} />
+                    </Button>
+                }
                 <LibraryRules
                     open={this.state.openRules}
                     handleClose={this.handleClose("openRules")}

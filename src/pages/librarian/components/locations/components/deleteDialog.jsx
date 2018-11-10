@@ -1,14 +1,13 @@
+import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import * as intl from "react-intl-universal";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
-import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
+import {TextField} from "@material-ui/core";
+import * as intl from "react-intl-universal";
 
-
-export default function ReserveDialog(props) {
+export default function DeleteDialog(props) {
     return (
         <Dialog
             open={props.open}
@@ -16,11 +15,13 @@ export default function ReserveDialog(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle>{intl.get('form.formTitle.reserveBook')}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{intl.get('form.formTitle.deleteLocation')}</DialogTitle>
             <DialogContent>
                 <TextField
-                    label={intl.get('form.barcode')}
-                    defaultValue={props.barcode}
+                    margin="normal"
+                    label={intl.get('form.location')}
+                    fullWidth
+                    defaultValue={props.location && props.location.location}
                     disabled
                 />
             </DialogContent>
@@ -29,7 +30,7 @@ export default function ReserveDialog(props) {
                     {intl.get('form.cancel')}
                 </Button>
                 <Button
-                    onClick={props.handleReserve(props.reader, props.barcode)}
+                    onClick={props.location && props.handleDelete(props.location.location)}
                     color="primary"
                     disabled={props.processing}
                 >
@@ -37,5 +38,5 @@ export default function ReserveDialog(props) {
                 </Button>
             </DialogActions>
         </Dialog>
-    )
+    );
 }

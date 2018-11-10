@@ -1,12 +1,13 @@
 import React from 'react'
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import {
-    BookOutlined,
     AccountCircleOutlined,
     HistoryOutlined,
     NotificationsOutlined,
     EqualizerOutlined,
     SubtitlesOutlined,
+    LocationOnOutlined,
+    ChromeReaderModeOutlined
 } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import * as intl from "react-intl-universal";
@@ -132,6 +133,8 @@ export default class Nav extends React.Component {
         const eventState =  await fetchDeleteBook(id, barcode);
         let returnMessage = ''
         switch(eventState) {
+            case -2:
+                returnMessage = intl.get('message.barcodeError')
             case -1:
                 returnMessage = intl.get('message.bookStillBorrowed')
                 break;
@@ -155,7 +158,7 @@ export default class Nav extends React.Component {
                     selected={this.props.whichFunction === "books"}
                     component={Link} to={`/librarian/${this.props.loginUser}/books`}
                 >
-                    <BookOutlined/>
+                    <ChromeReaderModeOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.books')} />
                 </ListItem>
                 <ListItem
@@ -165,6 +168,14 @@ export default class Nav extends React.Component {
                 >
                     <SubtitlesOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.categories')} />
+                </ListItem>
+                <ListItem
+                    button
+                    selected={this.props.whichFunction === "locations"}
+                    component={Link} to={`/librarian/${this.props.loginUser}/locations`}
+                >
+                    <LocationOnOutlined/>
+                    <ListItemText primary={intl.get('librarian.nav.locations')} />
                 </ListItem>
                 <ListItem
                     button
