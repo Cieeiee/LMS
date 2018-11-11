@@ -110,6 +110,15 @@ export default class Nav extends React.Component {
             case -3:
                 returnMessage = intl.get('message.notReserver')
                 break;
+            case -4:
+                returnMessage = intl.get('message.barcodeError')
+                break;
+            case -5:
+                returnMessage = intl.get('message.bookBeenBorrowed')
+                break;
+            case -6:
+                returnMessage = intl.get('message.bookNotBeenBorrowed')
+                break;
             case 1:
                 returnMessage = intl.get('message.success')
                 break;

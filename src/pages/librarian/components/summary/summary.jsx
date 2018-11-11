@@ -154,7 +154,6 @@ export default class Summary extends React.Component {
                                     indicatorColor="primary"
                                     textColor="primary"
                                     centered
-                                    className="grow"
                                 >
                                     <Tab label={intl.get('basic.daily')} />
                                     <Tab label={intl.get('basic.weekly')} />
@@ -177,7 +176,6 @@ export default class Summary extends React.Component {
                                     indicatorColor="primary"
                                     textColor="primary"
                                     centered
-                                    className="grow"
                                 >
                                     <Tab label={intl.get('basic.daily')} />
                                     <Tab label={intl.get('basic.weekly')} />
@@ -200,7 +198,6 @@ export default class Summary extends React.Component {
                                     indicatorColor="primary"
                                     textColor="primary"
                                     centered
-                                    className="grow"
                                 >
                                     <Tab label={intl.get('basic.daily')} />
                                     <Tab label={intl.get('basic.weekly')} />

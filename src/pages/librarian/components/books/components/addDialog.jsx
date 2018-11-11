@@ -29,9 +29,13 @@ export default class AddDialog extends React.Component {
     }
 
     handleIsbn = isbn => async () => {
-      let data = await fetchSearchIsbn(isbn)
-      data.isbn = isbn
-      this.setState({ newBook: data, isFilled: true })
+        if (!this.props.checkISBN(isbn))
+            return
+        let data = await fetchSearchIsbn(isbn)
+        if (Object.prototype.isPrototypeOf(data) && Object.keys(data).length > 0) {
+            data.isbn = isbn
+            this.setState({ newBook: data, isFilled: true})
+        }
     }
     handleOpen = which => () => {this.setState({[which]: true})}
     handleClose = which => () => {
@@ -107,7 +111,9 @@ export default class AddDialog extends React.Component {
                             />
                             <label htmlFor="button-file">
                                 <TextField
-                                    label={intl.get('form.image')}
+                                    error={this.props.formError === "imgEmpty"}
+                                    label={this.props.formError === "imgEmpty" ?
+                                        intl.get('form.imgEmpty') : intl.get('form.image')}
                                     margin='dense'
                                     fullWidth
                                     InputLabelProps={{
@@ -117,7 +123,11 @@ export default class AddDialog extends React.Component {
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position='end'>
-                                                <Button component="span" color="primary">
+                                                <Button
+                                                    component="span"
+                                                    color="primary"
+                                                    onClick={this.props.clearFormError}
+                                                >
                                                     {intl.get('form.select')}
                                                 </Button>
                                             </InputAdornment>
@@ -130,9 +140,14 @@ export default class AddDialog extends React.Component {
                             <img src={this.state.imgPreview} width="100%" alt=""/>
                         </div>
                         <div className="flex-col grow">
-                            {this.state.openISBN && <TextField
+                            {this.state.openISBN &&
+                            <TextField
+                                error={this.props.formError === "isbnEmpty" || this.props.formError === "isbnError"}
+                                label={this.props.formError === "isbnEmpty" ?
+                                    intl.get('form.isbnEmpty') : this.props.formError === "isbnError" ?
+                                        intl.get('form.isbnError') : "ISBN"}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label='ISBN'
                                 fullWidth
                                 value={this.state.newBook.isbn}
                                 onChange={this.handleChange('isbn')}
@@ -155,58 +170,76 @@ export default class AddDialog extends React.Component {
                                 color="primary"
                                 className="loginUser"
                                 variant="caption"
-                                // style={{marginLeft: "auto"}}
                                 onClick={this.handleClose("openISBN")}
                             >
                                 {intl.get('form.noISBN')}
                             </Typography>}
                             <TextField
+                                error={this.props.formError === "titleEmpty"}
+                                label={this.props.formError === "titleEmpty" ?
+                                    intl.get('form.titleEmpty') : intl.get('form.title')}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label={intl.get('form.title')}
                                 fullWidth
                                 value={this.state.newBook.title}
                                 onChange={this.handleChange('title')}
-                                InputLabelProps={this.state.openISBN && {
+                                InputLabelProps={(this.state.openISBN && this.state.isFilled) && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
                             <TextField
+                                error={this.props.formError === "authorEmpty"}
+                                label={this.props.formError === "authorEmpty" ?
+                                    intl.get('form.authorEmpty') : intl.get('form.author')}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label={intl.get('form.author')}
                                 fullWidth
                                 value={this.state.newBook.author}
                                 onChange={this.handleChange('author')}
-                                InputLabelProps={this.state.openISBN && {
+                                InputLabelProps={(this.state.openISBN && this.state.isFilled) && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
                             <TextField
+                                error={this.props.formError === "priceEmpty" || this.props.formError === "priceError"}
+                                label={this.props.formError === "priceEmpty" ?
+                                    intl.get('form.priceEmpty') : this.props.formError === "priceError" ?
+                                        intl.get('form.priceError') : intl.get('form.price')}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label={intl.get('form.price')}
                                 type='number'
                                 fullWidth
                                 value={this.state.newBook.price}
                                 onChange={this.handleChange('price')}
-                                InputLabelProps={this.state.openISBN && {
+                                InputLabelProps={(this.state.openISBN && this.state.isFilled) && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
                             <TextField
+                                error={this.props.formError === "introductionEmpty"}
+                                label={this.props.formError === "introductionEmpty" ?
+                                    intl.get('form.introductionEmpty') : intl.get('form.introduction')}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label={intl.get('form.introduction')}
                                 fullWidth
                                 multiline
                                 value={this.state.newBook.introduction}
                                 onChange={this.handleChange('introduction')}
-                                InputLabelProps={this.state.openISBN && {
+                                InputLabelProps={(this.state.openISBN && this.state.isFilled) && {
                                     shrink: this.state.isFilled,
                                 }}
                             />
-                            <FormControl fullWidth>
-                                <InputLabel>{intl.get('form.category')}</InputLabel>
+                            <FormControl
+                                margin='dense'
+                                fullWidth
+                                error={this.props.formError === "categoryEmpty"}
+                            >
+                                <InputLabel>{this.props.formError === "categoryEmpty" ?
+                                    intl.get('form.categoryEmpty') : intl.get('form.category')}</InputLabel>
                                 <Select
                                     value={this.state.category}
                                     onChange={this.handleChangeSelect("category")}
+                                    onFocus={this.props.clearFormError}
                                 >
                                     { intl.getInitOptions().currentLocale === 'en-US' ?
                                         this.props.categories.map(category =>
@@ -218,11 +251,17 @@ export default class AddDialog extends React.Component {
                                     }
                                 </Select>
                             </FormControl>
-                            <FormControl margin='dense' fullWidth>
-                                <InputLabel>{intl.get('form.location')}</InputLabel>
+                            <FormControl
+                                margin='dense'
+                                fullWidth
+                                error={this.props.formError === "locationEmpty"}
+                            >
+                                <InputLabel>{this.props.formError === "locationEmpty" ?
+                                    intl.get('form.locationEmpty') : intl.get('form.location')}</InputLabel>
                                 <Select
                                     value={this.state.location}
                                     onChange={this.handleChangeSelect("location")}
+                                    onFocus={this.props.clearFormError}
                                 >
                                     {
                                         this.props.locationList && this.props.locationList.map(location =>
@@ -238,8 +277,12 @@ export default class AddDialog extends React.Component {
                                 {/*onChange={this.handleChange('location')}*/}
                             {/*/>*/}
                             <TextField
+                                error={this.props.formError === "numberEmpty" || this.props.formError === "numberError"}
+                                label={this.props.formError === "numberEmpty" ?
+                                    intl.get('form.numberEmpty') : this.props.formError === "numberError" ?
+                                        intl.get('form.numberError') : intl.get('form.number')}
+                                onFocus={this.props.clearFormError}
                                 margin='dense'
-                                label={intl.get('form.number')}
                                 type='number'
                                 fullWidth
                                 value={this.state.newBook.number}
@@ -251,18 +294,7 @@ export default class AddDialog extends React.Component {
                 <DialogActions>
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
-                        disabled={!(
-                            (!this.state.openISBN || this.state.newBook.isbn) &&
-                            this.state.newBook.title &&
-                            this.state.newBook.author &&
-                            this.state.category &&
-                            this.state.newBook.introduction &&
-                            this.state.newBook.location &&
-                            this.state.newBook.price &&
-                            this.state.newBook.number &&
-                            this.state.newBook.number !== '0' &&
-                            this.state.newBook.number
-                        ) || this.props.processing}
+                        disabled={this.props.processing}
                         color='primary'
                         onClick={this.props.handleAddBook(this.state.img, this.state.newBook)}
                     >{intl.get('form.confirm')}</Button>

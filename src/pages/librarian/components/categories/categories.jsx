@@ -205,7 +205,7 @@ export default class Categories extends React.Component {
                                         count={categoryListToShow.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
-                                        rowsPerPageOptions={[5, 12, 20]}
+                                        rowsPerPageOptions={[12]}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                         ActionsComponent={TablePaginationFooter}

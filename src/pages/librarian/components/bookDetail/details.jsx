@@ -7,8 +7,8 @@ import {
     fetchBorrow,
     fetchDeleteBook,
     fetchDetails,
-    fetchPayFine,
-    fetchShowLocations, fetchUpdateBookLocation
+    fetchPayFine, fetchShowCategories,
+    fetchShowLocations, fetchUpdateBook, fetchUpdateBookLocation
 } from "../../../../mock";
 import MessageDialog from "../messageDialog";
 import BorrowDialog from "./components/borrowDialog";
@@ -28,9 +28,11 @@ import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import UpdateLocationDialog from "./components/updateLocationDialog";
+import UpdateDialog from "../books/components/updateDialog";
 
 const isSearched = searchTerm => item =>
-    item.barcode.indexOf(searchTerm) === 0;
+    item.barcode.indexOf(searchTerm) === 0 ||
+    item.location.toUpperCase().includes(searchTerm.toUpperCase());
 
 export default class BookDetails extends React.Component {
     constructor(props) {
@@ -45,6 +47,7 @@ export default class BookDetails extends React.Component {
             openDelete: false,
             openBarcode: false,
             openShowBarcodes: false,
+            openUpdate: false,
             item: undefined,
             searchTerm: "",
             processing: false,
@@ -52,6 +55,7 @@ export default class BookDetails extends React.Component {
             step: 0,
             formError: undefined,
             locationList: [],
+            categories: [],
             page: 0,
             rowsPerPage: 5,
         }
@@ -93,8 +97,8 @@ export default class BookDetails extends React.Component {
             this.setState({formError: "numberEmpty"})
             return
         }
-        if (info.number === 0) {
-            this.setState({formError: "numberZero"})
+        if (!/^\d+$/.test(info.number) || /^0+/.test(info.number)) {
+            this.setState({formError: "numberError"})
             return
         }
         if (info.location === undefined || info.location.length === 0) {
@@ -104,7 +108,7 @@ export default class BookDetails extends React.Component {
         await this.setState({processing: true})
         const barcodeImages = await fetchAddBookNumber(info)
 
-        const book = await fetchDetails(this.props.match.params.isbn);
+        const book = await this.getBookDetails();
         let returnMessage = ''
         if (barcodeImages === null)
             returnMessage = intl.get('message.systemError')
@@ -161,7 +165,7 @@ export default class BookDetails extends React.Component {
         }
         await this.setState({processing: true})
         const eventState = await fetchBorrow(info)
-        const book = await fetchDetails(this.props.match.params.isbn);
+        const book = await this.getBookDetails();
         let returnMessage = ''
         switch(eventState) {
             case -1:
@@ -172,6 +176,15 @@ export default class BookDetails extends React.Component {
                 break;
             case -3:
                 returnMessage = intl.get('message.notReserver')
+                break;
+            case -4:
+                returnMessage = intl.get('message.barcodeError')
+                break;
+            case -5:
+                returnMessage = intl.get('message.bookBeenBorrowed')
+                break;
+            case -6:
+                returnMessage = intl.get('message.bookNotBeenBorrowed')
                 break;
             case 1:
                 returnMessage = intl.get('message.success')
@@ -195,7 +208,7 @@ export default class BookDetails extends React.Component {
         }
         await this.setState({processing: true})
         const eventState =  await fetchDeleteBook(id, barcode);
-        const book = await fetchDetails(this.props.match.params.isbn);
+        const book = await this.getBookDetails();
         let returnMessage = ''
         switch(eventState) {
             case -1:
@@ -229,18 +242,60 @@ export default class BookDetails extends React.Component {
         else
             returnMessage = intl.get('message.systemError')
 
-        const book = await fetchDetails(this.props.match.params.isbn);
+        const book = await this.getBookDetails();
         this.setState({
             openLocation: false,
             returnMessage,
             book
         })
     }
+    handleUpdateBook = updateBook => async () => {
+        if (!updateBook.title  || updateBook.title.length === 0) {
+            this.setState({formError: "titleEmpty"})
+            return
+        }
+        if (!updateBook.author  || updateBook.author.length === 0) {
+            this.setState({formError: "authorEmpty"})
+            return
+        }
+        if (!updateBook.category  || updateBook.category.length === 0) {
+            this.setState({formError: "categoryEmpty"})
+            return
+        }
+        if (!updateBook.introduction  || updateBook.introduction.length === 0) {
+            this.setState({formError: "introductionEmpty"})
+            return
+        }
+        if (!updateBook.price  || updateBook.price.length === 0) {
+            this.setState({formError: "priceEmpty"})
+            return
+        }
+        if (!/^[.\d]+$/.test(updateBook.price) || /^0+/.test(updateBook.price)) {
+            this.setState({formError: "priceError"})
+            return
+        }
+        await this.setState({processing: true})
+        const eventState = await fetchUpdateBook(updateBook)
+        const book = await this.getBookDetails();
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
+        this.setState({
+            openUpdate: false,
+            book,
+            returnMessage,
+        })
+    }
+    getBookDetails = async () => {
+        let book = await fetchDetails(this.props.match.params.isbn);
+        book.bookClass["categoryCh"] = await this.state.categories.find(which => which.categoryEn === book.bookClass.category).categoryCh
+        return book
+    }
 
     async componentDidMount() {
-        const book = await fetchDetails(this.props.match.params.isbn);
-        const locationList = await fetchShowLocations();
-        this.setState({book, locationList})
+        const locationList = await fetchShowLocations()
+        const categories = await fetchShowCategories();
+        await this.setState({locationList, categories})
+        const book = await this.getBookDetails();
+        this.setState({book})
     }
 
     render() {
@@ -258,9 +313,19 @@ export default class BookDetails extends React.Component {
                         <div className="flex-row">
                             <img src={this.state.book.bookClass.picture} alt='' height='400px' />
                             <div style={{marginLeft: 30}} className="flex-col">
-                                <Typography variant="title" gutterBottom style={{fontSize: 40}}>
-                                    {this.state.book.bookClass.title}
-                                </Typography>
+                                <div className="flex-row">
+                                    <Typography variant="title" gutterBottom style={{fontSize: 40}}>
+                                        {this.state.book.bookClass.title}
+                                    </Typography>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        style={{margin: "auto 0 auto auto", width: 100}}
+                                        onClick={this.handleOpen("openUpdate", this.state.book.bookClass)}
+                                    >
+                                        {intl.get("basic.update")}
+                                    </Button>
+                                </div>
                                 <Typography variant="p" color="textSecondary">
                                     {this.state.book.bookClass.author}
                                 </Typography>
@@ -282,7 +347,10 @@ export default class BookDetails extends React.Component {
                                                 {this.state.book.bookClass.isbn}
                                             </Typography>
                                             <Typography>
-                                                {this.state.book.bookClass.category}
+                                                {
+                                                    intl.getInitOptions().currentLocale === "zh-CN" ?
+                                                        this.state.book.bookClass.categoryCh : this.state.book.bookClass.category
+                                                }
                                             </Typography>
                                             <Typography>
                                                 ￥{this.state.book.bookClass.price}
@@ -314,7 +382,7 @@ export default class BookDetails extends React.Component {
                             />
                             <div className="grow"/>
                             <Button
-                                style={{marginRight: 20, width: 100}}
+                                style={{margin: "auto auto", width: 100}}
                                 variant="contained"
                                 color="primary"
                                 onClick={this.handleOpen("openAdd", this.state.book.bookClass.isbn)}
@@ -408,7 +476,7 @@ export default class BookDetails extends React.Component {
                                         count={copyListToShow.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
-                                        rowsPerPageOptions={[5, 12, 20]}
+                                        rowsPerPageOptions={[5, 10, 20]}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                         ActionsComponent={TablePaginationFooter}
@@ -462,6 +530,16 @@ export default class BookDetails extends React.Component {
                             step={this.state.step}
                             handlePayFine={this.handlePayFine}
                             fine={this.state.fine}
+                        />
+                        <UpdateDialog
+                            categories={this.state.categories}
+                            handleClose={this.handleClose("openUpdate")}
+                            handleUpdateBook={this.handleUpdateBook}
+                            open={this.state.openUpdate}
+                            book={this.state.item}
+                            processing={this.state.processing}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                         />
                         <BarcodeDialog
                             open={this.state.openBarcode}

@@ -102,7 +102,7 @@ export default class HistoryList extends React.Component {
                                     rowsPerPage={rowsPerPage}
                                     page={page}
                                     onChangePage={this.handleChangePage}
-                                    rowsPerPageOptions={[5, 14, 20]}
+                                    rowsPerPageOptions={[5]}
                                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                     ActionsComponent={TablePaginationFooter}
                                 />

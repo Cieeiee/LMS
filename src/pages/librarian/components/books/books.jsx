@@ -45,6 +45,7 @@ class Books extends React.Component {
             item: undefined,
             barcodeImages: undefined,
             returnMessage: undefined,
+            formError: undefined,
             openSnack: false,
             processing: false,
             page: 0,
@@ -59,12 +60,14 @@ class Books extends React.Component {
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value });
     };
+    clearFormError = () => {this.setState({formError: undefined})}
     handleSearch = e => this.setState({searchTerm: e.target.value});
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
             item,
-            processing: false
+            processing: false,
+            formError: undefined,
         })
     };
     handleClose = (which) => () => {
@@ -76,7 +79,66 @@ class Books extends React.Component {
             this.setState({returnMessage: undefined})
         }
     };
+    checkISBN = (isbn) => {
+        if (isbn === undefined || isbn.length === 0) {
+            this.setState({formError: "isbnEmpty"})
+            return false
+        }
+        if (!/^\d{13}$/.test(isbn)) {
+            this.setState({formError: "isbnError"})
+            return false
+        }
+        return true
+    }
     handleAddBook = (img, newBook) => async () => {
+        if (!img) {
+            this.setState({formError: "imgEmpty"})
+            return
+        }
+        if (newBook.isbn === undefined || newBook.isbn.length === 0) {
+            this.setState({formError: "isbnEmpty"})
+            return
+        }
+        if (!/^\d{13}$/.test(newBook.isbn)) {
+            this.setState({formError: "isbnError"})
+            return
+        }
+        if (!newBook.title  || newBook.title.length === 0) {
+            this.setState({formError: "titleEmpty"})
+            return
+        }
+        if (!newBook.author  || newBook.author.length === 0) {
+            this.setState({formError: "authorEmpty"})
+            return
+        }
+        if (!newBook.category  || newBook.category.length === 0) {
+            this.setState({formError: "categoryEmpty"})
+            return
+        }
+        if (!newBook.introduction  || newBook.introduction.length === 0) {
+            this.setState({formError: "introductionEmpty"})
+            return
+        }
+        if (!newBook.location  || newBook.location.length === 0) {
+            this.setState({formError: "locationEmpty"})
+            return
+        }
+        if (!newBook.price  || newBook.price.length === 0) {
+            this.setState({formError: "priceEmpty"})
+            return
+        }
+        if (!/^[.\d]+$/.test(newBook.price) || /^0+/.test(newBook.price)) {
+            this.setState({formError: "priceError"})
+            return
+        }
+        if (!newBook.number  || newBook.number.length === 0) {
+            this.setState({formError: "numberEmpty"})
+            return
+        }
+        if (!/^\d+$/.test(newBook.number) || /^0+/.test(newBook.number)) {
+            this.setState({formError: "numberError"})
+            return
+        }
         await this.setState({processing: true})
         let data = new FormData()
         data.append('file', img)
@@ -117,6 +179,31 @@ class Books extends React.Component {
         }
     }
     handleUpdateBook = updateBook => async () => {
+
+        if (!updateBook.title  || updateBook.title.length === 0) {
+            this.setState({formError: "titleEmpty"})
+            return
+        }
+        if (!updateBook.author  || updateBook.author.length === 0) {
+            this.setState({formError: "authorEmpty"})
+            return
+        }
+        if (!updateBook.category  || updateBook.category.length === 0) {
+            this.setState({formError: "categoryEmpty"})
+            return
+        }
+        if (!updateBook.introduction  || updateBook.introduction.length === 0) {
+            this.setState({formError: "introductionEmpty"})
+            return
+        }
+        if (!updateBook.price  || updateBook.price.length === 0) {
+            this.setState({formError: "priceEmpty"})
+            return
+        }
+        if (!/^[.\d]+$/.test(updateBook.price) || /^0+/.test(updateBook.price)) {
+            this.setState({formError: "priceError"})
+            return
+        }
         await this.setState({processing: true})
         const eventState = await fetchUpdateBook(updateBook)
         let bookList = await fetchBookList()
@@ -225,7 +312,7 @@ class Books extends React.Component {
                                         count={bookListToShow.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
-                                        rowsPerPageOptions={[5, 12, 20]}
+                                        rowsPerPageOptions={[12]}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                         ActionsComponent={TablePaginationFooter}
@@ -240,6 +327,9 @@ class Books extends React.Component {
                             locationList={this.state.locationList}
                             handleAddBook={this.handleAddBook}
                             processing={this.state.processing}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
+                            checkISBN={this.checkISBN}
                         />
                         <BarcodeDialog
                             open={this.state.openBarcode}
@@ -253,6 +343,8 @@ class Books extends React.Component {
                             open={this.state.openUpdate}
                             book={this.state.item}
                             processing={this.state.processing}
+                            formError={this.state.formError}
+                            clearFormError={this.clearFormError}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}

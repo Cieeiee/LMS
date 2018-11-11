@@ -202,7 +202,7 @@ export default class LibrarianNotifications extends React.Component {
                                         page={page}
                                         onChangePage={this.handleChangePage}
                                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                                        rowsPerPageOptions={[5, 9, 15]}
+                                        rowsPerPageOptions={[9]}
                                         ActionsComponent={TablePaginationFooter}
                                     />
                                 </TableRow>

@@ -158,8 +158,17 @@
     "barcodeEmpty": "条形码不能为空",
     "readerEmpty": "读者不能为空",
     "numberEmpty": "数量不能为空",
-    "numberZero": "数量不能为0",
+    "numberError": "请输入正整数",
     "locationEmpty": "位置不能为空",
+    "isbnEmpty": "ISBN不能为空",
+    "isbnError": "ISBN应该是一个13位的数字",
+    "titleEmpty": "标题不能为空",
+    "authorEmpty": "作者不能为空",
+    "categoryEmpty": "内容不能为空",
+    "introductionEmpty": "介绍不能为空",
+    "priceEmpty": "价格不能为空",
+    "priceError": "价格需要是一个正数",
+    "imgEmpty": "图片不能为空",
 
     "English": "英文",
     "Chinese": "中文",
@@ -207,7 +216,8 @@
     "deletedHistory": "书籍删除历史",
     "lostHistory": "书籍丢失历史",
     "librarian": "图书馆员",
-    "reader": "读者"
+    "reader": "读者",
+    "noBooksFound": "没有找到相关书籍"
   },
   "message": {
     "systemError": "系统错误，请检查表格是否正确填写",
@@ -215,7 +225,7 @@
     "excessBorrow": "该读者借书数量达到上限",
     "notReserver": "该书已经被别人预约了",
     "success": "成功",
-    "bookStillBorrowed": "该书尚未归还，无法删除",
+    "bookStillBorrowed": "该书被借出或者被预约，无法删除",
     "bookExists": "该书已存在",
     "pictureError": "上传图片发生错误",
     "IOError": "IO发生错误",
@@ -230,6 +240,8 @@
     "incorrectAccountOrPassword": "账号或密码错误",
     "accountNotExists": "账号不存在",
     "accountEmailNotMatch": "账号和邮箱不匹配",
-    "successFindPassword": "成功！在邮件查看你的密码吧！"
+    "successFindPassword": "成功！在邮件查看你的密码吧！",
+    "bookBeenBorrowed": "该书已被借出",
+    "bookNotBeenBorrowed": "该书目前没被借出"
   }
 }

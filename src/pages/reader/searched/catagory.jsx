@@ -18,6 +18,8 @@ import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../mock/tablePaginationFooter";
 import '../reader.scss'
 import DetailsDialog from "./components/detailsDialog";
+import NoContent from "../history/components/NoContent";
+import NoResult from "./components/NoContent";
 
 export default class CategoryPage extends React.Component {
     constructor(props) {
@@ -100,31 +102,33 @@ export default class CategoryPage extends React.Component {
 
                 <div style={{margin: "20px 0 20px 0"}}>
                     <div className="grow">
-                        <Table>
-                            <Grid container spacing={16} style={{width: "100%"}}>
-                                {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(book =>
-                                    <Grid item xs={6}>
-                                        <OneBook
-                                            key={book.isbn}
-                                            book={book}
-                                            handleOpen={this.handleOpen("openDetails", book)}
+                        {bookListToShow == false ? <NoResult/> :
+                            <Table>
+                                <Grid container spacing={16} style={{width: "100%"}}>
+                                    {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(book =>
+                                        <Grid item xs={6}>
+                                            <OneBook
+                                                key={book.isbn}
+                                                book={book}
+                                                handleOpen={this.handleOpen("openDetails", book)}
+                                            />
+                                        </Grid>
+                                    )}
+                                </Grid>
+                                <TableFooter>
+                                    <TableRow>
+                                        <TablePagination
+                                            count={bookListToShow.length}
+                                            rowsPerPage={rowsPerPage}
+                                            page={page}
+                                            onChangePage={this.handleChangePage}
+                                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                            ActionsComponent={TablePaginationFooter}
                                         />
-                                    </Grid>
-                                )}
-                            </Grid>
-                            <TableFooter>
-                                <TableRow>
-                                    <TablePagination
-                                        count={bookListToShow.length}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onChangePage={this.handleChangePage}
-                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                                        ActionsComponent={TablePaginationFooter}
-                                    />
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
+                                    </TableRow>
+                                </TableFooter>
+                            </Table>
+                        }
                     </div>
                     <DetailsDialog
                         open={this.state.openDetails}

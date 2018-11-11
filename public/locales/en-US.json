@@ -158,8 +158,17 @@
     "barcodeEmpty": "The barcode can not be empty",
     "readerEmpty": "The reader can not be empty",
     "numberEmpty": "The number can not be empty",
-    "numberZero": "The number can not be zero",
+    "numberError": "Please enter positive integer",
     "locationEmpty": "The location can not be empty",
+    "isbnEmpty": "The ISBN can not be empty",
+    "isbnError": "The ISBN should be a number of 13 digits",
+    "titleEmpty": "The title can not be empty",
+    "authorEmpty": "The author can not be empty",
+    "categoryEmpty": "The category can not be empty",
+    "introductionEmpty": "The introduction can not be empty",
+    "priceEmpty": "The price can not be empty",
+    "priceError": "The price should be a positive number",
+    "imgEmpty": "The image can not be empty",
 
     "English": "English",
     "Chinese": "Chinese",
@@ -207,7 +216,8 @@
     "deletedHistory": "Book Deleted History",
     "lostHistory": "Book Lost History",
     "librarian": "librarian",
-    "reader": "reader"
+    "reader": "reader",
+    "noBooksFound": "No books found."
   },
   "message": {
     "systemError": "system error. please check the form again.",
@@ -215,7 +225,7 @@
     "excessBorrow": "The reader can not borrow more books.",
     "notReserver": "The book is reserved by others now.",
     "success": "Success.",
-    "bookStillBorrowed": "Can not delete now. The book have not been returned yet.",
+    "bookStillBorrowed": "Can not delete now. The book have been borrowed or reserved.",
     "bookExists": "The book already exists.",
     "pictureError": "Something wrong with the picture.",
     "IOError": "Something wrong with the IO.",
@@ -230,6 +240,8 @@
     "incorrectAccountOrPassword": "Incorrect account or password",
     "accountNotExists": "Account doesn't exist",
     "accountEmailNotMatch": "The account and the email doesn't match.",
-    "successFindPassword": "Success! Check your email for your password."
+    "successFindPassword": "Success! Check your email for your password.",
+    "bookBeenBorrowed": "The book has been borrowed",
+    "bookNotBeenBorrowed": "The book has not been borrowed now"
   }
 }

@@ -45,7 +45,7 @@ export default class ReturnDialog extends React.Component {
                     onClose={this.props.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">{intl.get('librarian.nav.lostBook')}</DialogTitle>
+                    <DialogTitle id="form-dialog-title">{intl.get('librarian.nav.returnBook')}</DialogTitle>
                     <DialogContent>
                         <TextField
                             error={this.props.formError === "barcodeEmpty"}

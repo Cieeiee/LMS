@@ -51,11 +51,11 @@ export default class AddDialog extends React.Component {
                 <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.addBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
-                        error={this.props.formError === "numberEmpty"}
+                        error={this.props.formError === "numberEmpty" || this.props.formError === "numberError"}
                         margin='dense'
                         label={this.props.formError === "numberEmpty" ?
-                            intl.get("form.numberEmpty") : this.props.formError === "numberEmpty" ?
-                                intl.get("form.numberZero") : intl.get('form.number')}
+                            intl.get("form.numberEmpty") : this.props.formError === "numberError" ?
+                                intl.get("form.numberError") : intl.get('form.number')}
                         fullWidth
                         value={this.state.number}
                         onChange={this.handleChange("number")}

@@ -1,14 +1,10 @@
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import {TextField} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import React from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
-import Switch from "@material-ui/core/Switch/Switch";
-import FormGroup from "@material-ui/core/FormGroup/FormGroup";
 import * as intl from "react-intl-universal";
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
@@ -66,26 +62,38 @@ export default class UpdateDialog extends React.Component {
                 <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.updateBook')}</DialogTitle>
                 <DialogContent>
                     <TextField
+                        error={this.props.formError === "titleEmpty"}
+                        label={this.props.formError === "titleEmpty" ?
+                            intl.get('form.titleEmpty') : intl.get('form.title')}
+                        onFocus={this.props.clearFormError}
                         margin='dense'
-                        label={intl.get('form.title')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.title}
                         onChange={this.handleChange('title')}
                     />
                     <TextField
+                        error={this.props.formError === "authorEmpty"}
+                        label={this.props.formError === "authorEmpty" ?
+                            intl.get('form.authorEmpty') : intl.get('form.author')}
+                        onFocus={this.props.clearFormError}
                         margin='dense'
-                        label={intl.get('form.author')}
                         fullWidth
                         defaultValue={this.props.book && this.props.book.author}
                         onChange={this.handleChange('author')}
                     />
-                    <FormControl fullWidth>
-                        <InputLabel>{intl.get('form.category')}</InputLabel>
+                    <FormControl
+                        margin='dense'
+                        fullWidth
+                        error={this.props.formError === "categoryEmpty"}
+                    >
+                        <InputLabel>{this.props.formError === "categoryEmpty" ?
+                            intl.get('form.categoryEmpty') : intl.get('form.category')}</InputLabel>
                         <Select
                             onChange={this.handleChangeSelect}
                             value={this.state.category}
+                            onFocus={this.props.clearFormError}
                         >
-                            { intl.getInitOptions().currentLocale === 'en-US' ?
+                            { Boolean(this.props.categories) && intl.getInitOptions().currentLocale === 'en-US' ?
                                 this.props.categories.map(category =>
                                     <MenuItem value={category.categoryEn}>{category.categoryEn}</MenuItem>
                                 ) :
@@ -96,16 +104,21 @@ export default class UpdateDialog extends React.Component {
                         </Select>
                     </FormControl>
                     <TextField
-                        margin='dense'
-                        label={intl.get('form.price')}
+                        error={this.props.formError === "priceEmpty" || this.props.formError === "priceError"}
+                        label={this.props.formError === "priceEmpty" ?
+                            intl.get('form.priceEmpty') : this.props.formError === "priceError" ?
+                                intl.get('form.priceError') : intl.get('form.price')}
+                        onFocus={this.props.clearFormError}
                         type='number'
                         fullWidth
                         defaultValue={this.props.book && this.props.book.price}
                         onChange={this.handleChange('price')}
                     />
                     <TextField
-                        margin='dense'
-                        label={intl.get('form.introduction')}
+                        error={this.props.formError === "introductionEmpty"}
+                        label={this.props.formError === "introductionEmpty" ?
+                            intl.get('form.introductionEmpty') : intl.get('form.introduction')}
+                        onFocus={this.props.clearFormError}
                         multiline
                         fullWidth
                         defaultValue={this.props.book && this.props.book.introduction}
@@ -115,13 +128,7 @@ export default class UpdateDialog extends React.Component {
                 <DialogActions>
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
-                        disabled={!(
-                            this.state.updateBook.title &&
-                            this.state.updateBook.author &&
-                            this.state.updateBook.category &&
-                            this.state.updateBook.introduction &&
-                            this.state.updateBook.price
-                        ) || this.props.processing}
+                        disabled={this.props.processing}
                         color='primary'
                         onClick={this.props.handleUpdateBook(this.state.updateBook)}
                     >{intl.get('form.confirm')}</Button>

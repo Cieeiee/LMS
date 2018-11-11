@@ -136,12 +136,13 @@ export default class DetailsDialog extends React.Component {
                                             </Typography>
                                         </TableCell>
                                         <TableCell numeric>
-                                            {item.availability === 0 && <Button
+                                            <Button
                                                 color='secondary'
                                                 onClick={this.handleOpen('openReserve', item.bar_code)}
+                                                disabled={item.availability !== 0}
                                             >
                                                 {intl.get('reader.searched.reserve')}
-                                            </Button>}
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 )}

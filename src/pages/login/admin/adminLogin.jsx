@@ -1,7 +1,6 @@
 import React from "react";
 import {Button, Paper, TextField} from "@material-ui/core";
 import MessageDialog from "../components/MessageDialog";
-import {serverAdmin} from "../../../mock/config";
 import {fetchAdminLogin} from "../../../mock";
 
 const backgroundImage = require('../../../images/library.jpg');
