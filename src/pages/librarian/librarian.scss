@@ -1,0 +1,25 @@
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.grow {
+  flex-grow: 1;
+}
+.table-row:nth-of-type(odd){
+  background: #E3F2FD;
+}
+.barcode:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.loginUser:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.title:hover {
+  cursor: pointer;
+}
