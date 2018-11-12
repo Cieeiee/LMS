@@ -3,18 +3,20 @@ import {TextField, Button} from '@material-ui/core'
 import {Route, BrowserRouter, Switch,} from 'react-router-dom'
 import './reader.scss'
 import { TopButton } from "./components/TopButton";
-import ReaderHistory from "./history/History";
-import ReaderNotification from "./notification/Notification"
 import Popper from "@material-ui/core/Popper/Popper";
 import Grow from "@material-ui/core/Grow/Grow";
 import Paper from "@material-ui/core/Paper/Paper";
 import MenuList from "@material-ui/core/MenuList/MenuList";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import CategoryPage from "./searched/searched";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
-import ApplicationFooter from "../../mock/footer";
 import * as intl from "react-intl-universal";
 import {fetchShowCategories} from "../../mock";
+
+const ReaderHistory = React.lazy(() => import("./history/History"))
+const CategoryPage = React.lazy(() => import("./searched/searched"))
+const NotFound = React.lazy(() => import('./../notFound/index'))
+const ReaderNotification = React.lazy(() => import("./notification/Notification"))
+const ApplicationFooter = React.lazy(() => import("../../mock/footer"))
 
 const Logo = require('../../images/logo.jpg');
 
@@ -23,12 +25,15 @@ export default class Reader extends React.Component {
         return (
             <div style={{width: '100%'}} className="flex-col grow">
                 <BrowserRouter>
+                  <React.Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route path='/reader/:loginUser' exact component={Home}/>
-                        <Route path='/reader/:loginUser/history' component={ReaderHistory}/>
-                        <Route path='/reader/:loginUser/:searchType/:keywords' component={CategoryPage}/>
-                        <Route path='/reader/:loginUser/notification' component={ReaderNotification}/>
+                        <Route path='/reader/:loginUser/history' exact component={ReaderHistory}/>
+                        <Route path='/reader/:loginUser/:searchType/:keywords' exact component={CategoryPage}/>
+                        <Route path='/reader/:loginUser/notification' exact component={ReaderNotification}/>
+                        <Route component={NotFound} />
                     </Switch>
+                  </React.Suspense>
                 </BrowserRouter>
                 <div className="grow"/>
                 <ApplicationFooter/>

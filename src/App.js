@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css'
+
 import { AdminLogin, Login } from './pages/login/index'
-import NotFound from './pages/notFound/index'
-import Admin from './pages/admin/index'
-import Reader from './pages/reader/index'
-import Librarian from './pages/librarian/index'
 import * as intl from "react-intl-universal";
 import _ from "lodash";
 import http from "axios";
+
+const NotFound = lazy(() => import('./pages/notFound/index'));
+const Admin = lazy(() => import('./pages/admin/index'));
+const Reader = lazy(() => import('./pages/reader/index'));
+const Librarian = lazy(() => import('./pages/librarian/index'));
 
 const SUPPOER_LOCALES = [
     {
@@ -65,15 +67,17 @@ class App extends Component {
             this.state.initDone &&
             <div className="flex-col" style={{height: "100%"}}>
                 <BrowserRouter>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route path='/' exact component={LinkToGuest}/>
-                        <Route path='/login' exact component={Login} />
-                        <Route path='/admin/login' exact component={AdminLogin} />
+                        <Route path='/login' component={Login} />
+                        <Route path='/admin/login' component={AdminLogin} />
                         <Route path='/admin' component={Admin} />
                         <Route path='/reader' component={Reader} />
                         <Route path='/librarian' component={Librarian} />
                         <Route component={NotFound} />
                     </Switch>
+                  </Suspense>
                 </BrowserRouter>
             </div>
         );
