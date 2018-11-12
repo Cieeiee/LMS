@@ -109,7 +109,6 @@ export default class UpdateDialog extends React.Component {
                             intl.get('form.priceEmpty') : this.props.formError === "priceError" ?
                                 intl.get('form.priceError') : intl.get('form.price')}
                         onFocus={this.props.clearFormError}
-                        type='number'
                         fullWidth
                         defaultValue={this.props.book && this.props.book.price}
                         onChange={this.handleChange('price')}

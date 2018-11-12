@@ -7,8 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { ExitToApp } from '@material-ui/icons'
 import {Link} from "react-router-dom";
-import { PeopleOutlined, DescriptionOutlined, MenuOutlined, SettingsOutlined } from "@material-ui/icons"
-import {serverAdmin} from "../../../mock/config";
+import { PeopleOutlined, DescriptionOutlined, SettingsOutlined } from "@material-ui/icons"
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import PasswordDialog from "./passwordDialog";
@@ -110,7 +109,7 @@ class PrimarySearchAppBar extends React.Component {
     }
 
     handleLogout = () => {
-        fetch(`${serverAdmin}/admin/logout`).catch(e => alert(e));
+        // fetch(`${serverAdmin}/admin/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 

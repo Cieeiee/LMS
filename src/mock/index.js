@@ -599,6 +599,28 @@ export const fetchReserveBook = async (id, barcode) => {
     }
 }
 
+export const fetchCancelReserve = async (id, barcode, reserveTime) => {
+    try {
+        const Response = await fetch(`${serverReader}/reader/cancelReserve`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                barcode: barcode,
+                timestamp: reserveTime
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+
 export const fetchReaderUpdateInfo = async (id, name, email, password) => {
     try {
         const Response = await fetch(`${serverReader}/updateReader`, {

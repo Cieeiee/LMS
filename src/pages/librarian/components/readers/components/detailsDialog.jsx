@@ -140,7 +140,7 @@ export default class DetailsDialog extends React.Component {
                                             <TableCell>{item.borrowTime}</TableCell>
                                             <TableCell>{item.returnTime}</TableCell>
                                             <TableCell>{item.fine}</TableCell>
-                                            <TableCell>{item.state === 3 && intl.get('basic.lost')}</TableCell>
+                                            <TableCell>{item.state === 3 ? intl.get('basic.lost') : intl.get('basic.normal')}</TableCell>
                                         </TableRow>
                                     )}
                                     {emptyRows > 0 && (

@@ -1,13 +1,8 @@
 import React from 'react';
-import {Table, TableBody, TableCell, TableHead, TableRow, withStyles} from '@material-ui/core';
-import blue from "@material-ui/core/es/colors/blue";
 import TopBar from "../nav/TopBar";
 import Nav from "../nav/nav";
 import * as intl from "react-intl-universal";
 import {fetchBookHistory} from "../../../../mock";
-import TablePagination from "@material-ui/core/TablePagination/TablePagination";
-import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
-import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import HistoryList from "./component/historyList";
 
 export default class BookHistory extends React.Component {

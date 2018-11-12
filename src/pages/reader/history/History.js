@@ -14,9 +14,9 @@ import ReservingTableWrapped from './components/ReservingTable'
 import BorrowedTableWrapped from './components/BorrowedTable'
 import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
-import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
-import {fetchReaderUpdateInfo, fetchSearchReader} from "../../../mock";
+import {fetchCancelReserve, fetchReaderUpdateInfo, fetchSearchReader} from "../../../mock";
+import CancelReserveDialog from "./components/CancelReserve";
 
 const Logo = require('../../../images/logo.jpg');
 
@@ -72,6 +72,8 @@ class ReaderHistoryClass extends React.Component {
             borrowingTotal: undefined,
             tabValue: 0,
             openUpdate: false,
+            openCancelReserve: false,
+            item: undefined,
             formError: undefined,
 
             name: undefined,
@@ -126,7 +128,8 @@ class ReaderHistoryClass extends React.Component {
             this.setState({[which]: event.target.value});
     };
 
-    handleOpen = (which) => () => {
+    handleOpen = (which, item) => () => {
+        if (item) this.setState({item})
         this.setState({[which]: true, processing: false});
 
         this.setState({
@@ -191,6 +194,16 @@ class ReaderHistoryClass extends React.Component {
             })
         }
     };
+    handleCancelReserve = (id, barcode, reserveTime) => async () => {
+        this.setState({processing: true})
+        const eventState = await fetchCancelReserve(id, barcode, reserveTime)
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
+        this.setState({
+            returnMessage,
+            openCancelReserve: false
+        })
+        this.getHistory()
+    }
 
     componentWillMount() {
         this.getHistory();
@@ -267,13 +280,24 @@ class ReaderHistoryClass extends React.Component {
                                 {this.state.tabValue === 0 &&
                                 <BorrowingTableWrapped records={this.state.borrowingHistory} total={this.state.borrowingTotal}/>}
                                 {this.state.tabValue === 1 &&
-                                <ReservingTableWrapped records={this.state.reservingHistory}/>}
+                                <ReservingTableWrapped
+                                    records={this.state.reservingHistory}
+                                    handleOpen={this.handleOpen}
+                                />}
                                 {this.state.tabValue === 2 &&
                                 <BorrowedTableWrapped records={this.state.borrowedHistory} total={this.state.borrowedTotal}/>}
                             </Paper>
                         </Grid>
                     </Grid>
                 </div>
+                <CancelReserveDialog
+                    open={this.state.openCancelReserve}
+                    handleClose={this.handleClose("openCancelReserve")}
+                    handleCancelReserve={this.handleCancelReserve}
+                    reader={this.props.match.params.loginUser}
+                    book={this.state.item}
+                    processing={this.state.processing}
+                />
             </React.Fragment>
         );
     }

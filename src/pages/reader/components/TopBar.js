@@ -17,7 +17,6 @@ import {
 } from '@material-ui/icons'
 import {Link} from "react-router-dom";
 import LibraryRules from "./libraryRules";
-import {serverReader} from "../../../mock/config";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import * as intl from "react-intl-universal";

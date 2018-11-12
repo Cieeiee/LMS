@@ -1,6 +1,5 @@
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 import React from "react";
-import * as intl from "react-intl-universal";
 
 export default function MessageDialog(props) {
     return (

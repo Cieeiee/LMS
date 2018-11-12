@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import {DescriptionOutlined, ExitToAppOutlined, MenuOutlined} from '@material-ui/icons'
+import {DescriptionOutlined, ExitToAppOutlined} from '@material-ui/icons'
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Menu from "@material-ui/core/Menu/Menu";

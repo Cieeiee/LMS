@@ -8,7 +8,6 @@ import {Assignment} from '@material-ui/icons'
 import {TopBar} from "../components/TopBar";
 import {green} from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography/Typography";
-import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
 import {fetchShowNotification} from "../../../mock";
 import TableBody from "@material-ui/core/TableBody/TableBody";

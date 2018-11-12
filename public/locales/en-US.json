@@ -104,7 +104,8 @@
       "payFine": "The fine that reader have to pay",
       "readerDetails": "Reader Details",
       "bookDetails": "Book Details",
-      "updateBookLocation": "Update Book Location"
+      "updateBookLocation": "Update Book Location",
+      "cancelReserveBook": "Cancel the reservation of this book?"
     },
 
     "changePassword": "change password",
@@ -192,6 +193,7 @@
     "borrow": "borrow",
     "return": "return",
     "lost": "lost",
+    "normal": "/",
     "details": "details",
     "Search": "Search...",
     "success": "Success",

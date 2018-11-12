@@ -10,7 +10,7 @@ import Grow from "@material-ui/core/Grow/Grow";
 import Paper from "@material-ui/core/Paper/Paper";
 import MenuList from "@material-ui/core/MenuList/MenuList";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import CategoryPage from "./searched/catagory";
+import CategoryPage from "./searched/searched";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
 import ApplicationFooter from "../../mock/footer";
 import * as intl from "react-intl-universal";

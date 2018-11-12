@@ -5,11 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
 import {Notifications, ExitToApp, DescriptionOutlined, AccountCircleOutlined, VpnKeyOutlined} from '@material-ui/icons'
 import LibraryRules from "./libraryRules";
-import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import Divider from "@material-ui/core/Divider/Divider";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import Menu from "@material-ui/core/Menu/Menu";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import {fetchShowRules} from "../../../mock";

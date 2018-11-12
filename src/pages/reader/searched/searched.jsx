@@ -18,7 +18,6 @@ import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../mock/tablePaginationFooter";
 import '../reader.scss'
 import DetailsDialog from "./components/detailsDialog";
-import NoContent from "../history/components/NoContent";
 import NoResult from "./components/NoContent";
 
 export default class CategoryPage extends React.Component {

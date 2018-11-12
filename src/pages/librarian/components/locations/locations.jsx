@@ -12,10 +12,9 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import {BuildOutlined} from "@material-ui/icons";
 import {
     fetchAddLocations,
-    fetchAddlocations, fetchDeleteLocations,
-    fetchDeletelocations, fetchShowLocations,
-    fetchShowlocations, fetchUpdateLocations,
-    fetchUpdatelocations
+    fetchDeleteLocations,
+    fetchShowLocations,
+    fetchUpdateLocations,
 } from "../../../../mock";
 import AddDialog from "./components/addDialog";
 import EditDialog from "./components/editDialog";

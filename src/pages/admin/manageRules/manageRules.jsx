@@ -9,7 +9,6 @@ import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import { CreateOutlined } from '@material-ui/icons'
 import MessageDialog from '../components/messageDialog'
-import {serverAdmin} from "../../../mock/config";
 import * as intl from "react-intl-universal";
 import {fetchAdminShowRules, fetchChangeRules} from "../../../mock";
 
@@ -60,7 +59,7 @@ export default class ManageRules extends React.Component {
             this.setState({formError: `${id}incorrect`});
             return;
         }
-        if (id >= 2 && (/[.]/.test)) {
+        if (id >= 2 && /[.]/.test(value)) {
             this.setState({formError: `${id}notInteger`});
             return;
         }
@@ -71,6 +70,7 @@ export default class ManageRules extends React.Component {
     };
 
     render() {
+
         return (
             <React.Fragment>
                 <TopBar />
@@ -112,6 +112,15 @@ export default class ManageRules extends React.Component {
                                                     {intl.get('admin.rules.Deposit_unit')}
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
+                                                    <Button
+                                                        onClick={this.handleClick(0, this.state.deposit)}
+                                                    >
+                                                        <CreateOutlined/>
+                                                    </Button>
+                                                </InputAdornment>
+                                            ),
                                         }}
                                         variant="outlined"
                                         defaultValue={this.state.deposit}
@@ -119,11 +128,6 @@ export default class ManageRules extends React.Component {
                                         onFocus={this.clearFormError}
                                         onChange={this.handleChange("deposit")}
                                     />
-                                    <Button
-                                        onClick={this.handleClick(0, this.state.deposit)}
-                                    >
-                                        <CreateOutlined/>
-                                    </Button>
                                 </div>
                             </Paper>
                         </Grid>
@@ -146,6 +150,7 @@ export default class ManageRules extends React.Component {
                                         helperText={this.state.formError === "1empty" ?
                                             intl.get("form.thisEmpty") : this.state.formError === "1incorrect" &&
                                                 intl.get("form.thisIncorrect")}
+                                        onFocus={this.clearFormError}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -155,15 +160,21 @@ export default class ManageRules extends React.Component {
                                                     {intl.get('admin.rules.Fine_unit')}
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
+                                                    <Button
+                                                        onClick={this.handleClick(1, this.state.fine)}
+                                                    >
+                                                        <CreateOutlined/>
+                                                    </Button>
+                                                </InputAdornment>
+                                            ),
                                         }}
                                         variant="outlined"
                                         defaultValue={this.state.fine}
                                         value={this.state.fine}
                                         onChange={this.handleChange("fine")}
                                     />
-                                    <Button onClick={this.handleClick(1, this.state.fine)}>
-                                        <CreateOutlined/>
-                                    </Button>
                                 </div>
                             </Paper>
                         </Grid>
@@ -188,6 +199,7 @@ export default class ManageRules extends React.Component {
                                             intl.get("form.thisEmpty") : this.state.formError === "2incorrect" ?
                                                 intl.get("form.thisIncorrect") : this.state.formError === "2notInteger" &&
                                                     intl.get("form.thisNotInteger")}
+                                        onFocus={this.clearFormError}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -197,15 +209,21 @@ export default class ManageRules extends React.Component {
                                                     {intl.get('admin.rules.TimeToReturnBook_unit')}
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
+                                                    <Button
+                                                        onClick={this.handleClick(2, this.state.maxReturnTime)}
+                                                    >
+                                                        <CreateOutlined/>
+                                                    </Button>
+                                                </InputAdornment>
+                                            ),
                                         }}
                                         variant="outlined"
                                         defaultValue={this.state.maxReturnTime}
                                         value={this.state.maxReturnTime}
                                         onChange={this.handleChange("maxReturnTime")}
                                     />
-                                    <Button onClick={this.handleClick(2, this.state.maxReturnTime)}>
-                                        <CreateOutlined/>
-                                    </Button>
                                 </div>
                             </Paper>
                         </Grid>
@@ -230,6 +248,7 @@ export default class ManageRules extends React.Component {
                                             intl.get("form.thisEmpty") : this.state.formError === "3incorrect" ?
                                                 intl.get("form.thisIncorrect") : this.state.formError === "3notInteger" &&
                                                     intl.get("form.thisNotInteger")}
+                                        onFocus={this.clearFormError}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -239,15 +258,21 @@ export default class ManageRules extends React.Component {
                                                     {intl.get('admin.rules.ValidTimeForReserving_unit')}
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
+                                                    <Button
+                                                        onClick={this.handleClick(3, this.state.maxReserveTime)}
+                                                    >
+                                                        <CreateOutlined/>
+                                                    </Button>
+                                                </InputAdornment>
+                                            ),
                                         }}
                                         variant="outlined"
                                         defaultValue={this.state.maxReserveTime}
                                         value={this.state.maxReserveTime}
                                         onChange={this.handleChange("maxReserveTime")}
                                     />
-                                    <Button onClick={this.handleClick(3, this.state.maxReserveTime)}>
-                                        <CreateOutlined/>
-                                    </Button>
                                 </div>
                             </Paper>
                         </Grid>
@@ -272,6 +297,7 @@ export default class ManageRules extends React.Component {
                                             intl.get("form.thisEmpty") : this.state.formError === "4incorrect" ?
                                                 intl.get("form.thisIncorrect") : this.state.formError === "4notInteger" &&
                                                     intl.get("form.thisNotInteger")}
+                                        onFocus={this.clearFormError}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -281,15 +307,21 @@ export default class ManageRules extends React.Component {
                                                     {intl.get('admin.rules.MaximumBooksToBorrow_unit')}
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment variant="outlined" position="end">
+                                                    <Button
+                                                        onClick={this.handleClick(4, this.state.maxBorrowNum)}
+                                                    >
+                                                        <CreateOutlined/>
+                                                    </Button>
+                                                </InputAdornment>
+                                            ),
                                         }}
                                         variant="outlined"
                                         defaultValue={this.state.maxBorrowNum}
                                         value={this.state.maxBorrowNum}
                                         onChange={this.handleChange("maxBorrowNum")}
                                     />
-                                    <Button onClick={this.handleClick(4, this.state.maxBorrowNum)}>
-                                        <CreateOutlined/>
-                                    </Button>
                                 </div>
                             </Paper>
                         </Grid>

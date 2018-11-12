@@ -15,7 +15,6 @@ import Nav from "../nav/nav";
 import MessageDialog from "../messageDialog";
 import * as intl from "react-intl-universal";
 import Typography from "@material-ui/core/Typography/Typography";
-import Paper from "@material-ui/core/Paper/Paper";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import Table from "@material-ui/core/Table/Table";

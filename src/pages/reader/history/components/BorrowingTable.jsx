@@ -1,5 +1,4 @@
 import Grid from "@material-ui/core/Grid/Grid";
-import Paper from "@material-ui/core/Paper/Paper";
 import Table from "@material-ui/core/Table/Table";
 import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
@@ -46,8 +45,8 @@ function BorrowingTable(props) {
                 <TableHead className={classes.head}>
                     <TableRow>
                         <CustomTableCell>{intl.get("form.title")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.barcode")}</CustomTableCell>
-                        <CustomTableCell numeric>{intl.get("form.borrowTime")}</CustomTableCell>
+                        <CustomTableCell>{intl.get("form.barcode")}</CustomTableCell>
+                        <CustomTableCell>{intl.get("form.borrowTime")}</CustomTableCell>
                         <CustomTableCell numeric>{intl.get("form.fine")}</CustomTableCell>
                     </TableRow>
                 </TableHead>
@@ -58,8 +57,8 @@ function BorrowingTable(props) {
                                 <CustomTableCell component="th" scope="row">
                                     {book.title}
                                 </CustomTableCell>
-                                <CustomTableCell numeric>{book.barcode}</CustomTableCell>
-                                <CustomTableCell numeric>{book.borrowTime}</CustomTableCell>
+                                <CustomTableCell>{book.barcode}</CustomTableCell>
+                                <CustomTableCell>{book.borrowTime}</CustomTableCell>
                                 <CustomTableCell numeric>{book.fine}</CustomTableCell>
                             </TableRow>
                         );

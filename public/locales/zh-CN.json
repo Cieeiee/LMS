@@ -105,7 +105,8 @@
       "bookDetails": "书籍详情",
       "findPassword": "找回密码",
       "findPasswordText": "正确输入你的账号（即你的注册手机号），之后会有一份包含你密码的邮件发到你的邮箱.",
-      "updateBookLocation": "更新书籍位置"
+      "updateBookLocation": "更新书籍位置",
+      "cancelReserveBook": "取消预约这本书吗?"
     },
     "changePassword": "修改密码",
 
@@ -192,6 +193,7 @@
     "borrow": "借出",
     "return": "归还",
     "lost": "丢失",
+    "normal": "/",
     "details": "详情",
     "Search": "搜索...",
     "success": "成功",
