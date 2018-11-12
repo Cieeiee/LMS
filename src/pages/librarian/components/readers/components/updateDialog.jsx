@@ -60,10 +60,11 @@ export default class UpdateDialog extends React.Component {
                         onChange={this.handleChange('name')}
                     />
                     <TextField
-                        error={this.props.formError === "emailEmpty"}
+                        error={this.props.formError === "emailEmpty" || this.props.formError === "emailIncorrect"}
                         margin='dense'
                         label={this.props.formError === "emailEmpty" ?
-                            intl.get('form.emailEmpty') : intl.get('form.email')}
+                            intl.get('form.emailEmpty') : this.props.formError === "emailIncorrect" ?
+                                intl.get('form.emailIncorrect') : intl.get('form.email')}
                         type='email'
                         fullWidth
                         defaultValue={this.props.reader && this.props.reader.email}

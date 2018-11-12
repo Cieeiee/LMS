@@ -155,6 +155,7 @@
     "enEmpty": "The English of the category can not be empty",
     "zhEmpty": "The Chinese of the category can not be empty",
     "accountExists": "The account already exists",
+    "accountIncorrect": "The account must be a phone number of 11 digits",
     "barcodeEmpty": "The barcode can not be empty",
     "readerEmpty": "The reader can not be empty",
     "numberEmpty": "The number can not be empty",
@@ -169,6 +170,9 @@
     "priceEmpty": "The price can not be empty",
     "priceError": "The price should be a positive number",
     "imgEmpty": "The image can not be empty",
+    "thisEmpty": "The number here can not be empty",
+    "thisIncorrect": "Please enter a number here",
+    "thisNotInteger": "The number here should be a positive integer",
 
     "English": "English",
     "Chinese": "Chinese",

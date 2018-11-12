@@ -155,6 +155,7 @@
     "enEmpty": "分类的英文不能为空",
     "zhEmpty": "分类的中文不能为空",
     "accountExists": "账号已存在",
+    "accountIncorrect": "账号必须是11位的手机号码",
     "barcodeEmpty": "条形码不能为空",
     "readerEmpty": "读者不能为空",
     "numberEmpty": "数量不能为空",
@@ -169,6 +170,9 @@
     "priceEmpty": "价格不能为空",
     "priceError": "价格需要是一个正数",
     "imgEmpty": "图片不能为空",
+    "thisEmpty": "该项不能为空",
+    "thisIncorrect": "请在这里输入一个数字",
+    "thisNotInteger": "这里的数字必须是正整数",
 
     "English": "英文",
     "Chinese": "中文",

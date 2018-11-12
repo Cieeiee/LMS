@@ -312,15 +312,16 @@ export default class BookDetails extends React.Component {
                     <div style={{margin: "40px auto 0 auto",width: "60%"}}>
                         <div className="flex-row">
                             <img src={this.state.book.bookClass.picture} alt='' height='400px' />
-                            <div style={{marginLeft: 30}} className="flex-col">
+                            <div style={{marginLeft: 30}} className="grow flex-col">
                                 <div className="flex-row">
                                     <Typography variant="title" gutterBottom style={{fontSize: 40}}>
                                         {this.state.book.bookClass.title}
                                     </Typography>
+                                    <div className="grow"/>
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        style={{margin: "auto 0 auto auto", width: 100}}
+                                        style={{margin: "auto auto", width: 100}}
                                         onClick={this.handleOpen("openUpdate", this.state.book.bookClass)}
                                     >
                                         {intl.get("basic.update")}

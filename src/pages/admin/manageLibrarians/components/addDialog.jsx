@@ -18,10 +18,12 @@ export default function AddDialog(props) {
             <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.addLibrarian')}</DialogTitle>
             <DialogContent>
                 <TextField
-                    error={props.formError === "nameEmpty"}
+                    error={props.formError === "accountEmpty" || props.formError === "accountIncorrect"}
                     margin="normal"
                     id="name"
-                    label={props.formError === "nameEmpty" ? intl.get('form.nameEmpty') : intl.get('form.account')}
+                    label={props.formError === "accountEmpty" ? intl.get('form.accountEmpty')
+                        : props.formError === "accountIncorrect" ?
+                            intl.get('form.accountIncorrect') : intl.get('form.account')}
                     fullWidth
                     value={props.ID}
                     onFocus={props.clearFormError}

@@ -283,7 +283,6 @@ export default class AddDialog extends React.Component {
                                         intl.get('form.numberError') : intl.get('form.number')}
                                 onFocus={this.props.clearFormError}
                                 margin='dense'
-                                type='number'
                                 fullWidth
                                 value={this.state.newBook.number}
                                 onChange={this.handleChange('number')}

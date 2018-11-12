@@ -43,10 +43,11 @@ export default class AddDialog extends React.Component {
                 <DialogTitle>{intl.get('form.formTitle.addReader')}</DialogTitle>
                 <DialogContent>
                     <TextField
-                        error={this.props.formError === "accountEmpty"}
+                        error={this.props.formError === "accountEmpty" || this.props.formError === "accountIncorrect"}
                         margin='dense'
                         label={this.props.formError === "accountEmpty" ?
-                            intl.get('form.accountEmpty') : intl.get('form.account')}
+                            intl.get('form.accountEmpty') : this.props.formError === "accountIncorrect" ?
+                                intl.get('form.accountIncorrect')  : intl.get('form.account')}
                         fullWidth
                         onFocus={this.props.clearFormError}
                         onChange={this.handleChange('id')}
@@ -61,10 +62,11 @@ export default class AddDialog extends React.Component {
                         onChange={this.handleChange('name')}
                     />
                     <TextField
-                        error={this.props.formError === "emailEmpty"}
+                        error={this.props.formError === "emailEmpty" || this.props.formError === "emailIncorrect"}
                         margin='dense'
                         label={this.props.formError === "emailEmpty" ?
-                            intl.get('form.emailEmpty') : intl.get('form.email')}
+                            intl.get('form.emailEmpty') : this.props.formError === "emailIncorrect" ?
+                                intl.get('form.emailIncorrect') : intl.get('form.email')}
                         type='email'
                         fullWidth
                         onFocus={this.props.clearFormError}

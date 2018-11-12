@@ -114,7 +114,7 @@ export default function UpdateReaderInfoDialog(props) {
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get("form.cancel")}
                 </Button>
-                <Button onClick={props.handleUpdate} color="primary">
+                <Button onClick={props.handleUpdate} disabled={props.processing} color="primary">
                     {intl.get("form.confirm")}
                 </Button>
             </DialogActions>

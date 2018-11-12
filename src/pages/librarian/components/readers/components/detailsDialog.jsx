@@ -46,7 +46,7 @@ export default class DetailsDialog extends React.Component {
                 // fullScreen
                 open={this.props.open}
                 onClose={this.props.handleClose}
-                scroll="paper"
+                scroll="body"
             >
                 <DialogContent>
                     <div className="flex-col" style={{marginBottom: 40}}>
@@ -171,6 +171,7 @@ export default class DetailsDialog extends React.Component {
                     <Button
                         onClick={this.props.reader && this.props.handleDeleteReader(this.props.reader.id)}
                         processing={this.props.processing}
+                        color='secondary'
                     >
                         {intl.get('form.formTitle.deleteReader')}
                     </Button>

@@ -11,44 +11,30 @@ import { CreateOutlined } from '@material-ui/icons'
 import MessageDialog from '../components/messageDialog'
 import {serverAdmin} from "../../../mock/config";
 import * as intl from "react-intl-universal";
+import {fetchAdminShowRules, fetchChangeRules} from "../../../mock";
 
 export default class ManageRules extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            changingID: undefined,
             returnMessage: undefined,
         };
-
-        this.encode = [
-            "Deposit",
-            "Fine",
-            "Time to return book",
-            "Valid time for reserving",
-            "Maximum books to borrow",
-        ];
     };
 
-    getAllRules = () => {
-        fetch(`${serverAdmin}/showRules`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    deposit: result.deposit,
-                    fine: result.fine,
-                    maxReturnTime: result.maxReturnTime,
-                    maxReserveTime: result.maxReserveTime,
-                    maxBorrowNum: result.maxBorrowNum,
-
-                    formError: undefined,
-                });
-            })
-            .catch(e => alert(e));
+    getAllRules = async () => {
+        const result = await fetchAdminShowRules()
+        this.setState({
+            deposit: result.deposit,
+            fine: result.fine,
+            maxReturnTime: result.maxReturnTime,
+            maxReserveTime: result.maxReserveTime,
+            maxBorrowNum: result.maxBorrowNum,
+        });
     };
 
-    componentDidMount() {
-        this.getAllRules();
+    async componentDidMount() {
+        await this.getAllRules();
     };
 
     handleChange = which => event => {
@@ -65,40 +51,26 @@ export default class ManageRules extends React.Component {
         this.setState({formError: undefined});
     };
 
-    handleClick = (id, value) => () => {
+    handleClick = (id, value) => async () => {
         if (value === undefined || value.length === 0) {
             this.setState({formError: `${id}empty`});
             return;
         }
-        fetch(`${serverAdmin}/admin/changeRules?rule=${id}&value=${value}`)
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({
-                    status: result.state,
-                    changingID: id,
-                });
-            })
-            .catch(e => alert(e));
-    };
+        if (!/^\d+(.[0-9]*)?$/.test(value) || /^0+$/.test(value)) {
+            this.setState({formError: `${id}incorrect`});
+            return;
+        }
+        if (id >= 2 && (/[.]/.test)) {
+            this.setState({formError: `${id}notInteger`});
+            return;
+        }
+        const eventState = await fetchChangeRules(id, value);
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
+        this.setState({returnMessage})
 
-    changeRules = () => {
-        if (this.state.status === 1){
-            this.setState({
-                status: undefined,
-                returnMessage: intl.get('basic.success')
-            });
-        }
-        if (this.state.status === 0) {
-            this.setState({
-                status: undefined,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
     };
 
     render() {
-        this.changeRules();
-
         return (
             <React.Fragment>
                 <TopBar />
@@ -126,10 +98,11 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
-                                        error={this.state.formError === "0empty"}
-                                        helperText={this.state.formError === "0empty" && intl.get('form.wrongFormat')}
+                                        error={this.state.formError === "0empty" || this.state.formError === "0incorrect"}
                                         label={intl.get('admin.rules.Deposit')}
-                                        type="number"
+                                        helperText={this.state.formError === "0empty" ?
+                                            intl.get("form.thisEmpty") : this.state.formError === "0incorrect" &&
+                                                intl.get("form.thisIncorrect")}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -168,10 +141,11 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
-                                        error={this.state.formError === "1empty"}
-                                        helperText={this.state.formError === "1empty" && "Please input right format!"}
+                                        error={this.state.formError === "1empty" || this.state.formError === "1incorrect"}
                                         label={intl.get('admin.rules.Fine')}
-                                        type="number"
+                                        helperText={this.state.formError === "1empty" ?
+                                            intl.get("form.thisEmpty") : this.state.formError === "1incorrect" &&
+                                                intl.get("form.thisIncorrect")}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -207,16 +181,19 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
-                                        error={this.state.formError === "2empty"}
-                                        helperText={this.state.formError === "2empty" && "Please input right format!"}
+                                        error={this.state.formError === "2empty"
+                                        || this.state.formError === "2incorrect" || this.state.formError === "2notInteger"}
                                         label={intl.get('admin.rules.TimeToReturnBook')}
-                                        type="number"
+                                        helperText={this.state.formError === "2empty" ?
+                                            intl.get("form.thisEmpty") : this.state.formError === "2incorrect" ?
+                                                intl.get("form.thisIncorrect") : this.state.formError === "2notInteger" &&
+                                                    intl.get("form.thisNotInteger")}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment variant="outlined" position="end">
+                                            startAdornment: (
+                                                <InputAdornment variant="outlined" position="start">
                                                     {intl.get('admin.rules.TimeToReturnBook_unit')}
                                                 </InputAdornment>
                                             ),
@@ -246,16 +223,19 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
-                                        error={this.state.formError === "3empty"}
-                                        helperText={this.state.formError === "3empty" && "Please input right format!"}
+                                        error={this.state.formError === "3empty"
+                                        || this.state.formError === "3incorrect" || this.state.formError === "3notInteger"}
                                         label={intl.get('admin.rules.ValidTimeForReserving')}
-                                        type="number"
+                                        helperText={this.state.formError === "3empty" ?
+                                            intl.get("form.thisEmpty") : this.state.formError === "3incorrect" ?
+                                                intl.get("form.thisIncorrect") : this.state.formError === "3notInteger" &&
+                                                    intl.get("form.thisNotInteger")}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment variant="outlined" position="end">
+                                            startAdornment: (
+                                                <InputAdornment variant="outlined" position="start">
                                                     {intl.get('admin.rules.ValidTimeForReserving_unit')}
                                                 </InputAdornment>
                                             ),
@@ -285,16 +265,19 @@ export default class ManageRules extends React.Component {
                                     </div>
                                     <div className="grow"/>
                                     <TextField
-                                        error={this.state.formError === "4empty"}
-                                        helperText={this.state.formError === "4empty" && "Please input right format!"}
+                                        error={this.state.formError === "4empty"
+                                        || this.state.formError === "4incorrect" || this.state.formError === "4notInteger"}
                                         label={intl.get('admin.rules.MaximumBooksToBorrow')}
-                                        type="number"
+                                        helperText={this.state.formError === "4empty" ?
+                                            intl.get("form.thisEmpty") : this.state.formError === "4incorrect" ?
+                                                intl.get("form.thisIncorrect") : this.state.formError === "4notInteger" &&
+                                                    intl.get("form.thisNotInteger")}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                         InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment variant="outlined" position="end">
+                                            startAdornment: (
+                                                <InputAdornment variant="outlined" position="start">
                                                     {intl.get('admin.rules.MaximumBooksToBorrow_unit')}
                                                 </InputAdornment>
                                             ),

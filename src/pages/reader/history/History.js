@@ -16,7 +16,7 @@ import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
 import {serverReader} from "../../../mock/config";
 import * as intl from "react-intl-universal";
-import {fetchSearchReader} from "../../../mock";
+import {fetchReaderUpdateInfo, fetchSearchReader} from "../../../mock";
 
 const Logo = require('../../../images/logo.jpg');
 
@@ -82,6 +82,7 @@ class ReaderHistoryClass extends React.Component {
             changePassword: false,
             updateStatus: undefined,
             returnMessage: undefined,
+            processing: false,
         }
     }
 
@@ -126,7 +127,7 @@ class ReaderHistoryClass extends React.Component {
     };
 
     handleOpen = (which) => () => {
-        this.setState({[which]: true});
+        this.setState({[which]: true, processing: false});
 
         this.setState({
             name: this.state.info !== undefined? this.state.info.name: null,
@@ -150,29 +151,7 @@ class ReaderHistoryClass extends React.Component {
         this.setState({formError: undefined});
     };
 
-    updateReader= () => {
-        if (this.state.updateStatus === 0) {
-            this.setState({
-                updateStatus: undefined,
-                returnMessage: intl.get('basic.failed')
-            });
-        }
-        if (this.state.updateStatus === 1) {
-            const updatedInfo = {
-                id: this.state.info.id,
-                name: this.state.name,
-                email: this.state.email,
-                deposit: this.state.info.deposit,
-            };
-            this.setState({
-                updateStatus: undefined,
-                info: updatedInfo,
-                returnMessage: intl.get('basic.success')
-            });
-        }
-    };
-
-    handleUpdate = () => {
+    handleUpdate = async () => {
         if (this.state.name === undefined || this.state.name.length === 0) {
             this.setState({formError: "nameEmpty"});
             return;
@@ -195,25 +174,22 @@ class ReaderHistoryClass extends React.Component {
             return;
         }
 
-        this.handleClose("openUpdate")();
-
-        fetch(`${serverReader}/updateReader`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.props.match.params.loginUser,
+        this.setState({processing: true})
+        const eventState = await fetchReaderUpdateInfo(this.props.match.params.loginUser,
+                                                    this.state.name, this.state.email, this.state.password)
+        let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
+        await this.setState({returnMessage, openUpdate: false})
+        if (returnMessage) {
+            const updatedInfo = {
+                id: this.state.info.id,
                 name: this.state.name,
                 email: this.state.email,
-                password: this.state.password,
+                deposit: this.state.info.deposit,
+            };
+            this.setState({
+                info: updatedInfo
             })
-        })
-            .then(Response => Response.json())
-            .then(result => {
-                this.setState({updateStatus: result.state});
-            })
+        }
     };
 
     componentWillMount() {
@@ -222,7 +198,6 @@ class ReaderHistoryClass extends React.Component {
 
     render() {
         const {classes} = this.props;
-        this.updateReader();
 
         return (
             <React.Fragment>
@@ -249,6 +224,7 @@ class ReaderHistoryClass extends React.Component {
                                 email={this.state.email}
                                 password={this.state.password}
                                 confirmPassword={this.state.confirmPassword}
+                                processing={this.state.processing}
                             />
                             <MessageDialog
                                 handleClose={this.handleClose("returnMessage")}

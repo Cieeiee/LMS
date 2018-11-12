@@ -21,6 +21,29 @@ export const fetchAdminLogin = async (account, password) => {
         return null
     }
 }
+
+export const fetchAdminShowRules = async () => {
+    try {
+        const Response = await fetch(`${serverAdmin}/showRules`)
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return []
+    }
+}
+
+export const fetchChangeRules = async (id, value) => {
+    try {
+        const Response = await fetch(`${serverAdmin}/admin/changeRules?rule=${id}&value=${value}`)
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return []
+    }
+}
+
 export const fetchAdminChangePassword = async password => {
     try {
         const Response = await fetch(`${serverAdmin}/admin/changePassword`, {
@@ -566,6 +589,29 @@ export const fetchReserveBook = async (id, barcode) => {
             body: JSON.stringify({
                 id: id,
                 barcode: barcode,
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchReaderUpdateInfo = async (id, name, email, password) => {
+    try {
+        const Response = await fetch(`${serverReader}/updateReader`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                email: email,
+                password: password,
             })
         })
         const result = await Response.json()

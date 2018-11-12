@@ -90,6 +90,11 @@ export default class Readers extends React.Component {
             this.setState({formError: "emailEmpty"})
             return
         }
+        const emailPattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        if (!emailPattern.test(info.email)) {
+            this.setState({formError: "emailIncorrect"});
+            return;
+        }
         await this.setState({processing: true})
         const eventState = await fetchUpdateReader(info);
         const readerList = await fetchReaderList();
@@ -115,6 +120,10 @@ export default class Readers extends React.Component {
             this.setState({formError: "accountEmpty"})
             return
         }
+        if (!/^\d{11}$/.test(info.id) || /^0+/.test(info.id)) {
+            this.setState({formError: "accountIncorrect"});
+            return;
+        }
         if (info.name === undefined || info.name.length === 0) {
             this.setState({formError: "nameEmpty"})
             return
@@ -122,6 +131,11 @@ export default class Readers extends React.Component {
         if (info.email === undefined || info.email.length === 0) {
             this.setState({formError: "emailEmpty"})
             return
+        }
+        const emailPattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        if (!emailPattern.test(info.email)) {
+            this.setState({formError: "emailIncorrect"});
+            return;
         }
         await this.setState({processing: true})
         const eventState =  await fetchAddReader(info)

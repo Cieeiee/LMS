@@ -20,6 +20,9 @@ import TextField from "@material-ui/core/TextField/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import * as intl from "react-intl-universal";
 import {fetchAddLibrarian, fetchDeleteLibrarian, fetchShowLibrarians, fetchUpdateLibrarian} from "../../../mock";
+import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import TablePaginationFooter from "../../../mock/tablePaginationFooter";
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 const styles = theme => ({
     row: {
@@ -51,8 +54,17 @@ class ManageLibrariansClass extends React.Component {
             email: undefined,
             password: undefined,
             confirmPassword: undefined,
+            page: 0,
+            rowsPerPage: 10,
         }
     }
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
 
     handleOpen = (which, account) => () => {
         this.setState({[which]: account, processing: false});
@@ -145,7 +157,11 @@ class ManageLibrariansClass extends React.Component {
 
     handleAdd = async () => {
         if (this.state.ID === undefined || this.state.ID.length === 0) {
-            this.setState({formError: "nameEmpty"});
+            this.setState({formError: "accountEmpty"});
+            return;
+        }
+        if (!/^\d{11}$/.test(this.state.ID) || /^0+/.test(this.state.ID)) {
+            this.setState({formError: "accountIncorrect"});
             return;
         }
         if (this.state.email === undefined || this.state.email.length === 0) {
@@ -191,6 +207,10 @@ class ManageLibrariansClass extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const { librarians, rowsPerPage, page } = this.state;
+        let librariansToShow = []
+        if (librarians) librariansToShow = librarians.filter(isSearched(this.state.searchTerm))
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, librariansToShow.length - page * rowsPerPage);
 
         return (
             <React.Fragment>
@@ -241,7 +261,7 @@ class ManageLibrariansClass extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.librarians.filter(isSearched(this.state.searchTerm))
+                                {librariansToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map(librarian => {
                                     return (
                                         <TableRow className={classes.row} key={librarian.id}>
@@ -264,7 +284,26 @@ class ManageLibrariansClass extends React.Component {
                                         </TableRow>
                                     );
                                 })}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{ height: 48 * emptyRows }}>
+                                        <TableCell colSpan={4} />
+                                    </TableRow>
+                                )}
                             </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        colSpan={4}
+                                        count={librariansToShow.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        rowsPerPageOptions={[5, 10, 15]}
+                                        onChangePage={this.handleChangePage}
+                                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                        ActionsComponent={TablePaginationFooter}
+                                    />
+                                </TableRow>
+                            </TableFooter>
                         </Table>
                         <AddDialog handleClose={this.handleClose}
                                    handleAdd={this.handleAdd}

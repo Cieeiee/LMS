@@ -116,7 +116,7 @@ class PrimarySearchAppBar extends React.Component {
     };
 
     handleLogout = () => {
-        fetch(`${serverReader}/logout`).catch(e => alert(e));
+        // fetch(`${serverReader}/logout`).catch(e => alert(e));
         window.location.href = '/';
     };
 

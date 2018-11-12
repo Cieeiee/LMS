@@ -61,6 +61,7 @@ class PrimarySearchAppBar extends React.Component {
     handleOpen = which => event => {
         this.setState({
             anchorEl: event.currentTarget,
+            formError: undefined,
             [which]: true
         })
     }
