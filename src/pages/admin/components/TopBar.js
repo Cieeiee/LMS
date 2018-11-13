@@ -110,7 +110,7 @@ class PrimarySearchAppBar extends React.Component {
 
     handleLogout = () => {
         // fetch(`${serverAdmin}/admin/logout`).catch(e => alert(e));
-        window.location.href = '/';
+        window.location.href = `/reader/guest${this.props.lang}`;
     };
 
     render() {
@@ -156,14 +156,14 @@ class PrimarySearchAppBar extends React.Component {
                             </IconButton>
                             <IconButton
                                 color="inherit"
-                                component={Link} to={`/admin`}
+                                component={Link} to={`/admin${this.props.lang}`}
                                 style={{textTransform: 'none'}}
                             >
                                 <PeopleOutlined/>
                             </IconButton>
                             <IconButton
                                 color="inherit"
-                                component={Link} to={`/admin/manageRules`}
+                                component={Link} to={`/admin/manageRules${this.props.lang}`}
                                 style={{textTransform: 'none'}}
                             >
                                 <DescriptionOutlined/>

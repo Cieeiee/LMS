@@ -76,9 +76,9 @@ export default class Login extends React.Component {
         const loginStatus = await fetchReaderLibrarianLogin(this.state.account, this.state.password)
         this.setState({loginStatus});
         if (loginStatus === 0)
-            window.location.href = '/reader/' + this.state.account;
+            window.location.href = `/reader/${this.state.account}${this.props.location.search}`;
         if (loginStatus === 1)
-            window.location.href = `/librarian/${this.state.account}/books`;
+            window.location.href = `/librarian/${this.state.account}/books${this.props.location.search}`;
     };
 
     handleFindPassword = async event => {

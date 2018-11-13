@@ -306,9 +306,17 @@ export default class BookDetails extends React.Component {
 
         return(
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"books"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"books"}
+                        lang={this.props.location.search}
+                    />
                     <div style={{margin: "40px auto 0 auto",width: "60%"}}>
                         <div className="flex-row">
                             <img src={this.state.book.bookClass.picture} alt='' height='400px' />

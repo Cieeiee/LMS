@@ -214,7 +214,7 @@ class ReaderHistoryClass extends React.Component {
 
         return (
             <React.Fragment>
-                <TopBar loginUser={this.props.match.params.loginUser}/>
+                <TopBar loginUser={this.props.match.params.loginUser} lang={this.props.location.search}/>
                 <div className="flex-col mid-div">
                     <Grid container spacing={24}>
                         <Grid item xs={12} className="flex-row">

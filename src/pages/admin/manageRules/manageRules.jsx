@@ -73,7 +73,7 @@ export default class ManageRules extends React.Component {
 
         return (
             <React.Fragment>
-                <TopBar />
+                <TopBar lang={this.props.location.search}/>
                 <div className="mid-div flex-col">
                     <div className="flex-row"
                          style={{marginBottom: 10}}

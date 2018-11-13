@@ -116,7 +116,7 @@ class PrimarySearchAppBar extends React.Component {
 
     handleLogout = () => {
         // fetch(`${serverReader}/logout`).catch(e => alert(e));
-        window.location.href = '/';
+        window.location.href = `/reader/guest${this.props.lang}`;
     };
 
     handleChange = e => {
@@ -130,7 +130,7 @@ class PrimarySearchAppBar extends React.Component {
         if (this.state.keywords === undefined || this.state.keywords.length === 0)
             return;
 
-        window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}`;
+        window.location.href = `/reader/${this.props.loginUser}/search/${this.state.keywords}${this.props.lang}`;
     };
 
     handleOpen = which => event => {
@@ -190,7 +190,7 @@ class PrimarySearchAppBar extends React.Component {
                             variant="title"
                             color="inherit"
                             noWrap
-                            onClick={() => window.location.href = `/reader/${this.props.loginUser}`}
+                            onClick={() => window.location.href = `/reader/${this.props.loginUser}${this.props.lang}`}
                         >
                             Bibliosoft
                         </Typography>
@@ -216,12 +216,12 @@ class PrimarySearchAppBar extends React.Component {
                                 <DescriptionOutlined />
                             </IconButton>
                             {this.props.loginUser !== "guest" && <IconButton color="inherit" component={Link}
-                                        to={`/reader/${this.props.loginUser}/history`}
+                                        to={`/reader/${this.props.loginUser}/history${this.props.lang}`}
                             >
                                 <AccountCircleOutlined />
                             </IconButton>}
                             <IconButton color="inherit" component={Link}
-                                        to={`/reader/${this.props.loginUser}/notification`}
+                                        to={`/reader/${this.props.loginUser}/notification${this.props.lang}`}
                             >
                                 <Notifications />
                             </IconButton>
@@ -234,7 +234,7 @@ class PrimarySearchAppBar extends React.Component {
                                 </IconButton> :
                                 <IconButton
                                     color="inherit"
-                                    onClick={() => window.location.href = '/login'}
+                                    onClick={() => window.location.href = `/login${this.props.lang}`}
                                 >
                                     <VpnKeyOutlined />
                                 </IconButton>

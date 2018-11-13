@@ -139,9 +139,17 @@ export default class Summary extends React.Component {
     render() {
         return (
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"summary"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"summary"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow flex-col">
                         <Paper style={{margin: "20px 20px 0 20px", padding: "10px 20px 0 20px"}}>
                             <div className="flex-col">

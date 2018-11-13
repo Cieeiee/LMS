@@ -243,9 +243,17 @@ class Books extends React.Component {
 
         return(
             <div className="flex-col grow">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row grow">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"books"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"books"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow">
                         <Table>
                             <TableHead>

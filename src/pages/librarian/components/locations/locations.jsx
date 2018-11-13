@@ -148,9 +148,17 @@ export default class Locations extends React.Component {
 
         return (
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"locations"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"locations"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow">
                         <Table>
                             <TableHead>

@@ -88,7 +88,7 @@ class App extends Component {
 class LinkToGuest extends React.Component {
 
     componentDidMount() {
-        window.location.href = "/reader/guest"
+        window.location.href = "/reader/guest?lang=en-US"
     }
 
     render() {

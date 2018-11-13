@@ -74,7 +74,7 @@ class IconLabelButtons extends React.Component {
         window.location.search = `?lang=${which}`;
         this.handleClose("openMenu")();
     }
-    handleLogout = () => window.location.href = '/'
+    handleLogout = () => window.location.href = `/reader/guest${this.props.lang}`
 
     render() {
         const { classes } = this.props;
@@ -116,7 +116,7 @@ class IconLabelButtons extends React.Component {
                     // variant="outlined"
                     color="secondary"
                     className={classes.button}
-                    component={Link} to={`/reader/${this.props.loginUser}/history`}
+                    component={Link} to={`/reader/${this.props.loginUser}/history${this.props.lang}`}
                 >
                     {intl.get("reader.topButton.profile")}
                     <AccountCircleOutlined className={classes.iconSmall} />
@@ -125,7 +125,7 @@ class IconLabelButtons extends React.Component {
                     // variant="outlined"
                     color="primary"
                     className={classes.button}
-                    component={Link} to={`/reader/${this.props.loginUser}/notification`}
+                    component={Link} to={`/reader/${this.props.loginUser}/notification${this.props.lang}`}
                 >
                     {intl.get("reader.topButton.notification")}
                     <Notifications className={classes.iconSmall}/>
@@ -143,7 +143,7 @@ class IconLabelButtons extends React.Component {
                         // variant="outlined"
                         color="default"
                         className={classes.button}
-                        onClick={() => window.location.href = '/login'}
+                        onClick={() => window.location.href = `/login${this.props.lang}`}
                     >
                         {intl.get("reader.topButton.login")}
                         <VpnKeyOutlined className={classes.iconSmall} />

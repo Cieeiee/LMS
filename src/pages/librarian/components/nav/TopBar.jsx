@@ -214,7 +214,7 @@ class SearchAppBar extends React.Component {
                         </IconButton>
                         <IconButton
                             color="inherit"
-                            onClick={() => window.location.href = '/'}
+                            onClick={() => window.location.href = `/reader/guest${this.props.lang}`}
                         >
                             {/*{intl.get('basic.logout')}*/}
                             <ExitToAppOutlined/>

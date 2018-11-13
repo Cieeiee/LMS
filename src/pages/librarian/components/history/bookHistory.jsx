@@ -39,9 +39,16 @@ export default class BookHistory extends React.Component {
     render() {
         return(
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"history"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"history"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow">
                         <HistoryList
                             historyList={this.state.deletedHistory}

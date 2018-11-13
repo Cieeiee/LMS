@@ -173,7 +173,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "books"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/books`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/books${this.props.lang}`}
                 >
                     <ChromeReaderModeOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.books')} />
@@ -181,7 +181,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "categories"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/categories`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/categories${this.props.lang}`}
                 >
                     <SubtitlesOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.categories')} />
@@ -189,7 +189,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "locations"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/locations`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/locations${this.props.lang}`}
                 >
                     <LocationOnOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.locations')} />
@@ -197,7 +197,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "readers"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/readers`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/readers${this.props.lang}`}
                 >
                     <AccountCircleOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.readers')} />
@@ -205,7 +205,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "history"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/history`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/history${this.props.lang}`}
                 >
                     <HistoryOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.deleteHistory')} />
@@ -213,7 +213,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "notifications"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/notifications`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/notifications${this.props.lang}`}
                 >
                     <NotificationsOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.notifications')} />
@@ -221,7 +221,7 @@ export default class Nav extends React.Component {
                 <ListItem
                     button
                     selected={this.props.whichFunction === "summary"}
-                    component={Link} to={`/librarian/${this.props.loginUser}/summary`}
+                    component={Link} to={`/librarian/${this.props.loginUser}/summary${this.props.lang}`}
                 >
                     <EqualizerOutlined/>
                     <ListItemText primary={intl.get('librarian.nav.summary')} />

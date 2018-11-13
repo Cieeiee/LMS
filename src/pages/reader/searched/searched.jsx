@@ -100,7 +100,7 @@ export default class Searched extends React.Component {
 
         return (
             <div className="flex-col">
-                <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
+                <TopBar searchBar loginUser={this.props.match.params.loginUser} lang={this.props.location.search}/>
 
                 <div className="flex-col grow" style={{margin: "20px 0 20px 0"}}>
                     <div className="flex-col grow">

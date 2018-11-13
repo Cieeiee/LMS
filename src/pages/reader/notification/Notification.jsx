@@ -56,7 +56,7 @@ export default class ReaderNotification extends React.Component {
         );
         return (
             <React.Fragment>
-                <TopBar loginUser={this.props.match.params.loginUser}/>
+                <TopBar loginUser={this.props.match.params.loginUser} lang={this.props.location.search}/>
                 <div className="flex-col mid-div">
                     <div className="flex-row"
                          style={{marginBottom: 10}}

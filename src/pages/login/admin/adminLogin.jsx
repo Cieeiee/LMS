@@ -60,7 +60,7 @@ export default class AdminLogin extends React.Component {
         const loginStatus = await fetchAdminLogin(this.state.account, this.state.password)
         this.setState({loginStatus});
         if (loginStatus === 1)
-            window.location.href = '/admin';
+            window.location.href = `/admin${this.props.location.search}`;
     };
     handleLanguage = (which) => () => {
         window.location.search = `?lang=${which}`;

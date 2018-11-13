@@ -73,10 +73,10 @@ class Home extends React.Component {
             return;
         }
 
-        window.location.href = `/reader/${this.props.match.params.loginUser}/search/${this.state.keywords}`;
+        window.location.href = `/reader/${this.props.match.params.loginUser}/search/${this.state.keywords}${this.props.location.search}`;
     };
     handleCategory = which => () => {
-        window.location.href = `/reader/${this.props.match.params.loginUser}/category/${which}`;
+        window.location.href = `/reader/${this.props.match.params.loginUser}/category/${which}${this.props.location.search}`;
     };
     async componentDidMount() {
         const categories = await fetchShowCategories();
@@ -86,11 +86,11 @@ class Home extends React.Component {
     render() {
         return (
                 <div className="flex-col" style={{height: '100%'}}>
-                    <TopButton loginUser={this.props.match.params.loginUser}/>
+                    <TopButton loginUser={this.props.match.params.loginUser} lang={this.props.location.search}/>
                     <div className='reader-page'>
                         <div className='bg' style={{backgroundImage: `url(${Logo})`}} />
                         <TextField
-                            label={intl.get("basic.Search")}
+                            placeholder={intl.get("basic.Search")}
                             variant='outlined'
                             style={{width: 600, margin: '30px 0 50px 0'}}
                             value={this.state.keywords}

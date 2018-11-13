@@ -191,9 +191,17 @@ export default class Readers extends React.Component {
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, readerListToShow.length - page * rowsPerPage);
         return (
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"readers"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"readers"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow">
                         <Table>
                             <TableHead>

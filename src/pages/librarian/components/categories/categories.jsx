@@ -153,9 +153,17 @@ export default class Categories extends React.Component {
 
         return (
             <div className="flex-col">
-                <TopBar loginUser={this.props.match.params.loginUser} handleSearch={this.handleSearch}/>
+                <TopBar
+                    loginUser={this.props.match.params.loginUser}
+                    handleSearch={this.handleSearch}
+                    lang={this.props.location.search}
+                />
                 <div style={{width: '100%'}} className="flex-row">
-                    <Nav loginUser={this.props.match.params.loginUser} whichFunction={"categories"}/>
+                    <Nav
+                        loginUser={this.props.match.params.loginUser}
+                        whichFunction={"categories"}
+                        lang={this.props.location.search}
+                    />
                     <div className="grow">
                         <Table>
                             <TableHead>
