@@ -99,7 +99,7 @@ class Books extends React.Component {
             this.setState({formError: "isbnEmpty"})
             return
         }
-        if (!/^\d{13}$/.test(newBook.isbn)) {
+        if (newBook.isbn !== 0 && !/^\d{13}$/.test(newBook.isbn)) {
             this.setState({formError: "isbnError"})
             return
         }

@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Loading from "../../mock/loading";
 
 const ManageLibrarians = React.lazy(() => import('./manageLibrarians/manageLibrarians'));
 const ManageRules = React.lazy(() => import('./manageRules/manageRules'));
@@ -10,7 +11,7 @@ export default function Admin(props) {
     return (
         <div className="flex-col grow">
             <BrowserRouter>
-              <React.Suspense fallback={<div>Loading...</div>}>
+              <React.Suspense fallback={<Loading/>}>
                 <Switch>
                     <Route path='/admin' exact component={ManageLibrarians}/>
                     <Route path='/admin/manageRules' exact component={ManageRules}/>
