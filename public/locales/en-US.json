@@ -248,6 +248,6 @@
     "accountEmailNotMatch": "The account and the email doesn't match.",
     "successFindPassword": "Success! Check your email for your password.",
     "bookBeenBorrowed": "The book has been borrowed",
-    "bookNotBeenBorrowed": "The book has not been borrowed now"
+    "bookNotBeenBorrowed": "The book isn't borrowed now"
   }
 }

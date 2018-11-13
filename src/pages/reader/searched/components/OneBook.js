@@ -121,12 +121,12 @@ function BookClass(props) {
 
                 <div className="flex-row">
                     <CardContent className="flex-row">
-                        <Button color="primary" disabled>
+                        <Typography variant="button" style={{marginRight: 20}}>
                             {intl.get("form.remain")}: {props.book.remain}
-                        </Button>
-                        <Button color="primary" disabled>
+                        </Typography>
+                        <Typography variant="button" >
                             {intl.get("form.total")}: {props.book.total}
-                        </Button>
+                        </Typography>
                     </CardContent>
                     <div className={classes.grow}/>
                     <CardActions className="flex-row">

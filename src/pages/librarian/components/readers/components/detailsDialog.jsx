@@ -13,14 +13,19 @@ import * as intl from "react-intl-universal";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../../../mock/tablePaginationFooter";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import {fetchReaderHistory} from "../../../../../mock";
 
 
 export default class DetailsDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            borrowingHistory: [],
+            reservingHistory: [],
+            borrowedHistory: [],
             page: 0,
             rowsPerPage: 5,
+            init: false,
         }
     }
 
@@ -31,10 +36,63 @@ export default class DetailsDialog extends React.Component {
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value });
     };
+    changeDateFormat = (d) => {
+        let date = new Date(d);
+        let changed = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        return changed;
+    }
+    classifyHistory = (history) => {
+        let borrowing = [], reserving = [], borrowed = [];
+        for (let i in history) {
+            let h = history[i];
+            if (h.borrowTime !== null) {
+                h.borrowTime = this.changeDateFormat(h.borrowTime);
+            }
+            if (h.returnTime !== null) {
+                h.returnTime = this.changeDateFormat(h.returnTime);
+            }
+            if (h.reserveTime !== null) {
+                h.reserveTime = this.changeDateFormat(h.reserveTime);
+            }
+            if (h.state === 1) {
+                borrowing.push(h);
+            }
+            else if (h.state === 0) {
+                reserving.push(h);
+            }
+            else if (h.state === 2 || h.state === 3) {
+                borrowed.push(h);
+            }
+        }
+        this.setState({
+            borrowingHistory: borrowing,
+            reservingHistory: reserving,
+            borrowedHistory: borrowed,
+        });
+    };
+    handleDetails = async reader => {
+        const history = await fetchReaderHistory(reader.id);
+        await this.classifyHistory(history);
+    }
+    handleInit = async () => {
+        if (this.props.open && !this.state.init) {
+            await this.handleDetails(this.props.reader)
+            this.setState({
+                init: true,
+            })
+        }
+        if (!this.props.open && this.state.init) {
+            this.setState({
+                init: false,
+            })
+        }
+    }
+
 
     render() {
+        this.handleInit()
         const { rowsPerPage, page } = this.state;
-        const { borrowedHistory } = this.props;
+        const { borrowingHistory, reservingHistory, borrowedHistory } = this.state;
         let borrowedHistoryToShow = []
         if (borrowedHistory) borrowedHistoryToShow = borrowedHistory;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, borrowedHistoryToShow.length - page * rowsPerPage);
@@ -71,7 +129,7 @@ export default class DetailsDialog extends React.Component {
                     </div>
                     <div style={{marginBottom: 40}}>
                         <Typography variant="title" gutterBottom>{intl.get('form.formTitle.borrowingBooks')}</Typography>
-                        {this.props.borrowingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowing')}</Typography> :
+                        {borrowingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowing')}</Typography> :
                             <Table>
                                 <TableHead>
                                     <TableRow>
@@ -82,8 +140,8 @@ export default class DetailsDialog extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.props.borrowingHistory.map(item =>
-                                        <TableRow key={item.barcode}>
+                                    {borrowingHistory.map(item =>
+                                        <TableRow key={item.borrowTime}>
                                             <TableCell>{item.barcode}</TableCell>
                                             <TableCell>{item.title}</TableCell>
                                             <TableCell>{item.borrowTime}</TableCell>
@@ -96,7 +154,7 @@ export default class DetailsDialog extends React.Component {
 
                     <div style={{marginBottom: 40}}>
                         <Typography variant="title" gutterBottom>{intl.get('form.formTitle.reservingBooks')}</Typography>
-                        {this.props.reservingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noReserving')}</Typography> :
+                        {reservingHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noReserving')}</Typography> :
                             <Table>
                                 <TableHead>
                                     <TableRow>
@@ -106,8 +164,8 @@ export default class DetailsDialog extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.props.reservingHistory.map(item =>
-                                        <TableRow key={item.barcode}>
+                                    {reservingHistory.map(item =>
+                                        <TableRow key={item.reserveTime}>
                                             <TableCell>{item.barcode}</TableCell>
                                             <TableCell>{item.title}</TableCell>
                                             <TableCell>{item.reserveTime}</TableCell>
@@ -119,7 +177,7 @@ export default class DetailsDialog extends React.Component {
 
                     <div style={{marginBottom: 40}}>
                         <Typography variant="title" gutterBottom>{intl.get('form.formTitle.borrowedBooks')}</Typography>
-                        {this.props.borrowedHistory == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowed')}</Typography> :
+                        {borrowedHistoryToShow == false ? <Typography color="textSecondary">{intl.get('form.formTitle.noBorrowed')}</Typography> :
                             <Table>
                                 <TableHead>
                                     <TableRow>
@@ -134,7 +192,7 @@ export default class DetailsDialog extends React.Component {
                                 <TableBody>
                                     {borrowedHistoryToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map(item =>
-                                        <TableRow key={item.barcode}>
+                                        <TableRow key={item.borrowTime}>
                                             <TableCell>{item.barcode}</TableCell>
                                             <TableCell>{item.title}</TableCell>
                                             <TableCell>{item.borrowTime}</TableCell>
@@ -157,7 +215,8 @@ export default class DetailsDialog extends React.Component {
                                             rowsPerPage={rowsPerPage}
                                             page={page}
                                             onChangePage={this.handleChangePage}
-                                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                            rowsPerPageOptions={[5]}
+                                            // onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                             ActionsComponent={TablePaginationFooter}
                                         />
                                     </TableRow>

@@ -178,48 +178,7 @@ export default class Readers extends React.Component {
             readerList
         })
     };
-    changeDateFormat = (d) => {
-        let date = new Date(d);
-        let changed = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-        return changed;
-    }
-    classifyHistory = (history) => {
-        let borrowing = [], reserving = [], borrowed = [];
-        for (let i in history) {
-            let h = history[i];
-            if (h.borrowTime !== null) {
-                h.borrowTime = this.changeDateFormat(h.borrowTime);
-            }
-            if (h.returnTime !== null) {
-                h.returnTime = this.changeDateFormat(h.returnTime);
-            }
-            if (h.reserveTime !== null) {
-                h.reserveTime = this.changeDateFormat(h.reserveTime);
-            }
-            if (h.state === 1) {
-                borrowing.push(h);
-            }
-            else if (h.state === 0) {
-                reserving.push(h);
-            }
-            else if (h.state === 2 || h.state === 3) {
-                borrowed.push(h);
-            }
-        }
-        this.setState({
-            borrowingHistory: borrowing,
-            reservingHistory: reserving,
-            borrowedHistory: borrowed,
-        });
-    };
-    handleDetails = item => async () => {
-        const history = await fetchReaderHistory(item.id);
-        await this.classifyHistory(history);
-        this.setState({
-            openDetails: true,
-            item: item,
-        })
-    }
+
     async componentDidMount() {
         const readerList = await fetchReaderList()
         this.setState({readerList})
@@ -272,7 +231,7 @@ export default class Readers extends React.Component {
                                             >
                                                 <BuildOutlined/>
                                             </IconButton>
-                                            <Button variant='outlined' onClick={this.handleDetails(item)}>
+                                            <Button variant='outlined' onClick={this.handleOpen("openDetails", item)}>
                                                 {intl.get('basic.details')}
                                             </Button>
                                         </TableCell>
@@ -317,9 +276,6 @@ export default class Readers extends React.Component {
                             processing={this.state.processing}
                         />
                         <DetailsDialog
-                            borrowingHistory={this.state.borrowingHistory}
-                            reservingHistory={this.state.reservingHistory}
-                            borrowedHistory={this.state.borrowedHistory}
                             open={this.state.openDetails}
                             handleClose={this.handleClose("openDetails")}
                             handleDeleteReader={this.handleDeleteReader}

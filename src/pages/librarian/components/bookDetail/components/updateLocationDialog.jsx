@@ -24,7 +24,7 @@ export default class UpdateLocationDialog extends React.Component {
     handleInit = () => {
         if (this.props.open && !this.state.init) {
             this.setState({
-                location: '',
+                location: this.props.copy.location,
                 init: true
             })
         }
@@ -51,7 +51,7 @@ export default class UpdateLocationDialog extends React.Component {
                         margin='dense'
                         label={intl.get('form.barcode')}
                         fullWidth
-                        defaultValue={this.props.barcode}
+                        defaultValue={this.props.copy && this.props.copy.barcode}
                         disabled
                     />
                     <FormControl
@@ -80,7 +80,7 @@ export default class UpdateLocationDialog extends React.Component {
                     <Button color='primary' onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
                         color='primary'
-                        onClick={this.props.handleUpdateLocation(this.props.barcode, this.state.location)}
+                        onClick={this.props.copy && this.props.handleUpdateLocation(this.props.copy.barcode, this.state.location)}
                         disabled={this.props.processing}
                     >
                         {intl.get('form.confirm')}

@@ -415,7 +415,7 @@ export default class BookDetails extends React.Component {
                                             {item.barcode}
                                         </TableCell>
                                         <TableCell
-                                            onClick={this.handleOpen("openLocation", item.barcode)}
+                                            onClick={this.handleOpen("openLocation", item)}
                                             className="barcode"
                                         >
                                             {item.location}
@@ -560,7 +560,7 @@ export default class BookDetails extends React.Component {
                             formError={this.state.formError}
                             clearFormError={this.clearFormError}
                             locationList={this.state.locationList}
-                            barcode={this.state.item}
+                            copy={this.state.item}
                         />
                         <MessageDialog
                             handleClose={this.handleClose("openSnack")}

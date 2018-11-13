@@ -24,7 +24,7 @@ export default class UpdateDialog extends React.Component {
     handleChange = name => e => this.setState({updateBook: {...this.state.updateBook, [name]: e.target.value}})
     handleChangeSelect = event => {this.setState({
         category: event.target.value,
-        updateBook: {...this.state.updateBook, category: this.state.category}})
+        updateBook: {...this.state.updateBook, category: event.target.value}})
     }
     handleInit = () => {
         if (this.props.open && !this.state.init) {

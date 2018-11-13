@@ -2,41 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3612d19a-a6ef-481f-9819-dd6bc31f6df8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/reader/history/components/CancelReserve.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mock/loading.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/locales/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en-US.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/zh-CN.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/zh-CN.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/editDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/deleteDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/lostDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/returnDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/updateLocationDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/updateLocationDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/history/bookHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/history/bookHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/locations/locations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/locations/locations.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/borrowDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/borrowDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/deleteDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/deleteDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/lostDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/lostDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/returnDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/component/returnDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/components/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/components/TopBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/components/TopButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/components/TopButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/History.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/History.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/ReaderInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/ReaderInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/reader/reader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/reader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/searched.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reader/searched/searched.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reader/searched/searched.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,32 +124,33 @@
     <session id="839496334">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.20" value="2" />
+          <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.22" value="2" />
-          <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.23" value="2" />
           <entry key="project.open.time.24" value="3" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.30" value="1" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="TypeScriptServerServiceImpl" value="1" />
+          <entry key="TypeScriptServerServiceImpl" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="14" />
-          <entry key="JSON" value="4978" />
-          <entry key="JSX Harmony" value="38230" />
-          <entry key="JavaScript" value="5763" />
+          <entry key="JSON" value="4984" />
+          <entry key="JSX Harmony" value="40026" />
+          <entry key="JavaScript" value="5918" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="RegExp" value="14" />
           <entry key="SCSS" value="475" />
@@ -173,24 +158,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="1" />
-          <entry key="HTML" value="8" />
-          <entry key="Image" value="11" />
-          <entry key="JSON" value="65" />
-          <entry key="JSX Harmony" value="489" />
-          <entry key="JavaScript" value="91" />
+          <entry key="CSS" value="2" />
+          <entry key="HTML" value="9" />
+          <entry key="Image" value="12" />
+          <entry key="JSON" value="69" />
+          <entry key="JSX Harmony" value="512" />
+          <entry key="JavaScript" value="102" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="SCSS" value="12" />
+          <entry key="SCSS" value="13" />
           <entry key="SVG" value="2" />
-          <entry key="TypeScript" value="2" />
+          <entry key="TypeScript" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="14" />
-          <entry key="js" value="5763" />
-          <entry key="json" value="4978" />
-          <entry key="jsx" value="38230" />
+          <entry key="js" value="5918" />
+          <entry key="json" value="4984" />
+          <entry key="jsx" value="40026" />
           <entry key="regexp" value="14" />
           <entry key="scss" value="475" />
           <entry key="txt" value="16" />
@@ -198,20 +183,21 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="1" />
+          <entry key="css" value="2" />
+          <entry key="gif" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="8" />
+          <entry key="html" value="9" />
           <entry key="ico" value="5" />
           <entry key="jpg" value="6" />
-          <entry key="js" value="91" />
-          <entry key="json" value="65" />
-          <entry key="jsx" value="489" />
+          <entry key="js" value="102" />
+          <entry key="json" value="69" />
+          <entry key="jsx" value="512" />
           <entry key="jsx___jb_tmp___" value="1" />
           <entry key="log" value="1" />
           <entry key="md" value="1" />
-          <entry key="scss" value="12" />
+          <entry key="scss" value="13" />
           <entry key="svg" value="2" />
-          <entry key="ts" value="2" />
+          <entry key="ts" value="3" />
         </counts>
       </usages-collector>
     </session>
@@ -219,49 +205,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/history/History.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/librarian/librarian.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#1#75#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/NoContent.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="66">
+              <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -270,34 +217,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/reserveDialog.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="308">
+              <caret line="72" column="71" lean-forward="true" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
               <folding>
-                <element signature="e#0#68#0" expanded="true" />
+                <element signature="e#0#56#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/searched.jsx">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+              <caret line="165" column="9" lean-forward="true" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/index.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-68">
+              <caret line="17" column="64" lean-forward="true" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -305,9 +257,44 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.scss">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/notFound/notFound.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/searched.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/NoContent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-24">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mock/loading.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="38" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -321,9 +308,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$</find>
-      <find>handleCHange</find>
-      <find>state</find>
       <find>this.props</find>
       <find>Not</find>
       <find>income</find>
@@ -351,6 +335,9 @@
       <find>number</find>
       <find>lost</find>
       <find>reserve</find>
+      <find>SUPPOER</find>
+      <find>borrowedHistory</find>
+      <find>openLocation</find>
     </findStrings>
     <replaceStrings>
       <replace>CustomTableCell</replace>
@@ -365,6 +352,7 @@
       <replace>this.props</replace>
       <replace>updateBook</replace>
       <replace>isFilled</replace>
+      <replace>borrowed</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -381,32 +369,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/updateLocationDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/reader/searched/catagory.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/reader/searched/components/NoContent.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/addDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/history/component/historyList.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/categories/categories.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" />
         <option value="$PROJECT_DIR$/src/pages/login/librarianAndReader/login.jsx" />
         <option value="$PROJECT_DIR$/src/pages/login/admin/adminLogin.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/UpdateReaderInfoDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" />
-        <option value="$PROJECT_DIR$/public/locales/en-US.json" />
         <option value="$PROJECT_DIR$/public/locales/zh-CN.json" />
         <option value="$PROJECT_DIR$/src/pages/reader/history/components/CancelReserve.jsx" />
         <option value="$PROJECT_DIR$/src/mock/index.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" />
         <option value="$PROJECT_DIR$/src/pages/admin/components/TopBar.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/addDialog.jsx" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageLibrarians/components/deleteDialog.jsx" />
@@ -431,6 +403,22 @@
         <option value="$PROJECT_DIR$/src/pages/reader/history/History.js" />
         <option value="$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx" />
+        <option value="$PROJECT_DIR$/public/locales/en-US.json" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/updateLocationDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx" />
+        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/pages/librarian/librarian.jsx" />
+        <option value="$PROJECT_DIR$/src/mock/loading.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/reader/reader.jsx" />
         <option value="$PROJECT_DIR$/src/pages/reader/searched/searched.jsx" />
       </list>
     </option>
@@ -515,14 +503,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="manageLibrarians" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -530,23 +510,6 @@
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="manageLibrarians" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="manageRules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="librarian" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -555,158 +518,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="bookDetail" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="bookDetail" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="categories" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="categories" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="history" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="history" type="462c0819:PsiDirectoryNode" />
-              <item name="component" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="locations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="locations" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="nav" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="nav" type="462c0819:PsiDirectoryNode" />
-              <item name="component" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="readers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="readers" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -723,41 +534,7 @@
               <item name="LMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="librarian" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="summary" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="librarianAndReader" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
@@ -779,49 +556,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="reader" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="reader" type="462c0819:PsiDirectoryNode" />
-              <item name="history" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="reader" type="462c0819:PsiDirectoryNode" />
-              <item name="history" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="reader" type="462c0819:PsiDirectoryNode" />
-              <item name="notification" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="reader" type="462c0819:PsiDirectoryNode" />
               <item name="searched" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="reader" type="462c0819:PsiDirectoryNode" />
-              <item name="searched" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -836,7 +571,7 @@
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="D:\webstorm\WebStorm 2018.2.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -848,11 +583,11 @@
       <recent name="E:\works\LMS\src\pages\librarian\components\nav\component" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\works\LMS\src\images" />
       <recent name="E:\works\LMS\src\pages\librarian\components\bookDetail\components" />
       <recent name="E:\works\LMS\src\pages\reader\searched\components" />
       <recent name="E:\works\LMS\public" />
       <recent name="E:\works\LMS\public\locales" />
-      <recent name="E:\works\LMS\src\pages\librarian\components\locations" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -931,7 +666,10 @@
       <workItem from="1541729469585" duration="37817000" />
       <workItem from="1541810468795" duration="29627000" />
       <workItem from="1541945131322" duration="4760000" />
-      <workItem from="1541984358435" duration="18585000" />
+      <workItem from="1541984358435" duration="21606000" />
+      <workItem from="1542033128583" duration="6928000" />
+      <workItem from="1542076615732" duration="7514000" />
+      <workItem from="1542094252100" duration="2831000" />
     </task>
     <task id="LOCAL-00001" summary="add summary">
       <created>1541422683992</created>
@@ -944,7 +682,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="681949000" />
+    <option name="totallyTimeSpent" value="702243000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -957,8 +695,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.1849315" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.1849315" />
       <window_info id="Structure" order="1" sideWeight="0.50078493" side_tool="true" weight="0.2540854" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -972,8 +711,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32899022" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49578503" visible="true" weight="0.3756786" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50421494" side_tool="true" weight="0.33984798" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4947313" visible="true" weight="0.37459284" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5052687" side_tool="true" weight="0.37527114" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49868214" weight="0.32899022" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
@@ -1034,256 +773,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="add summary" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/locations/locations.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/component/borrowDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/component/deleteDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/component/lostDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/component/passwordDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/component/returnDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/TopBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/deleteDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/components/editDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/addDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/updateDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-308">
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/components/accountChart.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/components/bookChart.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/components/incomeChart.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/messageDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/librarian/librarian.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/admin/adminLogin.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/components/MessageDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/librarianAndReader/findPasswordDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/librarianAndReader/login.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/login.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/notFound/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/notFound/notFound.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/components/libraryRules.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/components/messageDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/components/TopBar.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1299,15 +796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/BorrowingTable.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1316,31 +804,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/CancelReserve.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/NoContent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/ReaderInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#4#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/ReservingTable.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -1350,11 +820,55 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/UpdateReaderInfoDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/reserveDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/components/TopBar.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-intl-universal/typings/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2574">
+          <caret line="126" column="52" selection-start-line="126" selection-start-column="52" selection-end-line="126" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/readers.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="45" column="29" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/readers/components/detailsDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4070">
+          <caret line="200" column="71" selection-start-line="200" selection-start-column="71" selection-end-line="200" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -1365,70 +879,215 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/notification/Notification.jsx">
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/notifications/notifications.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+        <state relative-caret-position="3960">
+          <caret line="203" column="64" selection-start-line="203" selection-start-column="40" selection-end-line="203" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/detailsDialog.jsx">
+    <entry file="file://$PROJECT_DIR$/src/mock/tablePaginationFooter.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="330">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageRules/manageRules.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1034">
+          <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/history/components/BorrowedTable.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="81" column="66" selection-start-line="81" selection-start-column="66" selection-end-line="81" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/locales/zh-CN.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5151" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/locales/en-US.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="250" column="34" lean-forward="true" selection-start-line="250" selection-start-column="34" selection-end-line="250" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/nav/nav.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/updateDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
           <folding>
-            <element signature="e#1#75#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/NoContent.jsx">
+    <entry file="file://$PROJECT_DIR$/src/mock/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="330">
+          <caret line="15" column="9" selection-start-line="5" selection-start-column="67" selection-end-line="15" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/OneBook.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/reserveDialog.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/index.js">
+    <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/searched.jsx">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+        <state relative-caret-position="440">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.jsx">
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/components/updateLocationDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="242">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/loading.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/login/librarianAndReader/login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1365">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.scss">
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/bookDetail/details.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5617">
+          <caret line="554" column="34" selection-start-line="554" selection-start-column="34" selection-end-line="554" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/summary/summary.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2904">
+          <caret line="144" column="51" selection-start-line="144" selection-start-column="51" selection-end-line="144" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/login/index.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/login/login.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/notFound/notFound.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="72" column="71" lean-forward="true" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageLibrarians/manageLibrarians.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="165" column="9" lean-forward="true" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/librarian/librarian.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/components/NoContent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-24">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock/loading.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/searched/searched.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/reader/reader.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="17" column="64" lean-forward="true" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

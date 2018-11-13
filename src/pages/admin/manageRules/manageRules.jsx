@@ -55,11 +55,11 @@ export default class ManageRules extends React.Component {
             this.setState({formError: `${id}empty`});
             return;
         }
-        if (!/^\d+(.[0-9]*)?$/.test(value) || /^0+$/.test(value)) {
+        if (!/^\d+(\.\d+)?$/.test(value) || /^0+$/.test(value)) {
             this.setState({formError: `${id}incorrect`});
             return;
         }
-        if (id >= 2 && /[.]/.test(value)) {
+        if (id >= 2 && /\./.test(value)) {
             this.setState({formError: `${id}notInteger`});
             return;
         }

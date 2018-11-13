@@ -79,7 +79,7 @@ class BorrowedTable extends React.Component {
                             {recordsToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(book => {
                                 return (
-                                    <TableRow className={classes.row}>
+                                    <TableRow key={book.borrowTime} className={classes.row}>
                                         <CustomTableCell component="th" scope="row">
                                             {book.title}
                                         </CustomTableCell>

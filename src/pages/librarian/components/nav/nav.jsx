@@ -64,7 +64,15 @@ export default class Nav extends React.Component {
         }
         await this.setState({processing: true})
         const fine = await fetchPayFine(info)
-        if (fine === -2) {
+        if (fine === -3) {
+            this.setState({
+                returnMessage: intl.get('message.bookNotBeenBorrowed'),
+                openLost: false,
+                openReturn: false,
+                step: 0
+            })
+        }
+        else if (fine === -2) {
             this.setState({
                 returnMessage: intl.get('message.barcodeError'),
                 openLost: false,

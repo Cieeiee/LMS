@@ -11,9 +11,10 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener/ClickAwayListener";
 import * as intl from "react-intl-universal";
 import {fetchShowCategories} from "../../mock";
+import Loading from "../../mock/loading";
 
 const ReaderHistory = React.lazy(() => import("./history/History"))
-const CategoryPage = React.lazy(() => import("./searched/searched"))
+const Searched = React.lazy(() => import("./searched/searched"))
 const NotFound = React.lazy(() => import('./../notFound/index'))
 const ReaderNotification = React.lazy(() => import("./notification/Notification"))
 const ApplicationFooter = React.lazy(() => import("../../mock/footer"))
@@ -25,11 +26,11 @@ export default class Reader extends React.Component {
         return (
             <div style={{width: '100%'}} className="flex-col grow">
                 <BrowserRouter>
-                  <React.Suspense fallback={<div>Loading...</div>}>
+                  <React.Suspense fallback={<Loading/>}>
                     <Switch>
                         <Route path='/reader/:loginUser' exact component={Home}/>
                         <Route path='/reader/:loginUser/history' exact component={ReaderHistory}/>
-                        <Route path='/reader/:loginUser/:searchType/:keywords' exact component={CategoryPage}/>
+                        <Route path='/reader/:loginUser/:searchType/:keywords' exact component={Searched}/>
                         <Route path='/reader/:loginUser/notification' exact component={ReaderNotification}/>
                         <Route component={NotFound} />
                     </Switch>

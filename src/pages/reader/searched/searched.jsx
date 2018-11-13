@@ -19,8 +19,9 @@ import TablePaginationFooter from "../../../mock/tablePaginationFooter";
 import '../reader.scss'
 import DetailsDialog from "./components/detailsDialog";
 import NoResult from "./components/NoContent";
+import Loading from "../../../mock/loading";
 
-export default class CategoryPage extends React.Component {
+export default class Searched extends React.Component {
     constructor(props) {
         super(props);
 
@@ -33,6 +34,7 @@ export default class CategoryPage extends React.Component {
             page: 0,
             rowsPerPage: 10,
             processing: false,
+            loaded: false,
         };
     };
 
@@ -65,6 +67,7 @@ export default class CategoryPage extends React.Component {
 
     async componentDidMount() {
         await this.getBookList()
+        this.setState({loaded: true})
     }
 
     handleOpen = (which, value) => () => {
@@ -96,12 +99,17 @@ export default class CategoryPage extends React.Component {
         let bookListToShow = bookList
 
         return (
-            <React.Fragment>
+            <div className="flex-col">
                 <TopBar searchBar loginUser={this.props.match.params.loginUser}/>
 
-                <div style={{margin: "20px 0 20px 0"}}>
-                    <div className="grow">
-                        {bookListToShow == false ? <NoResult/> :
+                <div className="flex-col grow" style={{margin: "20px 0 20px 0"}}>
+                    <div className="flex-col grow">
+                        {!this.state.loaded ?
+                            <div style={{marginTop: 350}}>
+                                <Loading/>
+                            </div>
+                            :
+                            bookListToShow == false ? <NoResult/> :
                             <Table>
                                 <Grid container spacing={16} style={{width: "100%"}}>
                                     {bookListToShow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(book =>
@@ -142,7 +150,7 @@ export default class CategoryPage extends React.Component {
                         message={this.state.returnMessage}
                     />
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

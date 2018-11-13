@@ -6,6 +6,7 @@ import { AdminLogin, Login } from './pages/login/index'
 import * as intl from "react-intl-universal";
 import _ from "lodash";
 import http from "axios";
+import Loading from "./mock/loading";
 
 const NotFound = lazy(() => import('./pages/notFound/index'));
 const Admin = lazy(() => import('./pages/admin/index'));
@@ -43,7 +44,7 @@ class App extends Component {
         http
             .get(`/locales/${currentLocale}.json`)
             .then(res => {
-                console.log("App locale data", res.data);
+                // console.log("App locale data", res.data);
                 // init method will load CLDR locale data according to currentLocale
                 return intl.init({
                     currentLocale,
@@ -67,7 +68,7 @@ class App extends Component {
             this.state.initDone &&
             <div className="flex-col" style={{height: "100%"}}>
                 <BrowserRouter>
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<Loading/>}>
                     <Switch>
                         <Route path='/' exact component={LinkToGuest}/>
                         <Route path='/login' component={Login} />

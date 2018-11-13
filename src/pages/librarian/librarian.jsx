@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './librarian.scss';
+import Loading from "../../mock/loading";
 
 const Books = React.lazy(() => import('./components/books/books.jsx'))
 const ApplicationFooter = React.lazy(() => import("../../mock/footer"))
@@ -17,9 +18,9 @@ export default class Librarian extends React.Component {
     render() {
         return (
             <div style={{width: '100%', height: '100%'}} className="flex-col">
-                <div className="grow">
+                <div className="flex-col grow">
                     <BrowserRouter>
-                      <React.Suspense fallback={<div>Loading...</div>}>
+                      <React.Suspense fallback={<Loading/>}>
                         <Switch>
                             <Route path='/librarian/:loginUser/books' exact component={Books}/>
                             <Route path='/librarian/:loginUser/books/:isbn' exact component={BookDetails}/>
