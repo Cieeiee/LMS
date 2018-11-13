@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3612d19a-a6ef-481f-9819-dd6bc31f6df8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +132,7 @@
           <entry key="HTML" value="14" />
           <entry key="JSON" value="4984" />
           <entry key="JSX Harmony" value="40511" />
-          <entry key="JavaScript" value="6233" />
+          <entry key="JavaScript" value="6239" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="RegExp" value="14" />
           <entry key="SCSS" value="475" />
@@ -157,7 +155,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="14" />
-          <entry key="js" value="6233" />
+          <entry key="js" value="6239" />
           <entry key="json" value="4984" />
           <entry key="jsx" value="40511" />
           <entry key="regexp" value="14" />
@@ -209,7 +207,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3494">
-              <caret line="304" column="39" lean-forward="true" selection-start-line="304" selection-start-column="39" selection-end-line="304" selection-end-column="39" />
+              <caret line="304" column="39" selection-start-line="304" selection-start-column="39" selection-end-line="304" selection-end-column="39" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -235,7 +233,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
-              <caret line="101" column="29" lean-forward="true" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
+              <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
               <folding>
                 <element signature="e#0#105#0" expanded="true" />
               </folding>
@@ -428,7 +426,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="960" />
@@ -672,7 +670,7 @@
       <workItem from="1541984358435" duration="21606000" />
       <workItem from="1542033128583" duration="6928000" />
       <workItem from="1542076615732" duration="7514000" />
-      <workItem from="1542094252100" duration="12971000" />
+      <workItem from="1542094252100" duration="13235000" />
     </task>
     <task id="LOCAL-00001" summary="add summary">
       <created>1541422683992</created>
@@ -685,7 +683,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="712383000" />
+    <option name="totallyTimeSpent" value="712647000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -697,10 +695,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.1849315" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.1849315" />
       <window_info id="Structure" order="1" sideWeight="0.50078493" side_tool="true" weight="0.2540854" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -714,7 +711,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32899022" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4947313" visible="true" weight="0.37459284" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.4947313" visible="true" weight="0.37459284" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5052687" side_tool="true" weight="0.37527114" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49868214" weight="0.32899022" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
@@ -1138,7 +1135,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/components/addDialog.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3494">
-          <caret line="304" column="39" lean-forward="true" selection-start-line="304" selection-start-column="39" selection-end-line="304" selection-end-column="39" />
+          <caret line="304" column="39" selection-start-line="304" selection-start-column="39" selection-end-line="304" selection-end-column="39" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
@@ -1148,7 +1145,7 @@
     <entry file="file://$PROJECT_DIR$/src/pages/librarian/components/books/books.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="101" column="29" lean-forward="true" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
+          <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
           <folding>
             <element signature="e#0#105#0" expanded="true" />
           </folding>

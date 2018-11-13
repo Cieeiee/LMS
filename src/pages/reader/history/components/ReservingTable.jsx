@@ -62,6 +62,7 @@ function ReservingTable(props) {
                                 <CustomTableCell numeric>
                                     <Button
                                         onClick={props.handleOpen('openCancelReserve', book)}
+                                        variant="outlined"
                                     >
                                         {intl.get('form.cancel')}
                                     </Button>
