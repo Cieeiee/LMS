@@ -20,12 +20,13 @@ import AddDialog from "./components/addDialog";
 import UpdateDialog from "./components/updateDialog";
 import DetailsDialog from "./components/detailsDialog";
 import MessageDialog from "../messageDialog";
-import { BuildOutlined } from '@material-ui/icons'
+import {BuildOutlined, SmsOutlined} from '@material-ui/icons'
 import * as intl from "react-intl-universal";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import DeleteDialog from "./components/deleteDialog";
+import {Link} from "react-router-dom";
 
 const isSearched = searchTerm => item =>
     item.id.indexOf(searchTerm) === 0 ||
@@ -230,8 +231,8 @@ export default class Readers extends React.Component {
                                     <CustomTableCell numeric>{intl.get('form.deposit')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
-                                            variant='outlined'
-                                            color="inherit"
+                                            variant='contained'
+                                            style={{width: 80}}
                                             onClick={this.handleOpen("openAdd", undefined)}
                                         >
                                             {intl.get('basic.add')}
@@ -251,13 +252,14 @@ export default class Readers extends React.Component {
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen("openUpdate", item)}
-                                                style={{marginRight: 10}}
                                             >
                                                 <BuildOutlined/>
                                             </IconButton>
-                                            <Button variant='outlined' onClick={this.handleOpen("openDetails", item)}>
-                                                {intl.get('basic.details')}
-                                            </Button>
+                                            <IconButton
+                                                onClick={this.handleOpen("openDetails", item)}
+                                            >
+                                                <SmsOutlined/>
+                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -330,7 +332,8 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: blue[300],
         color: theme.palette.common.white,
-        // fontSize: 18,
+        fontSize: 14,
+        textTransform: 'capitalize',
     },
     body: {
         // fontSize: 16,

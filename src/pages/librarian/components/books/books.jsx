@@ -1,5 +1,5 @@
 import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { BuildOutlined } from '@material-ui/icons';
+import {BuildOutlined, MoreOutlined, SmsOutlined} from '@material-ui/icons';
 import React from 'react';
 import {withStyles} from '@material-ui/core';
 import '../../librarian.scss'
@@ -267,8 +267,8 @@ class Books extends React.Component {
                                     <CustomTableCell numeric>{intl.get('form.total')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
-                                            variant='outlined'
-                                            color='inherit'
+                                            variant='contained'
+                                            style={{width: 80}}
                                             onClick={this.handleOpen('openAdd', undefined)}
                                         >
                                             {intl.get('basic.add')}
@@ -293,17 +293,15 @@ class Books extends React.Component {
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen('openUpdate', item)}
-                                                style={{marginRight: 10}}
                                             >
                                                 <BuildOutlined/>
                                             </IconButton>
-                                            <Button
-                                                variant='outlined'
+                                            <IconButton
                                                 component={Link}
                                                 to={`/librarian/${this.props.match.params.loginUser}/books/${item.isbn}`}
                                             >
-                                                {intl.get('basic.details')}
-                                            </Button>
+                                                <SmsOutlined/>
+                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -370,7 +368,8 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: blue[300],
         color: theme.palette.common.white,
-        // fontSize: 18,
+        fontSize: 14,
+        textTransform: 'capitalize',
     },
 }))(TableCell);
 

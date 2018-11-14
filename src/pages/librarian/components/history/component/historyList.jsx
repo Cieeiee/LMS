@@ -119,7 +119,8 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: blue[300],
         color: theme.palette.common.white,
-        // fontSize: 18,
+        fontSize: 14,
+        textTransform: 'capitalize',
     },
     body: {
         // fontSize: 16,

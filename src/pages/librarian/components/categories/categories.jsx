@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button/Button";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import {BuildOutlined} from "@material-ui/icons";
+import {BuildOutlined, DeleteOutlined} from "@material-ui/icons";
 import {fetchAddCategories, fetchDeleteCategories, fetchShowCategories, fetchUpdateCategories} from "../../../../mock";
 import AddDialog from "./components/addDialog";
 import EditDialog from "./components/editDialog";
@@ -172,8 +172,8 @@ export default class Categories extends React.Component {
                                     <CustomTableCell numeric>{intl.get('form.Chinese')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
-                                            variant='outlined'
-                                            color="inherit"
+                                            variant='contained'
+                                            style={{width: 80}}
                                             onClick={this.handleOpen("openAdd", undefined)}
                                         >
                                             {intl.get('basic.add')}
@@ -190,13 +190,18 @@ export default class Categories extends React.Component {
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen("openUpdate", item)}
-                                                style={{marginRight: 10}}
+                                                // style={{marginRight: 10}}
                                             >
                                                 <BuildOutlined/>
                                             </IconButton>
-                                            <Button variant='outlined' onClick={this.handleOpen("openDelete", item)}>
-                                                {intl.get('basic.delete')}
-                                            </Button>
+                                            {/*<Button variant='outlined' onClick={this.handleOpen("openDelete", item)}>*/}
+                                                {/*{intl.get('basic.delete')}*/}
+                                            {/*</Button>*/}
+                                            <IconButton
+                                                onClick={this.handleOpen("openDelete", item)}
+                                            >
+                                                <DeleteOutlined/>
+                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -261,6 +266,7 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: blue[300],
         color: theme.palette.common.white,
-        // fontSize: 18,
+        fontSize: 14,
+        textTransform: 'capitalize',
     },
 }))(TableCell);
