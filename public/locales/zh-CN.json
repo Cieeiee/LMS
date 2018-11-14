@@ -106,7 +106,8 @@
       "findPassword": "找回密码",
       "findPasswordText": "正确输入你的账号（即你的注册手机号），之后会有一份包含你密码的邮件发到你的邮箱.",
       "updateBookLocation": "更新书籍位置",
-      "cancelReserveBook": "取消预约这本书吗?"
+      "cancelReserveBook": "取消预约这本书吗?",
+      "confirmToDeleteTheReader": "确认删除该读者吗?"
     },
     "changePassword": "修改密码",
 

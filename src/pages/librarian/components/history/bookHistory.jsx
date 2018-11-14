@@ -28,6 +28,8 @@ export default class BookHistory extends React.Component {
                 deletedHistory.push(c)
             }
         }
+        lostHistory.sort((x1, x2) => new Date(x1.date) < new Date(x2.date) ? 1 : -1)
+        deletedHistory.sort((x1, x2) => new Date(x1.date) < new Date(x2.date) ? 1 : -1)
         this.setState({lostHistory, deletedHistory})
     }
 

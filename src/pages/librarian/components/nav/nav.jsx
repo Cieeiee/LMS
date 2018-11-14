@@ -152,6 +152,7 @@ export default class Nav extends React.Component {
         switch(eventState) {
             case -2:
                 returnMessage = intl.get('message.barcodeError')
+                break;
             case -1:
                 returnMessage = intl.get('message.bookStillBorrowed')
                 break;

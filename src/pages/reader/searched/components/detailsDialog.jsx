@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
 import * as intl from "react-intl-universal";
-import {Table, TableBody, TableCell, TableHead, TableRow, TextField} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography/Typography";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";

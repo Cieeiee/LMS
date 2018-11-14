@@ -8,7 +8,7 @@ import Dialog from "@material-ui/core/Dialog/Dialog";
 import React from "react";
 
 
-export default function CancelReserveDialog(props) {
+export default function DeleteDialog(props) {
     return (
         <Dialog
             open={props.open}
@@ -16,12 +16,12 @@ export default function CancelReserveDialog(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle>{intl.get('form.formTitle.cancelReserveBook')}</DialogTitle>
+            <DialogTitle>{intl.get('form.formTitle.confirmToDeleteTheReader')}</DialogTitle>
             <DialogContent>
                 <TextField
                     fullWidth
-                    label={intl.get('form.barcode')}
-                    defaultValue={props.book && props.book.barcode}
+                    label={intl.get('form.account')}
+                    defaultValue={props.reader && props.reader.id}
                     disabled
                 />
             </DialogContent>
@@ -30,7 +30,7 @@ export default function CancelReserveDialog(props) {
                     {intl.get('form.cancel')}
                 </Button>
                 <Button
-                    onClick={props.book && props.handleCancelReserve(props.reader, props.book.barcode, props.book.reserveTime)}
+                    onClick={props.reader && props.handleDeleteReader(props.reader.id)}
                     color="primary"
                     disabled={props.processing}
                 >

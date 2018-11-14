@@ -112,6 +112,9 @@ class ReaderHistoryClass extends React.Component {
                 borrowed.push(h);
             }
         }
+        borrowing.sort((x1, x2) => new Date(x1.borrowTime) < new Date(x2.borrowTime) ? 1 : -1)
+        reserving.sort((x1, x2) => new Date(x1.reserveTime) < new Date(x2.reserveTime) ? 1 : -1)
+        borrowed.sort((x1, x2) => new Date(x1.borrowTime) < new Date(x2.borrowTime) ? 1 : -1)
         this.setState({
             borrowingHistory: borrowing,
             reservingHistory: reserving,

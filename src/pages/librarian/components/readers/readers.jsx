@@ -4,7 +4,6 @@ import Nav from "../nav/nav";
 import {
     fetchAddReader,
     fetchDeleteReader,
-    fetchReaderHistory,
     fetchReaderList,
     fetchUpdateReader
 } from "../../../../mock";
@@ -26,6 +25,7 @@ import * as intl from "react-intl-universal";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import DeleteDialog from "./components/deleteDialog";
 
 const isSearched = searchTerm => item =>
     item.id.indexOf(searchTerm) === 0 ||
@@ -44,6 +44,8 @@ export default class Readers extends React.Component {
             openUpdate: false,
             openDetails: false,
             openSnack: false,
+            openDelete: false,
+            reader: undefined,
             eventState: false,
             formError: undefined,
             returnMessage: undefined,
@@ -61,6 +63,19 @@ export default class Readers extends React.Component {
         this.setState({ rowsPerPage: event.target.value });
     };
     handleSearch = e => this.setState({searchTerm: e.target.value});
+    handleOpenDelete = (which, reader) => () => {
+        this.setState({
+            [which]: true,
+            reader,
+            processing: false
+        })
+    };
+    handleCloseDelete = (which) => () => {
+        this.setState({
+            [which]: false,
+            reader: undefined,
+        })
+    };
     handleOpen = (which, item) => () => {
         this.setState({
             [which]: true,
@@ -173,6 +188,7 @@ export default class Readers extends React.Component {
                 returnMessage = intl.get('message.systemError')
         }
         this.setState({
+            openDelete: false,
             openDetails: false,
             returnMessage,
             readerList
@@ -285,7 +301,14 @@ export default class Readers extends React.Component {
                         />
                         <DetailsDialog
                             open={this.state.openDetails}
+                            handleOpen={this.handleOpenDelete}
                             handleClose={this.handleClose("openDetails")}
+                            reader={this.state.item}
+                            processing={this.state.processing}
+                        />
+                        <DeleteDialog
+                            open={this.state.openDelete}
+                            handleClose={this.handleCloseDelete("openDelete")}
                             handleDeleteReader={this.handleDeleteReader}
                             reader={this.state.item}
                             processing={this.state.processing}

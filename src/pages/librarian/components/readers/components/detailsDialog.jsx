@@ -64,6 +64,9 @@ export default class DetailsDialog extends React.Component {
                 borrowed.push(h);
             }
         }
+        borrowing.sort((x1, x2) => new Date(x1.borrowTime) < new Date(x2.borrowTime) ? 1 : -1)
+        reserving.sort((x1, x2) => new Date(x1.reserveTime) < new Date(x2.reserveTime) ? 1 : -1)
+        borrowed.sort((x1, x2) => new Date(x1.borrowTime) < new Date(x2.borrowTime) ? 1 : -1)
         this.setState({
             borrowingHistory: borrowing,
             reservingHistory: reserving,
@@ -228,7 +231,7 @@ export default class DetailsDialog extends React.Component {
                 <DialogActions>
                     <Button onClick={this.props.handleClose}>{intl.get('form.cancel')}</Button>
                     <Button
-                        onClick={this.props.reader && this.props.handleDeleteReader(this.props.reader.id)}
+                        onClick={this.props.reader && this.props.handleOpen("openDelete", this.props.reader)}
                         processing={this.props.processing}
                         color='secondary'
                     >

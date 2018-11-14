@@ -105,7 +105,8 @@
       "readerDetails": "Reader Details",
       "bookDetails": "Book Details",
       "updateBookLocation": "Update Book Location",
-      "cancelReserveBook": "Cancel the reservation of this book?"
+      "cancelReserveBook": "Cancel the reservation of this book?",
+      "confirmToDeleteTheReader": "Confirm to delete the reader?"
     },
 
     "changePassword": "change password",
