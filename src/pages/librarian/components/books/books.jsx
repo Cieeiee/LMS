@@ -23,6 +23,8 @@ import * as intl from "react-intl-universal";
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import Menu from "@material-ui/core/Menu/Menu";
 
 const isSearched = searchTerm => {
     let terms = "";
@@ -55,6 +57,7 @@ class Books extends React.Component {
             categories: [],
             locationList: [],
             searchTerm: '',
+            selectedCategory: '',
             openAdd: false,
             openUpdate: false,
             openBarcode: false,
@@ -255,11 +258,36 @@ class Books extends React.Component {
         this.setState({bookList, categories, locationList});
     }
 
+    handleOpenMenu = event => {
+        this.setState({anchorEl: event.currentTarget})
+    }
+
+    handleCloseMenu = () => {
+        this.setState({anchorEl: undefined})
+    }
+
+    selectCategories = (selectedCategory) => () => {
+        if (selectedCategory === "all")
+            this.setState({
+                selectedCategory: '',
+                anchorEl: undefined
+            })
+        else {
+            this.setState({
+                selectedCategory,
+                anchorEl: undefined
+            })
+        }
+    }
+
 
     render() {
         const { bookList, rowsPerPage, page } = this.state;
         let bookListToShow = []
-        if (bookList) bookListToShow = bookList.filter(isSearched(this.state.searchTerm))
+        if (bookList) {
+            bookListToShow = bookList.filter(x => x.category.includes(this.state.selectedCategory))
+            bookListToShow = bookListToShow.filter(isSearched(this.state.searchTerm))
+        }
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, bookListToShow.length - page * rowsPerPage);
 
 
@@ -281,14 +309,45 @@ class Books extends React.Component {
                             <TableHead>
                                 <TableRow>
                                     <CustomTableCell>ISBN</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.author')}</CustomTableCell>
-                                    <CustomTableCell numeric>
-                                        {intl.get('form.category')}
+                                    <CustomTableCell>{intl.get('form.title')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.author')}</CustomTableCell>
+                                    <CustomTableCell>
+                                        <div
+                                            className="flex-row title"
+                                            onClick={this.handleOpenMenu}
+                                        >
+                                            <div style={{margin: "auto 0 auto 0"}}>
+                                                {intl.get('form.category')}
+                                            </div>
+                                            <DetailsOutlined
+                                                fontSize="small"
+                                                style={{margin: "auto 0 auto 0"}}
+                                            />
+                                        </div>
+                                        <Menu
+                                            anchorEl={this.state.anchorEl}
+                                            open={Boolean(this.state.anchorEl)}
+                                            onClose={this.handleCloseMenu}
+                                        >
+                                            <MenuItem onClick={this.selectCategories('all')} style={{textTransform: "capitalize"}}>
+                                                {intl.get('basic.all')}
+                                            </MenuItem> :
+                                            {
+                                                this.state.categories && this.state.categories.map(category =>
+                                                    intl.getInitOptions().currentLocale === 'en-US' ?
+                                                        <MenuItem onClick={this.selectCategories(category.categoryEn)}>
+                                                            {category.categoryEn}
+                                                        </MenuItem> :
+                                                        <MenuItem onClick={this.selectCategories(category.categoryEn)}>
+                                                            {category.categoryZh}
+                                                        </MenuItem>
+                                                )
+                                            }
+                                        </Menu>
                                     </CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.price')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.remain')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.total')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.price')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.remain')}</CustomTableCell>
+                                    <CustomTableCell>{intl.get('form.total')}</CustomTableCell>
                                     <CustomTableCell numeric>
                                         <Button
                                             variant='contained'
@@ -305,15 +364,15 @@ class Books extends React.Component {
                                     .map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.isbn}</TableCell>
-                                        <TableCell numeric>{item.title}</TableCell>
-                                        <TableCell numeric>{item.author}</TableCell>
-                                        <TableCell numeric>{ intl.getInitOptions().currentLocale === "zh-CN" ?
+                                        <TableCell>{item.title}</TableCell>
+                                        <TableCell>{item.author}</TableCell>
+                                        <TableCell>{ intl.getInitOptions().currentLocale === "zh-CN" ?
                                             item.categoryCh : item.category
                                         }
                                         </TableCell>
-                                        <TableCell numeric>{item.price}</TableCell>
-                                        <TableCell numeric>{item.remain}</TableCell>
-                                        <TableCell numeric>{item.total}</TableCell>
+                                        <TableCell>{item.price}</TableCell>
+                                        <TableCell>{item.remain}</TableCell>
+                                        <TableCell>{item.total}</TableCell>
                                         <TableCell numeric>
                                             <IconButton
                                                 onClick={this.handleOpen('openUpdate', item)}
