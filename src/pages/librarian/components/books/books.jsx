@@ -1,5 +1,5 @@
 import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import {BuildOutlined, MoreOutlined, SmsOutlined} from '@material-ui/icons';
+import {BuildOutlined, SmsOutlined, DetailsOutlined} from '@material-ui/icons';
 import React from 'react';
 import {withStyles} from '@material-ui/core';
 import '../../librarian.scss'
@@ -24,11 +24,27 @@ import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import TablePaginationFooter from "../../../../mock/tablePaginationFooter";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 
-const isSearched = searchTerm => item =>
-    item.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.author.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.category.toUpperCase().includes(searchTerm.toUpperCase()) ||
-    item.isbn.indexOf(searchTerm) === 0
+const isSearched = searchTerm => {
+    let terms = "";
+    if (!/^\s*$/.test(searchTerm))
+        terms = searchTerm.split(/[,\s]+/)
+    return (
+        item => {
+            if (terms === "")
+                return true
+            let res = true
+            for (let t of terms) {
+                if (t.length === 0) continue
+                res = res &&
+                    (item.title.toUpperCase().includes(t.toUpperCase()) ||
+                    item.author.toUpperCase().includes(t.toUpperCase()) ||
+                    item.category.toUpperCase().includes(t.toUpperCase()) ||
+                    item.isbn.indexOf(t) === 0)
+            }
+            return res
+        }
+    )
+}
 
 class Books extends React.Component {
     constructor(props) {
@@ -267,7 +283,9 @@ class Books extends React.Component {
                                     <CustomTableCell>ISBN</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.author')}</CustomTableCell>
-                                    <CustomTableCell numeric>{intl.get('form.category')}</CustomTableCell>
+                                    <CustomTableCell numeric>
+                                        {intl.get('form.category')}
+                                    </CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.price')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.remain')}</CustomTableCell>
                                     <CustomTableCell numeric>{intl.get('form.total')}</CustomTableCell>

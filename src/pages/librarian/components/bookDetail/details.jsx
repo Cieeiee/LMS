@@ -362,7 +362,7 @@ export default class BookDetails extends React.Component {
                                                 }
                                             </Typography>
                                             <Typography>
-                                                ￥{this.state.book.bookClass.price}
+                                                {this.state.book.bookClass.price}
                                             </Typography>
                                         </div>
                                     </div>

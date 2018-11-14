@@ -95,7 +95,7 @@ function BookClass(props) {
                                 {props.book.isbn}
                             </Typography>
                             <Typography>
-                                ￥{props.book.price}
+                                {props.book.price}
                             </Typography>
                             <Typography>
                                 {intl.getInitOptions().currentLocale === 'en-US' ?
