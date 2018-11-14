@@ -40,7 +40,6 @@ const isSearched = searchTerm => {
                 res = res &&
                     (item.title.toUpperCase().includes(t.toUpperCase()) ||
                     item.author.toUpperCase().includes(t.toUpperCase()) ||
-                    item.category.toUpperCase().includes(t.toUpperCase()) ||
                     item.isbn.indexOf(t) === 0)
             }
             return res
@@ -339,7 +338,7 @@ class Books extends React.Component {
                                                             {category.categoryEn}
                                                         </MenuItem> :
                                                         <MenuItem onClick={this.selectCategories(category.categoryEn)}>
-                                                            {category.categoryZh}
+                                                            {category.categoryCh}
                                                         </MenuItem>
                                                 )
                                             }
