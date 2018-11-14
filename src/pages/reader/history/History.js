@@ -2,7 +2,7 @@ import React from "react";
 import {TopBar} from "../components/TopBar";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
-import { MoveToInboxOutlined, AssignmentOutlined, HistoryOutlined } from '@material-ui/icons'
+import {MoveToInboxOutlined, AssignmentOutlined, HistoryOutlined, BuildOutlined} from '@material-ui/icons'
 import '../reader.scss'
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
@@ -15,8 +15,15 @@ import BorrowedTableWrapped from './components/BorrowedTable'
 import ReaderInfo from "./components/ReaderInfo";
 import UpdateReaderInfoDialog from "./components/UpdateReaderInfoDialog";
 import * as intl from "react-intl-universal";
-import {fetchCancelReserve, fetchReaderUpdateInfo, fetchSearchReader} from "../../../mock";
+import {
+    fetchCancelReserve,
+    fetchReaderChangePassword,
+    fetchReaderUpdateInfo,
+    fetchSearchReader
+} from "../../../mock";
 import CancelReserveDialog from "./components/CancelReserve";
+import Button from "@material-ui/core/Button/Button";
+import ChangePasswordDialog from "./components/changePasswordDialog";
 
 const Logo = require('../../../images/logo.jpg');
 
@@ -73,11 +80,13 @@ class ReaderHistoryClass extends React.Component {
             tabValue: 0,
             openUpdate: false,
             openCancelReserve: false,
+            openPassword: false,
             item: undefined,
             formError: undefined,
 
             name: undefined,
             email: undefined,
+            oldPassword: undefined,
             password: undefined,
             confirmPassword: undefined,
 
@@ -138,6 +147,9 @@ class ReaderHistoryClass extends React.Component {
         this.setState({
             name: this.state.info !== undefined? this.state.info.name: null,
             email: this.state.info !== undefined? this.state.info.email: null,
+            oldPassword: undefined,
+            password: undefined,
+            confirmPassword: undefined,
         });
     };
 
@@ -171,18 +183,10 @@ class ReaderHistoryClass extends React.Component {
             this.setState({formError: "emailIncorrect"});
             return;
         }
-        if (this.state.changePassword && (this.state.password === undefined || this.state.name.length === 0)) {
-            this.setState({formError: "passwordEmpty"});
-            return;
-        }
-        if (this.state.changePassword && this.state.password !== this.state.confirmPassword) {
-            this.setState({formError: "passwordNotSame"});
-            return;
-        }
 
         this.setState({processing: true})
         const eventState = await fetchReaderUpdateInfo(this.props.match.params.loginUser,
-                                                    this.state.name, this.state.email, this.state.password)
+                                                    this.state.name, this.state.email)
         let returnMessage = eventState ? intl.get('message.success') : intl.get('message.systemError')
         await this.setState({returnMessage, openUpdate: false})
         if (returnMessage) {
@@ -197,6 +201,38 @@ class ReaderHistoryClass extends React.Component {
             })
         }
     };
+    handleChangePassword = async () => {
+        if (this.state.oldPassword === undefined || this.state.oldPassword.length === 0) {
+            this.setState({formError: "oldPasswordEmpty"});
+            return;
+        }
+        if (this.state.password === undefined || this.state.name.length === 0) {
+            this.setState({formError: "passwordEmpty"});
+            return;
+        }
+        if (this.state.password !== this.state.confirmPassword) {
+            this.setState({formError: "passwordNotSame"});
+            return;
+        }
+        await this.setState({processing: true})
+        const eventState = await fetchReaderChangePassword(this.props.match.params.loginUser, this.state.oldPassword, this.state.password)
+        let returnMessage = '';
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.oldPasswordError')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
+
+        this.setState({
+            openPassword: false,
+            returnMessage
+        });
+    }
     handleCancelReserve = (id, barcode, reserveTime) => async () => {
         this.setState({processing: true})
         const eventState = await fetchCancelReserve(id, barcode, reserveTime)
@@ -208,7 +244,7 @@ class ReaderHistoryClass extends React.Component {
         this.getHistory()
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getHistory();
     }
 
@@ -233,19 +269,38 @@ class ReaderHistoryClass extends React.Component {
                                 handleChange={this.handleChange}
                                 handleClearFormError={this.handleClearFormError}
                                 open={this.state.openUpdate}
-                                changePassword={this.state.changePassword}
                                 formError={this.state.formError}
                                 info={this.state.info}
                                 name={this.state.name}
                                 email={this.state.email}
-                                password={this.state.password}
-                                confirmPassword={this.state.confirmPassword}
                                 processing={this.state.processing}
                             />
                             <MessageDialog
                                 handleClose={this.handleClose("returnMessage")}
                                 open={this.state.returnMessage !== undefined}
                                 message={this.state.returnMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12} className="flex-row">
+                            <div className="grow"/>
+                            <Button
+                                variant="outlined"
+                                onClick={this.handleOpen("openPassword", this.state.info.id)}
+                            >
+                                {intl.get('form.changePassword')}
+                            </Button>
+                            <ChangePasswordDialog
+                                handleClose={this.handleClose("openPassword")}
+                                handleChangePassword={this.handleChangePassword}
+                                handleChange={this.handleChange}
+                                clearFormError={this.handleClearFormError}
+                                open={this.state.openPassword}
+                                formError={this.state.formError}
+                                info={this.state.item}
+                                oldPassword={this.state.oldPassword}
+                                password={this.state.password}
+                                confirmPassword={this.state.confirmPassword}
+                                processing={this.state.processing}
                             />
                         </Grid>
                         <Grid item xs={12}>

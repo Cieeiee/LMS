@@ -2,10 +2,11 @@ import Card from "@material-ui/core/Card/Card";
 import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import CardContent from "@material-ui/core/CardContent/CardContent";
-import {AccountBoxOutlined, EmailOutlined, LocalAtmOutlined, PhoneOutlined} from "@material-ui/icons";
+import {AccountBoxOutlined, BuildOutlined, EmailOutlined, LocalAtmOutlined, PhoneOutlined} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import '../../reader.scss'
+import IconButton from "@material-ui/core/IconButton/IconButton";
 
 const Reader = require('../../../../images/reader.jpg');
 

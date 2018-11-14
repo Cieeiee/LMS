@@ -22,13 +22,9 @@ export default function UpdateReaderInfoDialog(props) {
         >
             <DialogTitle id="form-dialog-title">{intl.get("form.formTitle.updateInformation")}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-
-                </DialogContentText>
                 <TextField
                     error={props.formError === "nameEmpty"}
                     margin="normal"
-                    id="name"
                     label={props.formError === "nameEmpty" ? intl.get("form.nameEmpty") : intl.get("form.name")}
                     fullWidth
                     defaultValue={props.info!== undefined && props.info.name}
@@ -40,7 +36,6 @@ export default function UpdateReaderInfoDialog(props) {
                 <TextField
                     error={props.formError === "emailEmpty" || props.formError === "emailIncorrect"}
                     margin="normal"
-                    id="name"
                     label={
                         props.formError === "emailEmpty" ?
                             intl.get("form.emailEmpty") :
@@ -55,62 +50,8 @@ export default function UpdateReaderInfoDialog(props) {
                     onFocus={props.handleClearFormError}
                     // variant="outlined"
                 />
-                { props.changePassword &&
-                <TextField
-                    error={props.formError === "passwordNotSame" || props.formError === "passwordEmpty"}
-                    margin="normal"
-                    id="name"
-                    label={
-                        props.formError === "passwordNotSame" ?
-                            intl.get("form.passwordNotSame") : props.formError === "passwordEmpty" ?
-                            intl.get("form.passwordEmpty") : intl.get("form.password")
-                    }
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    type="password"
-                    fullWidth
-                    value={props.password}
-                    onChange={props.handleChange("password")}
-                    onFocus={props.handleClearFormError}
-                />
-                }
-                { props.changePassword &&
-                <TextField
-                    error={props.formError === "passwordNotSame" }
-                    margin="normal"
-                    id="name"
-                    label={
-                        props.formError === "passwordNotSame" ?
-                            intl.get("form.passwordNotSame") : intl.get("form.confirmPassword")
-                    }
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    type="password"
-                    fullWidth
-                    value={props.confirmPassword}
-                    onChange={props.handleChange("confirmPassword")}
-                    onFocus={props.handleClearFormError}
-                />
-                }
-
             </DialogContent>
             <DialogActions>
-                <FormGroup style={{marginLeft: 20}}>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={props.changePassword}
-                                onClick={props.handleChange("changePassword")}
-                                value="changePassword"
-                                color="primary"
-                            />
-                        }
-                        label={intl.get("form.changePassword")}
-                    />
-                </FormGroup>
-                <div className="grow"/>
                 <Button onClick={props.handleClose} color="primary">
                     {intl.get("form.cancel")}
                 </Button>

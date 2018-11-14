@@ -18,13 +18,25 @@ export default function PasswordDialog(props) {
             <DialogTitle id="form-dialog-title">{intl.get('form.formTitle.changePassword')}</DialogTitle>
             <DialogContent>
                 <TextField
+                    error={props.formError === "oldPasswordEmpty"}
+                    margin="normal"
+                    label={
+                         props.formError === "oldPasswordEmpty" ?
+                            intl.get('form.passwordEmpty') : intl.get('form.oldPassword')
+                    }
+                    type="password"
+                    fullWidth
+                    value={props.oldPassword}
+                    onFocus={props.clearFormError}
+                    onChange={props.handleChange("oldPassword")}
+                />
+                <TextField
                     error={props.formError === "passwordNotSame" || props.formError === "passwordEmpty"}
                     margin="normal"
-                    id="name"
                     label={
                         props.formError === "passwordNotSame" ?
                             intl.get('form.passwordNotSame') : props.formError === "passwordEmpty" ?
-                            intl.get('form.passwordEmpty') : intl.get('form.password')
+                            intl.get('form.passwordEmpty') : intl.get('form.newPassword')
                     }
                     type="password"
                     fullWidth
@@ -35,7 +47,6 @@ export default function PasswordDialog(props) {
                 <TextField
                     error={props.formError === "passwordNotSame"}
                     margin="normal"
-                    id="name"
                     label={
                         props.formError === "passwordNotSame" ?
                             intl.get('form.passwordNotSame') : intl.get('form.confirmPassword')

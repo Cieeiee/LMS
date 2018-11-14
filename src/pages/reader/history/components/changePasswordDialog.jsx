@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button/Button";
 import React from "react";
 import * as intl from "react-intl-universal";
 
-export default function PasswordDialog(props) {
+export default function ChangePasswordDialog(props) {
     return (
         <Dialog
             fullWidth

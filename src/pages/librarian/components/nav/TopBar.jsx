@@ -13,7 +13,7 @@ import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import * as intl from "react-intl-universal";
 import LibraryRules from "../../../reader/components/libraryRules";
-import {fetchShowRules, fetchUpdateLibrarian} from "../../../../mock";
+import {fetchLibrarianChangePassword, fetchShowRules, fetchUpdateLibrarian} from "../../../../mock";
 import PasswordDialog from "./component/passwordDialog";
 import MessageDialog from "../messageDialog";
 
@@ -84,6 +84,9 @@ class SearchAppBar extends React.Component {
         this.state = {
             openMenu: false,
             anchorEl: null,
+            oldPassword: undefined,
+            password: undefined,
+            confirmPassword: undefined,
             openChangePassword: false,
         }
     }
@@ -101,6 +104,10 @@ class SearchAppBar extends React.Component {
         this.setState({formError: undefined})
     }
     handleChangePassword = async () => {
+        if (this.state.oldPassword === undefined || this.state.oldPassword.length === 0) {
+            this.setState({formError: "oldPasswordEmpty"});
+            return;
+        }
         if (this.state.password === undefined || this.state.password.length === 0) {
             this.setState({formError: "passwordEmpty"});
             return;
@@ -110,15 +117,26 @@ class SearchAppBar extends React.Component {
             return;
         }
         await this.setState({processing: true})
-        const eventStatus = await fetchUpdateLibrarian(this.props.loginUser, null, this.state.password)
+        const eventState = await fetchLibrarianChangePassword(this.props.loginUser, this.state.oldPassword, this.state.password)
         let returnMessage = '';
-        if (eventStatus)
-            returnMessage = intl.get('message.success')
-        else
-            returnMessage = intl.get('message.systemError')
+        switch (eventState) {
+            case -3:
+                returnMessage = intl.get('message.oldPasswordError')
+                break;
+            case -2:
+                returnMessage = intl.get('message.noPermission')
+                break;
+            case -1:
+                returnMessage = intl.get('message.accountNotExists')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
 
         this.setState({
-            processing: false,
             openChangePassword: false,
             returnMessage
         });
@@ -129,6 +147,7 @@ class SearchAppBar extends React.Component {
             anchorEl: event.currentTarget,
             [which]: true,
             processing: false,
+            oldPassword: undefined,
             password: undefined,
             confirmPassword: undefined,
         })
@@ -237,6 +256,7 @@ class SearchAppBar extends React.Component {
                     handleChangePassword={this.handleChangePassword}
                     handleChange={this.handleChange}
                     clearFormError={this.clearFormError}
+                    oldPassword={this.state.oldPassword}
                     password={this.state.password}
                     confrimPassword={this.state.confirmPassword}
                     formError={this.state.formError}

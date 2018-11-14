@@ -218,7 +218,13 @@ class Books extends React.Component {
     getChinese = (bookList, categories) => {
         const _bookList = []
         for (let book of bookList) {
-            book["categoryCh"] = categories.find(which => which.categoryEn === book.category).categoryCh
+            let category = categories.find(which => which.categoryEn === book.category)
+            if (category) {
+                book["categoryCh"] = category.categoryCh
+            }
+            else {
+                book["categoryCh"] = book.category
+            }
             _bookList.push(book)
         }
         return _bookList

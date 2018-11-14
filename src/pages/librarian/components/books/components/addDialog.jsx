@@ -32,13 +32,15 @@ export default class AddDialog extends React.Component {
         if (!this.props.checkISBN(isbn))
             return
         let data = await fetchSearchIsbn(isbn)
-        // let img = await fetch(data.picture, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        //     }
-        // })
-        // console.log(img)
+        let img = await fetch(data.picture, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Cookie': 'bid=9UKj7i2yhGo'
+            },
+
+        })
+        console.log(img)
 
         if (Object.prototype.isPrototypeOf(data) && Object.keys(data).length > 0) {
             data.isbn = isbn

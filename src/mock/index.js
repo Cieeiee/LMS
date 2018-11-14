@@ -44,7 +44,7 @@ export const fetchChangeRules = async (id, value) => {
     }
 }
 
-export const fetchAdminChangePassword = async password => {
+export const fetchAdminChangePassword = async (oldPwd, newPwd) => {
     try {
         const Response = await fetch(`${serverAdmin}/admin/changePassword`, {
             method: 'POST',
@@ -53,7 +53,8 @@ export const fetchAdminChangePassword = async password => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                password: password
+                old: oldPwd,
+                new: newPwd
             })
         })
         const result = await Response.json()
@@ -136,6 +137,28 @@ export const fetchUpdateLibrarian = async (id, email, password) => {
 }
 
 //librarian
+export const fetchLibrarianChangePassword = async (id, old, change) => {
+    try {
+        const Response = await fetch(`${serverLibrarian}/librarian/modifyPassword?id=${id}&old=${old}&change=${change}`)
+        // const Response = await fetch(`${serverLibrarian}/librarian/modifyPassword`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         id: id,
+        //         old: old,
+        //         change: change
+        //     })
+        // })
+        const result = await Response.json()
+        return result
+    }
+    catch {
+        return null
+    }
+}
 export const fetchBookList = async () => {
   try {
     const Response = await fetch(`${serverLibrarian}/booklist`)
@@ -621,7 +644,7 @@ export const fetchCancelReserve = async (id, barcode, reserveTime) => {
     }
 }
 
-export const fetchReaderUpdateInfo = async (id, name, email, password) => {
+export const fetchReaderUpdateInfo = async (id, name, email) => {
     try {
         const Response = await fetch(`${serverReader}/updateReader`, {
             method: 'POST',
@@ -633,7 +656,28 @@ export const fetchReaderUpdateInfo = async (id, name, email, password) => {
                 id: id,
                 name: name,
                 email: email,
-                password: password,
+            })
+        })
+        const result = await Response.json()
+        return result.state
+    }
+    catch {
+        return null
+    }
+}
+
+export const fetchReaderChangePassword = async (id, oldpwd, newpwd) => {
+    try {
+        const Response = await fetch(`${serverReader}/reader/changePassword`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: id,
+                old: oldpwd,
+                new: newpwd,
             })
         })
         const result = await Response.json()

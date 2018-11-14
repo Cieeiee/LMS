@@ -51,6 +51,7 @@ class PrimarySearchAppBar extends React.Component {
             openMenu: false,
             openChangePassword: false,
             formError: undefined,
+            oldPassword: undefined,
             password: undefined,
             confirmPassword: undefined,
             returnMessage: undefined,
@@ -61,13 +62,16 @@ class PrimarySearchAppBar extends React.Component {
         this.setState({
             anchorEl: event.currentTarget,
             formError: undefined,
-            [which]: true
+            [which]: true,
+            processing: false,
+            oldPassword: undefined,
+            password: undefined,
+            confirmPassword: undefined,
         })
     }
     handleClose = which => () => {
         this.setState({
             anchorEl: null,
-            password: undefined,
             [which]: false
         })
     }
@@ -80,6 +84,10 @@ class PrimarySearchAppBar extends React.Component {
         this.setState({formError: undefined})
     }
     handleChangePassword = async () => {
+        if (this.state.oldPassword === undefined || this.state.oldPassword.length === 0) {
+            this.setState({formError: "oldPasswordEmpty"});
+            return;
+        }
         if (this.state.password === undefined || this.state.password.length === 0) {
             this.setState({formError: "passwordEmpty"});
             return;
@@ -89,15 +97,20 @@ class PrimarySearchAppBar extends React.Component {
             return;
         }
         await this.setState({processing: true})
-        const eventStatus = await fetchAdminChangePassword(this.state.password)
+        const eventState = await fetchAdminChangePassword(this.state.oldPassword, this.state.password)
         let returnMessage = '';
-        if (eventStatus)
-            returnMessage = intl.get('basic.success')
-        else
-            returnMessage = intl.get('basic.failed')
+        switch (eventState) {
+            case -1:
+                returnMessage = intl.get('message.oldPasswordError')
+                break;
+            case 1:
+                returnMessage = intl.get('message.success')
+                break;
+            default:
+                returnMessage = intl.get('message.systemError')
+        }
 
         this.setState({
-            processing: false,
             openChangePassword: false,
             returnMessage
         });
@@ -182,6 +195,7 @@ class PrimarySearchAppBar extends React.Component {
                     handleChangePassword={this.handleChangePassword}
                     handleChange={this.handleChange}
                     clearFormError={this.clearFormError}
+                    oldPassword={this.state.oldPassword}
                     password={this.state.password}
                     confrimPassword={this.state.confirmPassword}
                     formError={this.state.formError}

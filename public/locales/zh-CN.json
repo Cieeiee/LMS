@@ -122,6 +122,8 @@
     "account": "账号",
     "name": "姓名",
     "email": "邮箱",
+    "oldPassword": "原密码",
+    "newPassword": "新密码",
     "password": "密码",
     "confirmPassword": "确认密码",
     "title": "书名",
@@ -249,6 +251,7 @@
     "accountEmailNotMatch": "账号和邮箱不匹配",
     "successFindPassword": "成功！在邮件查看你的密码吧！",
     "bookBeenBorrowed": "该书已被借出",
-    "bookNotBeenBorrowed": "该书目前没被借出"
+    "bookNotBeenBorrowed": "该书目前没被借出",
+    "oldPasswordError": "原密码错误"
   }
 }

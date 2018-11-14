@@ -122,6 +122,8 @@
     "account": "account",
     "name": "name",
     "email": "email",
+    "oldPassword": "old password",
+    "newPassword": "new password",
     "password": "password",
     "confirmPassword": "confirm password",
     "title": "title",
@@ -249,6 +251,7 @@
     "accountEmailNotMatch": "The account and the email doesn't match.",
     "successFindPassword": "Success! Check your email for your password.",
     "bookBeenBorrowed": "The book has been borrowed",
-    "bookNotBeenBorrowed": "The book isn't borrowed now"
+    "bookNotBeenBorrowed": "The book isn't borrowed now",
+    "oldPasswordError": "Sorry, the old password is wrong"
   }
 }
