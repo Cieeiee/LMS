@@ -8,8 +8,9 @@ import TablePaginationFooter from "../../../../../mock/tablePaginationFooter";
 import Typography from "@material-ui/core/Typography/Typography";
 import TextField from "@material-ui/core/TextField/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
-import {SearchOutlined} from "@material-ui/icons";
+import {ReplayOutlined, SearchOutlined} from "@material-ui/icons";
 import blue from "@material-ui/core/es/colors/blue";
+import IconButton from "@material-ui/core/IconButton/IconButton";
 
 const isSearched = searchTerm => item =>
     item.id.indexOf(searchTerm) === 0 ||
@@ -71,10 +72,11 @@ export default class HistoryList extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <CustomTableCell>{intl.get('form.barcode')}</CustomTableCell>
-                                <CustomTableCell numeric>{this.props.account}</CustomTableCell>
+                                <CustomTableCell>{this.props.account}</CustomTableCell>
                                 <CustomTableCell numeric>ISBN</CustomTableCell>
                                 <CustomTableCell numeric>{intl.get('form.title')}</CustomTableCell>
                                 <CustomTableCell numeric>{intl.get('form.date')}</CustomTableCell>
+                                {/*<CustomTableCell numeric/>*/}
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -82,10 +84,15 @@ export default class HistoryList extends React.Component {
                                 .map((item, index) =>
                                     <TableRow key={index} className="table-row">
                                         <TableCell>{item.barcode}</TableCell>
-                                        <TableCell numeric>{item.id}</TableCell>
+                                        <TableCell>{item.id}</TableCell>
                                         <TableCell numeric>{item.isbn}</TableCell>
                                         <TableCell numeric>{item.title}</TableCell>
                                         <TableCell numeric>{item.date}</TableCell>
+                                        {/*<TableCell numeric>*/}
+                                            {/*<IconButton>*/}
+                                                {/*<ReplayOutlined fontSize="small"/>*/}
+                                            {/*</IconButton>*/}
+                                        {/*</TableCell>*/}
                                     </TableRow>
                                 )}
                             {emptyRows > 0 && (

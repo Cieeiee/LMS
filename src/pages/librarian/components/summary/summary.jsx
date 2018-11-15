@@ -116,10 +116,7 @@ export default class Summary extends React.Component {
         let income = this.getIncome(data)
         let book = this.getBook(data)
         let account = this.getAccount(data)
-
-        console.log(income)
-        console.log(book)
-        console.log(account)
+        
         this.setState({
             [`${which}Income`]: income,
             [`${which}Book`]: book,
