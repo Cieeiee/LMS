@@ -24,6 +24,7 @@ export default class DetailsDialog extends React.Component {
             openReserve: false,
             item: undefined,
             processing: false,
+            returnMessage: undefined
         }
     }
     handleChangePage = (event, page) => {
@@ -41,7 +42,6 @@ export default class DetailsDialog extends React.Component {
         this.setState({processing: true})
         const eventState = await fetchReserveBook(id, barcode)
         await this.handleBookDetails()
-
         let returnMessage = ''
         switch (eventState) {
             case 1:
