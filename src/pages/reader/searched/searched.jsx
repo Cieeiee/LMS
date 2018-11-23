@@ -29,7 +29,7 @@ export default class Searched extends React.Component {
             bookList: [],
             categories: undefined,
             openDetails: false,
-            // returnMessage: undefined,
+            returnMessage: undefined,
             item: undefined,
             page: 0,
             rowsPerPage: 10,
@@ -144,11 +144,11 @@ export default class Searched extends React.Component {
                         reader={this.props.match.params.loginUser}
                         book={this.state.item}
                     />
-                    {/* <MessageDialog
+                    <MessageDialog
                         handleClose={this.handleClose("returnMessage")}
                         open={this.state.returnMessage !== undefined}
                         message={this.state.returnMessage}
-                    /> */}
+                    />
                 </div>
             </div>
         );
