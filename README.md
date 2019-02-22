@@ -4,13 +4,13 @@ This project was bootstrapped with [React](https://reactjs.org) and [material-ui
 
 We divided the project into 3 parts by different user groups.
 
-[Librarian system](#Librarian system)
+[Librarian system](#Librarian)
 
-[Admin system](#Admin system)
+[Admin system](#Admin)
 
-[Reader system](#Reader system)
+[Reader system](#Reader)
 
-### Librarian system
+### Librarian
 
 Librarian can
 
@@ -27,7 +27,7 @@ Librarian can
 - Edit Book Category
 - Edit Book Location
 
-### Admin system
+### Admin
 
 Admin can
 
@@ -39,7 +39,7 @@ Admin can
 - Set Reader security deposit
 - Help to recovery Librarian password
 
-### Reader system
+### Reader
 
 Reader can
 
