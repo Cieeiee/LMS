@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [React](https://reactjs.org) and [material-ui](https://material-ui.com).
 
+## Project Settings
+
+```bash
+npm i
+npm start
+```
+
 We divided the project into 3 parts by different user groups.
 
 [Librarian system](#Librarian)
